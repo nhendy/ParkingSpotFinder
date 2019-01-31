@@ -7,7 +7,6 @@ import json
 
 class SpotsTable():
     def __init__(self, file=None, dict=None):
-        # self.radius = tolerance_radius
         self.table = {}
 
         if file is not None:
