@@ -2,99 +2,44 @@
 import numpy as np
 from copy import deepcopy
 from pprint import pprint
-
-#Credits: Adapted from Locality Sensitive Hashing for Similar Item Search by Santhosh Hari
-#Linke : https://towardsdatascience.com/locality-sensitive-hashing-for-music-search-f2f1940ace23
+import os
+import json
 
 class SpotsTable():
-
-    def __init__(self, num_tables, hash_len, dims, dict={}):
-        self.num_tables = num_tables
-        self.hash_len = hash_len
-        self.dims = dims
-        self.storage = deepcopy(dict)
-        self.hash_tables = []
-        for i in range(self.num_tables):
-            self.hash_tables.append(HashTable(self.dims, self.hash_len))
-
-        for k, v in dict.items():
-            self.__setitem__(k, v)
-
-        pprint(self.storage)
-        pprint(self.hash_tables[0].table)
-
-
-    def __setitem__(self, inp_vec, label):
-        self.storage[inp_vec] = label
-
-        for table in self.hash_tables:
-            table.add(inp_vec)
-
-
-    def l2_norm_criterion(self, query_vec, results):
-        final_vector = None
-        min_distance = float('Inf')
-
-        for result in results:
-            distance = np.linalg.norm(np.asarray(query_vec) - result)
-            if distance < min_distance:
-                min_distance = distance
-                final_vector = result
-
-        return final_vector
-
-
-    def cosine_similarity(self, query_vec, results):
-        final_vector = None
-        max_similatiry = float('-Inf')
-
-        for result in results:
-            similarity = np.dot(query_vec, result) / (np.linalg.norm(query_vec) * np.linalg.norm(result))
-            if similarity > max_similatiry:
-                max_similatiry = similarity
-                final_vector = result
-
-        return final_vector
-
-    def query (self, inp_vec, criterion = 'L2'):
-        results = list()
-        for table in self.hash_tables:
-            results.append(table.get(inp_vec))
-        pprint(results)
-        if criterion == 'L2':
-            return self.storage[self.l2_norm_criterion(inp_vec, results)]
-
-        return self.storage[self.cosine_similarity(inp_vec, results)]
-
-
-
-
-class HashTable():
-    def __init__(self, dims, hash_len):
-        self.hash_len = hash_len
-        self.dims = dims
+    def __init__(self, tolerance_radius, file='', dict={}):
+        self.radius = tolerance_radius
         self.table = {}
-        self.projections = np.random.randn(self.hash_len, dims)
 
-        # if dict:
-        #     for k, v in dict.items():
-        #         self.__setitem__(k, v)
-        print(len(self.projections))
-        print("Project vectors are\n {}".format(self.projections))
+        if file is not None:
+            if dict is not None:
+                raise ValueError('Can only provide dict or file, not both')
 
+            _, ext = os.path.splitext(file)
+            if ext.strip('.') != 'json':
+                raise ValueError('File must be in JSON format.')
 
-    def _generate_hash(self, vector):
-        code = (np.dot(vector, self.projections.T) > 0).astype('int').squeeze()
-        return ''.join(code.astype('str'))
+            with open(os.path.abspath(file), 'r') as file:
+                self.table =  {eval(k): v for k, v in json.load(file).items()}
+
+        else:
+            self.table = deepcopy(dict)
+
 
     def get(self, vector):
         return self.__getitem__(vector)
+
+    def _find(self, vector):
+
+        for k, v in self.table.items():
+
+
+
 
     def __getitem__(self, vector):
         code = self._generate_hash(vector)
         return self.table.get(code, [])
 
-    def add (self, key):
+    def __setitem__(self, key, value):
         code = self._generate_hash(key)
         self.table[code] = self.table.get(code, []) + [key]
 
@@ -104,4 +49,107 @@ class HashTable():
     def __len__(self):
         return len(self.table)
 
+
+
+#Credits: Adapted from Locality Sensitive Hashing for Similar Item Search by Santhosh Hari
+#Linke : https://towardsdatascience.com/locality-sensitive-hashing-for-music-search-f2f1940ace23
+
+# class SpotsTable():
+#
+#     def __init__(self, num_tables, hash_len, dims, dict={}):
+#         self.num_tables = num_tables
+#         self.hash_len = hash_len
+#         self.dims = dims
+#         self.storage = deepcopy(dict)
+#         self.hash_tables = []
+#         for i in range(self.num_tables):
+#             self.hash_tables.append(HashTable(self.dims, self.hash_len))
+#
+#         for k, v in dict.items():
+#             self.__setitem__(k, v)
+#
+#         pprint(self.storage)
+#         pprint(self.hash_tables[0].table)
+#
+#
+#     def __setitem__(self, inp_vec, label):
+#         self.storage[inp_vec] = label
+#
+#         for table in self.hash_tables:
+#             table.add(inp_vec)
+#
+#
+#     def l2_norm_criterion(self, query_vec, results):
+#         final_vector = None
+#         min_distance = float('Inf')
+#
+#         for result in results:
+#             distance = np.linalg.norm(np.asarray(query_vec) - result)
+#             if distance < min_distance:
+#                 min_distance = distance
+#                 final_vector = result
+#
+#         return final_vector
+#
+#
+#     def cosine_similarity(self, query_vec, results):
+#         final_vector = None
+#         max_similatiry = float('-Inf')
+#
+#         for result in results:
+#             similarity = np.dot(query_vec, result) / (np.linalg.norm(query_vec) * np.linalg.norm(result))
+#             if similarity > max_similatiry:
+#                 max_similatiry = similarity
+#                 final_vector = result
+#
+#         return final_vector
+#
+#     def query (self, inp_vec, criterion = 'L2'):
+#         results = list()
+#         for table in self.hash_tables:
+#             results.append(table.get(inp_vec))
+#         pprint(results)
+#         if criterion == 'L2':
+#             return self.storage[self.l2_norm_criterion(inp_vec, results)]
+#
+#         return self.storage[self.cosine_similarity(inp_vec, results)]
+#
+#
+#
+#
+# class HashTable():
+#     def __init__(self, dims, hash_len):
+#         self.hash_len = hash_len
+#         self.dims = dims
+#         self.table = {}
+#         self.projections = np.random.randn(self.hash_len, dims)
+#
+#         # if dict:
+#         #     for k, v in dict.items():
+#         #         self.__setitem__(k, v)
+#         print(len(self.projections))
+#         print("Project vectors are\n {}".format(self.projections))
+#
+#
+#     def _generate_hash(self, vector):
+#         code = (np.dot(vector, self.projections.T) > 0).astype('int').squeeze()
+#         return ''.join(code.astype('str'))
+#
+#     def get(self, vector):
+#         return self.__getitem__(vector)
+#
+#     def __getitem__(self, vector):
+#         code = self._generate_hash(vector)
+#         return self.table.get(code, [])
+#
+#     def add (self, key):
+#         code = self._generate_hash(key)
+#         self.table[code] = self.table.get(code, []) + [key]
+#
+#     def __iter__(self):
+#         return iter(self.table.items())
+#
+#     def __len__(self):
+#         return len(self.table)
+#
 
