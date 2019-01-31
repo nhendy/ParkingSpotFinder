@@ -6,8 +6,8 @@ import os
 import json
 
 class SpotsTable():
-    def __init__(self, tolerance_radius, file='', dict={}):
-        self.radius = tolerance_radius
+    def __init__(self, file=None, dict=None):
+        # self.radius = tolerance_radius
         self.table = {}
 
         if file is not None:
@@ -28,23 +28,27 @@ class SpotsTable():
     def get(self, vector):
         return self.__getitem__(vector)
 
-    def _find(self, vector):
-
-        for k, v in self.table.items():
-
+    def _find_nearest_neighbor(self, vector):
+        min_distance = float('Inf')
+        result = None
+        for k in self.table.keys():
+            distance = np.linalg.norm(np.asarray(k) - np.asarray(vector))
+            if distance < min_distance:
+                min_distance = distance
+                result = k
+        return result
 
 
 
     def __getitem__(self, vector):
-        code = self._generate_hash(vector)
-        return self.table.get(code, [])
+        key = self._find_nearest_neighbor(vector)
+        return self.table.get(key)
 
     def __setitem__(self, key, value):
-        code = self._generate_hash(key)
-        self.table[code] = self.table.get(code, []) + [key]
+        self.table[key] = value
 
     def __iter__(self):
-        return iter(self.table.items())
+        return iter(self.table)
 
     def __len__(self):
         return len(self.table)

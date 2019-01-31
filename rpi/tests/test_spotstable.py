@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import random
+import shutil
 
 root = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
 sys.path.append(root)
@@ -48,17 +49,24 @@ class TestSpotsTable(unittest.TestCase):
 
 
 
-    def test_1(self):
+    def test_(self):
 
-        #add 20% error
-        TestSpotsTable.add_error(0.01)
-        lookup_table = SpotsTable(dims=2, hash_len=5, dict=TestSpotsTable._actual_centers_to_ids)
+        #add  error percentage
+        TestSpotsTable.add_error(0.04)
+        lookup_table = SpotsTable(dict=TestSpotsTable._actual_centers_to_ids)
 
+        num_failures = 0
         for coords, expected_id in TestSpotsTable._faulty_centers_to_ids.items():
             actual_id = lookup_table.get(coords)
             if expected_id != actual_id:
-                print("{:}'s id didn't match  {}'s id".format(coords, TestSpotsTable._ids_to_actual_centers[expected_id]))
+                num_failures += 1
+                print("{!r:>10}'s id didn't match  {!r:>10}'s id it matched  "
+                      "{!r:>10}".format(coords, TestSpotsTable._ids_to_actual_centers[expected_id],
+                                  TestSpotsTable._ids_to_actual_centers[actual_id]))
 
+        print("\n\n\n{:=^{width}}\n\n\n".format( ' {}/{} FAILED '.format(num_failures,
+                                                                         len(TestSpotsTable._faulty_centers_to_ids)),
+                                                 width = shutil.get_terminal_size().columns ))
 
     # def setUp(self):
     #    '''
