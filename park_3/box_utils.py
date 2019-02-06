@@ -118,7 +118,7 @@ def convert_boxes_to_locations(center_form_boxes, center_form_priors, center_var
 
 def area_of(left_top, right_bottom) -> torch.Tensor:
     """Compute the areas of rectangles given two corners.
-
+/
     Args:
         left_top (N, 2): left top corner.
         right_bottom (N, 2): right bottom corner.

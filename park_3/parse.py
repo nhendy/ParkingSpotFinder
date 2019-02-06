@@ -2,6 +2,7 @@ import os
 import torch.utils.data as data
 import cv2
 import torch
+import PIL
 import numpy as np
 from xml.dom import minidom
 import xml.etree.ElementTree as et
@@ -43,16 +44,17 @@ def get_anno_dataset(xml_root):
 
 
 class CustomDetection(data.Dataset):
-    def __init__(self, root, data=None, transform = None, annotation=None, phase=None):
+    def __init__(self, root, data=None, transforms=None,  annotation=None, phase=None):
         self.ids = list(annotation.keys())
         self.annotations = annotation
         self.phase = phase
         self.root = root
         self.num_classes = CLASSES
-        self.transform = transform
+        self.transforms = transforms
 
     def __getitem__(self, idx):
         img, annotation, h, w, _, _ = self.pull_item(idx) #TODO:check format
+        print(img)
         return (img, annotation)
 
     def __len__(self):
@@ -66,10 +68,13 @@ class CustomDetection(data.Dataset):
         # print(annotation)
         path = os.path.join(self.root, img_id)
         path = path + ".jpg"
-        img_from_file = cv2.imread(path)
-        img_h, img_w, _ = img_from_file.shape
+        img_from_file = PIL.Image.open(path)
+        print(type(img_from_file))
+        img_h, img_w = img_from_file.size
         img = img_from_file.copy()
-        # img = self.transform(img_from_file)
+        img = self.transforms(img)
+        print(img.size)
+        img = np.array(img)
         return torch.from_numpy(img).permute(2, 0, 1), annotation, img_h, img_w, img, img_id
 
     def pull_img(self, idx):
@@ -77,7 +82,6 @@ class CustomDetection(data.Dataset):
         path = os.path.join(self.root, img_id)
         path = path + ".jpg"
         return cv2.imread(path, cv2.IMREAD_COLOR)
-
 
 
 
