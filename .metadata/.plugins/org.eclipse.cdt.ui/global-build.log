@@ -1,0 +1,4 @@
+18:17:12 **** Clean-only build of configuration Debug for project Porting ****
+make clean 
+rm -rf *
+ 
