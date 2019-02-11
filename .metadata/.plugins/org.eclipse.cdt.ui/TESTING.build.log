@@ -1,0 +1,6 @@
+22:51:42 **** Incremental Build of configuration Debug for project TESTING ****
+make -j8 all 
+make: Nothing to be done for 'all'.
+
+22:51:43 Build Finished (took 1s.200ms)
+
