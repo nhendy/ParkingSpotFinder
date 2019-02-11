@@ -26,6 +26,7 @@ def get_anno_per_image(xml_file):
                 odd = False
                 for point in contour.findall("point"):
                     if odd is False:  # TODO: find a better way to find xmin ymin xmax ymax -> creat a function to deal with this
+                        #TODO: also scale down multiloss calulated the data with error loss
                         bbox.append(point.attrib['x'])
                         bbox.append(point.attrib['y'])
                     odd = not odd
@@ -42,6 +43,16 @@ def get_anno_dataset(xml_root):
             data_anno[annotation_id] = get_anno_per_image(annotation_file)
     return data_anno
 
+
+class transformbBox(object):
+    def __init__(self, transform=None, bbox=None, scale =None):
+        self.transform = transform
+        self.bbox = bbox #TODO: this is a list -> whole another level of problems
+        self.scale = scale
+
+    def transformBbox(self):
+        print(self.transform)
+        return scaledBbox
 
 class CustomDetection(data.Dataset):
     def __init__(self, root, data=None, transforms=None,  annotation=None, phase=None):
@@ -69,8 +80,10 @@ class CustomDetection(data.Dataset):
         path = os.path.join(self.root, img_id)
         path = path + ".jpg"
         img_from_file = PIL.Image.open(path)
+
         print(type(img_from_file))
         img_h, img_w = img_from_file.size
+        newBbox = transformbBox(self.transforms, scale=(img_h/300,img_w/300))
         img = img_from_file.copy()
         img = self.transforms(img)
         print(img.size)
@@ -85,8 +98,9 @@ class CustomDetection(data.Dataset):
 
 
 
-# if __name__ == "__main__":
-#     annos = get_anno_dataset(xml_root)
-#     print(annos)
-    # dataset = CustomDetection(root = xml_root, annotation=annos, phase="Train")
+if __name__ == "__main__":
+    annos = get_anno_dataset(xml_root)
+    print(annos)
+    dataset = CustomDetection(root = xml_root, annotation=annos, phase="Train")
+
 

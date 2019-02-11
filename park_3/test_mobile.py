@@ -32,15 +32,10 @@ def train(model = None, criterion = None, optim = None, scheduler=None, data=Non
                 model.train()
             running_loss = 0.0
             correct_predict = 0
-            # print(len(loader))
             input, label  = next(iter(loader))
-            # print("input")
-            # print(input)
-            # print("size")
-            # print(input.size())
-            # print(type(input))
-            # print(len(label))
             output1, output2  = model(input.float())
+            #multilbox loss
+
             print("output")
             print(output2.shape)
 
