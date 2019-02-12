@@ -44,7 +44,7 @@ parser.add_argument('-O', '--output', help= "Path to output data folder in VOC f
 parser.add_argument('-TF', '--template_folder', metavar= "Template folder",
                     help= "Path to template folder.", type=str, required=False,
                     default='templates')
-parser.add_argument('-TN', '--template_name', help= "Name of temlpate file.",
+parser.add_argument('-TN', '--template_name', help= "Name of template file.",
                      metavar= "Template file",
                      type=str, required=False, default=TEMPLATE_FILE)
 args = parser.parse_args()
