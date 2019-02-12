@@ -18,7 +18,6 @@ from PIL import Image
 from jinja2 import Template
 from bs4 import BeautifulSoup
 import argparse
-import shutil
 from tqdm import tqdm
 
 __author__     = "Damini Rhijwani, Noureldin Hendy"
