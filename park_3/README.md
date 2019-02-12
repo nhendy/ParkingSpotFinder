@@ -1,6 +1,6 @@
 # Preprocessing
 To convert PKLot to VOC format. Use pklot2voc.py as follows:
-```python
+```
 usage: pklot2voc.py [-h] -I Input data folder -O Output data folder
                     [-TF Template folder] [-TN Template file]
 
