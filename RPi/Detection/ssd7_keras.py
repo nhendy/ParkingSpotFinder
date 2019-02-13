@@ -68,24 +68,37 @@ train_dataset = BatchGenerator(box_output_format=['class_id', 'xmin', 'ymin', 'x
 val_dataset = BatchGenerator(box_output_format=['class_id', 'xmin', 'ymin', 'xmax', 'ymax'])
 
 
+# The directories that contain the images.
+PKLOT_images_dir = '../../datasets/VOCdevkit/VOC2007_Test/JPEGImages/'
+
+# The directories that contain the annotations.
+PKLOT_annotations_dir      = '../../datasets/VOCdevkit/VOC2007/Annotations/'
+
+
 # Training dataset
-train_images_dir      = '../../datasets/Udacity_Driving/driving_dataset_consolidated_small/'
-train_labels_filename = '../../datasets/Udacity_Driving/driving_dataset_consolidated_small/train_labels.csv'
+PKLOT_train_image_set_filename    = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/train.txt'
+PKLOT_val_image_set_filename      = '../../datasets/VOCdevkit/VOC2012/ImageSets/Main/train.txt'
 
-# Validation dataset
-val_images_dir      = '../../datasets/Udacity_Driving/driving_dataset_consolidated_small/'
-val_labels_filename = '../../datasets/Udacity_Driving/driving_dataset_consolidated_small/val_labels.csv'
+# The XML parser needs to now what object class names to look for and in which order to map them to integers.
+classes = ['occupied', 'vaccant']
 
-train_dataset.parse_csv(images_dir=train_images_dir,
-                        labels_filename=train_labels_filename,
-                        input_format=['image_name', 'xmin', 'xmax', 'ymin', 'ymax', 'class_id'], # This is the order of the first six columns in the CSV file that contains the labels for your dataset. If your labels are in XML format, maybe the XML parser will be helpful, check the documentation.
-                        include_classes='all')
+train_dataset.parse_xml(images_dirs=[PKLOT_images_dir],
+                        image_set_filenames=PKLOT_train_image_set_filename,
+                        annotations_dirs=PKLOT_annotations_dir,
+                        classes=classes,
+                        include_classes='all',
+                        exclude_truncated=False,
+                        exclude_difficult=False,
+                        ret=False)
 
-val_dataset.parse_csv(images_dir=val_images_dir,
-                      labels_filename=val_labels_filename,
-                      input_format=['image_name', 'xmin', 'xmax', 'ymin', 'ymax', 'class_id'],
-                      include_classes='all')
-
+val_dataset.parse_xml(images_dirs=[PKLOT_images_dir],
+                        image_set_filenames=PKLOT_val_image_set_filename,
+                        annotations_dirs=PKLOT_annotations_dir,
+                        classes=classes,
+                        include_classes='all',
+                        exclude_truncated=False,
+                        exclude_difficult=True,
+                        ret=False)
 
 
 # The encoder constructor needs the spatial dimensions of the model's predictor layers to create the anchor boxes.
