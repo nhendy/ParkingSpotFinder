@@ -6,16 +6,16 @@ from math import ceil
 import numpy as np
 from matplotlib import pyplot as plt
 
-from keras_ssd7 import build_model
-from keras_ssd_loss import SSDLoss
-from keras_layer_AnchorBoxes import AnchorBoxes
-from keras_layer_L2Normalization import L2Normalization
+from models.keras_ssd7 import build_model
+from keras_loss_function.keras_ssd_loss import SSDLoss
+from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
+from keras_layers.keras_layer_L2Normalization import L2Normalization
 from ssd_box_encode_decode_utils import SSDBoxEncoder, decode_y, decode_y2
 from ssd_batch_generator import BatchGenerator
 
 
-img_height = 1280 #300 # Height of the input images
-img_width =  720  #480 # Width of the input images
+img_height = 300 #300 # Height of the input images
+img_width =  480  #480 # Width of the input images
 img_channels = 3 # Number of color channels of the input images
 subtract_mean = None # Set this to your preference (maybe `None`). The current settings transform the input pixel values to the interval `[-1,1]`.
 divide_by_stddev = None # Set this to your preference (maybe `None`). The current settings transform the input pixel values to the interval `[-1,1]`.
@@ -43,7 +43,7 @@ model = build_model(image_size=(img_height, img_width, img_channels),
                     two_boxes_for_ar1=two_boxes_for_ar1,
                     steps=steps,
                     offsets=offsets,
-                    limit_boxes=limit_boxes,
+                    # limit_boxes=limit_boxes,
                     variances=variances,
                     coords=coords,
                     normalize_coords=normalize_coords,
@@ -69,22 +69,22 @@ val_dataset = BatchGenerator(box_output_format=['class_id', 'xmin', 'ymin', 'xma
 
 
 # The directories that contain the images.
-PKLOT_images_dir = '../../datasets/VOCdevkit/VOC2007_Test/JPEGImages/'
+PKLOT_images_dir = '/Users/noureldinhendy/Downloads/PKLot 2/PKLot/JPEG/'
 
 # The directories that contain the annotations.
-PKLOT_annotations_dir      = '../../datasets/VOCdevkit/VOC2007/Annotations/'
+PKLOT_annotations_dir      = '/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/RPi/Detection/data/out_folder/'
 
 
 # Training dataset
-PKLOT_train_image_set_filename    = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/train.txt'
-PKLOT_val_image_set_filename      = '../../datasets/VOCdevkit/VOC2012/ImageSets/Main/train.txt'
+PKLOT_train_image_set_filename    = '/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/RPi/Detection/data/ImageSets/Main/train.txt'
+PKLOT_val_image_set_filename      = '/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/RPi/Detection/data/ImageSets/Main/valid.txt'
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['occupied', 'vaccant']
 
 train_dataset.parse_xml(images_dirs=[PKLOT_images_dir],
-                        image_set_filenames=PKLOT_train_image_set_filename,
-                        annotations_dirs=PKLOT_annotations_dir,
+                        image_set_filenames=[PKLOT_train_image_set_filename],
+                        annotations_dirs=[PKLOT_annotations_dir],
                         classes=classes,
                         include_classes='all',
                         exclude_truncated=False,
@@ -92,8 +92,8 @@ train_dataset.parse_xml(images_dirs=[PKLOT_images_dir],
                         ret=False)
 
 val_dataset.parse_xml(images_dirs=[PKLOT_images_dir],
-                        image_set_filenames=PKLOT_val_image_set_filename,
-                        annotations_dirs=PKLOT_annotations_dir,
+                        image_set_filenames=[PKLOT_val_image_set_filename],
+                        annotations_dirs=[PKLOT_annotations_dir],
                         classes=classes,
                         include_classes='all',
                         exclude_truncated=False,
@@ -140,8 +140,8 @@ train_generator = train_dataset.generate(batch_size=batch_size,
                                          flip=0.5, # Randomly flip horizontally with probability 0.5
                                          translate=((5, 50), (3, 30), 0.5), # Randomly translate by 5-50 pixels horizontally and 3-30 pixels vertically with probability 0.5
                                          scale=(0.75, 1.3, 0.5), # Randomly scale between 0.75 and 1.3 with probability 0.5
-                                         max_crop_and_resize=False,
-                                         random_pad_and_resize=False,
+                                         max_crop_and_resize=(img_height, img_width, 1, 3),
+                                         random_pad_and_resize=(img_height, img_width, 1, 3, 0.5),
                                          random_crop=False,
                                          crop=False,
                                          resize=False,
