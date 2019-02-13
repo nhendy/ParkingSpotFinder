@@ -98,11 +98,15 @@ def get_annotations_per_file(xml_file_path):
             for point in contour_points:
                 x, y = int(point['x']), int(point['y'])
                 if   x > xmax : xmax = x
-                elif x < xmin : xmin = x
+                if   x < xmin : xmin = x
 
                 if   y > ymax : ymax = y
-                elif y < ymin : ymin = y
+                if   y < ymin : ymin = y
 
+            assert(xmin != float("Inf"))
+            assert(ymin != float("Inf"))
+            assert(xmax != float("-Inf"))
+            assert(ymax != float("-Inf"))
             annotations.append(Space(id= space_id,
                                      xmin=xmin,
                                      ymin=ymin,
@@ -111,6 +115,12 @@ def get_annotations_per_file(xml_file_path):
                                      occupied=occupied))
     except Exception as e:
         print('FAILED @ {} id {}'.format(xml_file_path, space_id))
+        if isinstance(e, AssertionError):
+            print('xmin {}'.format(xmin))
+            print('xmax {}'.format(xmax))
+            print('ymin {}'.format(ymin))
+            print('ymax {}'.format(ymax))
+            os.system('subl '+ xml_file_path)
         exit(0)
 
     return annotations
