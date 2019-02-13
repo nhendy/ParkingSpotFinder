@@ -14,8 +14,8 @@ from ssd_box_encode_decode_utils import SSDBoxEncoder, decode_y, decode_y2
 from ssd_batch_generator import BatchGenerator
 
 
-img_height = 300 #300 # Height of the input images
-img_width =  480  #480 # Width of the input images
+img_height = 720 #300 # Height of the input images
+img_width =  1280  #480 # Width of the input images
 img_channels = 3 # Number of color channels of the input images
 subtract_mean = None # Set this to your preference (maybe `None`). The current settings transform the input pixel values to the interval `[-1,1]`.
 divide_by_stddev = None # Set this to your preference (maybe `None`). The current settings transform the input pixel values to the interval `[-1,1]`.
@@ -69,15 +69,15 @@ val_dataset = BatchGenerator(box_output_format=['class_id', 'xmin', 'ymin', 'xma
 
 
 # The directories that contain the images.
-PKLOT_images_dir = '/Users/noureldinhendy/Downloads/PKLot 2/PKLot/JPEG/'
+PKLOT_images_dir = '/Users/programming/PycharmProjects/Park/RPi/Detection/Data/'
 
 # The directories that contain the annotations.
-PKLOT_annotations_dir      = '/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/RPi/Detection/data/out_folder/'
+PKLOT_annotations_dir      = '/Users/programming/PycharmProjects/Park/RPi/Detection/newXML/'
 
 
 # Training dataset
-PKLOT_train_image_set_filename    = '/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/RPi/Detection/data/ImageSets/Main/train.txt'
-PKLOT_val_image_set_filename      = '/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/RPi/Detection/data/ImageSets/Main/valid.txt'
+PKLOT_train_image_set_filename    = '/Users/programming/PycharmProjects/Park/RPi/Detection/ImageSets/Main/train.txt'
+PKLOT_val_image_set_filename      = '/Users/programming/PycharmProjects/Park/RPi/Detection/ImageSets/Main/valid.txt'
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['occupied', 'vaccant']
