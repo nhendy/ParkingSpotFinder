@@ -92,6 +92,8 @@ def get_annotations_per_file(xml_file_path):
         for space in spaces:
             space_id, occupied = int(space['id']), int(space.get('occupied', 0))
             contour_points = space.find_all('point', recursive=True)
+
+            #TODO : THERE'S A HUGE BUG RIGHT HERE !!!!
             xmin, xmax, ymin, ymax = float("Inf"), float("-Inf"), float("Inf"), float("-Inf")
             for point in contour_points:
                 x, y = int(point['x']), int(point['y'])
