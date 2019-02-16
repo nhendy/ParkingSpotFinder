@@ -1,0 +1,253 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Ft_Esd_Slider.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Ft_Esd_Slider_Update_Signal,"ax",%progbits
+  18              		.align	1
+  19              		.global	Ft_Esd_Slider_Update_Signal
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-sp-d16
+  25              	Ft_Esd_Slider_Update_Signal:
+  26              	.LFB9:
+  27              		.file 1 "FT_Esd_Widgets/Ft_Esd_Slider.c"
+   1:FT_Esd_Widgets/Ft_Esd_Slider.c **** #include "Ft_Esd.h"
+   2:FT_Esd_Widgets/Ft_Esd_Slider.c **** #include "Ft_Esd_Slider.h"
+   3:FT_Esd_Widgets/Ft_Esd_Slider.c **** 
+   4:FT_Esd_Widgets/Ft_Esd_Slider.c **** #include "Ft_Esd_TouchTag.h"
+   5:FT_Esd_Widgets/Ft_Esd_Slider.c **** 
+   6:FT_Esd_Widgets/Ft_Esd_Slider.c **** #include <stdio.h>
+   7:FT_Esd_Widgets/Ft_Esd_Slider.c **** 
+   8:FT_Esd_Widgets/Ft_Esd_Slider.c **** ESD_METHOD(Ft_Esd_Slider_Update_Signal, Context = Ft_Esd_Slider)
+   9:FT_Esd_Widgets/Ft_Esd_Slider.c **** void Ft_Esd_Slider_Update_Signal(Ft_Esd_Slider *context)
+  10:FT_Esd_Widgets/Ft_Esd_Slider.c **** {
+  28              		.loc 1 10 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 24
+  36              		.cfi_offset 3, -24
+  37              		.cfi_offset 4, -20
+  38              		.cfi_offset 5, -16
+  39              		.cfi_offset 6, -12
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 0446     		mov	r4, r0
+  11:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	if (Ft_Esd_TouchTag_Touching(&context->TouchTag))
+  43              		.loc 1 11 0
+  44 0004 00F10806 		add	r6, r0, #8
+  45 0008 3046     		mov	r0, r6
+  46              	.LVL1:
+  47 000a FFF7FEFF 		bl	Ft_Esd_TouchTag_Touching
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s 			page 2
+
+
+  48              	.LVL2:
+  49 000e 38B3     		cbz	r0, .L1
+  50              	.LBB2:
+  12:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	{
+  13:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		ft_int32_t width = context->Width(context->Parent) - context->Height(context->Parent);
+  51              		.loc 1 13 0
+  52 0010 A36A     		ldr	r3, [r4, #40]
+  53 0012 2068     		ldr	r0, [r4]
+  54 0014 9847     		blx	r3
+  55              	.LVL3:
+  56 0016 0746     		mov	r7, r0
+  57 0018 E36A     		ldr	r3, [r4, #44]
+  58 001a 2068     		ldr	r0, [r4]
+  59 001c 9847     		blx	r3
+  60              	.LVL4:
+  61 001e 3F1A     		subs	r7, r7, r0
+  62              	.LVL5:
+  14:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		ft_int16_t touchX = Ft_Esd_TouchTag_TouchX(&context->TouchTag);
+  63              		.loc 1 14 0
+  64 0020 3046     		mov	r0, r6
+  65 0022 FFF7FEFF 		bl	Ft_Esd_TouchTag_TouchX
+  66              	.LVL6:
+  67 0026 0546     		mov	r5, r0
+  68              	.LVL7:
+  15:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		ft_int16_t touchY = Ft_Esd_TouchTag_TouchY(&context->TouchTag);
+  69              		.loc 1 15 0
+  70 0028 3046     		mov	r0, r6
+  71 002a FFF7FEFF 		bl	Ft_Esd_TouchTag_TouchY
+  72              	.LVL8:
+  16:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		ft_int32_t range = context->Range(context->Parent);
+  73              		.loc 1 16 0
+  74 002e 236C     		ldr	r3, [r4, #64]
+  75 0030 2068     		ldr	r0, [r4]
+  76 0032 9847     		blx	r3
+  77              	.LVL9:
+  78 0034 0146     		mov	r1, r0
+  79              	.LVL10:
+  17:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		ft_int32_t touchDelta = touchX - context->PreviousX;
+  80              		.loc 1 17 0
+  81 0036 B4F93E30 		ldrsh	r3, [r4, #62]
+  82 003a EB1A     		subs	r3, r5, r3
+  83              	.LVL11:
+  18:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		ft_int32_t valueDelta = (touchDelta * range) / width;
+  84              		.loc 1 18 0
+  85 003c 03FB00F3 		mul	r3, r3, r0
+  86              	.LVL12:
+  87 0040 93FBF7F3 		sdiv	r3, r3, r7
+  88              	.LVL13:
+  19:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		ft_int32_t newValue = context->PreviousValue + valueDelta;
+  89              		.loc 1 19 0
+  90 0044 B4F93C20 		ldrsh	r2, [r4, #60]
+  91              	.LVL14:
+  20:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		if (newValue < 0) newValue = 0;
+  92              		.loc 1 20 0
+  93 0048 D318     		adds	r3, r2, r3
+  94              	.LVL15:
+  95 004a 03D4     		bmi	.L4
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s 			page 3
+
+
+  21:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		else if (newValue > range) newValue = range;
+  96              		.loc 1 21 0
+  97 004c 9842     		cmp	r0, r3
+  98 004e 02DB     		blt	.L3
+  19:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		ft_int32_t newValue = context->PreviousValue + valueDelta;
+  99              		.loc 1 19 0
+ 100 0050 1946     		mov	r1, r3
+ 101 0052 00E0     		b	.L3
+ 102              	.L4:
+  20:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		if (newValue < 0) newValue = 0;
+ 103              		.loc 1 20 0
+ 104 0054 0021     		movs	r1, #0
+ 105              	.L3:
+ 106              	.LVL16:
+  22:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		context->Value = newValue;
+ 107              		.loc 1 22 0
+ 108 0056 09B2     		sxth	r1, r1
+ 109              	.LVL17:
+ 110 0058 A186     		strh	r1, [r4, #52]	@ movhi
+  23:FT_Esd_Widgets/Ft_Esd_Slider.c **** 		context->Changed(context->Parent, context->Value);
+ 111              		.loc 1 23 0
+ 112 005a A36B     		ldr	r3, [r4, #56]
+ 113 005c 2068     		ldr	r0, [r4]
+ 114              	.LVL18:
+ 115 005e 9847     		blx	r3
+ 116              	.LVL19:
+ 117              	.L1:
+ 118              	.LBE2:
+  24:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	}
+  25:FT_Esd_Widgets/Ft_Esd_Slider.c **** }
+ 119              		.loc 1 25 0
+ 120 0060 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 121              		.cfi_endproc
+ 122              	.LFE9:
+ 124              		.section	.text.Ft_Esd_Slider_ClampedValue,"ax",%progbits
+ 125              		.align	1
+ 126              		.global	Ft_Esd_Slider_ClampedValue
+ 127              		.syntax unified
+ 128              		.thumb
+ 129              		.thumb_func
+ 130              		.fpu fpv5-sp-d16
+ 132              	Ft_Esd_Slider_ClampedValue:
+ 133              	.LFB10:
+  26:FT_Esd_Widgets/Ft_Esd_Slider.c **** 
+  27:FT_Esd_Widgets/Ft_Esd_Slider.c **** ESD_METHOD(Ft_Esd_Slider_ClampedValue, Context = Ft_Esd_Slider, Type = ft_int16_t)
+  28:FT_Esd_Widgets/Ft_Esd_Slider.c **** ft_int16_t Ft_Esd_Slider_ClampedValue(Ft_Esd_Slider *context)
+  29:FT_Esd_Widgets/Ft_Esd_Slider.c **** {
+ 134              		.loc 1 29 0
+ 135              		.cfi_startproc
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138              	.LVL20:
+ 139 0000 10B5     		push	{r4, lr}
+ 140              	.LCFI1:
+ 141              		.cfi_def_cfa_offset 8
+ 142              		.cfi_offset 4, -8
+ 143              		.cfi_offset 14, -4
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s 			page 4
+
+
+  30:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	ft_int16_t value = context->Value;
+ 144              		.loc 1 30 0
+ 145 0002 B0F93440 		ldrsh	r4, [r0, #52]
+ 146              	.LVL21:
+  31:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	ft_int16_t range = context->Range(context->Parent);
+ 147              		.loc 1 31 0
+ 148 0006 036C     		ldr	r3, [r0, #64]
+ 149 0008 0068     		ldr	r0, [r0]
+ 150              	.LVL22:
+ 151 000a 9847     		blx	r3
+ 152              	.LVL23:
+  32:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	if (value < 0) return 0;
+ 153              		.loc 1 32 0
+ 154 000c 002C     		cmp	r4, #0
+ 155 000e 05DB     		blt	.L8
+  33:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	if (value > range) return range;
+ 156              		.loc 1 33 0
+ 157 0010 8442     		cmp	r4, r0
+ 158 0012 01DC     		bgt	.L10
+ 159              	.LVL24:
+ 160              	.L7:
+  34:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	return value;
+  35:FT_Esd_Widgets/Ft_Esd_Slider.c **** }
+ 161              		.loc 1 35 0
+ 162 0014 2046     		mov	r0, r4
+ 163              	.LVL25:
+ 164 0016 10BD     		pop	{r4, pc}
+ 165              	.LVL26:
+ 166              	.L10:
+  33:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	if (value > range) return range;
+ 167              		.loc 1 33 0
+ 168 0018 0446     		mov	r4, r0
+ 169              	.LVL27:
+ 170 001a FBE7     		b	.L7
+ 171              	.LVL28:
+ 172              	.L8:
+  32:FT_Esd_Widgets/Ft_Esd_Slider.c **** 	if (value > range) return range;
+ 173              		.loc 1 32 0
+ 174 001c 0024     		movs	r4, #0
+ 175              	.LVL29:
+ 176 001e F9E7     		b	.L7
+ 177              		.cfi_endproc
+ 178              	.LFE10:
+ 180              		.text
+ 181              	.Letext0:
+ 182              		.file 2 "FT_Eve_Hal/FT_DataTypes.h"
+ 183              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 184              		.file 4 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 185              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 186              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 187              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 188              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 189              		.file 9 "FT_Esd_Framework/Ft_Esd.h"
+ 190              		.file 10 "FT_Esd_Widgets/Ft_Esd_Theme.h"
+ 191              		.file 11 "FT_Esd_Framework/Ft_Esd_TouchTag.h"
+ 192              		.file 12 "FT_Esd_Widgets/Ft_Esd_Slider.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Ft_Esd_Slider.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s:18     .text.Ft_Esd_Slider_Update_Signal:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s:25     .text.Ft_Esd_Slider_Update_Signal:0000000000000000 Ft_Esd_Slider_Update_Signal
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s:125    .text.Ft_Esd_Slider_ClampedValue:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cc69v273.s:132    .text.Ft_Esd_Slider_ClampedValue:0000000000000000 Ft_Esd_Slider_ClampedValue
+
+UNDEFINED SYMBOLS
+Ft_Esd_TouchTag_Touching
+Ft_Esd_TouchTag_TouchX
+Ft_Esd_TouchTag_TouchY

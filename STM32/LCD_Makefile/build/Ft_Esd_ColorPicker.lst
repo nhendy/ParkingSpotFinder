@@ -1,0 +1,794 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Ft_Esd_ColorPicker.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	__aeabi_i2d
+  18              		.global	__aeabi_dadd
+  19              		.global	__aeabi_ddiv
+  20              		.section	.text.getSat,"ax",%progbits
+  21              		.align	1
+  22              		.global	getSat
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  26              		.fpu fpv5-sp-d16
+  28              	getSat:
+  29              	.LFB6:
+  30              		.file 1 "FT_Esd_Widgets/Ft_Esd_ColorPicker.c"
+   1:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** #include "Ft_Esd.h"
+   2:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** #include "Ft_Esd_ColorPicker.h"
+   3:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** #include <math.h>
+   4:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 
+   5:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_FUNCTION(getSat, Type = double, DisplayName = "Get Saturation", Category = Ft_Esd_ColorPicker)
+   6:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(x0, Type = int)
+   7:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(y0, Type = int)
+   8:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(x1, Type = int)
+   9:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(y1, Type = int)
+  10:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(r, Type = double)
+  11:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** double getSat(int x0, int y0, int x1, int y1, double r){
+  31              		.loc 1 11 0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35              	.LVL0:
+  36 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 32
+  39              		.cfi_offset 3, -32
+  40              		.cfi_offset 4, -28
+  41              		.cfi_offset 5, -24
+  42              		.cfi_offset 6, -20
+  43              		.cfi_offset 7, -16
+  44              		.cfi_offset 8, -12
+  45              		.cfi_offset 9, -8
+  46              		.cfi_offset 14, -4
+  47 0004 2DED028B 		vpush.64	{d8}
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 2
+
+
+  48              	.LCFI1:
+  49              		.cfi_def_cfa_offset 40
+  50              		.cfi_offset 80, -40
+  51              		.cfi_offset 81, -36
+  52 0008 8846     		mov	r8, r1
+  53 000a 9946     		mov	r9, r3
+  54 000c 55EC104B 		vmov	r4, r5, d0
+  12:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double sizeX = pow((x1-x0),2);
+  55              		.loc 1 12 0
+  56 0010 101A     		subs	r0, r2, r0
+  57              	.LVL1:
+  58 0012 FFF7FEFF 		bl	__aeabi_i2d
+  59              	.LVL2:
+  60 0016 9FED188B 		vldr.64	d8, .L3
+  61 001a B0EE481A 		vmov.f32	s2, s16
+  62 001e F0EE681A 		vmov.f32	s3, s17
+  63 0022 41EC100B 		vmov	d0, r0, r1
+  64 0026 FFF7FEFF 		bl	pow
+  65              	.LVL3:
+  66 002a 57EC106B 		vmov	r6, r7, d0
+  67              	.LVL4:
+  13:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double sizeY = pow((y1-y0),2);
+  68              		.loc 1 13 0
+  69 002e A9EB0800 		sub	r0, r9, r8
+  70 0032 FFF7FEFF 		bl	__aeabi_i2d
+  71              	.LVL5:
+  72 0036 B0EE481A 		vmov.f32	s2, s16
+  73 003a F0EE681A 		vmov.f32	s3, s17
+  74 003e 41EC100B 		vmov	d0, r0, r1
+  75 0042 FFF7FEFF 		bl	pow
+  76              	.LVL6:
+  14:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	return sqrt(sizeX + sizeY)/r;
+  77              		.loc 1 14 0
+  78 0046 53EC102B 		vmov	r2, r3, d0
+  79 004a 3046     		mov	r0, r6
+  80 004c 3946     		mov	r1, r7
+  81 004e FFF7FEFF 		bl	__aeabi_dadd
+  82              	.LVL7:
+  83 0052 41EC100B 		vmov	d0, r0, r1
+  84 0056 FFF7FEFF 		bl	sqrt
+  85              	.LVL8:
+  86 005a 2246     		mov	r2, r4
+  87 005c 2B46     		mov	r3, r5
+  88 005e 51EC100B 		vmov	r0, r1, d0
+  89 0062 FFF7FEFF 		bl	__aeabi_ddiv
+  90              	.LVL9:
+  15:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** }
+  91              		.loc 1 15 0
+  92 0066 41EC100B 		vmov	d0, r0, r1
+  93 006a BDEC028B 		vldm	sp!, {d8}
+  94              	.LCFI2:
+  95              		.cfi_restore 80
+  96              		.cfi_restore 81
+  97              		.cfi_def_cfa_offset 32
+  98 006e BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+  99              	.LVL10:
+ 100              	.L4:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 3
+
+
+ 101 0072 00BFAFF3 		.align	3
+ 101      0080
+ 102              	.L3:
+ 103 0078 00000000 		.word	0
+ 104 007c 00000040 		.word	1073741824
+ 105              		.cfi_endproc
+ 106              	.LFE6:
+ 108              		.global	__aeabi_dmul
+ 109              		.global	__aeabi_dsub
+ 110              		.section	.text.getHue,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	getHue
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 116              		.fpu fpv5-sp-d16
+ 118              	getHue:
+ 119              	.LFB7:
+  16:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 
+  17:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 
+  18:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_FUNCTION(getHue, Type = double, DisplayName = "Get Hue", Category = Ft_Esd_ColorPicker)
+  19:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(x0, Type = int)
+  20:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(y0, Type = int)
+  21:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(x1, Type = int)
+  22:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(y1, Type = int)
+  23:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** double getHue(int x0, int y0, int x1, int y1){
+ 120              		.loc 1 23 0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124              	.LVL11:
+  24:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double angleInRadian,angleInDegree;
+  25:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	if (x0 == x1)
+ 125              		.loc 1 25 0
+ 126 0000 9042     		cmp	r0, r2
+ 127 0002 28D0     		beq	.L16
+  23:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double angleInRadian,angleInDegree;
+ 128              		.loc 1 23 0
+ 129 0004 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 130              	.LCFI3:
+ 131              		.cfi_def_cfa_offset 24
+ 132              		.cfi_offset 3, -24
+ 133              		.cfi_offset 4, -20
+ 134              		.cfi_offset 5, -16
+ 135              		.cfi_offset 6, -12
+ 136              		.cfi_offset 7, -8
+ 137              		.cfi_offset 14, -4
+ 138 0006 1546     		mov	r5, r2
+ 139 0008 0446     		mov	r4, r0
+  26:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	{
+  27:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		if (y1<y0)
+  28:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			return 90;
+  29:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		else if (y1>y0)
+  30:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			return 270;
+  31:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		else
+  32:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			return 0;
+  33:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	} 
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 4
+
+
+  34:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	else if (x1>x0)
+ 140              		.loc 1 34 0
+ 141 000a 9042     		cmp	r0, r2
+ 142 000c 45DA     		bge	.L8
+  35:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	{
+  36:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		if (y1 > y0)
+ 143              		.loc 1 36 0
+ 144 000e 8B42     		cmp	r3, r1
+ 145 0010 27DD     		ble	.L9
+  37:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		{
+  38:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInRadian = atan2((y1-y0),(x1-x0));
+ 146              		.loc 1 38 0
+ 147 0012 581A     		subs	r0, r3, r1
+ 148              	.LVL12:
+ 149 0014 FFF7FEFF 		bl	__aeabi_i2d
+ 150              	.LVL13:
+ 151 0018 0646     		mov	r6, r0
+ 152 001a 0F46     		mov	r7, r1
+ 153 001c 281B     		subs	r0, r5, r4
+ 154 001e FFF7FEFF 		bl	__aeabi_i2d
+ 155              	.LVL14:
+ 156 0022 41EC110B 		vmov	d1, r0, r1
+ 157 0026 47EC106B 		vmov	d0, r6, r7
+ 158 002a FFF7FEFF 		bl	atan2
+ 159              	.LVL15:
+  39:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInDegree = 360 - (angleInRadian * 180 / M_PI);		
+ 160              		.loc 1 39 0
+ 161 002e 0022     		movs	r2, #0
+ 162 0030 474B     		ldr	r3, .L18+32
+ 163 0032 51EC100B 		vmov	r0, r1, d0
+ 164 0036 FFF7FEFF 		bl	__aeabi_dmul
+ 165              	.LVL16:
+ 166 003a 3DA3     		adr	r3, .L18
+ 167 003c D3E90023 		ldrd	r2, [r3]
+ 168 0040 FFF7FEFF 		bl	__aeabi_ddiv
+ 169              	.LVL17:
+ 170 0044 0246     		mov	r2, r0
+ 171 0046 0B46     		mov	r3, r1
+ 172 0048 0020     		movs	r0, #0
+ 173 004a 4249     		ldr	r1, .L18+36
+ 174 004c FFF7FEFF 		bl	__aeabi_dsub
+ 175              	.LVL18:
+ 176 0050 41EC100B 		vmov	d0, r0, r1
+ 177              	.LVL19:
+ 178 0054 44E0     		b	.L5
+ 179              	.LVL20:
+ 180              	.L16:
+ 181              	.LCFI4:
+ 182              		.cfi_def_cfa_offset 0
+ 183              		.cfi_restore 3
+ 184              		.cfi_restore 4
+ 185              		.cfi_restore 5
+ 186              		.cfi_restore 6
+ 187              		.cfi_restore 7
+ 188              		.cfi_restore 14
+  27:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			return 90;
+ 189              		.loc 1 27 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 5
+
+
+ 190 0056 8B42     		cmp	r3, r1
+ 191 0058 63DB     		blt	.L11
+  29:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			return 270;
+ 192              		.loc 1 29 0
+ 193 005a 65DD     		ble	.L12
+  30:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		else
+ 194              		.loc 1 30 0
+ 195 005c 9FED360B 		vldr.64	d0, .L18+8
+ 196 0060 7047     		bx	lr
+ 197              	.L9:
+ 198              	.LCFI5:
+ 199              		.cfi_def_cfa_offset 24
+ 200              		.cfi_offset 3, -24
+ 201              		.cfi_offset 4, -20
+ 202              		.cfi_offset 5, -16
+ 203              		.cfi_offset 6, -12
+ 204              		.cfi_offset 7, -8
+ 205              		.cfi_offset 14, -4
+  40:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		}
+  41:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		else
+  42:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		{
+  43:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInRadian = atan2((y0-y1),(x1-x0));
+ 206              		.loc 1 43 0
+ 207 0062 C81A     		subs	r0, r1, r3
+ 208              	.LVL21:
+ 209 0064 FFF7FEFF 		bl	__aeabi_i2d
+ 210              	.LVL22:
+ 211 0068 0646     		mov	r6, r0
+ 212 006a 0F46     		mov	r7, r1
+ 213 006c 281B     		subs	r0, r5, r4
+ 214 006e FFF7FEFF 		bl	__aeabi_i2d
+ 215              	.LVL23:
+ 216 0072 41EC110B 		vmov	d1, r0, r1
+ 217 0076 47EC106B 		vmov	d0, r6, r7
+ 218 007a FFF7FEFF 		bl	atan2
+ 219              	.LVL24:
+  44:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInDegree = angleInRadian * 180 / M_PI;
+ 220              		.loc 1 44 0
+ 221 007e 0022     		movs	r2, #0
+ 222 0080 334B     		ldr	r3, .L18+32
+ 223 0082 51EC100B 		vmov	r0, r1, d0
+ 224 0086 FFF7FEFF 		bl	__aeabi_dmul
+ 225              	.LVL25:
+ 226 008a 29A3     		adr	r3, .L18
+ 227 008c D3E90023 		ldrd	r2, [r3]
+ 228 0090 FFF7FEFF 		bl	__aeabi_ddiv
+ 229              	.LVL26:
+ 230 0094 41EC100B 		vmov	d0, r0, r1
+ 231              	.LVL27:
+ 232 0098 22E0     		b	.L5
+ 233              	.LVL28:
+ 234              	.L8:
+  45:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		}
+  46:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	}
+  47:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	else
+  48:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	{
+  49:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		if (y1 > y0)
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 6
+
+
+ 235              		.loc 1 49 0
+ 236 009a 8B42     		cmp	r3, r1
+ 237 009c 21DC     		bgt	.L17
+  50:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		{
+  51:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInRadian = atan2((y1-y0),(x0-x1));
+  52:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInDegree = 180 + (angleInRadian * 180 / M_PI);		
+  53:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		}
+  54:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		else
+  55:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		{
+  56:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInRadian = atan2((y0-y1),(x0-x1));
+ 238              		.loc 1 56 0
+ 239 009e C81A     		subs	r0, r1, r3
+ 240              	.LVL29:
+ 241 00a0 FFF7FEFF 		bl	__aeabi_i2d
+ 242              	.LVL30:
+ 243 00a4 0646     		mov	r6, r0
+ 244 00a6 0F46     		mov	r7, r1
+ 245 00a8 601B     		subs	r0, r4, r5
+ 246 00aa FFF7FEFF 		bl	__aeabi_i2d
+ 247              	.LVL31:
+ 248 00ae 41EC110B 		vmov	d1, r0, r1
+ 249 00b2 47EC106B 		vmov	d0, r6, r7
+ 250 00b6 FFF7FEFF 		bl	atan2
+ 251              	.LVL32:
+  57:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInDegree = 180 - (angleInRadian * 180 / M_PI);
+ 252              		.loc 1 57 0
+ 253 00ba 0022     		movs	r2, #0
+ 254 00bc 244B     		ldr	r3, .L18+32
+ 255 00be 51EC100B 		vmov	r0, r1, d0
+ 256 00c2 FFF7FEFF 		bl	__aeabi_dmul
+ 257              	.LVL33:
+ 258 00c6 1AA3     		adr	r3, .L18
+ 259 00c8 D3E90023 		ldrd	r2, [r3]
+ 260 00cc FFF7FEFF 		bl	__aeabi_ddiv
+ 261              	.LVL34:
+ 262 00d0 0246     		mov	r2, r0
+ 263 00d2 0B46     		mov	r3, r1
+ 264 00d4 0020     		movs	r0, #0
+ 265 00d6 1E49     		ldr	r1, .L18+32
+ 266 00d8 FFF7FEFF 		bl	__aeabi_dsub
+ 267              	.LVL35:
+ 268 00dc 41EC100B 		vmov	d0, r0, r1
+ 269              	.LVL36:
+ 270              	.L5:
+  58:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		}
+  59:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	}
+  60:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	return angleInDegree;
+  61:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** }
+ 271              		.loc 1 61 0
+ 272 00e0 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 273              	.LVL37:
+ 274              	.L17:
+  51:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 			angleInDegree = 180 + (angleInRadian * 180 / M_PI);		
+ 275              		.loc 1 51 0
+ 276 00e2 581A     		subs	r0, r3, r1
+ 277              	.LVL38:
+ 278 00e4 FFF7FEFF 		bl	__aeabi_i2d
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 7
+
+
+ 279              	.LVL39:
+ 280 00e8 0646     		mov	r6, r0
+ 281 00ea 0F46     		mov	r7, r1
+ 282 00ec 601B     		subs	r0, r4, r5
+ 283 00ee FFF7FEFF 		bl	__aeabi_i2d
+ 284              	.LVL40:
+ 285 00f2 41EC110B 		vmov	d1, r0, r1
+ 286 00f6 47EC106B 		vmov	d0, r6, r7
+ 287 00fa FFF7FEFF 		bl	atan2
+ 288              	.LVL41:
+  52:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		}
+ 289              		.loc 1 52 0
+ 290 00fe 0022     		movs	r2, #0
+ 291 0100 134B     		ldr	r3, .L18+32
+ 292 0102 51EC100B 		vmov	r0, r1, d0
+ 293 0106 FFF7FEFF 		bl	__aeabi_dmul
+ 294              	.LVL42:
+ 295 010a 09A3     		adr	r3, .L18
+ 296 010c D3E90023 		ldrd	r2, [r3]
+ 297 0110 FFF7FEFF 		bl	__aeabi_ddiv
+ 298              	.LVL43:
+ 299 0114 0022     		movs	r2, #0
+ 300 0116 0E4B     		ldr	r3, .L18+32
+ 301 0118 FFF7FEFF 		bl	__aeabi_dadd
+ 302              	.LVL44:
+ 303 011c 41EC100B 		vmov	d0, r0, r1
+ 304              	.LVL45:
+ 305 0120 DEE7     		b	.L5
+ 306              	.LVL46:
+ 307              	.L11:
+ 308              	.LCFI6:
+ 309              		.cfi_def_cfa_offset 0
+ 310              		.cfi_restore 3
+ 311              		.cfi_restore 4
+ 312              		.cfi_restore 5
+ 313              		.cfi_restore 6
+ 314              		.cfi_restore 7
+ 315              		.cfi_restore 14
+  28:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		else if (y1>y0)
+ 316              		.loc 1 28 0
+ 317 0122 9FED070B 		vldr.64	d0, .L18+16
+ 318 0126 7047     		bx	lr
+ 319              	.L12:
+  32:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	} 
+ 320              		.loc 1 32 0
+ 321 0128 9FED070B 		vldr.64	d0, .L18+24
+ 322              		.loc 1 61 0
+ 323 012c 7047     		bx	lr
+ 324              	.L19:
+ 325 012e 00BF     		.align	3
+ 326              	.L18:
+ 327 0130 182D4454 		.word	1413754136
+ 328 0134 FB210940 		.word	1074340347
+ 329 0138 00000000 		.word	0
+ 330 013c 00E07040 		.word	1081139200
+ 331 0140 00000000 		.word	0
+ 332 0144 00805640 		.word	1079410688
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 8
+
+
+ 333 0148 00000000 		.word	0
+ 334 014c 00000000 		.word	0
+ 335 0150 00806640 		.word	1080459264
+ 336 0154 00807640 		.word	1081507840
+ 337              		.cfi_endproc
+ 338              	.LFE7:
+ 340              		.global	__aeabi_d2iz
+ 341              		.section	.text.hsvToRgb,"ax",%progbits
+ 342              		.align	1
+ 343              		.global	hsvToRgb
+ 344              		.syntax unified
+ 345              		.thumb
+ 346              		.thumb_func
+ 347              		.fpu fpv5-sp-d16
+ 349              	hsvToRgb:
+ 350              	.LFB8:
+  62:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 
+  63:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 
+  64:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_FUNCTION(hsvToRgb, Type = ft_argb32_t, DisplayName = "HSV to RGB", Category = Ft_Esd_ColorPicke
+  65:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(h, Type = double)
+  66:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(s, Type = double)
+  67:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ESD_PARAMETER(v, Type = double)
+  68:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** ft_argb32_t hsvToRgb(double h, double s, double v){
+ 351              		.loc 1 68 0
+ 352              		.cfi_startproc
+ 353              		@ args = 0, pretend = 0, frame = 16
+ 354              		@ frame_needed = 0, uses_anonymous_args = 0
+ 355              	.LVL47:
+ 356 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 357              	.LCFI7:
+ 358              		.cfi_def_cfa_offset 32
+ 359              		.cfi_offset 4, -32
+ 360              		.cfi_offset 5, -28
+ 361              		.cfi_offset 6, -24
+ 362              		.cfi_offset 7, -20
+ 363              		.cfi_offset 8, -16
+ 364              		.cfi_offset 9, -12
+ 365              		.cfi_offset 10, -8
+ 366              		.cfi_offset 14, -4
+ 367 0004 84B0     		sub	sp, sp, #16
+ 368              	.LCFI8:
+ 369              		.cfi_def_cfa_offset 48
+ 370 0006 59EC118B 		vmov	r8, r9, d1
+ 371 000a 55EC124B 		vmov	r4, r5, d2
+  69:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double r,g,b;
+  70:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	int R,G,B;
+  71:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	h = h/360.0;
+ 372              		.loc 1 71 0
+ 373 000e 0022     		movs	r2, #0
+ 374 0010 5D4B     		ldr	r3, .L30+8
+ 375 0012 51EC100B 		vmov	r0, r1, d0
+ 376 0016 FFF7FEFF 		bl	__aeabi_ddiv
+ 377              	.LVL48:
+ 378 001a 0646     		mov	r6, r0
+ 379 001c 0F46     		mov	r7, r1
+ 380              	.LVL49:
+  72:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	v = v/255.0;
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 9
+
+
+ 381              		.loc 1 72 0
+ 382 001e 58A3     		adr	r3, .L30
+ 383 0020 D3E90023 		ldrd	r2, [r3]
+ 384 0024 2046     		mov	r0, r4
+ 385 0026 2946     		mov	r1, r5
+ 386 0028 FFF7FEFF 		bl	__aeabi_ddiv
+ 387              	.LVL50:
+ 388 002c 0446     		mov	r4, r0
+ 389              	.LVL51:
+ 390 002e 0D46     		mov	r5, r1
+ 391              	.LVL52:
+  73:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	int i = (int)(h * 6);
+ 392              		.loc 1 73 0
+ 393 0030 0022     		movs	r2, #0
+ 394 0032 564B     		ldr	r3, .L30+12
+ 395 0034 3046     		mov	r0, r6
+ 396 0036 3946     		mov	r1, r7
+ 397 0038 FFF7FEFF 		bl	__aeabi_dmul
+ 398              	.LVL53:
+ 399 003c 0646     		mov	r6, r0
+ 400              	.LVL54:
+ 401 003e 0F46     		mov	r7, r1
+ 402 0040 FFF7FEFF 		bl	__aeabi_d2iz
+ 403              	.LVL55:
+ 404 0044 8246     		mov	r10, r0
+ 405              	.LVL56:
+  74:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double f = h * 6 - i;
+ 406              		.loc 1 74 0
+ 407 0046 FFF7FEFF 		bl	__aeabi_i2d
+ 408              	.LVL57:
+ 409 004a 0246     		mov	r2, r0
+ 410 004c 0B46     		mov	r3, r1
+ 411 004e 3046     		mov	r0, r6
+ 412 0050 3946     		mov	r1, r7
+ 413 0052 FFF7FEFF 		bl	__aeabi_dsub
+ 414              	.LVL58:
+ 415 0056 0646     		mov	r6, r0
+ 416 0058 0F46     		mov	r7, r1
+ 417              	.LVL59:
+  75:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double p = v * (1 - s);
+ 418              		.loc 1 75 0
+ 419 005a CDE90089 		strd	r8, [sp]
+ 420 005e 4246     		mov	r2, r8
+ 421 0060 4B46     		mov	r3, r9
+ 422 0062 0020     		movs	r0, #0
+ 423 0064 4A49     		ldr	r1, .L30+16
+ 424 0066 FFF7FEFF 		bl	__aeabi_dsub
+ 425              	.LVL60:
+ 426 006a 2246     		mov	r2, r4
+ 427 006c 2B46     		mov	r3, r5
+ 428 006e FFF7FEFF 		bl	__aeabi_dmul
+ 429              	.LVL61:
+ 430 0072 8046     		mov	r8, r0
+ 431              	.LVL62:
+ 432 0074 8946     		mov	r9, r1
+ 433              	.LVL63:
+  76:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double q = v * (1 - f * s);
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 10
+
+
+ 434              		.loc 1 76 0
+ 435 0076 DDE90023 		ldrd	r2, [sp]
+ 436 007a 3046     		mov	r0, r6
+ 437 007c 3946     		mov	r1, r7
+ 438 007e FFF7FEFF 		bl	__aeabi_dmul
+ 439              	.LVL64:
+ 440 0082 0246     		mov	r2, r0
+ 441 0084 0B46     		mov	r3, r1
+ 442 0086 0020     		movs	r0, #0
+ 443 0088 4149     		ldr	r1, .L30+16
+ 444 008a FFF7FEFF 		bl	__aeabi_dsub
+ 445              	.LVL65:
+ 446 008e 2246     		mov	r2, r4
+ 447 0090 2B46     		mov	r3, r5
+ 448 0092 FFF7FEFF 		bl	__aeabi_dmul
+ 449              	.LVL66:
+ 450 0096 CDE90201 		strd	r0, [sp, #8]
+ 451              	.LVL67:
+  77:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	double t = v * (1 - (1 - f) * s);
+ 452              		.loc 1 77 0
+ 453 009a 3246     		mov	r2, r6
+ 454 009c 3B46     		mov	r3, r7
+ 455 009e 0020     		movs	r0, #0
+ 456              	.LVL68:
+ 457 00a0 3B49     		ldr	r1, .L30+16
+ 458 00a2 FFF7FEFF 		bl	__aeabi_dsub
+ 459              	.LVL69:
+ 460 00a6 DDE90023 		ldrd	r2, [sp]
+ 461 00aa FFF7FEFF 		bl	__aeabi_dmul
+ 462              	.LVL70:
+ 463 00ae 0246     		mov	r2, r0
+ 464 00b0 0B46     		mov	r3, r1
+ 465 00b2 0020     		movs	r0, #0
+ 466 00b4 3649     		ldr	r1, .L30+16
+ 467 00b6 FFF7FEFF 		bl	__aeabi_dsub
+ 468              	.LVL71:
+ 469 00ba 2246     		mov	r2, r4
+ 470 00bc 2B46     		mov	r3, r5
+ 471 00be FFF7FEFF 		bl	__aeabi_dmul
+ 472              	.LVL72:
+ 473 00c2 0646     		mov	r6, r0
+ 474              	.LVL73:
+ 475 00c4 0F46     		mov	r7, r1
+ 476              	.LVL74:
+  78:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 
+  79:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	switch(i % 6)
+ 477              		.loc 1 79 0
+ 478 00c6 334B     		ldr	r3, .L30+20
+ 479 00c8 83FB0A23 		smull	r2, r3, r3, r10
+ 480 00cc A3EBEA73 		sub	r3, r3, r10, asr #31
+ 481 00d0 03EB4303 		add	r3, r3, r3, lsl #1
+ 482 00d4 5A00     		lsls	r2, r3, #1
+ 483 00d6 AAEB0203 		sub	r3, r10, r2
+ 484 00da 052B     		cmp	r3, #5
+ 485 00dc 08D8     		bhi	.L22
+ 486 00de DFE803F0 		tbb	[pc, r3]
+ 487              	.L23:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 11
+
+
+ 488 00e2 07       		.byte	(.L22-.L23)/2
+ 489 00e3 03       		.byte	(.L24-.L23)/2
+ 490 00e4 2D       		.byte	(.L25-.L23)/2
+ 491 00e5 36       		.byte	(.L26-.L23)/2
+ 492 00e6 3F       		.byte	(.L27-.L23)/2
+ 493 00e7 48       		.byte	(.L28-.L23)/2
+ 494              		.p2align 1
+ 495              	.L24:
+ 496              	.LVL75:
+  80:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	{
+  81:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 0: r = v, g = t, b = p; break;
+  82:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 1: r = q, g = v, b = p; break;
+ 497              		.loc 1 82 0
+ 498 00e8 2646     		mov	r6, r4
+ 499              	.LVL76:
+ 500 00ea 2F46     		mov	r7, r5
+ 501 00ec DDE90245 		ldrd	r4, [sp, #8]
+ 502              	.LVL77:
+ 503              	.L22:
+  83:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 2: r = p, g = v, b = t; break;
+  84:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 3: r = p, g = q, b = v; break;
+  85:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 4: r = t, g = p, b = v; break;
+  86:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 5: r = v, g = p, b = q; break;
+  87:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	}
+  88:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	R = (int)(r*255.0);
+ 504              		.loc 1 88 0
+ 505 00f0 23A3     		adr	r3, .L30
+ 506 00f2 D3E90023 		ldrd	r2, [r3]
+ 507 00f6 2046     		mov	r0, r4
+ 508 00f8 2946     		mov	r1, r5
+ 509 00fa FFF7FEFF 		bl	__aeabi_dmul
+ 510              	.LVL78:
+ 511 00fe FFF7FEFF 		bl	__aeabi_d2iz
+ 512              	.LVL79:
+ 513 0102 0446     		mov	r4, r0
+ 514              	.LVL80:
+  89:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	G = (int)(g*255.0);
+ 515              		.loc 1 89 0
+ 516 0104 1EA3     		adr	r3, .L30
+ 517 0106 D3E90023 		ldrd	r2, [r3]
+ 518 010a 3046     		mov	r0, r6
+ 519              	.LVL81:
+ 520 010c 3946     		mov	r1, r7
+ 521 010e FFF7FEFF 		bl	__aeabi_dmul
+ 522              	.LVL82:
+ 523 0112 FFF7FEFF 		bl	__aeabi_d2iz
+ 524              	.LVL83:
+ 525 0116 0546     		mov	r5, r0
+ 526              	.LVL84:
+  90:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	B = (int)(b*255.0);
+ 527              		.loc 1 90 0
+ 528 0118 19A3     		adr	r3, .L30
+ 529 011a D3E90023 		ldrd	r2, [r3]
+ 530 011e 4046     		mov	r0, r8
+ 531              	.LVL85:
+ 532 0120 4946     		mov	r1, r9
+ 533 0122 FFF7FEFF 		bl	__aeabi_dmul
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 12
+
+
+ 534              	.LVL86:
+ 535 0126 FFF7FEFF 		bl	__aeabi_d2iz
+ 536              	.LVL87:
+  91:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	return (ft_argb32_t)((0xFF<<24)+(R<<16)+(G<<8)+B);
+ 537              		.loc 1 91 0
+ 538 012a 2404     		lsls	r4, r4, #16
+ 539              	.LVL88:
+ 540 012c 04F17F44 		add	r4, r4, #-16777216
+ 541 0130 04EB0524 		add	r4, r4, r5, lsl #8
+  92:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** }
+ 542              		.loc 1 92 0
+ 543 0134 2044     		add	r0, r0, r4
+ 544              	.LVL89:
+ 545 0136 04B0     		add	sp, sp, #16
+ 546              	.LCFI9:
+ 547              		.cfi_remember_state
+ 548              		.cfi_def_cfa_offset 32
+ 549              	.LVL90:
+ 550              		@ sp needed
+ 551 0138 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 552              	.LVL91:
+ 553              	.L25:
+ 554              	.LCFI10:
+ 555              		.cfi_restore_state
+  83:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 3: r = p, g = q, b = v; break;
+ 556              		.loc 1 83 0
+ 557 013c 2246     		mov	r2, r4
+ 558 013e 2B46     		mov	r3, r5
+ 559 0140 4446     		mov	r4, r8
+ 560              	.LVL92:
+ 561 0142 4D46     		mov	r5, r9
+ 562 0144 8046     		mov	r8, r0
+ 563              	.LVL93:
+ 564 0146 8946     		mov	r9, r1
+ 565 0148 1646     		mov	r6, r2
+ 566              	.LVL94:
+ 567 014a 1F46     		mov	r7, r3
+ 568 014c D0E7     		b	.L22
+ 569              	.LVL95:
+ 570              	.L26:
+  84:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 4: r = t, g = p, b = v; break;
+ 571              		.loc 1 84 0
+ 572 014e DDE90267 		ldrd	r6, [sp, #8]
+ 573              	.LVL96:
+ 574 0152 2246     		mov	r2, r4
+ 575 0154 2B46     		mov	r3, r5
+ 576 0156 4446     		mov	r4, r8
+ 577              	.LVL97:
+ 578 0158 4D46     		mov	r5, r9
+ 579 015a 9046     		mov	r8, r2
+ 580              	.LVL98:
+ 581 015c 9946     		mov	r9, r3
+ 582 015e C7E7     		b	.L22
+ 583              	.LVL99:
+ 584              	.L27:
+  85:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 		case 5: r = v, g = p, b = q; break;
+ 585              		.loc 1 85 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 13
+
+
+ 586 0160 2246     		mov	r2, r4
+ 587 0162 2B46     		mov	r3, r5
+ 588 0164 0446     		mov	r4, r0
+ 589              	.LVL100:
+ 590 0166 0D46     		mov	r5, r1
+ 591 0168 4646     		mov	r6, r8
+ 592              	.LVL101:
+ 593 016a 4F46     		mov	r7, r9
+ 594 016c 9046     		mov	r8, r2
+ 595              	.LVL102:
+ 596 016e 9946     		mov	r9, r3
+ 597 0170 BEE7     		b	.L22
+ 598              	.LVL103:
+ 599              	.L28:
+  86:FT_Esd_Widgets/Ft_Esd_ColorPicker.c **** 	}
+ 600              		.loc 1 86 0
+ 601 0172 4646     		mov	r6, r8
+ 602              	.LVL104:
+ 603 0174 4F46     		mov	r7, r9
+ 604 0176 DDE90289 		ldrd	r8, [sp, #8]
+ 605              	.LVL105:
+ 606 017a B9E7     		b	.L22
+ 607              	.L31:
+ 608 017c AFF30080 		.align	3
+ 609              	.L30:
+ 610 0180 00000000 		.word	0
+ 611 0184 00E06F40 		.word	1081073664
+ 612 0188 00807640 		.word	1081507840
+ 613 018c 00001840 		.word	1075314688
+ 614 0190 0000F03F 		.word	1072693248
+ 615 0194 ABAAAA2A 		.word	715827883
+ 616              		.cfi_endproc
+ 617              	.LFE8:
+ 619              		.text
+ 620              	.Letext0:
+ 621              		.file 2 "FT_Eve_Hal/FT_DataTypes.h"
+ 622              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 623              		.file 4 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 624              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 625              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 626              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 627              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 628              		.file 9 "FT_Esd_Framework/Ft_Esd.h"
+ 629              		.file 10 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/math.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Ft_Esd_ColorPicker.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:21     .text.getSat:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:28     .text.getSat:0000000000000000 getSat
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:103    .text.getSat:0000000000000078 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:111    .text.getHue:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:118    .text.getHue:0000000000000000 getHue
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:327    .text.getHue:0000000000000130 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:342    .text.hsvToRgb:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:349    .text.hsvToRgb:0000000000000000 hsvToRgb
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:488    .text.hsvToRgb:00000000000000e2 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:494    .text.hsvToRgb:00000000000000e8 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccG1Dmwd.s:610    .text.hsvToRgb:0000000000000180 $d
+
+UNDEFINED SYMBOLS
+__aeabi_i2d
+__aeabi_dadd
+__aeabi_ddiv
+pow
+sqrt
+__aeabi_dmul
+__aeabi_dsub
+atan2
+__aeabi_d2iz
