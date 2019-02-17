@@ -125,7 +125,7 @@ int main(void)
   MX_UART4_Init();
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
-// FT800_BootupConfig();
+FT800_BootupConfig();
   my_printf("hello %d", 1);
 
 

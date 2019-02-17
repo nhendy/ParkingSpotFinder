@@ -204,15 +204,11 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 		for (int i = 2; i >= 0; i--) {
 			if (HAL_SPI_Transmit(&hspi1, (uint8_t *) &cTempAddr[i], 1,
 			HAL_MAX_DELAY) != HAL_OK) {
-				char buff[] = "FAILED TO TRANSMIT in StartTransfer\r";
-				HAL_UART_Transmit(&huart6, (uint8_t *) buff, sizeof(buff) - 1,
-				HAL_MAX_DELAY);
+				my_printf("FAILED TO TRANSMIT in StartTransfer\n");
 			} 			// Send Memory Write plus high address byte
 
 			else {
-				char buff[] = "SUCCESSFUL TRANSMISSION\r";
-				HAL_UART_Transmit(&huart6, (uint8_t *) buff, sizeof(buff) - 1,
-				HAL_MAX_DELAY);
+				my_printf("SUCCESSFUL TRANSMISSION\n");
 			}
 
 		}
@@ -277,15 +273,11 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 		for (int i = 2; i >= 0; i--) {
 			if (HAL_SPI_Transmit(&hspi1, (uint8_t *) &cTempAddr[i], 1,
 			HAL_MAX_DELAY) != HAL_OK) {
-				char buff[] = "FAILED TO TRANSMIT in StartTransfer in command\r";
-				HAL_UART_Transmit(&huart6, (uint8_t *) buff, sizeof(buff) - 1,
-				HAL_MAX_DELAY);
+				my_printf("FAILED TO TRANSMIT in StartTransfer\n");
 			} 			// Send Memory Write plus high address byte
 
 			else {
-				char buff[] = "SUCCESSFUL TRANSMISSION\r";
-				HAL_UART_Transmit(&huart6, (uint8_t *) buff, sizeof(buff) - 1,
-				HAL_MAX_DELAY);
+				my_printf("SUCCESSFUL TRANSMISSION\n");
 			}
 		}
 #endif
@@ -351,11 +343,13 @@ ft_uint8_t Ft_Gpu_Hal_Transfer8(Ft_Gpu_Hal_Context_t *host, ft_uint8_t value) {
 #ifdef STM32F7
 	ft_uint8_t ReadByte;
 	if (host->status == FT_GPU_HAL_WRITING) {
-		if(HAL_SPI_Transmit(&hspi1, value, 1, HAL_MAX_DELAY) != HAL_OK){
-			
+		if(HAL_SPI_Transmit(&hspi1, &value, 1, HAL_MAX_DELAY) != HAL_OK){
+			my_printf("FAILED TO TRANSMIT IN Ft_Gpu_Hal_Transfer8\n");
 		}
 	} else {
-		HAL_SPI_Receive(&hspi1, &ReadByte, 1, HAL_MAX_DELAY);
+		if(HAL_SPI_Receive(&hspi1, &ReadByte, 1, HAL_MAX_DELAY) != HAL_OK){
+			my_printf("FAILED TO RECEIVE IN Ft_Gpu_Hal_Transfer8\n");
+		}
 	}
 	return ReadByte;
 #endif
@@ -517,15 +511,13 @@ ft_void_t Ft_Gpu_HostCommand(Ft_Gpu_Hal_Context_t *host, ft_uint8_t cmd) {
 	HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
 
 	for (int i = 2; i >= 0; i--) {
-		if (HAL_SPI_Transmit(&hspi1, &cTempAddr[i], 1, HAL_MAX_DELAY) != HAL_OK) // Send Memory Write plus high address byte
-		{
-			char buff[] = "FAILED TRANSMISSION in Ft_Gpu_HostCommand\r";
-			HAL_UART_Transmit(&huart6, (uint8_t *) buff, sizeof(buff) - 1,
-			HAL_MAX_DELAY);
-		}
-		else{
-			char buff[] = "SUCCESSFUL TRANSMISSION in Ft_Gpu_HostCommand\r";
-			HAL_UART_Transmit(&huart6, (uint8_t *) buff, sizeof(buff) - 1, HAL_MAX_DELAY);
+		if (HAL_SPI_Transmit(&hspi1, (uint8_t *) &cTempAddr[i], 1,
+		HAL_MAX_DELAY) != HAL_OK) {
+			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\n");
+		} 			// Send Memory Write plus high address byte
+
+		else {
+			my_printf("SUCCESSFUL TRANSMISSION\n");
 		}
 	}
 
@@ -649,7 +641,14 @@ ft_void_t Ft_Gpu_HostCommand_Ext3(Ft_Gpu_Hal_Context_t *host, ft_uint32_t cmd) {
 	HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
 
 	for (int i = 2; i >= 0; i--) {
-		HAL_SPI_Transmit(&hspi1, &cTempAddr[i], 1, HAL_MAX_DELAY); // Send Memory Write plus high address byte
+		if (HAL_SPI_Transmit(&hspi1, (uint8_t *) &cTempAddr[i], 1,
+		HAL_MAX_DELAY) != HAL_OK) {
+			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\n");
+		} 			// Send Memory Write plus high address byte
+
+		else {
+			my_printf("SUCCESSFUL TRANSMISSION\n");
+		}
 	}
 
 	HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_SET);	// Set chip select high
