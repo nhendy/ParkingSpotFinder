@@ -1,9 +1,0 @@
-LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
-LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:TESTING Run,org.eclipse.launchbar.core.descriptorType.default\:LCD_Testv2 Run,org.eclipse.launchbar.core.descriptorType.default\:Porting Run,org.eclipse.launchbar.core.descriptorType.default\:LCD_Library Run,org.eclipse.launchbar.core.descriptorType.default\:LCD_Test Run,org.eclipse.launchbar.core.descriptorType.default\:LCD_Makefile2 Run
-eclipse.preferences.version=1
-org.eclipse.launchbar.core.descriptorType.default\:LCD_Makefile2\ Run/activeLaunchMode=debug
-org.eclipse.launchbar.core.descriptorType.default\:LCD_Test\ Run/activeLaunchMode=run
-org.eclipse.launchbar.core.descriptorType.default\:LCD_Test\ Run/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
-org.eclipse.launchbar.core.descriptorType.default\:TESTING\ Run/activeLaunchMode=run
-org.eclipse.launchbar.core.descriptorType.default\:TESTING\ Run/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
