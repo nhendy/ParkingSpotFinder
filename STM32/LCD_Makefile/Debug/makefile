@@ -1,0 +1,60 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+-include ../makefile.init
+
+RM := rm -rf
+
+# All of the sources participating in the build are defined here
+-include sources.mk
+-include startup/subdir.mk
+-include Timer/subdir.mk
+-include Src/subdir.mk
+-include FT_Eve_Hal/subdir.mk
+-include FT_Esd_Widgets/subdir.mk
+-include FT_Esd_Framework/subdir.mk
+-include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
+-include subdir.mk
+-include objects.mk
+
+ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(S_UPPER_DEPS)),)
+-include $(S_UPPER_DEPS)
+endif
+ifneq ($(strip $(C_DEPS)),)
+-include $(C_DEPS)
+endif
+endif
+
+-include ../makefile.defs
+
+# Add inputs and outputs from these tool invocations to the build variables 
+
+# All Target
+all: LCD_Makefile.elf
+
+# Tool invocations
+LCD_Makefile.elf: $(OBJS) $(USER_OBJS) ../STM32F746ZGTx_FLASH.ld
+	@echo 'Building target: $@'
+	@echo 'Invoking: MCU GCC Linker'
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F746ZGTx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "LCD_Makefile.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	@echo 'Finished building target: $@'
+	@echo ' '
+	$(MAKE) --no-print-directory post-build
+
+# Other Targets
+clean:
+	-$(RM) *
+	-@echo ' '
+
+post-build:
+	-@echo 'Generating hex and Printing size information:'
+	arm-none-eabi-objcopy -O ihex "LCD_Makefile.elf" "LCD_Makefile.hex"
+	arm-none-eabi-size "LCD_Makefile.elf"
+	-@echo ' '
+
+.PHONY: all clean dependents
+.SECONDARY: post-build
+
+-include ../makefile.targets

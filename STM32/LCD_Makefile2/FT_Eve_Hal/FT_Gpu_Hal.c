@@ -32,6 +32,8 @@
 /* API to initialize the SPI interface */
 extern SPI_HandleTypeDef hspi1;
 extern UART_HandleTypeDef huart6;
+extern void my_printf(const char *fmt, ...);
+
 ft_bool_t Ft_Gpu_Hal_Init(Ft_Gpu_HalInit_t *halinit) {
 #ifdef STM32F7
 // GPIO, SPI are already initialized in main.c

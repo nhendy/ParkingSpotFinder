@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;LCD_Makefile/Makefile&apos;" deleteContents="false" description="Delete resource &apos;LCD_Makefile/Makefile&apos;" element1="/LCD_Makefile/Makefile" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1550420841533"/>
+</session>

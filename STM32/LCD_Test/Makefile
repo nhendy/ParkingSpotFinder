@@ -45,55 +45,91 @@ C_SOURCES = \
   Src/stm32f7xx_it.c \
   Src/main.c \
   Src/system_stm32f7xx.c \
-  Src/stm32f7xx_hal_msp.c  
+  Src/stm32f7xx_hal_msp.c
 ASM_SOURCES = \
   startup/startup_stm32f746xx.s
 
 #######################################
 # binaries
 #######################################
-CC = arm-none-eabi-gcc
-AS = arm-none-eabi-gcc -x assembler-with-cpp
-CP = arm-none-eabi-objcopy
-AR = arm-none-eabi-ar
-SZ = arm-none-eabi-size
+PREFIX = arm-none-eabi-
+# The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
+# either it can be added to the PATH environment variable.
+ifdef GCC_PATH
+CC = $(GCC_PATH)/$(PREFIX)gcc
+AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
+CP = $(GCC_PATH)/$(PREFIX)objcopy
+SZ = $(GCC_PATH)/$(PREFIX)size
+else
+CC = $(PREFIX)gcc
+AS = $(PREFIX)gcc -x assembler-with-cpp
+CP = $(PREFIX)objcopy
+SZ = $(PREFIX)size
+endif
 HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
- 
+
 #######################################
 # CFLAGS
 #######################################
+# cpu
+CPU = -mcpu=cortex-m7
+
+# fpu
+FPU = -mfpu=fpv5-sp-d16
+
+# float-abi
+FLOAT-ABI = -mfloat-abi=hard
+
+# mcu
+MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
+
 # macros for gcc
+# AS defines
 AS_DEFS =
+
+# C defines
 C_DEFS = -D__weak=__attribute__\(\(weak\)\) -D__packed=__attribute__\(\(__packed__\)\) -DUSE_HAL_DRIVER -DSTM32F746xx
-# includes for gcc
+
+# AS includes
 AS_INCLUDES =
+
+# C includes
 C_INCLUDES = -IInc
 C_INCLUDES += -IDrivers/STM32F7xx_HAL_Driver/Inc
 C_INCLUDES += -IDrivers/STM32F7xx_HAL_Driver/Inc/Legacy
 C_INCLUDES += -IDrivers/CMSIS/Include
 C_INCLUDES += -IDrivers/CMSIS/Device/ST/STM32F7xx/Include
+
+
 # compile gcc flags
-ASFLAGS = -mthumb -mcpu=cortex-m7 -mfpu=fpv4-sp-d16 -mfloat-abi=hard $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
-CFLAGS = -mthumb -mcpu=cortex-m7 -mfpu=fpv4-sp-d16 -mfloat-abi=hard $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+
+CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
 endif
+
+
 # Generate dependency information
-CFLAGS += -std=c99 -MD -MP -MF $(BUILD_DIR)/.dep/$(@F).d
+CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
+
 
 #######################################
 # LDFLAGS
 #######################################
 # link script
 LDSCRIPT = STM32F746ZGTx_FLASH.ld
+
 # libraries
-LIBS =
+LIBS = -lc -lm -lnosys
 LIBDIR =
-LDFLAGS = -mthumb -mcpu=cortex-m7 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -specs=nosys.specs -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
+LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
+
 
 #######################################
 # build the application
@@ -105,7 +141,7 @@ vpath %.c $(sort $(dir $(C_SOURCES)))
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 
-$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
+$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
 
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
@@ -117,10 +153,10 @@ $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
 
 $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	$(HEX) $< $@
-	
+
 $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-	$(BIN) $< $@	
-	
+	$(BIN) $< $@
+
 $(BUILD_DIR):
 	mkdir -p $@/.dep
 
@@ -129,7 +165,7 @@ $(BUILD_DIR):
 #######################################
 clean:
 	-rm -fR $(BUILD_DIR)
-  
+
 #######################################
 # dependencies
 #######################################

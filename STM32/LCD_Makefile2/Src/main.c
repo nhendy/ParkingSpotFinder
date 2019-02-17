@@ -85,6 +85,7 @@ static void MX_UART4_Init(void);
 static void MX_USART6_UART_Init(void);
 /* USER CODE BEGIN PFP */
 extern ft_void_t FT800_BootupConfig();
+extern ft_void_t Ft_Esd_MainLoop();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -126,7 +127,7 @@ int main(void)
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
 FT800_BootupConfig();
-  my_printf("hello %d", 1);
+  my_printf("hello %d\n", 1);
 
 
 
@@ -139,6 +140,8 @@ FT800_BootupConfig();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    Ft_Esd_MainLoop();
+
   }
   /* USER CODE END 3 */
 }

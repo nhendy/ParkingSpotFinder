@@ -31,7 +31,7 @@
 
 // External variables
 extern UART_HandleTypeDef huart6;
-
+extern void my_printf(const char *fmt, ...);
 
 
 //
@@ -453,75 +453,75 @@ ft_void_t setup() {
 }
 
 // Ft_Esd_MainLoop
-// ft_void_t Ft_Esd_MainLoop();
+// ft_void_t Ft_Esd_MainLoop()
+
+// #if defined(MSVC_PLATFORM) || defined(FT900_PLATFORM)
+// /* Main entry point */
+//ft_int32_t main(ft_int32_t argc, ft_char8_t *argv[])
+//// #endif
+//// #if defined(ARDUINO_PLATFORM) || defined(MSVC_FT800EMU)
+//// ft_void_t loop();
+//// #endif
+//{
+//// #ifdef ESD_SIMULATION
+//// 	printf("\f"); // Shows horizontal line in ESD output window
+//// 	printf(FT_WELCOME_MESSAGE);
+//// #endif
+////
+//// #ifdef FT900_PLATFORM
+//// 	FT900_Config();
+//// #endif
+//	Ft_Gpu_HalInit_t halinit;
 //
-// // #if defined(MSVC_PLATFORM) || defined(FT900_PLATFORM)
-// // /* Main entry point */
-// // ft_int32_t main(ft_int32_t argc, ft_char8_t *argv[])
-// // #endif
-// // #if defined(ARDUINO_PLATFORM) || defined(MSVC_FT800EMU)
-// // ft_void_t loop();
-// // #endif
-// {
-// // #ifdef ESD_SIMULATION
-// // 	printf("\f"); // Shows horizontal line in ESD output window
-// // 	printf(FT_WELCOME_MESSAGE);
-// // #endif
-// //
-// // #ifdef FT900_PLATFORM
-// // 	FT900_Config();
-// // #endif
-// 	Ft_Gpu_HalInit_t halinit;
-//
-// 	halinit.TotalChannelNum = 1;
+//	halinit.TotalChannelNum = 1;
 //
 //
-// 	Ft_Gpu_Hal_Init(&halinit);
-// 	s_Host.hal_config.channel_no = 0;
-// 	s_Host.hal_config.pdn_pin_no = FT800_PD_N;
-// 	s_Host.hal_config.spi_cs_pin_no = FT800_SEL_PIN;
-// // #ifdef MSVC_PLATFORM_SPI
-// // 	host.hal_config.spi_clockrate_khz = 12000; //in KHz
-// // #endif
-// // #ifdef ARDUINO_PLATFORM_SPI
-// // 	host.hal_config.spi_clockrate_khz = 4000; //in KHz
-// // #endif
-// 	Ft_Gpu_Hal_Open(&s_Host);
+//	Ft_Gpu_Hal_Init(&halinit);
+//	s_Host.hal_config.channel_no = 0;
+//	s_Host.hal_config.pdn_pin_no = FT800_PD_N;
+//	s_Host.hal_config.spi_cs_pin_no = FT800_SEL_PIN;
+//// #ifdef MSVC_PLATFORM_SPI
+//// 	host.hal_config.spi_clockrate_khz = 12000; //in KHz
+//// #endif
+//// #ifdef ARDUINO_PLATFORM_SPI
+//// 	host.hal_config.spi_clockrate_khz = 4000; //in KHz
+//// #endif
+//	Ft_Gpu_Hal_Open(&s_Host);
 //
-// 	//printf("Ft_Gpu_Hal_Open done \n");
-// 	Ft_Esd_Host = &s_Host;
+//	//printf("Ft_Gpu_Hal_Open done \n");
+//	Ft_Esd_Host = &s_Host;
 //
-// 	FT800_BootupConfig();
+//	FT800_BootupConfig();
 //
-// // #if (defined FT900_PLATFORM) || defined(MSVC_PLATFORM) || defined(ESD_SIMULATION)
-// // 	printf("reg_touch_rz = 0x%x\n", Ft_Gpu_Hal_Rd16(&s_Host, REG_TOUCH_RZ));
-// // 	printf("reg_touch_rzthresh = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_RZTHRESH));
-// // 	printf("reg_touch_tag_xy = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG_XY));
-// // 	printf("reg_touch_tag = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG));
-// // #endif
-// //
-// // #if FT900_PLATFORM
-// // 	FT900_InitSDCard();
-// // #endif
-// //
-// // #ifndef ESD_SIMULATION
-// // 	App_CoPro_Widget_Calibrate();
-// // #endif
+//// #if (defined FT900_PLATFORM) || defined(MSVC_PLATFORM) || defined(ESD_SIMULATION)
+//// 	printf("reg_touch_rz = 0x%x\n", Ft_Gpu_Hal_Rd16(&s_Host, REG_TOUCH_RZ));
+//// 	printf("reg_touch_rzthresh = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_RZTHRESH));
+//// 	printf("reg_touch_tag_xy = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG_XY));
+//// 	printf("reg_touch_tag = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG));
+//// #endif
+////
+//// #if FT900_PLATFORM
+//// 	FT900_InitSDCard();
+//// #endif
+////
+//// #ifndef ESD_SIMULATION
+//// 	App_CoPro_Widget_Calibrate();
+//// #endif
 //
-// 	Ft_Esd_GAlloc = &s_GAlloc;
-// 	Ft_Esd_GpuAlloc_Reset(&s_GAlloc);
+//	Ft_Esd_GAlloc = &s_GAlloc;
+//	Ft_Esd_GpuAlloc_Reset(&s_GAlloc);
 //
-// 	Ft_Esd_InitFontHeight();
+//	Ft_Esd_InitFontHeight();
 //
-// 	Ft_Esd_MainLoop();
+//	Ft_Esd_MainLoop();
 //
-// 	Ft_Gpu_Hal_Close(&s_Host);
-// 	Ft_Gpu_Hal_DeInit();
-// 	Ft_Esd_Host = 0;
-// #ifdef MSVC_PLATFORM
-// 	return 0;
-// #endif
-// }
+//	Ft_Gpu_Hal_Close(&s_Host);
+//	Ft_Gpu_Hal_DeInit();
+//	Ft_Esd_Host = 0;
+//#ifdef MSVC_PLATFORM
+//	return 0;
+//#endif
+//}
 
 ft_uint32_t Ft_Esd_GAlloc_GetTotalUsed(Ft_Esd_GpuAlloc *ga)
 {
