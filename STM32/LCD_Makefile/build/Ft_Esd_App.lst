@@ -1,0 +1,1576 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Ft_Esd_App.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Ft_Esd_GetMillis,"ax",%progbits
+  18              		.align	1
+  19              		.global	Ft_Esd_GetMillis
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-sp-d16
+  25              	Ft_Esd_GetMillis:
+  26              	.LFB3:
+  27              		.file 1 "FT_Esd_Framework/Ft_Esd_App.c"
+   1:FT_Esd_Framework/Ft_Esd_App.c **** /*
+   2:FT_Esd_Framework/Ft_Esd_App.c ****  Copyright (c) BridgeTek Pte Ltd 2015
+   3:FT_Esd_Framework/Ft_Esd_App.c **** 
+   4:FT_Esd_Framework/Ft_Esd_App.c ****  THIS SOFTWARE IS PROVIDED BY BridgeTek Pte Ltd "AS IS"
+   5:FT_Esd_Framework/Ft_Esd_App.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+   6:FT_Esd_Framework/Ft_Esd_App.c ****  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+   7:FT_Esd_Framework/Ft_Esd_App.c ****  BridgeTek Pte Ltd BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+   8:FT_Esd_Framework/Ft_Esd_App.c ****  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+   9:FT_Esd_Framework/Ft_Esd_App.c ****  OF SUBSTITUTE GOODS OR SERVICES LOSS OF USE, DATA, OR PROFITS OR BUSINESS INTERRUPTION)
+  10:FT_Esd_Framework/Ft_Esd_App.c ****  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
+  11:FT_Esd_Framework/Ft_Esd_App.c ****  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  12:FT_Esd_Framework/Ft_Esd_App.c ****  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  13:FT_Esd_Framework/Ft_Esd_App.c **** 
+  14:FT_Esd_Framework/Ft_Esd_App.c ****  FTDI DRIVERS MAY BE USED ONLY IN CONJUNCTION WITH PRODUCTS BASED ON FTDI PARTS.
+  15:FT_Esd_Framework/Ft_Esd_App.c **** 
+  16:FT_Esd_Framework/Ft_Esd_App.c ****  FTDI DRIVERS MAY BE DISTRIBUTED IN ANY FORM AS LONG AS LICENSE INFORMATION IS NOT MODIFIED.
+  17:FT_Esd_Framework/Ft_Esd_App.c **** 
+  18:FT_Esd_Framework/Ft_Esd_App.c ****  IF A CUSTOM VENDOR ID AND/OR PRODUCT ID OR DESCRIPTION STRING ARE USED, IT IS THE
+  19:FT_Esd_Framework/Ft_Esd_App.c ****  RESPONSIBILITY OF THE PRODUCT MANUFACTURER TO MAINTAIN ANY CHANGES AND SUBSEQUENT WHQL
+  20:FT_Esd_Framework/Ft_Esd_App.c ****  RE-CERTIFICATION AS A RESULT OF MAKING THESE CHANGES.
+  21:FT_Esd_Framework/Ft_Esd_App.c ****  */
+  22:FT_Esd_Framework/Ft_Esd_App.c **** 
+  23:FT_Esd_Framework/Ft_Esd_App.c **** #include <FT_Platform.h>
+  24:FT_Esd_Framework/Ft_Esd_App.c **** #include "Ft_Esd.h"
+  25:FT_Esd_Framework/Ft_Esd_App.c **** #include "Ft_Esd_GpuAlloc.h"
+  26:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+  27:FT_Esd_Framework/Ft_Esd_App.c **** #include "ff.h"
+  28:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+  29:FT_Esd_Framework/Ft_Esd_App.c **** 
+  30:FT_Esd_Framework/Ft_Esd_App.c **** //
+  31:FT_Esd_Framework/Ft_Esd_App.c **** // Static
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 2
+
+
+  32:FT_Esd_Framework/Ft_Esd_App.c **** //
+  33:FT_Esd_Framework/Ft_Esd_App.c **** static Ft_Gpu_Hal_Context_t s_Host;
+  34:FT_Esd_Framework/Ft_Esd_App.c **** static Ft_Esd_GpuAlloc s_GAlloc;
+  35:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+  36:FT_Esd_Framework/Ft_Esd_App.c **** static FATFS s_FatFS;
+  37:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+  38:FT_Esd_Framework/Ft_Esd_App.c **** 
+  39:FT_Esd_Framework/Ft_Esd_App.c **** //
+  40:FT_Esd_Framework/Ft_Esd_App.c **** // Globals
+  41:FT_Esd_Framework/Ft_Esd_App.c **** //
+  42:FT_Esd_Framework/Ft_Esd_App.c **** Ft_Gpu_Hal_Context_t *Ft_Esd_Host = 0; // Pointer to s_Host
+  43:FT_Esd_Framework/Ft_Esd_App.c **** Ft_Esd_GpuAlloc *Ft_Esd_GAlloc = 0; // Pointer to s_GAlloc
+  44:FT_Esd_Framework/Ft_Esd_App.c **** ft_uint32_t Ft_Esd_Millis = 0;  // Time in milliseconds for current frame
+  45:FT_Esd_Framework/Ft_Esd_App.c **** ft_uint32_t Ft_Esd_DeltaMs = 0; // Delta time in milliseconds between frames
+  46:FT_Esd_Framework/Ft_Esd_App.c **** ft_uint32_t Ft_Esd_Frame = 0;   // Number of times Render has been called
+  47:FT_Esd_Framework/Ft_Esd_App.c **** ft_rgb32_t Ft_Esd_ClearColor = 0x212121; // Screen clear color
+  48:FT_Esd_Framework/Ft_Esd_App.c **** 
+  49:FT_Esd_Framework/Ft_Esd_App.c **** ESD_FUNCTION(Ft_Esd_GetMillis, Type = ft_uint32_t,
+  50:FT_Esd_Framework/Ft_Esd_App.c **** 		DisplayName = "Get Milliseconds", Category = EsdUtilities)ft_uint32_t Ft_Esd_GetMillis() {
+  28              		.loc 1 50 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  51:FT_Esd_Framework/Ft_Esd_App.c **** 	return Ft_Esd_Millis;
+  52:FT_Esd_Framework/Ft_Esd_App.c **** }
+  33              		.loc 1 52 0
+  34 0000 014B     		ldr	r3, .L2
+  35 0002 1868     		ldr	r0, [r3]
+  36 0004 7047     		bx	lr
+  37              	.L3:
+  38 0006 00BF     		.align	2
+  39              	.L2:
+  40 0008 00000000 		.word	.LANCHOR0
+  41              		.cfi_endproc
+  42              	.LFE3:
+  44              		.section	.text.Ft_Esd_GetDeltaMs,"ax",%progbits
+  45              		.align	1
+  46              		.global	Ft_Esd_GetDeltaMs
+  47              		.syntax unified
+  48              		.thumb
+  49              		.thumb_func
+  50              		.fpu fpv5-sp-d16
+  52              	Ft_Esd_GetDeltaMs:
+  53              	.LFB4:
+  53:FT_Esd_Framework/Ft_Esd_App.c **** 
+  54:FT_Esd_Framework/Ft_Esd_App.c **** /* Difference in milliseconds since last frame Update call */
+  55:FT_Esd_Framework/Ft_Esd_App.c **** ESD_FUNCTION(Ft_Esd_GetDeltaMs, Type = ft_uint32_t,
+  56:FT_Esd_Framework/Ft_Esd_App.c **** 		DisplayName = "Get Delta Ms", Category = EsdUtilities)ft_uint32_t Ft_Esd_GetDeltaMs() {
+  54              		.loc 1 56 0
+  55              		.cfi_startproc
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  57:FT_Esd_Framework/Ft_Esd_App.c **** 	return Ft_Esd_DeltaMs;
+  58:FT_Esd_Framework/Ft_Esd_App.c **** }
+  59              		.loc 1 58 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 3
+
+
+  60 0000 014B     		ldr	r3, .L5
+  61 0002 1868     		ldr	r0, [r3]
+  62 0004 7047     		bx	lr
+  63              	.L6:
+  64 0006 00BF     		.align	2
+  65              	.L5:
+  66 0008 00000000 		.word	.LANCHOR1
+  67              		.cfi_endproc
+  68              	.LFE4:
+  70              		.section	.text.Ft_Esd_GetHost,"ax",%progbits
+  71              		.align	1
+  72              		.global	Ft_Esd_GetHost
+  73              		.syntax unified
+  74              		.thumb
+  75              		.thumb_func
+  76              		.fpu fpv5-sp-d16
+  78              	Ft_Esd_GetHost:
+  79              	.LFB5:
+  59:FT_Esd_Framework/Ft_Esd_App.c **** 
+  60:FT_Esd_Framework/Ft_Esd_App.c **** ESD_FUNCTION(Ft_Esd_GetHost, Type = Ft_Gpu_Hal_Context_t *,
+  61:FT_Esd_Framework/Ft_Esd_App.c **** 		DisplayName = "Get EVE Host", Category = EsdUtilities)Ft_Gpu_Hal_Context_t *Ft_Esd_GetHost() {
+  80              		.loc 1 61 0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84              		@ link register save eliminated.
+  62:FT_Esd_Framework/Ft_Esd_App.c **** 	return Ft_Esd_Host;
+  63:FT_Esd_Framework/Ft_Esd_App.c **** }
+  85              		.loc 1 63 0
+  86 0000 014B     		ldr	r3, .L8
+  87 0002 1868     		ldr	r0, [r3]
+  88 0004 7047     		bx	lr
+  89              	.L9:
+  90 0006 00BF     		.align	2
+  91              	.L8:
+  92 0008 00000000 		.word	.LANCHOR2
+  93              		.cfi_endproc
+  94              	.LFE5:
+  96              		.section	.text.FT800_BootupConfig,"ax",%progbits
+  97              		.align	1
+  98              		.global	FT800_BootupConfig
+  99              		.syntax unified
+ 100              		.thumb
+ 101              		.thumb_func
+ 102              		.fpu fpv5-sp-d16
+ 104              	FT800_BootupConfig:
+ 105              	.LFB6:
+  64:FT_Esd_Framework/Ft_Esd_App.c **** 
+  65:FT_Esd_Framework/Ft_Esd_App.c **** ft_uint16_t Ft_Esd_FontHeight[32] = { 0 }; // Font heights of currently set bitmaps
+  66:FT_Esd_Framework/Ft_Esd_App.c **** 
+  67:FT_Esd_Framework/Ft_Esd_App.c **** /* Global variables for display resolution to support various display panels */
+  68:FT_Esd_Framework/Ft_Esd_App.c **** /* Default is WQVGA - 480x272 */
+  69:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispWidth = 480;
+  70:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispHeight = 272;
+  71:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispHCycle = 548;
+  72:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispHOffset = 43;
+  73:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispHSync0 = 0;
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 4
+
+
+  74:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispHSync1 = 41;
+  75:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispVCycle = 292;
+  76:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispVOffset = 12;
+  77:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispVSync0 = 0;
+  78:FT_Esd_Framework/Ft_Esd_App.c **** ft_int16_t FT_DispVSync1 = 10;
+  79:FT_Esd_Framework/Ft_Esd_App.c **** ft_uint8_t FT_DispPCLK = 5;
+  80:FT_Esd_Framework/Ft_Esd_App.c **** ft_char8_t FT_DispSwizzle = 0;
+  81:FT_Esd_Framework/Ft_Esd_App.c **** ft_char8_t FT_DispPCLKPol = 1;
+  82:FT_Esd_Framework/Ft_Esd_App.c **** ft_char8_t FT_DispCSpread = 1;
+  83:FT_Esd_Framework/Ft_Esd_App.c **** ft_char8_t FT_DispDither = 1;
+  84:FT_Esd_Framework/Ft_Esd_App.c **** 
+  85:FT_Esd_Framework/Ft_Esd_App.c **** /* Initial boot up display list */
+  86:FT_Esd_Framework/Ft_Esd_App.c **** const ft_uint32_t FT_DLCODE_BOOTUP[] = { CLEAR_COLOR_RGB(0, 0, 0), CLEAR(1, 1,
+  87:FT_Esd_Framework/Ft_Esd_App.c **** 		1), BITMAP_HANDLE(31), BEGIN(BITMAPS), VERTEX2II(6, 0, 31, 'E'),
+  88:FT_Esd_Framework/Ft_Esd_App.c **** 		VERTEX2II(29, 0, 31, 'S'), VERTEX2II(55, 0, 31, 'D'), VERTEX2II(83, 0,
+  89:FT_Esd_Framework/Ft_Esd_App.c **** 				31, '3'), BITMAP_HANDLE(28), BEGIN(BITMAPS), VERTEX2II(7, 43,
+  90:FT_Esd_Framework/Ft_Esd_App.c **** 				28, 'H'), VERTEX2II(22, 43, 28, 'e'), VERTEX2II(33, 43, 28,
+  91:FT_Esd_Framework/Ft_Esd_App.c **** 				'l'), VERTEX2II(39, 43, 28, 'l'), VERTEX2II(45, 43, 28, 'o'),
+  92:FT_Esd_Framework/Ft_Esd_App.c **** 		DISPLAY(), };
+  93:FT_Esd_Framework/Ft_Esd_App.c **** 
+  94:FT_Esd_Framework/Ft_Esd_App.c **** #define FT_WELCOME_MESSAGE "Copyright © BridgeTek Pte Ltd.\r\n"
+  95:FT_Esd_Framework/Ft_Esd_App.c **** 
+  96:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+  97:FT_Esd_Framework/Ft_Esd_App.c **** ft_void_t FT900_Config()
+  98:FT_Esd_Framework/Ft_Esd_App.c **** {
+  99:FT_Esd_Framework/Ft_Esd_App.c **** 	sys_enable(sys_device_uart0);
+ 100:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(48, pad_uart0_txd); /* UART0 TXD */
+ 101:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(49, pad_uart0_rxd); /* UART0 RXD */
+ 102:FT_Esd_Framework/Ft_Esd_App.c **** 	uart_open(UART0, /* Device */
+ 103:FT_Esd_Framework/Ft_Esd_App.c **** 			1, /* Prescaler = 1 */
+ 104:FT_Esd_Framework/Ft_Esd_App.c **** 			UART_DIVIDER_115200_BAUD, /* Divider = 1302 */
+ 105:FT_Esd_Framework/Ft_Esd_App.c **** 			uart_data_bits_8, /* No. Data Bits */
+ 106:FT_Esd_Framework/Ft_Esd_App.c **** 			uart_parity_none, /* Parity */
+ 107:FT_Esd_Framework/Ft_Esd_App.c **** 			uart_stop_bits_1); /* No. Stop Bits */
+ 108:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 109:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Print out a welcome message... */
+ 110:FT_Esd_Framework/Ft_Esd_App.c **** 	uart_puts(UART0, FT_WELCOME_MESSAGE);
+ 111:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 112:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef ENABLE_ILI9488_HVGA_PORTRAIT
+ 113:FT_Esd_Framework/Ft_Esd_App.c **** 	/* asign all the respective pins to gpio and set them to default values */
+ 114:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(34, pad_gpio34);
+ 115:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_dir(34, pad_dir_output);
+ 116:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(34, 1);
+ 117:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 118:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(27, pad_gpio27);
+ 119:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_dir(27, pad_dir_output);
+ 120:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(27, 1);
+ 121:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 122:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(29, pad_gpio29);
+ 123:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_dir(29, pad_dir_output);
+ 124:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(29, 1);
+ 125:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 126:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(33, pad_gpio33);
+ 127:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_dir(33, pad_dir_output);
+ 128:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(33, 1);
+ 129:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 130:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(30, pad_gpio30);
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 5
+
+
+ 131:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_dir(30, pad_dir_output);
+ 132:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(30, 1);
+ 133:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 134:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(28, pad_gpio28);
+ 135:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_dir(28, pad_dir_output);
+ 136:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(28, 1);
+ 137:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 138:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(43, pad_gpio43);
+ 139:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_dir(43, pad_dir_output);
+ 140:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(43, 1);
+ 141:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(34, 1);
+ 142:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(28, 1);
+ 143:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(43, 1);
+ 144:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(33, 1);
+ 145:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(33, 1);
+ 146:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 147:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 148:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 149:FT_Esd_Framework/Ft_Esd_App.c **** 	/* useful for timer */
+ 150:FT_Esd_Framework/Ft_Esd_App.c **** 	ft_millis_init();
+ 151:FT_Esd_Framework/Ft_Esd_App.c **** 	interrupt_enable_globally();
+ 152:FT_Esd_Framework/Ft_Esd_App.c **** 	//printf("ft900 config done \n");}
+ 153:FT_Esd_Framework/Ft_Esd_App.c **** }
+ 154:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 155:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 156:FT_Esd_Framework/Ft_Esd_App.c **** ft_void_t FT800_BootupConfig() {
+ 106              		.loc 1 156 0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 111              	.LCFI0:
+ 112              		.cfi_def_cfa_offset 40
+ 113              		.cfi_offset 3, -40
+ 114              		.cfi_offset 4, -36
+ 115              		.cfi_offset 5, -32
+ 116              		.cfi_offset 6, -28
+ 117              		.cfi_offset 7, -24
+ 118              		.cfi_offset 8, -20
+ 119              		.cfi_offset 9, -16
+ 120              		.cfi_offset 10, -12
+ 121              		.cfi_offset 11, -8
+ 122              		.cfi_offset 14, -4
+ 157:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Powercycle(&s_Host, FT_TRUE);
+ 123              		.loc 1 157 0
+ 124 0004 6F4C     		ldr	r4, .L14
+ 125 0006 0121     		movs	r1, #1
+ 126 0008 2046     		mov	r0, r4
+ 127 000a FFF7FEFF 		bl	Ft_Gpu_Hal_Powercycle
+ 128              	.LVL0:
+ 158:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 159:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Access address 0 to wake up the FT800 */
+ 160:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_HostCommand(&s_Host, FT_GPU_ACTIVE_M);
+ 129              		.loc 1 160 0
+ 130 000e 0021     		movs	r1, #0
+ 131 0010 2046     		mov	r0, r4
+ 132 0012 FFF7FEFF 		bl	Ft_Gpu_HostCommand
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 6
+
+
+ 133              	.LVL1:
+ 161:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Sleep(300);
+ 134              		.loc 1 161 0
+ 135 0016 4FF49670 		mov	r0, #300
+ 136 001a FFF7FEFF 		bl	Ft_Gpu_Hal_Sleep
+ 137              	.LVL2:
+ 162:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 163:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_HostCommand(&s_Host, FT_GPU_ACTIVE_M);
+ 138              		.loc 1 163 0
+ 139 001e 0021     		movs	r1, #0
+ 140 0020 2046     		mov	r0, r4
+ 141 0022 FFF7FEFF 		bl	Ft_Gpu_HostCommand
+ 142              	.LVL3:
+ 164:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Sleep(300);
+ 143              		.loc 1 164 0
+ 144 0026 4FF49670 		mov	r0, #300
+ 145 002a FFF7FEFF 		bl	Ft_Gpu_Hal_Sleep
+ 146              	.LVL4:
+ 147              	.LBB2:
+ 165:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 166:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Set the clk to external clock */
+ 167:FT_Esd_Framework/Ft_Esd_App.c **** #if (!defined(ME800A_HV35R) && !defined(ME810A_HV35R) && !defined(ME812A_WH50R))
+ 168:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_HostCommand(&s_Host, FT_GPU_EXTERNAL_OSC);
+ 169:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Sleep(10);
+ 170:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 171:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 172:FT_Esd_Framework/Ft_Esd_App.c **** 	;
+ 173:FT_Esd_Framework/Ft_Esd_App.c **** 	{
+ 174:FT_Esd_Framework/Ft_Esd_App.c **** 		ft_uint8_t chipid;
+ 175:FT_Esd_Framework/Ft_Esd_App.c **** 		//Read Register ID to check if FT800 is ready.
+ 176:FT_Esd_Framework/Ft_Esd_App.c **** 		chipid = Ft_Gpu_Hal_Rd8(&s_Host, REG_ID);
+ 148              		.loc 1 176 0
+ 149 002e 6649     		ldr	r1, .L14+4
+ 150 0030 2046     		mov	r0, r4
+ 151 0032 FFF7FEFF 		bl	Ft_Gpu_Hal_Rd8
+ 152              	.LVL5:
+ 153 0036 0446     		mov	r4, r0
+ 154              	.LVL6:
+ 177:FT_Esd_Framework/Ft_Esd_App.c **** 		while (chipid != 0x7C) {
+ 155              		.loc 1 177 0
+ 156 0038 0BE0     		b	.L11
+ 157              	.L12:
+ 178:FT_Esd_Framework/Ft_Esd_App.c **** 			chipid = Ft_Gpu_Hal_Rd8(&s_Host, REG_ID);
+ 158              		.loc 1 178 0
+ 159 003a 6349     		ldr	r1, .L14+4
+ 160 003c 6148     		ldr	r0, .L14
+ 161 003e FFF7FEFF 		bl	Ft_Gpu_Hal_Rd8
+ 162              	.LVL7:
+ 163 0042 0446     		mov	r4, r0
+ 164              	.LVL8:
+ 179:FT_Esd_Framework/Ft_Esd_App.c **** 			printf("VC1 register ID after wake up %x\n", chipid);
+ 165              		.loc 1 179 0
+ 166 0044 0146     		mov	r1, r0
+ 167 0046 6148     		ldr	r0, .L14+8
+ 168              	.LVL9:
+ 169 0048 FFF7FEFF 		bl	printf
+ 170              	.LVL10:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 7
+
+
+ 180:FT_Esd_Framework/Ft_Esd_App.c **** 			ft_delay(100);
+ 171              		.loc 1 180 0
+ 172 004c 6420     		movs	r0, #100
+ 173 004e FFF7FEFF 		bl	Ft_Gpu_Hal_Sleep
+ 174              	.LVL11:
+ 175              	.L11:
+ 177:FT_Esd_Framework/Ft_Esd_App.c **** 			chipid = Ft_Gpu_Hal_Rd8(&s_Host, REG_ID);
+ 176              		.loc 1 177 0
+ 177 0052 7C2C     		cmp	r4, #124
+ 178 0054 F1D1     		bne	.L12
+ 179              	.LBE2:
+ 181:FT_Esd_Framework/Ft_Esd_App.c **** 		}
+ 182:FT_Esd_Framework/Ft_Esd_App.c **** #if defined(MSVC_PLATFORM) || defined (FT900_PLATFORM) || defined(ESD_SIMULATION)
+ 183:FT_Esd_Framework/Ft_Esd_App.c **** 		printf("VC1 register ID after wake up %x\n", chipid);
+ 184:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 185:FT_Esd_Framework/Ft_Esd_App.c **** 	}
+ 186:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 187:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Configuration of LCD display */
+ 188:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef DISPLAY_RESOLUTION_QVGA
+ 189:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Values specific to QVGA LCD display */
+ 190:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispWidth = 320;
+ 191:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHeight = 240;
+ 192:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHCycle = 408;
+ 193:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHOffset = 70;
+ 194:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHSync0 = 0;
+ 195:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHSync1 = 10;
+ 196:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVCycle = 263;
+ 197:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVOffset = 13;
+ 198:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVSync0 = 0;
+ 199:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVSync1 = 2;
+ 200:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispPCLK = 8;
+ 201:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispSwizzle = 2;
+ 202:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispPCLKPol = 0;
+ 203:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispCSpread = 1;
+ 204:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispDither = 1;
+ 205:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 206:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 207:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef DISPLAY_RESOLUTION_WVGA
+ 208:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Values specific to QVGA LCD display */
+ 209:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispWidth = 800;
+ 180              		.loc 1 209 0
+ 181 0056 4FF44873 		mov	r3, #800
+ 182 005a 5D4A     		ldr	r2, .L14+12
+ 183 005c 1380     		strh	r3, [r2]	@ movhi
+ 210:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHeight = 480;
+ 184              		.loc 1 210 0
+ 185 005e 4FF4F073 		mov	r3, #480
+ 186 0062 5C49     		ldr	r1, .L14+16
+ 187 0064 0B80     		strh	r3, [r1]	@ movhi
+ 211:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHCycle = 928;
+ 188              		.loc 1 211 0
+ 189 0066 4FF46872 		mov	r2, #928
+ 190 006a 5B4B     		ldr	r3, .L14+20
+ 191 006c 1A80     		strh	r2, [r3]	@ movhi
+ 212:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHOffset = 88;
+ 192              		.loc 1 212 0
+ 193 006e DFF8E4B1 		ldr	fp, .L14+144
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 8
+
+
+ 194 0072 5823     		movs	r3, #88
+ 195 0074 ABF80030 		strh	r3, [fp]	@ movhi
+ 213:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHSync0 = 0;
+ 196              		.loc 1 213 0
+ 197 0078 0025     		movs	r5, #0
+ 198 007a 584B     		ldr	r3, .L14+24
+ 199 007c 1D80     		strh	r5, [r3]	@ movhi
+ 214:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHSync1 = 48;
+ 200              		.loc 1 214 0
+ 201 007e 3023     		movs	r3, #48
+ 202 0080 5748     		ldr	r0, .L14+28
+ 203 0082 0380     		strh	r3, [r0]	@ movhi
+ 215:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVCycle = 525;
+ 204              		.loc 1 215 0
+ 205 0084 40F20D23 		movw	r3, #525
+ 206 0088 564C     		ldr	r4, .L14+32
+ 207              	.LVL12:
+ 208 008a 2380     		strh	r3, [r4]	@ movhi
+ 216:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVOffset = 32;
+ 209              		.loc 1 216 0
+ 210 008c 2023     		movs	r3, #32
+ 211 008e 564E     		ldr	r6, .L14+36
+ 212 0090 3380     		strh	r3, [r6]	@ movhi
+ 217:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVSync0 = 0;
+ 213              		.loc 1 217 0
+ 214 0092 564F     		ldr	r7, .L14+40
+ 215 0094 3D80     		strh	r5, [r7]	@ movhi
+ 218:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVSync1 = 3;
+ 216              		.loc 1 218 0
+ 217 0096 0323     		movs	r3, #3
+ 218 0098 554C     		ldr	r4, .L14+44
+ 219 009a 2380     		strh	r3, [r4]	@ movhi
+ 219:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispPCLK = 2;
+ 220              		.loc 1 219 0
+ 221 009c 554E     		ldr	r6, .L14+48
+ 222 009e 4FF0020C 		mov	ip, #2
+ 223 00a2 86F800C0 		strb	ip, [r6]
+ 220:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispSwizzle = 0;
+ 224              		.loc 1 220 0
+ 225 00a6 DFF8B0A1 		ldr	r10, .L14+148
+ 226 00aa 8AF80050 		strb	r5, [r10]
+ 221:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispPCLKPol = 1;
+ 227              		.loc 1 221 0
+ 228 00ae DFF8AC91 		ldr	r9, .L14+152
+ 229 00b2 4FF00108 		mov	r8, #1
+ 230 00b6 89F80080 		strb	r8, [r9]
+ 222:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispCSpread = 0;
+ 231              		.loc 1 222 0
+ 232 00ba 4F4F     		ldr	r7, .L14+52
+ 233 00bc 3D70     		strb	r5, [r7]
+ 223:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispDither = 1;
+ 234              		.loc 1 223 0
+ 235 00be 4F4F     		ldr	r7, .L14+56
+ 236 00c0 87F80080 		strb	r8, [r7]
+ 224:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 225:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 226:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef DISPLAY_RESOLUTION_HVGA_PORTRAIT
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 9
+
+
+ 227:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Values specific to HVGA LCD display */
+ 228:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispWidth = 320;
+ 229:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHeight = 480;
+ 230:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHCycle = 400;
+ 231:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHOffset = 40;
+ 232:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHSync0 = 0;
+ 233:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispHSync1 = 10;
+ 234:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVCycle = 500;
+ 235:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVOffset = 10;
+ 236:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVSync0 = 0;
+ 237:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispVSync1 = 5;
+ 238:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispPCLK = 4;
+ 239:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispSwizzle = 2;
+ 240:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispPCLKPol = 1;
+ 241:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispCSpread = 1;
+ 242:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispDither = 1;
+ 243:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef ME810A_HV35R
+ 244:FT_Esd_Framework/Ft_Esd_App.c **** 	FT_DispPCLK = 5;
+ 245:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 246:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 247:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 248:FT_Esd_Framework/Ft_Esd_App.c **** #if (defined(ME800A_HV35R) || defined(ME810A_HV35R))
+ 249:FT_Esd_Framework/Ft_Esd_App.c **** 	/* After recognizing the type of chip, perform the trimming if necessary */
+ 250:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_ClockTrimming(&s_Host, LOW_FREQ_BOUND);
+ 251:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 252:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 253:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HCYCLE, FT_DispHCycle);
+ 237              		.loc 1 253 0
+ 238 00c4 3F4C     		ldr	r4, .L14
+ 239 00c6 4E49     		ldr	r1, .L14+60
+ 240 00c8 2046     		mov	r0, r4
+ 241 00ca FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 242              	.LVL13:
+ 254:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HOFFSET, FT_DispHOffset);
+ 243              		.loc 1 254 0
+ 244 00ce BBF80020 		ldrh	r2, [fp]
+ 245 00d2 4C49     		ldr	r1, .L14+64
+ 246 00d4 2046     		mov	r0, r4
+ 247 00d6 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 248              	.LVL14:
+ 255:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HSYNC0, FT_DispHSync0);
+ 249              		.loc 1 255 0
+ 250 00da 404B     		ldr	r3, .L14+24
+ 251 00dc 1A88     		ldrh	r2, [r3]
+ 252 00de 4A49     		ldr	r1, .L14+68
+ 253 00e0 2046     		mov	r0, r4
+ 254 00e2 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 255              	.LVL15:
+ 256:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HSYNC1, FT_DispHSync1);
+ 256              		.loc 1 256 0
+ 257 00e6 3E48     		ldr	r0, .L14+28
+ 258 00e8 0288     		ldrh	r2, [r0]
+ 259 00ea 4849     		ldr	r1, .L14+72
+ 260 00ec 2046     		mov	r0, r4
+ 261 00ee FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 262              	.LVL16:
+ 257:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VCYCLE, FT_DispVCycle);
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 10
+
+
+ 263              		.loc 1 257 0
+ 264 00f2 3C4B     		ldr	r3, .L14+32
+ 265 00f4 1A88     		ldrh	r2, [r3]
+ 266 00f6 4649     		ldr	r1, .L14+76
+ 267 00f8 2046     		mov	r0, r4
+ 268 00fa FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 269              	.LVL17:
+ 258:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VOFFSET, FT_DispVOffset);
+ 270              		.loc 1 258 0
+ 271 00fe 3A4B     		ldr	r3, .L14+36
+ 272 0100 1A88     		ldrh	r2, [r3]
+ 273 0102 4449     		ldr	r1, .L14+80
+ 274 0104 2046     		mov	r0, r4
+ 275 0106 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 276              	.LVL18:
+ 259:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VSYNC0, FT_DispVSync0);
+ 277              		.loc 1 259 0
+ 278 010a 384B     		ldr	r3, .L14+40
+ 279 010c 1A88     		ldrh	r2, [r3]
+ 280 010e 4249     		ldr	r1, .L14+84
+ 281 0110 2046     		mov	r0, r4
+ 282 0112 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 283              	.LVL19:
+ 260:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VSYNC1, FT_DispVSync1);
+ 284              		.loc 1 260 0
+ 285 0116 364B     		ldr	r3, .L14+44
+ 286 0118 1A88     		ldrh	r2, [r3]
+ 287 011a 4049     		ldr	r1, .L14+88
+ 288 011c 2046     		mov	r0, r4
+ 289 011e FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 290              	.LVL20:
+ 261:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_SWIZZLE, FT_DispSwizzle);
+ 291              		.loc 1 261 0
+ 292 0122 9AF80020 		ldrb	r2, [r10]	@ zero_extendqisi2
+ 293 0126 3E49     		ldr	r1, .L14+92
+ 294 0128 2046     		mov	r0, r4
+ 295 012a FFF7FEFF 		bl	Ft_Gpu_Hal_Wr8
+ 296              	.LVL21:
+ 262:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_PCLK_POL, FT_DispPCLKPol);
+ 297              		.loc 1 262 0
+ 298 012e 99F80020 		ldrb	r2, [r9]	@ zero_extendqisi2
+ 299 0132 3C49     		ldr	r1, .L14+96
+ 300 0134 2046     		mov	r0, r4
+ 301 0136 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr8
+ 302              	.LVL22:
+ 263:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HSIZE, FT_DispWidth);
+ 303              		.loc 1 263 0
+ 304 013a 254A     		ldr	r2, .L14+12
+ 305 013c 1288     		ldrh	r2, [r2]
+ 306 013e 3A49     		ldr	r1, .L14+100
+ 307 0140 2046     		mov	r0, r4
+ 308 0142 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 309              	.LVL23:
+ 264:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VSIZE, FT_DispHeight);
+ 310              		.loc 1 264 0
+ 311 0146 2349     		ldr	r1, .L14+16
+ 312 0148 0A88     		ldrh	r2, [r1]
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 11
+
+
+ 313 014a 3849     		ldr	r1, .L14+104
+ 314 014c 2046     		mov	r0, r4
+ 315 014e FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 316              	.LVL24:
+ 265:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_CSPREAD, FT_DispCSpread);
+ 317              		.loc 1 265 0
+ 318 0152 294B     		ldr	r3, .L14+52
+ 319 0154 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 320 0156 3649     		ldr	r1, .L14+108
+ 321 0158 2046     		mov	r0, r4
+ 322 015a FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 323              	.LVL25:
+ 266:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_DITHER, FT_DispDither);
+ 324              		.loc 1 266 0
+ 325 015e 3A78     		ldrb	r2, [r7]	@ zero_extendqisi2
+ 326 0160 3449     		ldr	r1, .L14+112
+ 327 0162 2046     		mov	r0, r4
+ 328 0164 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 329              	.LVL26:
+ 267:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 268:FT_Esd_Framework/Ft_Esd_App.c **** #if (defined(FT_800_ENABLE) || defined(FT_810_ENABLE) ||defined(FT_812_ENABLE))
+ 269:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Touch configuration - configure the resistance value to 1200 - this value is specific to custom
+ 270:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr16(&s_Host, REG_TOUCH_RZTHRESH, RESISTANCE_THRESHOLD);
+ 330              		.loc 1 270 0
+ 331 0168 4FF4E162 		mov	r2, #1800
+ 332 016c 3249     		ldr	r1, .L14+116
+ 333 016e 2046     		mov	r0, r4
+ 334 0170 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr16
+ 335              	.LVL27:
+ 271:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 272:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 273:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_GPIO_DIR, 0xff);
+ 336              		.loc 1 273 0
+ 337 0174 FF22     		movs	r2, #255
+ 338 0176 3149     		ldr	r1, .L14+120
+ 339 0178 2046     		mov	r0, r4
+ 340 017a FFF7FEFF 		bl	Ft_Gpu_Hal_Wr8
+ 341              	.LVL28:
+ 274:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_GPIO, 0xff);
+ 342              		.loc 1 274 0
+ 343 017e FF22     		movs	r2, #255
+ 344 0180 2F49     		ldr	r1, .L14+124
+ 345 0182 2046     		mov	r0, r4
+ 346 0184 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr8
+ 347              	.LVL29:
+ 275:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 276:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_WrMem(&s_Host, RAM_DL, (ft_uint8_t *) FT_DLCODE_BOOTUP,
+ 348              		.loc 1 276 0
+ 349 0188 4023     		movs	r3, #64
+ 350 018a 2E4A     		ldr	r2, .L14+128
+ 351 018c 4FF44011 		mov	r1, #3145728
+ 352 0190 2046     		mov	r0, r4
+ 353 0192 FFF7FEFF 		bl	Ft_Gpu_Hal_WrMem
+ 354              	.LVL30:
+ 277:FT_Esd_Framework/Ft_Esd_App.c **** 			sizeof(FT_DLCODE_BOOTUP));
+ 278:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_DLSWAP, DLSWAP_FRAME);
+ 355              		.loc 1 278 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 12
+
+
+ 356 0196 0222     		movs	r2, #2
+ 357 0198 2B49     		ldr	r1, .L14+132
+ 358 019a 2046     		mov	r0, r4
+ 359 019c FFF7FEFF 		bl	Ft_Gpu_Hal_Wr8
+ 360              	.LVL31:
+ 279:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 280:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_PCLK, FT_DispPCLK); //after this display is visible on the LCD
+ 361              		.loc 1 280 0
+ 362 01a0 3278     		ldrb	r2, [r6]	@ zero_extendqisi2
+ 363 01a2 2A49     		ldr	r1, .L14+136
+ 364 01a4 2046     		mov	r0, r4
+ 365 01a6 FFF7FEFF 		bl	Ft_Gpu_Hal_Wr8
+ 366              	.LVL32:
+ 281:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 282:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef ENABLE_ILI9488_HVGA_PORTRAIT
+ 283:FT_Esd_Framework/Ft_Esd_App.c **** 	/* to cross check reset pin */
+ 284:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_GPIO, 0xff);
+ 285:FT_Esd_Framework/Ft_Esd_App.c **** 	ft_delay(120);
+ 286:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_GPIO, 0x7f);
+ 287:FT_Esd_Framework/Ft_Esd_App.c **** 	ft_delay(120);
+ 288:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_GPIO, 0xff);
+ 289:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 290:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Reconfigure the SPI */
+ 291:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+ 292:FT_Esd_Framework/Ft_Esd_App.c **** 	ILI9488_Bootup();
+ 293:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 294:FT_Esd_Framework/Ft_Esd_App.c **** 	printf("after ILI9488 bootup \n");
+ 295:FT_Esd_Framework/Ft_Esd_App.c **** 	//spi
+ 296:FT_Esd_Framework/Ft_Esd_App.c **** 	// Initialize SPIM HW
+ 297:FT_Esd_Framework/Ft_Esd_App.c **** 	sys_enable(sys_device_spi_master);
+ 298:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(27, pad_spim_sck); /* GPIO27 to SPIM_CLK */
+ 299:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(28, pad_spim_ss0); /* GPIO28 as CS */
+ 300:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(29, pad_spim_mosi); /* GPIO29 to SPIM_MOSI */
+ 301:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(30, pad_spim_miso); /* GPIO30 to SPIM_MISO */
+ 302:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 303:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(28, 1);
+ 304:FT_Esd_Framework/Ft_Esd_App.c **** 	spi_init(SPIM, spi_dir_master, spi_mode_0, 4);
+ 305:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 306:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 307:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 308:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 309:FT_Esd_Framework/Ft_Esd_App.c **** 	/* make the spi to quad mode - addition 2 bytes for silicon */
+ 310:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT_81X_ENABLE
+ 311:FT_Esd_Framework/Ft_Esd_App.c **** 	/* api to set quad and numbe of dummy bytes */
+ 312:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef ENABLE_SPI_QUAD
+ 313:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_SetSPI(&s_Host,FT_GPU_SPI_QUAD_CHANNEL,FT_GPU_SPI_TWODUMMY);
+ 314:FT_Esd_Framework/Ft_Esd_App.c **** #elif ENABLE_SPI_DUAL
+ 315:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_SetSPI(&s_Host,FT_GPU_SPI_DUAL_CHANNEL,FT_GPU_SPI_TWODUMMY);
+ 316:FT_Esd_Framework/Ft_Esd_App.c **** #else
+ 317:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_SetSPI(&s_Host, FT_GPU_SPI_SINGLE_CHANNEL, FT_GPU_SPI_ONEDUMMY);
+ 367              		.loc 1 317 0
+ 368 01aa 4246     		mov	r2, r8
+ 369 01ac 2946     		mov	r1, r5
+ 370 01ae 2046     		mov	r0, r4
+ 371 01b0 FFF7FEFF 		bl	Ft_Gpu_Hal_SetSPI
+ 372              	.LVL33:
+ 318:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 13
+
+
+ 319:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 320:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 321:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 322:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+ 323:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Change clock frequency to 25mhz */
+ 324:FT_Esd_Framework/Ft_Esd_App.c **** 	spi_init(SPIM, spi_dir_master, spi_mode_0, 4);
+ 325:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 326:FT_Esd_Framework/Ft_Esd_App.c **** #if (defined(ENABLE_SPI_QUAD))
+ 327:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Initialize IO2 and IO3 pad/pin for dual and quad settings */
+ 328:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(31, pad_spim_io2);
+ 329:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(32, pad_spim_io3);
+ 330:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(31, 1);
+ 331:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_write(32, 1);
+ 332:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 333:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Enable FIFO of QSPI */
+ 334:FT_Esd_Framework/Ft_Esd_App.c **** 	spi_option(SPIM, spi_option_fifo_size, 64);
+ 335:FT_Esd_Framework/Ft_Esd_App.c **** 	spi_option(SPIM, spi_option_fifo, 1);
+ 336:FT_Esd_Framework/Ft_Esd_App.c **** 	spi_option(SPIM, spi_option_fifo_receive_trigger, 1);
+ 337:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 338:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 339:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef ENABLE_SPI_QUAD
+ 340:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+ 341:FT_Esd_Framework/Ft_Esd_App.c **** 	spi_option(SPIM,spi_option_bus_width,4);
+ 342:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 343:FT_Esd_Framework/Ft_Esd_App.c **** #elif ENABLE_SPI_DUAL
+ 344:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+ 345:FT_Esd_Framework/Ft_Esd_App.c **** 	spi_option(SPIM,spi_option_bus_width,2);
+ 346:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 347:FT_Esd_Framework/Ft_Esd_App.c **** #else
+ 348:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+ 349:FT_Esd_Framework/Ft_Esd_App.c **** 	spi_option(SPIM, spi_option_bus_width, 1);
+ 350:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 351:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 352:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 353:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 354:FT_Esd_Framework/Ft_Esd_App.c **** 	s_Host.ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(&s_Host, REG_CMD_WRITE);
+ 373              		.loc 1 354 0
+ 374 01b4 2649     		ldr	r1, .L14+140
+ 375 01b6 2046     		mov	r0, r4
+ 376 01b8 FFF7FEFF 		bl	Ft_Gpu_Hal_Rd16
+ 377              	.LVL34:
+ 378 01bc 2081     		strh	r0, [r4, #8]	@ movhi
+ 355:FT_Esd_Framework/Ft_Esd_App.c **** }
+ 379              		.loc 1 355 0
+ 380 01be BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 381              	.L15:
+ 382 01c2 00BF     		.align	2
+ 383              	.L14:
+ 384 01c4 00000000 		.word	.LANCHOR3
+ 385 01c8 00203000 		.word	3153920
+ 386 01cc 00000000 		.word	.LC0
+ 387 01d0 00000000 		.word	.LANCHOR4
+ 388 01d4 00000000 		.word	.LANCHOR5
+ 389 01d8 00000000 		.word	.LANCHOR6
+ 390 01dc 00000000 		.word	.LANCHOR8
+ 391 01e0 00000000 		.word	.LANCHOR9
+ 392 01e4 00000000 		.word	.LANCHOR10
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 14
+
+
+ 393 01e8 00000000 		.word	.LANCHOR11
+ 394 01ec 00000000 		.word	.LANCHOR12
+ 395 01f0 00000000 		.word	.LANCHOR13
+ 396 01f4 00000000 		.word	.LANCHOR14
+ 397 01f8 00000000 		.word	.LANCHOR17
+ 398 01fc 00000000 		.word	.LANCHOR18
+ 399 0200 2C203000 		.word	3153964
+ 400 0204 30203000 		.word	3153968
+ 401 0208 38203000 		.word	3153976
+ 402 020c 3C203000 		.word	3153980
+ 403 0210 40203000 		.word	3153984
+ 404 0214 44203000 		.word	3153988
+ 405 0218 4C203000 		.word	3153996
+ 406 021c 50203000 		.word	3154000
+ 407 0220 64203000 		.word	3154020
+ 408 0224 6C203000 		.word	3154028
+ 409 0228 34203000 		.word	3153972
+ 410 022c 48203000 		.word	3153992
+ 411 0230 68203000 		.word	3154024
+ 412 0234 60203000 		.word	3154016
+ 413 0238 18213000 		.word	3154200
+ 414 023c 90203000 		.word	3154064
+ 415 0240 94203000 		.word	3154068
+ 416 0244 00000000 		.word	.LANCHOR19
+ 417 0248 54203000 		.word	3154004
+ 418 024c 70203000 		.word	3154032
+ 419 0250 FC203000 		.word	3154172
+ 420 0254 00000000 		.word	.LANCHOR7
+ 421 0258 00000000 		.word	.LANCHOR15
+ 422 025c 00000000 		.word	.LANCHOR16
+ 423              		.cfi_endproc
+ 424              	.LFE6:
+ 426              		.section	.text.App_CoPro_Widget_Calibrate,"ax",%progbits
+ 427              		.align	1
+ 428              		.global	App_CoPro_Widget_Calibrate
+ 429              		.syntax unified
+ 430              		.thumb
+ 431              		.thumb_func
+ 432              		.fpu fpv5-sp-d16
+ 434              	App_CoPro_Widget_Calibrate:
+ 435              	.LFB7:
+ 356:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 357:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef FT900_PLATFORM
+ 358:FT_Esd_Framework/Ft_Esd_App.c **** ft_void_t FT900_InitSDCard()
+ 359:FT_Esd_Framework/Ft_Esd_App.c **** {
+ 360:FT_Esd_Framework/Ft_Esd_App.c **** 	sys_enable(sys_device_sd_card);
+ 361:FT_Esd_Framework/Ft_Esd_App.c **** 	sdhost_init();
+ 362:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 363:FT_Esd_Framework/Ft_Esd_App.c **** #define GPIO_SD_CLK  (19)
+ 364:FT_Esd_Framework/Ft_Esd_App.c **** #define GPIO_SD_CMD  (20)
+ 365:FT_Esd_Framework/Ft_Esd_App.c **** #define GPIO_SD_DAT3 (21)
+ 366:FT_Esd_Framework/Ft_Esd_App.c **** #define GPIO_SD_DAT2 (22)
+ 367:FT_Esd_Framework/Ft_Esd_App.c **** #define GPIO_SD_DAT1 (23)
+ 368:FT_Esd_Framework/Ft_Esd_App.c **** #define GPIO_SD_DAT0 (24)
+ 369:FT_Esd_Framework/Ft_Esd_App.c **** #define GPIO_SD_CD   (25)
+ 370:FT_Esd_Framework/Ft_Esd_App.c **** #define GPIO_SD_WP   (26)
+ 371:FT_Esd_Framework/Ft_Esd_App.c **** 
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 15
+
+
+ 372:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(GPIO_SD_CLK, pad_sd_clk); gpio_pull(GPIO_SD_CLK, pad_pull_none); // pad_pull_none
+ 373:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(GPIO_SD_CMD, pad_sd_cmd); gpio_pull(GPIO_SD_CMD, pad_pull_pullup);
+ 374:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(GPIO_SD_DAT3, pad_sd_data3); gpio_pull(GPIO_SD_DAT3, pad_pull_pullup);
+ 375:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(GPIO_SD_DAT2, pad_sd_data2); gpio_pull(GPIO_SD_DAT2, pad_pull_pullup);
+ 376:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(GPIO_SD_DAT1, pad_sd_data1); gpio_pull(GPIO_SD_DAT1, pad_pull_pullup);
+ 377:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(GPIO_SD_DAT0, pad_sd_data0); gpio_pull(GPIO_SD_DAT0, pad_pull_pullup);
+ 378:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(GPIO_SD_CD, pad_sd_cd); gpio_pull(GPIO_SD_CD, pad_pull_pullup);
+ 379:FT_Esd_Framework/Ft_Esd_App.c **** 	gpio_function(GPIO_SD_WP, pad_sd_wp); gpio_pull(GPIO_SD_WP, pad_pull_pullup);
+ 380:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 381:FT_Esd_Framework/Ft_Esd_App.c **** 	SDHOST_STATUS sd_status;
+ 382:FT_Esd_Framework/Ft_Esd_App.c **** 	while ((sd_status = sdhost_card_detect()) != SDHOST_CARD_INSERTED)
+ 383:FT_Esd_Framework/Ft_Esd_App.c **** 	printf("Waiting for SD Card (status: %i)\n", (int)sd_status);
+ 384:FT_Esd_Framework/Ft_Esd_App.c **** 	printf("SD Card inserted\n");
+ 385:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 386:FT_Esd_Framework/Ft_Esd_App.c **** 	if (f_mount(&s_FatFS, "", 1) != FR_OK) printf("FatFS mount failed\n");
+ 387:FT_Esd_Framework/Ft_Esd_App.c **** 	else printf("FatFS mounted succesfully\n");
+ 388:FT_Esd_Framework/Ft_Esd_App.c **** }
+ 389:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 390:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 391:FT_Esd_Framework/Ft_Esd_App.c **** /* API to demonstrate calibrate widget/functionality */
+ 392:FT_Esd_Framework/Ft_Esd_App.c **** ft_void_t App_CoPro_Widget_Calibrate() {
+ 436              		.loc 1 392 0
+ 437              		.cfi_startproc
+ 438              		@ args = 0, pretend = 0, frame = 24
+ 439              		@ frame_needed = 0, uses_anonymous_args = 0
+ 440 0000 10B5     		push	{r4, lr}
+ 441              	.LCFI1:
+ 442              		.cfi_def_cfa_offset 8
+ 443              		.cfi_offset 4, -8
+ 444              		.cfi_offset 14, -4
+ 445 0002 88B0     		sub	sp, sp, #32
+ 446              	.LCFI2:
+ 447              		.cfi_def_cfa_offset 40
+ 448              	.LVL35:
+ 393:FT_Esd_Framework/Ft_Esd_App.c **** 	ft_uint32_t NumBytesGen = 0, TransMatrix[6];
+ 394:FT_Esd_Framework/Ft_Esd_App.c **** 	ft_uint16_t CurrWriteOffset = 0;
+ 395:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_CoCmd_Dlstart(&s_Host);
+ 449              		.loc 1 395 0
+ 450 0004 1C4C     		ldr	r4, .L22
+ 451 0006 2046     		mov	r0, r4
+ 452 0008 FFF7FEFF 		bl	Ft_Gpu_CoCmd_Dlstart
+ 453              	.LVL36:
+ 396:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_WrCmd32(&s_Host, CLEAR_COLOR_RGB(64, 64, 64));
+ 454              		.loc 1 396 0
+ 455 000c 1B49     		ldr	r1, .L22+4
+ 456 000e 2046     		mov	r0, r4
+ 457 0010 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 458              	.LVL37:
+ 397:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_WrCmd32(&s_Host, CLEAR(1, 1, 1));
+ 459              		.loc 1 397 0
+ 460 0014 1A49     		ldr	r1, .L22+8
+ 461 0016 2046     		mov	r0, r4
+ 462 0018 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 463              	.LVL38:
+ 398:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_WrCmd32(&s_Host, COLOR_RGB(0xff, 0xff, 0xff));
+ 464              		.loc 1 398 0
+ 465 001c 6FF07B41 		mvn	r1, #-83886080
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 16
+
+
+ 466 0020 2046     		mov	r0, r4
+ 467 0022 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 468              	.LVL39:
+ 399:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Draw number at 0,0 location */
+ 400:FT_Esd_Framework/Ft_Esd_App.c **** 	//Ft_App_WrCoCmd_Buffer(&s_Host, COLOR_A(30));
+ 401:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_CoCmd_Text(&s_Host, (FT_DispWidth / 2), (FT_DispHeight / 2), 27,
+ 469              		.loc 1 401 0
+ 470 0026 174B     		ldr	r3, .L22+12
+ 471 0028 B3F90020 		ldrsh	r2, [r3]
+ 472 002c 002A     		cmp	r2, #0
+ 473 002e 1FDB     		blt	.L20
+ 474              	.L17:
+ 475 0030 5210     		asrs	r2, r2, #1
+ 476 0032 154B     		ldr	r3, .L22+16
+ 477 0034 B3F90010 		ldrsh	r1, [r3]
+ 478 0038 0029     		cmp	r1, #0
+ 479 003a 1BDB     		blt	.L21
+ 480              	.L18:
+ 481 003c 0E4C     		ldr	r4, .L22
+ 482 003e 134B     		ldr	r3, .L22+20
+ 483 0040 0193     		str	r3, [sp, #4]
+ 484 0042 4FF4C063 		mov	r3, #1536
+ 485 0046 0093     		str	r3, [sp]
+ 486 0048 1B23     		movs	r3, #27
+ 487 004a 4910     		asrs	r1, r1, #1
+ 488 004c 2046     		mov	r0, r4
+ 489 004e FFF7FEFF 		bl	Ft_Gpu_CoCmd_Text
+ 490              	.LVL40:
+ 402:FT_Esd_Framework/Ft_Esd_App.c **** 			OPT_CENTER, "Please Tap on the dot");
+ 403:FT_Esd_Framework/Ft_Esd_App.c **** #if defined(FT_801_ENABLE) || defined(FT_811_ENABLE) || defined(FT_813_ENABLE)
+ 404:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_Wr8(&s_Host, REG_CTOUCH_EXTENDED, CTOUCH_MODE_COMPATIBILITY);
+ 405:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 406:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_CoCmd_Calibrate(&s_Host, 0);
+ 491              		.loc 1 406 0
+ 492 0052 0021     		movs	r1, #0
+ 493 0054 2046     		mov	r0, r4
+ 494 0056 FFF7FEFF 		bl	Ft_Gpu_CoCmd_Calibrate
+ 495              	.LVL41:
+ 407:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Wait till coprocessor completes the operation */
+ 408:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_WaitCmdfifo_empty(&s_Host);
+ 496              		.loc 1 408 0
+ 497 005a 2046     		mov	r0, r4
+ 498 005c FFF7FEFF 		bl	Ft_Gpu_Hal_WaitCmdfifo_empty
+ 499              	.LVL42:
+ 409:FT_Esd_Framework/Ft_Esd_App.c **** 	/* Print the configured values */
+ 410:FT_Esd_Framework/Ft_Esd_App.c **** 	Ft_Gpu_Hal_RdMem(&s_Host, REG_TOUCH_TRANSFORM_A, (ft_uint8_t *) TransMatrix,
+ 500              		.loc 1 410 0
+ 501 0060 1823     		movs	r3, #24
+ 502 0062 02AA     		add	r2, sp, #8
+ 503 0064 0A49     		ldr	r1, .L22+24
+ 504 0066 2046     		mov	r0, r4
+ 505 0068 FFF7FEFF 		bl	Ft_Gpu_Hal_RdMem
+ 506              	.LVL43:
+ 411:FT_Esd_Framework/Ft_Esd_App.c **** 			4 * 6); //read all the 6 coefficients
+ 412:FT_Esd_Framework/Ft_Esd_App.c **** #ifdef MSVC_PLATFORM
+ 413:FT_Esd_Framework/Ft_Esd_App.c **** 					printf("Touch screen transform values are A 0x%x,B 0x%x,C 0x%x,D 0x%x,E 0x%x, F 0x%x",
+ 414:FT_Esd_Framework/Ft_Esd_App.c **** 							TransMatrix[0], TransMatrix[1], TransMatrix[2], TransMatrix[3], TransMatrix[4], TransMatrix[
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 17
+
+
+ 415:FT_Esd_Framework/Ft_Esd_App.c **** #endif
+ 416:FT_Esd_Framework/Ft_Esd_App.c **** }
+ 507              		.loc 1 416 0
+ 508 006c 08B0     		add	sp, sp, #32
+ 509              	.LCFI3:
+ 510              		.cfi_remember_state
+ 511              		.cfi_def_cfa_offset 8
+ 512              		@ sp needed
+ 513 006e 10BD     		pop	{r4, pc}
+ 514              	.L20:
+ 515              	.LCFI4:
+ 516              		.cfi_restore_state
+ 401:FT_Esd_Framework/Ft_Esd_App.c **** 			OPT_CENTER, "Please Tap on the dot");
+ 517              		.loc 1 401 0
+ 518 0070 0132     		adds	r2, r2, #1
+ 519 0072 DDE7     		b	.L17
+ 520              	.L21:
+ 521 0074 0131     		adds	r1, r1, #1
+ 522 0076 E1E7     		b	.L18
+ 523              	.L23:
+ 524              		.align	2
+ 525              	.L22:
+ 526 0078 00000000 		.word	.LANCHOR3
+ 527 007c 40404002 		.word	37765184
+ 528 0080 07000026 		.word	637534215
+ 529 0084 00000000 		.word	.LANCHOR5
+ 530 0088 00000000 		.word	.LANCHOR4
+ 531 008c 00000000 		.word	.LC1
+ 532 0090 50213000 		.word	3154256
+ 533              		.cfi_endproc
+ 534              	.LFE7:
+ 536              		.section	.text.Ft_Esd_InitFontHeight,"ax",%progbits
+ 537              		.align	1
+ 538              		.global	Ft_Esd_InitFontHeight
+ 539              		.syntax unified
+ 540              		.thumb
+ 541              		.thumb_func
+ 542              		.fpu fpv5-sp-d16
+ 544              	Ft_Esd_InitFontHeight:
+ 545              	.LFB8:
+ 417:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 418:FT_Esd_Framework/Ft_Esd_App.c **** // TODO: Update Ft_Esd_FontHeight on CMD_ROMFONT
+ 419:FT_Esd_Framework/Ft_Esd_App.c **** // TODO: Update Ft_Esd_FontHeight on CMD_SETFONT
+ 420:FT_Esd_Framework/Ft_Esd_App.c **** ft_void_t Ft_Esd_InitFontHeight() {
+ 546              		.loc 1 420 0
+ 547              		.cfi_startproc
+ 548              		@ args = 0, pretend = 0, frame = 0
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ 550 0000 70B5     		push	{r4, r5, r6, lr}
+ 551              	.LCFI5:
+ 552              		.cfi_def_cfa_offset 16
+ 553              		.cfi_offset 4, -16
+ 554              		.cfi_offset 5, -12
+ 555              		.cfi_offset 6, -8
+ 556              		.cfi_offset 14, -4
+ 421:FT_Esd_Framework/Ft_Esd_App.c **** 	ft_uint32_t ft = Ft_Gpu_Hal_Rd32(&s_Host, ROMFONT_TABLEADDRESS);
+ 557              		.loc 1 421 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 18
+
+
+ 558 0002 0B49     		ldr	r1, .L28
+ 559 0004 0B48     		ldr	r0, .L28+4
+ 560 0006 FFF7FEFF 		bl	Ft_Gpu_Hal_Rd32
+ 561              	.LVL44:
+ 562 000a 0646     		mov	r6, r0
+ 563              	.LVL45:
+ 564              	.LBB3:
+ 422:FT_Esd_Framework/Ft_Esd_App.c **** 	for (int i = 0; i < 16; ++i) {
+ 565              		.loc 1 422 0
+ 566 000c 0024     		movs	r4, #0
+ 567 000e 0CE0     		b	.L25
+ 568              	.LVL46:
+ 569              	.L26:
+ 570              	.LBB4:
+ 423:FT_Esd_Framework/Ft_Esd_App.c **** 		ft_uint32_t addr =
+ 424:FT_Esd_Framework/Ft_Esd_App.c **** 				ft + (FT_GPU_FONT_TABLE_SIZE * i)
+ 571              		.loc 1 424 0 discriminator 3
+ 572 0010 9421     		movs	r1, #148
+ 573 0012 01FB0461 		mla	r1, r1, r4, r6
+ 574              	.LVL47:
+ 425:FT_Esd_Framework/Ft_Esd_App.c **** 						+ (ft_uint32_t) (&(((FT_Gpu_Fonts_t *) (void *) 0)->FontHeightInPixels));
+ 426:FT_Esd_Framework/Ft_Esd_App.c **** 		Ft_Esd_FontHeight[16 + i] = Ft_Gpu_Hal_Rd16(&s_Host, addr);
+ 575              		.loc 1 426 0 discriminator 3
+ 576 0016 04F11005 		add	r5, r4, #16
+ 577 001a 8C31     		adds	r1, r1, #140
+ 578              	.LVL48:
+ 579 001c 0548     		ldr	r0, .L28+4
+ 580 001e FFF7FEFF 		bl	Ft_Gpu_Hal_Rd16
+ 581              	.LVL49:
+ 582 0022 054B     		ldr	r3, .L28+8
+ 583 0024 23F81500 		strh	r0, [r3, r5, lsl #1]	@ movhi
+ 584              	.LBE4:
+ 422:FT_Esd_Framework/Ft_Esd_App.c **** 		ft_uint32_t addr =
+ 585              		.loc 1 422 0 discriminator 3
+ 586 0028 0134     		adds	r4, r4, #1
+ 587              	.LVL50:
+ 588              	.L25:
+ 422:FT_Esd_Framework/Ft_Esd_App.c **** 		ft_uint32_t addr =
+ 589              		.loc 1 422 0 is_stmt 0 discriminator 1
+ 590 002a 0F2C     		cmp	r4, #15
+ 591 002c F0DD     		ble	.L26
+ 592              	.LBE3:
+ 427:FT_Esd_Framework/Ft_Esd_App.c **** 	}
+ 428:FT_Esd_Framework/Ft_Esd_App.c **** }
+ 593              		.loc 1 428 0 is_stmt 1
+ 594 002e 70BD     		pop	{r4, r5, r6, pc}
+ 595              	.LVL51:
+ 596              	.L29:
+ 597              		.align	2
+ 598              	.L28:
+ 599 0030 FCFF2F00 		.word	3145724
+ 600 0034 00000000 		.word	.LANCHOR3
+ 601 0038 00000000 		.word	.LANCHOR20
+ 602              		.cfi_endproc
+ 603              	.LFE8:
+ 605              		.section	.text.setup,"ax",%progbits
+ 606              		.align	1
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 19
+
+
+ 607              		.global	setup
+ 608              		.syntax unified
+ 609              		.thumb
+ 610              		.thumb_func
+ 611              		.fpu fpv5-sp-d16
+ 613              	setup:
+ 614              	.LFB9:
+ 429:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 430:FT_Esd_Framework/Ft_Esd_App.c **** ft_void_t setup() {
+ 615              		.loc 1 430 0
+ 616              		.cfi_startproc
+ 617              		@ args = 0, pretend = 0, frame = 0
+ 618              		@ frame_needed = 0, uses_anonymous_args = 0
+ 619              		@ link register save eliminated.
+ 431:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 432:FT_Esd_Framework/Ft_Esd_App.c **** }
+ 620              		.loc 1 432 0
+ 621 0000 7047     		bx	lr
+ 622              		.cfi_endproc
+ 623              	.LFE9:
+ 625              		.section	.text.Ft_Esd_GAlloc_GetTotalUsed,"ax",%progbits
+ 626              		.align	1
+ 627              		.global	Ft_Esd_GAlloc_GetTotalUsed
+ 628              		.syntax unified
+ 629              		.thumb
+ 630              		.thumb_func
+ 631              		.fpu fpv5-sp-d16
+ 633              	Ft_Esd_GAlloc_GetTotalUsed:
+ 634              	.LFB10:
+ 433:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 434:FT_Esd_Framework/Ft_Esd_App.c **** // Ft_Esd_MainLoop
+ 435:FT_Esd_Framework/Ft_Esd_App.c **** ft_void_t Ft_Esd_MainLoop();
+ 436:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 437:FT_Esd_Framework/Ft_Esd_App.c **** //#if defined(MSVC_PLATFORM) || defined(FT900_PLATFORM)
+ 438:FT_Esd_Framework/Ft_Esd_App.c **** ///* Main entry point */
+ 439:FT_Esd_Framework/Ft_Esd_App.c **** //ft_int32_t main(ft_int32_t argc, ft_char8_t *argv[])
+ 440:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 441:FT_Esd_Framework/Ft_Esd_App.c **** //#if defined(ARDUINO_PLATFORM) || defined(MSVC_FT800EMU)
+ 442:FT_Esd_Framework/Ft_Esd_App.c **** //ft_void_t loop()
+ 443:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 444:FT_Esd_Framework/Ft_Esd_App.c **** //{
+ 445:FT_Esd_Framework/Ft_Esd_App.c **** //#ifdef ESD_SIMULATION
+ 446:FT_Esd_Framework/Ft_Esd_App.c **** //	printf("\f"); // Shows horizontal line in ESD output window
+ 447:FT_Esd_Framework/Ft_Esd_App.c **** //	printf(FT_WELCOME_MESSAGE);
+ 448:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 449:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 450:FT_Esd_Framework/Ft_Esd_App.c **** //#ifdef FT900_PLATFORM
+ 451:FT_Esd_Framework/Ft_Esd_App.c **** //	FT900_Config();
+ 452:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 453:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Gpu_HalInit_t halinit;
+ 454:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 455:FT_Esd_Framework/Ft_Esd_App.c **** //	halinit.TotalChannelNum = 1;
+ 456:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 457:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Gpu_Hal_Init(&halinit);
+ 458:FT_Esd_Framework/Ft_Esd_App.c **** //	s_Host.hal_config.channel_no = 0;
+ 459:FT_Esd_Framework/Ft_Esd_App.c **** //	s_Host.hal_config.pdn_pin_no = FT800_PD_N;
+ 460:FT_Esd_Framework/Ft_Esd_App.c **** //	s_Host.hal_config.spi_cs_pin_no = FT800_SEL_PIN;
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 20
+
+
+ 461:FT_Esd_Framework/Ft_Esd_App.c **** //#ifdef MSVC_PLATFORM_SPI
+ 462:FT_Esd_Framework/Ft_Esd_App.c **** //	host.hal_config.spi_clockrate_khz = 12000; //in KHz
+ 463:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 464:FT_Esd_Framework/Ft_Esd_App.c **** //#ifdef ARDUINO_PLATFORM_SPI
+ 465:FT_Esd_Framework/Ft_Esd_App.c **** //	host.hal_config.spi_clockrate_khz = 4000; //in KHz
+ 466:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 467:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Gpu_Hal_Open(&s_Host);
+ 468:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 469:FT_Esd_Framework/Ft_Esd_App.c **** //	//printf("Ft_Gpu_Hal_Open done \n");
+ 470:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Esd_Host = &s_Host;
+ 471:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 472:FT_Esd_Framework/Ft_Esd_App.c **** //	FT800_BootupConfig();
+ 473:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 474:FT_Esd_Framework/Ft_Esd_App.c **** //#if (defined FT900_PLATFORM) || defined(MSVC_PLATFORM) || defined(ESD_SIMULATION)
+ 475:FT_Esd_Framework/Ft_Esd_App.c **** //	printf("reg_touch_rz = 0x%x\n", Ft_Gpu_Hal_Rd16(&s_Host, REG_TOUCH_RZ));
+ 476:FT_Esd_Framework/Ft_Esd_App.c **** //	printf("reg_touch_rzthresh = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_RZTHRESH));
+ 477:FT_Esd_Framework/Ft_Esd_App.c **** //	printf("reg_touch_tag_xy = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG_XY));
+ 478:FT_Esd_Framework/Ft_Esd_App.c **** //	printf("reg_touch_tag = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG));
+ 479:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 480:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 481:FT_Esd_Framework/Ft_Esd_App.c **** //#if FT900_PLATFORM
+ 482:FT_Esd_Framework/Ft_Esd_App.c **** //	FT900_InitSDCard();
+ 483:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 484:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 485:FT_Esd_Framework/Ft_Esd_App.c **** //#ifndef ESD_SIMULATION
+ 486:FT_Esd_Framework/Ft_Esd_App.c **** //	App_CoPro_Widget_Calibrate();
+ 487:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 488:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 489:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Esd_GAlloc = &s_GAlloc;
+ 490:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Esd_GpuAlloc_Reset(&s_GAlloc);
+ 491:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 492:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Esd_InitFontHeight();
+ 493:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 494:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Esd_MainLoop();
+ 495:FT_Esd_Framework/Ft_Esd_App.c **** //
+ 496:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Gpu_Hal_Close(&s_Host);
+ 497:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Gpu_Hal_DeInit();
+ 498:FT_Esd_Framework/Ft_Esd_App.c **** //	Ft_Esd_Host = 0;
+ 499:FT_Esd_Framework/Ft_Esd_App.c **** //#ifdef MSVC_PLATFORM
+ 500:FT_Esd_Framework/Ft_Esd_App.c **** //	return 0;
+ 501:FT_Esd_Framework/Ft_Esd_App.c **** //#endif
+ 502:FT_Esd_Framework/Ft_Esd_App.c **** //}
+ 503:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 504:FT_Esd_Framework/Ft_Esd_App.c **** ft_uint32_t Ft_Esd_GAlloc_GetTotalUsed(Ft_Esd_GpuAlloc *ga) {
+ 635              		.loc 1 504 0
+ 636              		.cfi_startproc
+ 637              		@ args = 0, pretend = 0, frame = 0
+ 638              		@ frame_needed = 0, uses_anonymous_args = 0
+ 639              	.LVL52:
+ 640 0000 08B5     		push	{r3, lr}
+ 641              	.LCFI6:
+ 642              		.cfi_def_cfa_offset 8
+ 643              		.cfi_offset 3, -8
+ 644              		.cfi_offset 14, -4
+ 505:FT_Esd_Framework/Ft_Esd_App.c **** 	if (!Ft_Esd_GAlloc)
+ 645              		.loc 1 505 0
+ 646 0002 044B     		ldr	r3, .L35
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 21
+
+
+ 647 0004 1868     		ldr	r0, [r3]
+ 648              	.LVL53:
+ 649 0006 10B1     		cbz	r0, .L33
+ 506:FT_Esd_Framework/Ft_Esd_App.c **** 		return 0;
+ 507:FT_Esd_Framework/Ft_Esd_App.c **** 	return Ft_Esd_GpuAlloc_GetTotalUsed(Ft_Esd_GAlloc);
+ 650              		.loc 1 507 0
+ 651 0008 FFF7FEFF 		bl	Ft_Esd_GpuAlloc_GetTotalUsed
+ 652              	.LVL54:
+ 653              	.L31:
+ 508:FT_Esd_Framework/Ft_Esd_App.c **** }
+ 654              		.loc 1 508 0
+ 655 000c 08BD     		pop	{r3, pc}
+ 656              	.L33:
+ 506:FT_Esd_Framework/Ft_Esd_App.c **** 		return 0;
+ 657              		.loc 1 506 0
+ 658 000e 0020     		movs	r0, #0
+ 659 0010 FCE7     		b	.L31
+ 660              	.L36:
+ 661 0012 00BF     		.align	2
+ 662              	.L35:
+ 663 0014 00000000 		.word	.LANCHOR21
+ 664              		.cfi_endproc
+ 665              	.LFE10:
+ 667              		.section	.text.Ft_Esd_GAlloc_GetTotal,"ax",%progbits
+ 668              		.align	1
+ 669              		.global	Ft_Esd_GAlloc_GetTotal
+ 670              		.syntax unified
+ 671              		.thumb
+ 672              		.thumb_func
+ 673              		.fpu fpv5-sp-d16
+ 675              	Ft_Esd_GAlloc_GetTotal:
+ 676              	.LFB11:
+ 509:FT_Esd_Framework/Ft_Esd_App.c **** 
+ 510:FT_Esd_Framework/Ft_Esd_App.c **** ft_uint32_t Ft_Esd_GAlloc_GetTotal(Ft_Esd_GpuAlloc *ga) {
+ 677              		.loc 1 510 0
+ 678              		.cfi_startproc
+ 679              		@ args = 0, pretend = 0, frame = 0
+ 680              		@ frame_needed = 0, uses_anonymous_args = 0
+ 681              	.LVL55:
+ 682 0000 08B5     		push	{r3, lr}
+ 683              	.LCFI7:
+ 684              		.cfi_def_cfa_offset 8
+ 685              		.cfi_offset 3, -8
+ 686              		.cfi_offset 14, -4
+ 511:FT_Esd_Framework/Ft_Esd_App.c **** 	if (!Ft_Esd_GAlloc)
+ 687              		.loc 1 511 0
+ 688 0002 044B     		ldr	r3, .L41
+ 689 0004 1868     		ldr	r0, [r3]
+ 690              	.LVL56:
+ 691 0006 10B1     		cbz	r0, .L39
+ 512:FT_Esd_Framework/Ft_Esd_App.c **** 		return 0;
+ 513:FT_Esd_Framework/Ft_Esd_App.c **** 	return Ft_Esd_GpuAlloc_GetTotal(Ft_Esd_GAlloc);
+ 692              		.loc 1 513 0
+ 693 0008 FFF7FEFF 		bl	Ft_Esd_GpuAlloc_GetTotal
+ 694              	.LVL57:
+ 695              	.L37:
+ 514:FT_Esd_Framework/Ft_Esd_App.c **** }
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 22
+
+
+ 696              		.loc 1 514 0
+ 697 000c 08BD     		pop	{r3, pc}
+ 698              	.L39:
+ 512:FT_Esd_Framework/Ft_Esd_App.c **** 		return 0;
+ 699              		.loc 1 512 0
+ 700 000e 0020     		movs	r0, #0
+ 701 0010 FCE7     		b	.L37
+ 702              	.L42:
+ 703 0012 00BF     		.align	2
+ 704              	.L41:
+ 705 0014 00000000 		.word	.LANCHOR21
+ 706              		.cfi_endproc
+ 707              	.LFE11:
+ 709              		.global	FT_DLCODE_BOOTUP
+ 710              		.global	FT_DispDither
+ 711              		.global	FT_DispCSpread
+ 712              		.global	FT_DispPCLKPol
+ 713              		.global	FT_DispSwizzle
+ 714              		.global	FT_DispPCLK
+ 715              		.global	FT_DispVSync1
+ 716              		.global	FT_DispVSync0
+ 717              		.global	FT_DispVOffset
+ 718              		.global	FT_DispVCycle
+ 719              		.global	FT_DispHSync1
+ 720              		.global	FT_DispHSync0
+ 721              		.global	FT_DispHOffset
+ 722              		.global	FT_DispHCycle
+ 723              		.global	FT_DispHeight
+ 724              		.global	FT_DispWidth
+ 725              		.global	Ft_Esd_FontHeight
+ 726              		.global	Ft_Esd_ClearColor
+ 727              		.global	Ft_Esd_Frame
+ 728              		.global	Ft_Esd_DeltaMs
+ 729              		.global	Ft_Esd_Millis
+ 730              		.global	Ft_Esd_GAlloc
+ 731              		.global	Ft_Esd_Host
+ 732              		.section	.bss.FT_DispHSync0,"aw",%nobits
+ 733              		.align	1
+ 734              		.set	.LANCHOR8,. + 0
+ 737              	FT_DispHSync0:
+ 738 0000 0000     		.space	2
+ 739              		.section	.bss.FT_DispSwizzle,"aw",%nobits
+ 740              		.set	.LANCHOR15,. + 0
+ 743              	FT_DispSwizzle:
+ 744 0000 00       		.space	1
+ 745              		.section	.bss.FT_DispVSync0,"aw",%nobits
+ 746              		.align	1
+ 747              		.set	.LANCHOR12,. + 0
+ 750              	FT_DispVSync0:
+ 751 0000 0000     		.space	2
+ 752              		.section	.bss.Ft_Esd_DeltaMs,"aw",%nobits
+ 753              		.align	2
+ 754              		.set	.LANCHOR1,. + 0
+ 757              	Ft_Esd_DeltaMs:
+ 758 0000 00000000 		.space	4
+ 759              		.section	.bss.Ft_Esd_FontHeight,"aw",%nobits
+ 760              		.align	2
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 23
+
+
+ 761              		.set	.LANCHOR20,. + 0
+ 764              	Ft_Esd_FontHeight:
+ 765 0000 00000000 		.space	64
+ 765      00000000 
+ 765      00000000 
+ 765      00000000 
+ 765      00000000 
+ 766              		.section	.bss.Ft_Esd_Frame,"aw",%nobits
+ 767              		.align	2
+ 770              	Ft_Esd_Frame:
+ 771 0000 00000000 		.space	4
+ 772              		.section	.bss.Ft_Esd_GAlloc,"aw",%nobits
+ 773              		.align	2
+ 774              		.set	.LANCHOR21,. + 0
+ 777              	Ft_Esd_GAlloc:
+ 778 0000 00000000 		.space	4
+ 779              		.section	.bss.Ft_Esd_Host,"aw",%nobits
+ 780              		.align	2
+ 781              		.set	.LANCHOR2,. + 0
+ 784              	Ft_Esd_Host:
+ 785 0000 00000000 		.space	4
+ 786              		.section	.bss.Ft_Esd_Millis,"aw",%nobits
+ 787              		.align	2
+ 788              		.set	.LANCHOR0,. + 0
+ 791              	Ft_Esd_Millis:
+ 792 0000 00000000 		.space	4
+ 793              		.section	.bss.s_Host,"aw",%nobits
+ 794              		.align	2
+ 795              		.set	.LANCHOR3,. + 0
+ 798              	s_Host:
+ 799 0000 00000000 		.space	24
+ 799      00000000 
+ 799      00000000 
+ 799      00000000 
+ 799      00000000 
+ 800              		.section	.data.FT_DispCSpread,"aw",%progbits
+ 801              		.set	.LANCHOR17,. + 0
+ 804              	FT_DispCSpread:
+ 805 0000 01       		.byte	1
+ 806              		.section	.data.FT_DispDither,"aw",%progbits
+ 807              		.set	.LANCHOR18,. + 0
+ 810              	FT_DispDither:
+ 811 0000 01       		.byte	1
+ 812              		.section	.data.FT_DispHCycle,"aw",%progbits
+ 813              		.align	1
+ 814              		.set	.LANCHOR6,. + 0
+ 817              	FT_DispHCycle:
+ 818 0000 2402     		.short	548
+ 819              		.section	.data.FT_DispHOffset,"aw",%progbits
+ 820              		.align	1
+ 821              		.set	.LANCHOR7,. + 0
+ 824              	FT_DispHOffset:
+ 825 0000 2B00     		.short	43
+ 826              		.section	.data.FT_DispHSync1,"aw",%progbits
+ 827              		.align	1
+ 828              		.set	.LANCHOR9,. + 0
+ 831              	FT_DispHSync1:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 24
+
+
+ 832 0000 2900     		.short	41
+ 833              		.section	.data.FT_DispHeight,"aw",%progbits
+ 834              		.align	1
+ 835              		.set	.LANCHOR5,. + 0
+ 838              	FT_DispHeight:
+ 839 0000 1001     		.short	272
+ 840              		.section	.data.FT_DispPCLK,"aw",%progbits
+ 841              		.set	.LANCHOR14,. + 0
+ 844              	FT_DispPCLK:
+ 845 0000 05       		.byte	5
+ 846              		.section	.data.FT_DispPCLKPol,"aw",%progbits
+ 847              		.set	.LANCHOR16,. + 0
+ 850              	FT_DispPCLKPol:
+ 851 0000 01       		.byte	1
+ 852              		.section	.data.FT_DispVCycle,"aw",%progbits
+ 853              		.align	1
+ 854              		.set	.LANCHOR10,. + 0
+ 857              	FT_DispVCycle:
+ 858 0000 2401     		.short	292
+ 859              		.section	.data.FT_DispVOffset,"aw",%progbits
+ 860              		.align	1
+ 861              		.set	.LANCHOR11,. + 0
+ 864              	FT_DispVOffset:
+ 865 0000 0C00     		.short	12
+ 866              		.section	.data.FT_DispVSync1,"aw",%progbits
+ 867              		.align	1
+ 868              		.set	.LANCHOR13,. + 0
+ 871              	FT_DispVSync1:
+ 872 0000 0A00     		.short	10
+ 873              		.section	.data.FT_DispWidth,"aw",%progbits
+ 874              		.align	1
+ 875              		.set	.LANCHOR4,. + 0
+ 878              	FT_DispWidth:
+ 879 0000 E001     		.short	480
+ 880              		.section	.data.Ft_Esd_ClearColor,"aw",%progbits
+ 881              		.align	2
+ 884              	Ft_Esd_ClearColor:
+ 885 0000 21212100 		.word	2171169
+ 886              		.section	.rodata.App_CoPro_Widget_Calibrate.str1.4,"aMS",%progbits,1
+ 887              		.align	2
+ 888              	.LC1:
+ 889 0000 506C6561 		.ascii	"Please Tap on the dot\000"
+ 889      73652054 
+ 889      6170206F 
+ 889      6E207468 
+ 889      6520646F 
+ 890              		.section	.rodata.FT800_BootupConfig.str1.4,"aMS",%progbits,1
+ 891              		.align	2
+ 892              	.LC0:
+ 893 0000 56433120 		.ascii	"VC1 register ID after wake up %x\012\000"
+ 893      72656769 
+ 893      73746572 
+ 893      20494420 
+ 893      61667465 
+ 894              		.section	.rodata.FT_DLCODE_BOOTUP,"a",%progbits
+ 895              		.align	2
+ 896              		.set	.LANCHOR19,. + 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 25
+
+
+ 899              	FT_DLCODE_BOOTUP:
+ 900 0000 00000002 		.word	33554432
+ 901 0004 07000026 		.word	637534215
+ 902 0008 1F000005 		.word	83886111
+ 903 000c 0100001F 		.word	520093697
+ 904 0010 C50FC080 		.word	-2134896699
+ 905 0014 D30FA083 		.word	-2086662189
+ 906 0018 C40FE086 		.word	-2032136252
+ 907 001c B30F608A 		.word	-1973416013
+ 908 0020 1C000005 		.word	83886108
+ 909 0024 0100001F 		.word	520093697
+ 910 0028 48BEE280 		.word	-2132623800
+ 911 002c 65BEC282 		.word	-2101166491
+ 912 0030 6CBE2284 		.word	-2078097812
+ 913 0034 6CBEE284 		.word	-2065514900
+ 914 0038 6FBEA285 		.word	-2052931985
+ 915 003c 00000000 		.word	0
+ 916              		.text
+ 917              	.Letext0:
+ 918              		.file 2 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 919              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 920              		.file 4 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 921              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 922              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 923              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 924              		.file 8 "FT_Eve_Hal/FT_DataTypes.h"
+ 925              		.file 9 "FT_Eve_Hal/FT_Gpu_Hal.h"
+ 926              		.file 10 "FT_Eve_Hal/FT_Gpu.h"
+ 927              		.file 11 "FT_Esd_Framework/Ft_Esd.h"
+ 928              		.file 12 "FT_Esd_Framework/Ft_Esd_GpuAlloc.h"
+ 929              		.file 13 "FT_Eve_Hal/FT_CoPro_Cmds.h"
+ 930              		.file 14 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdio.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Ft_Esd_App.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:18     .text.Ft_Esd_GetMillis:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:25     .text.Ft_Esd_GetMillis:0000000000000000 Ft_Esd_GetMillis
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:40     .text.Ft_Esd_GetMillis:0000000000000008 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:45     .text.Ft_Esd_GetDeltaMs:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:52     .text.Ft_Esd_GetDeltaMs:0000000000000000 Ft_Esd_GetDeltaMs
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:66     .text.Ft_Esd_GetDeltaMs:0000000000000008 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:71     .text.Ft_Esd_GetHost:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:78     .text.Ft_Esd_GetHost:0000000000000000 Ft_Esd_GetHost
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:92     .text.Ft_Esd_GetHost:0000000000000008 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:97     .text.FT800_BootupConfig:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:104    .text.FT800_BootupConfig:0000000000000000 FT800_BootupConfig
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:384    .text.FT800_BootupConfig:00000000000001c4 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:427    .text.App_CoPro_Widget_Calibrate:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:434    .text.App_CoPro_Widget_Calibrate:0000000000000000 App_CoPro_Widget_Calibrate
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:526    .text.App_CoPro_Widget_Calibrate:0000000000000078 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:537    .text.Ft_Esd_InitFontHeight:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:544    .text.Ft_Esd_InitFontHeight:0000000000000000 Ft_Esd_InitFontHeight
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:599    .text.Ft_Esd_InitFontHeight:0000000000000030 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:606    .text.setup:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:613    .text.setup:0000000000000000 setup
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:626    .text.Ft_Esd_GAlloc_GetTotalUsed:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:633    .text.Ft_Esd_GAlloc_GetTotalUsed:0000000000000000 Ft_Esd_GAlloc_GetTotalUsed
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:663    .text.Ft_Esd_GAlloc_GetTotalUsed:0000000000000014 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:668    .text.Ft_Esd_GAlloc_GetTotal:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:675    .text.Ft_Esd_GAlloc_GetTotal:0000000000000000 Ft_Esd_GAlloc_GetTotal
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:705    .text.Ft_Esd_GAlloc_GetTotal:0000000000000014 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:899    .rodata.FT_DLCODE_BOOTUP:0000000000000000 FT_DLCODE_BOOTUP
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:810    .data.FT_DispDither:0000000000000000 FT_DispDither
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:804    .data.FT_DispCSpread:0000000000000000 FT_DispCSpread
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:850    .data.FT_DispPCLKPol:0000000000000000 FT_DispPCLKPol
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:743    .bss.FT_DispSwizzle:0000000000000000 FT_DispSwizzle
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:844    .data.FT_DispPCLK:0000000000000000 FT_DispPCLK
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:871    .data.FT_DispVSync1:0000000000000000 FT_DispVSync1
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:750    .bss.FT_DispVSync0:0000000000000000 FT_DispVSync0
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:864    .data.FT_DispVOffset:0000000000000000 FT_DispVOffset
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:857    .data.FT_DispVCycle:0000000000000000 FT_DispVCycle
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:831    .data.FT_DispHSync1:0000000000000000 FT_DispHSync1
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:737    .bss.FT_DispHSync0:0000000000000000 FT_DispHSync0
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:824    .data.FT_DispHOffset:0000000000000000 FT_DispHOffset
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:817    .data.FT_DispHCycle:0000000000000000 FT_DispHCycle
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:838    .data.FT_DispHeight:0000000000000000 FT_DispHeight
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:878    .data.FT_DispWidth:0000000000000000 FT_DispWidth
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:764    .bss.Ft_Esd_FontHeight:0000000000000000 Ft_Esd_FontHeight
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:884    .data.Ft_Esd_ClearColor:0000000000000000 Ft_Esd_ClearColor
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:770    .bss.Ft_Esd_Frame:0000000000000000 Ft_Esd_Frame
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:757    .bss.Ft_Esd_DeltaMs:0000000000000000 Ft_Esd_DeltaMs
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:791    .bss.Ft_Esd_Millis:0000000000000000 Ft_Esd_Millis
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:777    .bss.Ft_Esd_GAlloc:0000000000000000 Ft_Esd_GAlloc
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:784    .bss.Ft_Esd_Host:0000000000000000 Ft_Esd_Host
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:733    .bss.FT_DispHSync0:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:744    .bss.FT_DispSwizzle:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:746    .bss.FT_DispVSync0:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:753    .bss.Ft_Esd_DeltaMs:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:760    .bss.Ft_Esd_FontHeight:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:767    .bss.Ft_Esd_Frame:0000000000000000 $d
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s 			page 27
+
+
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:773    .bss.Ft_Esd_GAlloc:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:780    .bss.Ft_Esd_Host:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:787    .bss.Ft_Esd_Millis:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:794    .bss.s_Host:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:798    .bss.s_Host:0000000000000000 s_Host
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:813    .data.FT_DispHCycle:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:820    .data.FT_DispHOffset:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:827    .data.FT_DispHSync1:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:834    .data.FT_DispHeight:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:853    .data.FT_DispVCycle:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:860    .data.FT_DispVOffset:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:867    .data.FT_DispVSync1:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:874    .data.FT_DispWidth:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:881    .data.Ft_Esd_ClearColor:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:887    .rodata.App_CoPro_Widget_Calibrate.str1.4:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:891    .rodata.FT800_BootupConfig.str1.4:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccllXJib.s:895    .rodata.FT_DLCODE_BOOTUP:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+Ft_Gpu_Hal_Powercycle
+Ft_Gpu_HostCommand
+Ft_Gpu_Hal_Sleep
+Ft_Gpu_Hal_Rd8
+printf
+Ft_Gpu_Hal_Wr16
+Ft_Gpu_Hal_Wr8
+Ft_Gpu_Hal_WrMem
+Ft_Gpu_Hal_SetSPI
+Ft_Gpu_Hal_Rd16
+Ft_Gpu_CoCmd_Dlstart
+Ft_Gpu_Hal_WrCmd32
+Ft_Gpu_CoCmd_Text
+Ft_Gpu_CoCmd_Calibrate
+Ft_Gpu_Hal_WaitCmdfifo_empty
+Ft_Gpu_Hal_RdMem
+Ft_Gpu_Hal_Rd32
+Ft_Esd_GpuAlloc_GetTotalUsed
+Ft_Esd_GpuAlloc_GetTotal

@@ -1,0 +1,635 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"FT_Esd_MainLoop.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Ft_Esd_Spinner_Popup,"ax",%progbits
+  18              		.align	1
+  19              		.global	Ft_Esd_Spinner_Popup
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-sp-d16
+  25              	Ft_Esd_Spinner_Popup:
+  26              	.LFB17:
+  27              		.file 1 "FT_Esd_Framework/FT_Esd_MainLoop.c"
+   1:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+   2:FT_Esd_Framework/FT_Esd_MainLoop.c **** #include "FT_Platform.h"
+   3:FT_Esd_Framework/FT_Esd_MainLoop.c **** #include "FT_Gpu_Hal.h"
+   4:FT_Esd_Framework/FT_Esd_MainLoop.c **** #include "FT_Gpu.h"
+   5:FT_Esd_Framework/FT_Esd_MainLoop.c **** #include "FT_CoPro_Cmds.h"
+   6:FT_Esd_Framework/FT_Esd_MainLoop.c **** #include "Ft_Esd.h"
+   7:FT_Esd_Framework/FT_Esd_MainLoop.c **** #include "FT_Esd_Dl.h"
+   8:FT_Esd_Framework/FT_Esd_MainLoop.c **** #include "Ft_Esd_GpuAlloc.h"
+   9:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  10:FT_Esd_Framework/FT_Esd_MainLoop.c **** extern Ft_Gpu_Hal_Context_t *Ft_Esd_Host;
+  11:FT_Esd_Framework/FT_Esd_MainLoop.c **** extern Ft_Esd_GpuAlloc *Ft_Esd_GAlloc;
+  12:FT_Esd_Framework/FT_Esd_MainLoop.c **** extern ft_uint32_t Ft_Esd_Millis;
+  13:FT_Esd_Framework/FT_Esd_MainLoop.c **** extern ft_uint32_t Ft_Esd_DeltaMs;
+  14:FT_Esd_Framework/FT_Esd_MainLoop.c **** extern ft_uint32_t Ft_Esd_Frame;
+  15:FT_Esd_Framework/FT_Esd_MainLoop.c **** extern ft_rgb32_t Ft_Esd_ClearColor;
+  16:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  17:FT_Esd_Framework/FT_Esd_MainLoop.c **** extern ft_int16_t FT_DispWidth;
+  18:FT_Esd_Framework/FT_Esd_MainLoop.c **** extern ft_int16_t FT_DispHeight;
+  19:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  20:FT_Esd_Framework/FT_Esd_MainLoop.c **** // When not in the simulation, use the Ft_Main__Start etc symbols
+  21:FT_Esd_Framework/FT_Esd_MainLoop.c **** // as exported by the single Application logic document included
+  22:FT_Esd_Framework/FT_Esd_MainLoop.c **** #ifndef ESD_SIMULATION
+  23:FT_Esd_Framework/FT_Esd_MainLoop.c **** #define Ft_Main__Running__ESD() 1
+  24:FT_Esd_Framework/FT_Esd_MainLoop.c **** #define Ft_Main__Start__ESD Ft_Main__Start
+  25:FT_Esd_Framework/FT_Esd_MainLoop.c **** #define Ft_Main__Update__ESD Ft_Main__Update
+  26:FT_Esd_Framework/FT_Esd_MainLoop.c **** #define Ft_Main__Render__ESD Ft_Main__Render
+  27:FT_Esd_Framework/FT_Esd_MainLoop.c **** #define Ft_Main__Idle__ESD Ft_Main__Idle
+  28:FT_Esd_Framework/FT_Esd_MainLoop.c **** #define Ft_Main__End__ESD Ft_Main__End
+  29:FT_Esd_Framework/FT_Esd_MainLoop.c **** #else
+  30:FT_Esd_Framework/FT_Esd_MainLoop.c **** int Ft_Main__Running__ESD();
+  31:FT_Esd_Framework/FT_Esd_MainLoop.c **** int Ft_Sleep__ESD(int ms);
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 2
+
+
+  32:FT_Esd_Framework/FT_Esd_MainLoop.c **** #endif
+  33:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  34:FT_Esd_Framework/FT_Esd_MainLoop.c **** ft_void_t Ft_Main__Start__ESD();
+  35:FT_Esd_Framework/FT_Esd_MainLoop.c **** ft_void_t Ft_Main__Update__ESD();
+  36:FT_Esd_Framework/FT_Esd_MainLoop.c **** ft_void_t Ft_Main__Render__ESD();
+  37:FT_Esd_Framework/FT_Esd_MainLoop.c **** ft_void_t Ft_Main__Idle__ESD();
+  38:FT_Esd_Framework/FT_Esd_MainLoop.c **** ft_void_t Ft_Main__End__ESD();
+  39:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  40:FT_Esd_Framework/FT_Esd_MainLoop.c **** static int s_SpinnerPopup = 0;
+  41:FT_Esd_Framework/FT_Esd_MainLoop.c **** static int s_SpinnerPopped = 0;
+  42:FT_Esd_Framework/FT_Esd_MainLoop.c **** ESD_FUNCTION(Ft_Esd_Spinner_Popup, DisplayName = "Pop-up Spinner", Category = EsdUtilities)
+  43:FT_Esd_Framework/FT_Esd_MainLoop.c **** void Ft_Esd_Spinner_Popup()
+  44:FT_Esd_Framework/FT_Esd_MainLoop.c **** {
+  28              		.loc 1 44 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  45:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	s_SpinnerPopup = 1;
+  33              		.loc 1 45 0
+  34 0000 014B     		ldr	r3, .L2
+  35 0002 0122     		movs	r2, #1
+  36 0004 1A60     		str	r2, [r3]
+  46:FT_Esd_Framework/FT_Esd_MainLoop.c **** }
+  37              		.loc 1 46 0
+  38 0006 7047     		bx	lr
+  39              	.L3:
+  40              		.align	2
+  41              	.L2:
+  42 0008 00000000 		.word	.LANCHOR0
+  43              		.cfi_endproc
+  44              	.LFE17:
+  46              		.section	.text.Ft_Esd_MainLoop,"ax",%progbits
+  47              		.align	1
+  48              		.global	Ft_Esd_MainLoop
+  49              		.syntax unified
+  50              		.thumb
+  51              		.thumb_func
+  52              		.fpu fpv5-sp-d16
+  54              	Ft_Esd_MainLoop:
+  55              	.LFB18:
+  47:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  48:FT_Esd_Framework/FT_Esd_MainLoop.c **** void Ft_Esd_ResetCoState();
+  49:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  50:FT_Esd_Framework/FT_Esd_MainLoop.c **** void Ft_Esd_Timer_CancelGlobal();
+  51:FT_Esd_Framework/FT_Esd_MainLoop.c **** void Ft_Esd_Timer_UpdateGlobal();
+  52:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  53:FT_Esd_Framework/FT_Esd_MainLoop.c **** ft_void_t Ft_Esd_MainLoop()
+  54:FT_Esd_Framework/FT_Esd_MainLoop.c **** {
+  56              		.loc 1 54 0
+  57              		.cfi_startproc
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60 0000 70B5     		push	{r4, r5, r6, lr}
+  61              	.LCFI0:
+  62              		.cfi_def_cfa_offset 16
+  63              		.cfi_offset 4, -16
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 3
+
+
+  64              		.cfi_offset 5, -12
+  65              		.cfi_offset 6, -8
+  66              		.cfi_offset 14, -4
+  67 0002 82B0     		sub	sp, sp, #8
+  68              	.LCFI1:
+  69              		.cfi_def_cfa_offset 24
+  55:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	Ft_Gpu_Hal_Context_t *phost = Ft_Esd_Host;
+  70              		.loc 1 55 0
+  71 0004 514B     		ldr	r3, .L21
+  72 0006 1C68     		ldr	r4, [r3]
+  73              	.LVL0:
+  56:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  57:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	// Initialize application
+  58:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	Ft_Esd_ResetGpuState();
+  74              		.loc 1 58 0
+  75 0008 FFF7FEFF 		bl	Ft_Esd_ResetGpuState
+  76              	.LVL1:
+  59:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	Ft_Esd_ResetCoState();
+  77              		.loc 1 59 0
+  78 000c FFF7FEFF 		bl	Ft_Esd_ResetCoState
+  79              	.LVL2:
+  60:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	Ft_Esd_Frame = 0;
+  80              		.loc 1 60 0
+  81 0010 0026     		movs	r6, #0
+  82 0012 4F4B     		ldr	r3, .L21+4
+  83 0014 1E60     		str	r6, [r3]
+  61:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	Ft_Esd_Millis = ft_millis();
+  84              		.loc 1 61 0
+  85 0016 FFF7FEFF 		bl	ft_millis
+  86              	.LVL3:
+  87 001a 4E4B     		ldr	r3, .L21+8
+  88 001c 1860     		str	r0, [r3]
+  62:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	Ft_Esd_Timer_CancelGlobal();
+  89              		.loc 1 62 0
+  90 001e FFF7FEFF 		bl	Ft_Esd_Timer_CancelGlobal
+  91              	.LVL4:
+  63:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	Ft_Main__Start__ESD();
+  92              		.loc 1 63 0
+  93 0022 FFF7FEFF 		bl	Ft_Main__Start
+  94              	.LVL5:
+  95 0026 57E0     		b	.L13
+  96              	.LVL6:
+  97              	.L18:
+  98              	.LBB5:
+  64:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  65:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	int idled = 0;
+  66:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	while (Ft_Main__Running__ESD())
+  67:FT_Esd_Framework/FT_Esd_MainLoop.c **** 	{
+  68:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		// Idle at least once every frame
+  69:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		if (!idled) Ft_Main__Idle__ESD();
+  99              		.loc 1 69 0 discriminator 1
+ 100 0028 FFF7FEFF 		bl	Ft_Main__Idle
+ 101              	.LVL7:
+ 102 002c 57E0     		b	.L5
+ 103              	.LVL8:
+ 104              	.L19:
+  70:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		else idled = 0;
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 4
+
+
+  71:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  72:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		// Update GUI state before render
+  73:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		ft_uint32_t ms = ft_millis(); // Calculate frame time delta
+  74:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_DeltaMs = ms - Ft_Esd_Millis;
+  75:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_Millis = ms;
+  76:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_GpuAlloc_Update(Ft_Esd_GAlloc); // Run GC
+  77:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Main__Update__ESD();
+  78:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_Timer_UpdateGlobal();
+  79:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  80:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		// Process all coprocessor commands
+  81:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_Hal_WrCmd32(phost, CMD_DLSTART);
+  82:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_Hal_WrCmd32(phost, (2UL << 24) | Ft_Esd_ClearColor); // CLEAR_COLOR_RGB(33, 33, 33)); // S
+  83:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_Hal_WrCmd32(phost, CLEAR_TAG(255)); // Always default to 255, so no touch = 0, touch non-t
+  84:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_Hal_WrCmd32(phost, CLEAR(1, 1, 1));
+  85:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Main__Render__ESD();
+  86:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+  87:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		if (s_SpinnerPopup)
+  88:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		{
+  89:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			// Spinner used for switching longer loading pages with bitmaps etc
+  90:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			Ft_Esd_Dl_COLOR_RGB(~Ft_Esd_ClearColor);
+ 105              		.loc 1 90 0
+ 106 002e 4A4B     		ldr	r3, .L21+12
+ 107 0030 1D68     		ldr	r5, [r3]
+ 108 0032 ED43     		mvns	r5, r5
+ 109              	.LVL9:
+ 110              	.LBB6:
+ 111              	.LBB7:
+ 112              		.file 2 "FT_Esd_Framework/FT_Esd_Dl.h"
+   1:FT_Esd_Framework/FT_Esd_Dl.h **** 
+   2:FT_Esd_Framework/FT_Esd_Dl.h **** #ifndef FT_ESD_DL_H
+   3:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_DL_H
+   4:FT_Esd_Framework/FT_Esd_Dl.h **** 
+   5:FT_Esd_Framework/FT_Esd_Dl.h **** #include "FT_DataTypes.h"
+   6:FT_Esd_Framework/FT_Esd_Dl.h **** #include "FT_Platform.h"
+   7:FT_Esd_Framework/FT_Esd_Dl.h **** #include "Ft_Esd.h"
+   8:FT_Esd_Framework/FT_Esd_Dl.h **** #include "FT_Gpu.h"
+   9:FT_Esd_Framework/FT_Esd_Dl.h **** #include "Ft_Esd_BitmapInfo.h"
+  10:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  11:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_CATEGORY(EsdUtilities, DisplayName = "ESD Utilities")
+  12:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_CATEGORY(EveRenderFunctions, DisplayName = "EVE Render Functions")
+  13:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  14:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_TYPE(Ft_Gpu_Hal_Context_t *, Native = Pointer, Edit = Library)
+  15:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  16:FT_Esd_Framework/FT_Esd_Dl.h **** // Keep cache of displaylist values that don't often change but are generally set by every widget t
+  17:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_OPTIMIZE_DISPLAYLIST 1
+  18:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_STATE_STACK_SIZE 5
+  19:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  20:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_BITMAPHANDLE_INVALID 255
+  21:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  22:FT_Esd_Framework/FT_Esd_Dl.h **** //
+  23:FT_Esd_Framework/FT_Esd_Dl.h **** // Structs
+  24:FT_Esd_Framework/FT_Esd_Dl.h **** //
+  25:FT_Esd_Framework/FT_Esd_Dl.h **** #ifdef FT_ESD_OPTIMIZE_DISPLAYLIST
+  26:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_STATE Ft_Esd_GpuState[Ft_Esd_GpuState_I]
+  27:FT_Esd_Framework/FT_Esd_Dl.h **** typedef struct
+  28:FT_Esd_Framework/FT_Esd_Dl.h **** {
+  29:FT_Esd_Framework/FT_Esd_Dl.h **** 	// Keep to a minimum
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 5
+
+
+  30:FT_Esd_Framework/FT_Esd_Dl.h **** #ifdef FT_81X_ENABLE
+  31:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint32_t PaletteSource;
+  32:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  33:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint32_t ColorRGB;
+  34:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint8_t ColorA;
+  35:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint8_t Handle;         // Current handle
+  36:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint8_t Cell;           // Current cell
+  37:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_bool_t BitmapTransform; // BitmapTransform other than default is set
+  38:FT_Esd_Framework/FT_Esd_Dl.h **** #ifdef FT_81X_ENABLE
+  39:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint8_t VertexFormat;   // Current vertex format
+  40:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  41:FT_Esd_Framework/FT_Esd_Dl.h **** } Ft_Esd_GpuState_T;
+  42:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  43:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  44:FT_Esd_Framework/FT_Esd_Dl.h **** //
+  45:FT_Esd_Framework/FT_Esd_Dl.h **** // Globals
+  46:FT_Esd_Framework/FT_Esd_Dl.h **** //
+  47:FT_Esd_Framework/FT_Esd_Dl.h **** extern Ft_Gpu_Hal_Context_t *Ft_Esd_Host;
+  48:FT_Esd_Framework/FT_Esd_Dl.h **** extern ft_uint16_t Ft_Esd_FontHeight[32];
+  49:FT_Esd_Framework/FT_Esd_Dl.h **** #ifdef FT_ESD_OPTIMIZE_DISPLAYLIST
+  50:FT_Esd_Framework/FT_Esd_Dl.h **** extern Ft_Esd_GpuState_T Ft_Esd_GpuState[FT_ESD_STATE_STACK_SIZE];
+  51:FT_Esd_Framework/FT_Esd_Dl.h **** extern ft_uint8_t Ft_Esd_GpuState_I;
+  52:FT_Esd_Framework/FT_Esd_Dl.h **** extern ft_uint32_t Ft_Esd_CoFgColor;
+  53:FT_Esd_Framework/FT_Esd_Dl.h **** extern ft_uint32_t Ft_Esd_CoBgColor;
+  54:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  55:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  56:FT_Esd_Framework/FT_Esd_Dl.h **** //Get the height of builtin font
+  57:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_FUNCTION(Ft_Esd_GetFontHeight, Type = ft_uint16_t ,DisplayName = "Get Font Height", Category = 
+  58:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_PARAMETER(i, Type = int, DisplayName = "Bitmap Handle", Default = 0, Min = 0, Max = 31)
+  59:FT_Esd_Framework/FT_Esd_Dl.h **** // inline static ft_uint16_t Ft_Esd_GetFontHeight(int i) { return Ft_Esd_FontHeight[i]; }
+  60:FT_Esd_Framework/FT_Esd_Dl.h **** #define Ft_Esd_GetFontHeight(i) (Ft_Esd_FontHeight[i]);
+  61:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  62:FT_Esd_Framework/FT_Esd_Dl.h **** // Reset any cached state
+  63:FT_Esd_Framework/FT_Esd_Dl.h **** void Ft_Esd_ResetGpuState();
+  64:FT_Esd_Framework/FT_Esd_Dl.h **** void Ft_Esd_ResetCoState();
+  65:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  66:FT_Esd_Framework/FT_Esd_Dl.h **** ft_uint32_t Ft_Esd_BitmapHandle_GetTotalUsed();
+  67:FT_Esd_Framework/FT_Esd_Dl.h **** ft_uint32_t Ft_Esd_BitmapHandle_GetTotal();
+  68:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  69:FT_Esd_Framework/FT_Esd_Dl.h **** /// Set current tag. Must be returned to 255 after usage, to ensure next widgets don't draw with in
+  70:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_FUNCTION(Ft_Esd_Dl_TAG, Type = ft_void_t, Category = EveRenderFunctions, Inline)
+  71:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_PARAMETER(s, Type = ft_uint8_t, DisplayName = "Tag", Default = 255, Min = 0, Max = 255)
+  72:FT_Esd_Framework/FT_Esd_Dl.h **** inline static ft_void_t Ft_Esd_Dl_TAG(ft_uint8_t s)
+  73:FT_Esd_Framework/FT_Esd_Dl.h **** {
+  74:FT_Esd_Framework/FT_Esd_Dl.h **** 	Ft_Gpu_Hal_WrCmd32(Ft_Esd_Host, TAG(s));
+  75:FT_Esd_Framework/FT_Esd_Dl.h **** }
+  76:FT_Esd_Framework/FT_Esd_Dl.h **** //Specify color RGB
+  77:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_FUNCTION(Ft_Esd_Dl_COLOR_RGB, Type = ft_void_t, Category = EveRenderFunctions, Inline)
+  78:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_PARAMETER(c, Type = ft_rgb32_t, DisplayName = "Color")
+  79:FT_Esd_Framework/FT_Esd_Dl.h **** inline static ft_void_t Ft_Esd_Dl_COLOR_RGB(ft_rgb32_t c)
+  80:FT_Esd_Framework/FT_Esd_Dl.h **** {
+  81:FT_Esd_Framework/FT_Esd_Dl.h **** #if FT_ESD_OPTIMIZE_DISPLAYLIST
+  82:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_rgb32_t rgb = c & 0xFFFFFF;
+ 113              		.loc 2 82 0
+ 114 0034 25F07F45 		bic	r5, r5, #-16777216
+ 115              	.LVL10:
+  83:FT_Esd_Framework/FT_Esd_Dl.h **** 	if (rgb != FT_ESD_STATE.ColorRGB)
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 6
+
+
+ 116              		.loc 2 83 0
+ 117 0038 484B     		ldr	r3, .L21+16
+ 118              	.LVL11:
+ 119 003a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 120 003c 484B     		ldr	r3, .L21+20
+ 121 003e 03EB0213 		add	r3, r3, r2, lsl #4
+ 122 0042 5B68     		ldr	r3, [r3, #4]
+ 123 0044 9D42     		cmp	r5, r3
+ 124 0046 0BD0     		beq	.L7
+  84:FT_Esd_Framework/FT_Esd_Dl.h **** 	{
+  85:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  86:FT_Esd_Framework/FT_Esd_Dl.h **** 		Ft_Gpu_Hal_WrCmd32(Ft_Esd_Host, (4UL << 24) | (rgb));
+ 125              		.loc 2 86 0
+ 126 0048 45F08061 		orr	r1, r5, #67108864
+ 127 004c 3F4B     		ldr	r3, .L21
+ 128 004e 1868     		ldr	r0, [r3]
+ 129 0050 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 130              	.LVL12:
+  87:FT_Esd_Framework/FT_Esd_Dl.h **** #if FT_ESD_OPTIMIZE_DISPLAYLIST
+  88:FT_Esd_Framework/FT_Esd_Dl.h **** 		FT_ESD_STATE.ColorRGB = rgb;
+ 131              		.loc 2 88 0
+ 132 0054 414B     		ldr	r3, .L21+16
+ 133 0056 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 134 0058 414B     		ldr	r3, .L21+20
+ 135 005a 03EB0213 		add	r3, r3, r2, lsl #4
+ 136 005e 5D60     		str	r5, [r3, #4]
+ 137              	.L7:
+ 138              	.LVL13:
+ 139              	.LBE7:
+ 140              	.LBE6:
+  91:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			Ft_Gpu_CoCmd_Spinner(phost, FT_DispWidth / 2, FT_DispHeight / 2, 0, 0);
+ 141              		.loc 1 91 0
+ 142 0060 404B     		ldr	r3, .L21+24
+ 143 0062 B3F90020 		ldrsh	r2, [r3]
+ 144 0066 002A     		cmp	r2, #0
+ 145 0068 12DB     		blt	.L16
+ 146              	.L8:
+ 147 006a 5210     		asrs	r2, r2, #1
+ 148 006c 3E4B     		ldr	r3, .L21+28
+ 149 006e B3F90010 		ldrsh	r1, [r3]
+ 150 0072 0029     		cmp	r1, #0
+ 151 0074 0EDB     		blt	.L17
+ 152              	.L9:
+ 153 0076 0025     		movs	r5, #0
+ 154 0078 0095     		str	r5, [sp]
+ 155 007a 2B46     		mov	r3, r5
+ 156 007c 4910     		asrs	r1, r1, #1
+ 157 007e 2046     		mov	r0, r4
+ 158 0080 FFF7FEFF 		bl	Ft_Gpu_CoCmd_Spinner
+ 159              	.LVL14:
+  92:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			s_SpinnerPopup = 0;
+ 160              		.loc 1 92 0
+ 161 0084 394B     		ldr	r3, .L21+32
+ 162 0086 1D60     		str	r5, [r3]
+  93:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			s_SpinnerPopped = 1;
+ 163              		.loc 1 93 0
+ 164 0088 394B     		ldr	r3, .L21+36
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 7
+
+
+ 165 008a 0122     		movs	r2, #1
+ 166 008c 1A60     		str	r2, [r3]
+ 167 008e 55E0     		b	.L10
+ 168              	.L16:
+  91:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			Ft_Gpu_CoCmd_Spinner(phost, FT_DispWidth / 2, FT_DispHeight / 2, 0, 0);
+ 169              		.loc 1 91 0
+ 170 0090 0132     		adds	r2, r2, #1
+ 171 0092 EAE7     		b	.L8
+ 172              	.L17:
+ 173 0094 0131     		adds	r1, r1, #1
+ 174 0096 EEE7     		b	.L9
+ 175              	.L20:
+  94:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		}
+  95:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		else if (s_SpinnerPopped)
+  96:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		{
+  97:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			Ft_Gpu_CoCmd_Stop(phost);
+ 176              		.loc 1 97 0
+ 177 0098 2046     		mov	r0, r4
+ 178 009a FFF7FEFF 		bl	Ft_Gpu_CoCmd_Stop
+ 179              	.LVL15:
+  98:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			s_SpinnerPopped = 0;
+ 180              		.loc 1 98 0
+ 181 009e 344B     		ldr	r3, .L21+36
+ 182 00a0 0022     		movs	r2, #0
+ 183 00a2 1A60     		str	r2, [r3]
+ 184 00a4 4AE0     		b	.L10
+ 185              	.L12:
+  99:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		}
+ 100:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+ 101:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_Hal_WrCmd32(phost, DISPLAY());
+ 102:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_CoCmd_Swap(phost);
+ 103:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+ 104:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		// Replacement for Ft_Gpu_Hal_WaitCmdfifo_empty(phost); with idle function
+ 105:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		while (Ft_Gpu_Hal_Rd16(phost, REG_CMD_READ) != Ft_Gpu_Hal_Rd16(phost, REG_CMD_WRITE))
+ 106:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		{
+ 107:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			// Loop an idle task instead of doing nothing
+ 108:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			Ft_Main__Idle__ESD();
+ 186              		.loc 1 108 0
+ 187 00a6 FFF7FEFF 		bl	Ft_Main__Idle
+ 188              	.LVL16:
+ 109:FT_Esd_Framework/FT_Esd_MainLoop.c **** 			idled = 1;
+ 189              		.loc 1 109 0
+ 190 00aa 0126     		movs	r6, #1
+ 191              	.LVL17:
+ 192              	.L11:
+ 105:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		{
+ 193              		.loc 1 105 0
+ 194 00ac 3149     		ldr	r1, .L21+40
+ 195 00ae 2046     		mov	r0, r4
+ 196 00b0 FFF7FEFF 		bl	Ft_Gpu_Hal_Rd16
+ 197              	.LVL18:
+ 198 00b4 0546     		mov	r5, r0
+ 199 00b6 3049     		ldr	r1, .L21+44
+ 200 00b8 2046     		mov	r0, r4
+ 201 00ba FFF7FEFF 		bl	Ft_Gpu_Hal_Rd16
+ 202              	.LVL19:
+ 203 00be 8542     		cmp	r5, r0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 8
+
+
+ 204 00c0 F1D1     		bne	.L12
+ 110:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		}
+ 111:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		phost->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(phost, REG_CMD_WRITE);
+ 205              		.loc 1 111 0
+ 206 00c2 2D49     		ldr	r1, .L21+44
+ 207 00c4 2046     		mov	r0, r4
+ 208 00c6 FFF7FEFF 		bl	Ft_Gpu_Hal_Rd16
+ 209              	.LVL20:
+ 210 00ca 2081     		strh	r0, [r4, #8]	@ movhi
+ 112:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+ 113:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		// Restore initial frame values
+ 114:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		// Ft_Gpu_CoCmd_LoadIdentity(phost); // ?
+ 115:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_ResetGpuState();
+ 211              		.loc 1 115 0
+ 212 00cc FFF7FEFF 		bl	Ft_Esd_ResetGpuState
+ 213              	.LVL21:
+ 116:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		++Ft_Esd_Frame;
+ 214              		.loc 1 116 0
+ 215 00d0 1F4A     		ldr	r2, .L21+4
+ 216 00d2 1368     		ldr	r3, [r2]
+ 217 00d4 0133     		adds	r3, r3, #1
+ 218 00d6 1360     		str	r3, [r2]
+ 219              	.LVL22:
+ 220              	.L13:
+  69:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		else idled = 0;
+ 221              		.loc 1 69 0
+ 222 00d8 002E     		cmp	r6, #0
+ 223 00da A5D0     		beq	.L18
+  70:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+ 224              		.loc 1 70 0
+ 225 00dc 0026     		movs	r6, #0
+ 226              	.LVL23:
+ 227              	.L5:
+  73:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_DeltaMs = ms - Ft_Esd_Millis;
+ 228              		.loc 1 73 0
+ 229 00de FFF7FEFF 		bl	ft_millis
+ 230              	.LVL24:
+  74:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_Millis = ms;
+ 231              		.loc 1 74 0
+ 232 00e2 1C4A     		ldr	r2, .L21+8
+ 233 00e4 1368     		ldr	r3, [r2]
+ 234 00e6 C31A     		subs	r3, r0, r3
+ 235 00e8 2449     		ldr	r1, .L21+48
+ 236 00ea 0B60     		str	r3, [r1]
+  75:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_GpuAlloc_Update(Ft_Esd_GAlloc); // Run GC
+ 237              		.loc 1 75 0
+ 238 00ec 1060     		str	r0, [r2]
+  76:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Main__Update__ESD();
+ 239              		.loc 1 76 0
+ 240 00ee 244B     		ldr	r3, .L21+52
+ 241 00f0 1868     		ldr	r0, [r3]
+ 242              	.LVL25:
+ 243 00f2 FFF7FEFF 		bl	Ft_Esd_GpuAlloc_Update
+ 244              	.LVL26:
+  77:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Esd_Timer_UpdateGlobal();
+ 245              		.loc 1 77 0
+ 246 00f6 FFF7FEFF 		bl	Ft_Main__Update
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 9
+
+
+ 247              	.LVL27:
+  78:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+ 248              		.loc 1 78 0
+ 249 00fa FFF7FEFF 		bl	Ft_Esd_Timer_UpdateGlobal
+ 250              	.LVL28:
+  81:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_Hal_WrCmd32(phost, (2UL << 24) | Ft_Esd_ClearColor); // CLEAR_COLOR_RGB(33, 33, 33)); // S
+ 251              		.loc 1 81 0
+ 252 00fe 6FF0FF01 		mvn	r1, #255
+ 253 0102 2046     		mov	r0, r4
+ 254 0104 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 255              	.LVL29:
+  82:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_Hal_WrCmd32(phost, CLEAR_TAG(255)); // Always default to 255, so no touch = 0, touch non-t
+ 256              		.loc 1 82 0
+ 257 0108 134B     		ldr	r3, .L21+12
+ 258 010a 1968     		ldr	r1, [r3]
+ 259 010c 41F00071 		orr	r1, r1, #33554432
+ 260 0110 2046     		mov	r0, r4
+ 261 0112 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 262              	.LVL30:
+  83:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_Hal_WrCmd32(phost, CLEAR(1, 1, 1));
+ 263              		.loc 1 83 0
+ 264 0116 1B49     		ldr	r1, .L21+56
+ 265 0118 2046     		mov	r0, r4
+ 266 011a FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 267              	.LVL31:
+  84:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Main__Render__ESD();
+ 268              		.loc 1 84 0
+ 269 011e 1A49     		ldr	r1, .L21+60
+ 270 0120 2046     		mov	r0, r4
+ 271 0122 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 272              	.LVL32:
+  85:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+ 273              		.loc 1 85 0
+ 274 0126 FFF7FEFF 		bl	Ft_Main__Render
+ 275              	.LVL33:
+  87:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		{
+ 276              		.loc 1 87 0
+ 277 012a 104B     		ldr	r3, .L21+32
+ 278 012c 1B68     		ldr	r3, [r3]
+ 279 012e 002B     		cmp	r3, #0
+ 280 0130 7FF47DAF 		bne	.L19
+  95:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		{
+ 281              		.loc 1 95 0
+ 282 0134 0E4B     		ldr	r3, .L21+36
+ 283 0136 1B68     		ldr	r3, [r3]
+ 284 0138 002B     		cmp	r3, #0
+ 285 013a ADD1     		bne	.L20
+ 286              	.L10:
+ 101:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		Ft_Gpu_CoCmd_Swap(phost);
+ 287              		.loc 1 101 0
+ 288 013c 0021     		movs	r1, #0
+ 289 013e 2046     		mov	r0, r4
+ 290 0140 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 291              	.LVL34:
+ 102:FT_Esd_Framework/FT_Esd_MainLoop.c **** 
+ 292              		.loc 1 102 0
+ 293 0144 2046     		mov	r0, r4
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 10
+
+
+ 294 0146 FFF7FEFF 		bl	Ft_Gpu_CoCmd_Swap
+ 295              	.LVL35:
+ 105:FT_Esd_Framework/FT_Esd_MainLoop.c **** 		{
+ 296              		.loc 1 105 0
+ 297 014a AFE7     		b	.L11
+ 298              	.L22:
+ 299              		.align	2
+ 300              	.L21:
+ 301 014c 00000000 		.word	Ft_Esd_Host
+ 302 0150 00000000 		.word	Ft_Esd_Frame
+ 303 0154 00000000 		.word	Ft_Esd_Millis
+ 304 0158 00000000 		.word	Ft_Esd_ClearColor
+ 305 015c 00000000 		.word	Ft_Esd_GpuState_I
+ 306 0160 00000000 		.word	Ft_Esd_GpuState
+ 307 0164 00000000 		.word	FT_DispHeight
+ 308 0168 00000000 		.word	FT_DispWidth
+ 309 016c 00000000 		.word	.LANCHOR0
+ 310 0170 00000000 		.word	.LANCHOR1
+ 311 0174 F8203000 		.word	3154168
+ 312 0178 FC203000 		.word	3154172
+ 313 017c 00000000 		.word	Ft_Esd_DeltaMs
+ 314 0180 00000000 		.word	Ft_Esd_GAlloc
+ 315 0184 FF000012 		.word	301990143
+ 316 0188 07000026 		.word	637534215
+ 317              	.LBE5:
+ 318              		.cfi_endproc
+ 319              	.LFE18:
+ 321              		.section	.bss.s_SpinnerPopped,"aw",%nobits
+ 322              		.align	2
+ 323              		.set	.LANCHOR1,. + 0
+ 326              	s_SpinnerPopped:
+ 327 0000 00000000 		.space	4
+ 328              		.section	.bss.s_SpinnerPopup,"aw",%nobits
+ 329              		.align	2
+ 330              		.set	.LANCHOR0,. + 0
+ 333              	s_SpinnerPopup:
+ 334 0000 00000000 		.space	4
+ 335              		.text
+ 336              	.Letext0:
+ 337              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 338              		.file 4 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 339              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 340              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 341              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 342              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 343              		.file 9 "FT_Eve_Hal/FT_DataTypes.h"
+ 344              		.file 10 "FT_Eve_Hal/FT_Gpu_Hal.h"
+ 345              		.file 11 "FT_Esd_Framework/Ft_Esd.h"
+ 346              		.file 12 "FT_Esd_Framework/Ft_Esd_GpuAlloc.h"
+ 347              		.file 13 "FT_Eve_Hal/FT_CoPro_Cmds.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 FT_Esd_MainLoop.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:18     .text.Ft_Esd_Spinner_Popup:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:25     .text.Ft_Esd_Spinner_Popup:0000000000000000 Ft_Esd_Spinner_Popup
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:42     .text.Ft_Esd_Spinner_Popup:0000000000000008 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:47     .text.Ft_Esd_MainLoop:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:54     .text.Ft_Esd_MainLoop:0000000000000000 Ft_Esd_MainLoop
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:301    .text.Ft_Esd_MainLoop:000000000000014c $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:322    .bss.s_SpinnerPopped:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:326    .bss.s_SpinnerPopped:0000000000000000 s_SpinnerPopped
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:329    .bss.s_SpinnerPopup:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccghhbx0.s:333    .bss.s_SpinnerPopup:0000000000000000 s_SpinnerPopup
+
+UNDEFINED SYMBOLS
+Ft_Esd_ResetGpuState
+Ft_Esd_ResetCoState
+ft_millis
+Ft_Esd_Timer_CancelGlobal
+Ft_Main__Start
+Ft_Main__Idle
+Ft_Gpu_Hal_WrCmd32
+Ft_Gpu_CoCmd_Spinner
+Ft_Gpu_CoCmd_Stop
+Ft_Gpu_Hal_Rd16
+Ft_Esd_GpuAlloc_Update
+Ft_Main__Update
+Ft_Esd_Timer_UpdateGlobal
+Ft_Main__Render
+Ft_Gpu_CoCmd_Swap
+Ft_Esd_Host
+Ft_Esd_Frame
+Ft_Esd_Millis
+Ft_Esd_ClearColor
+Ft_Esd_GpuState_I
+Ft_Esd_GpuState
+FT_DispHeight
+FT_DispWidth
+Ft_Esd_DeltaMs
+Ft_Esd_GAlloc

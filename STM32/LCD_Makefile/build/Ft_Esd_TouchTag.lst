@@ -1,0 +1,1077 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Ft_Esd_TouchTag.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Ft_Esd_TouchTag__Initializer,"ax",%progbits
+  18              		.align	1
+  19              		.global	Ft_Esd_TouchTag__Initializer
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-sp-d16
+  25              	Ft_Esd_TouchTag__Initializer:
+  26              	.LFB3:
+  27              		.file 1 "FT_Esd_Framework/Ft_Esd_TouchTag.c"
+   1:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+   2:FT_Esd_Framework/Ft_Esd_TouchTag.c **** #include "Ft_Esd_TouchTag.h"
+   3:FT_Esd_Framework/Ft_Esd_TouchTag.c **** #include "Ft_Gpu_Hal.h"
+   4:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+   5:FT_Esd_Framework/Ft_Esd_TouchTag.c **** extern void Ft_Esd_Noop(void *context);
+   6:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+   7:FT_Esd_Framework/Ft_Esd_TouchTag.c **** extern Ft_Gpu_Hal_Context_t *Ft_Esd_Host;
+   8:FT_Esd_Framework/Ft_Esd_TouchTag.c **** extern ft_uint32_t Ft_Esd_Frame;
+   9:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+  10:FT_Esd_Framework/Ft_Esd_TouchTag.c **** static ft_uint32_t s_LastTagFrame = ~0;
+  11:FT_Esd_Framework/Ft_Esd_TouchTag.c **** static Ft_Esd_TouchTag s_NullTag = {
+  12:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	.Down = Ft_Esd_Noop,
+  13:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	.Up = Ft_Esd_Noop,
+  14:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	.Tap = Ft_Esd_Noop,
+  15:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	.Tag = 0,
+  16:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	.Set = 0
+  17:FT_Esd_Framework/Ft_Esd_TouchTag.c **** };
+  18:FT_Esd_Framework/Ft_Esd_TouchTag.c **** static ft_bool_t s_SuppressCurrentTags = 0;
+  19:FT_Esd_Framework/Ft_Esd_TouchTag.c **** static ft_uint8_t s_GpuRegTouchTag = 0;
+  20:FT_Esd_Framework/Ft_Esd_TouchTag.c **** static ft_uint8_t s_TagDown = 0;
+  21:FT_Esd_Framework/Ft_Esd_TouchTag.c **** static ft_uint8_t s_TagUp = 0;
+  22:FT_Esd_Framework/Ft_Esd_TouchTag.c **** typedef union {
+  23:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	ft_uint32_t XY;
+  24:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	struct {
+  25:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		ft_int16_t Y;
+  26:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		ft_int16_t X;
+  27:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	};
+  28:FT_Esd_Framework/Ft_Esd_TouchTag.c **** } Ft_Esd_TouchPos_t;
+  29:FT_Esd_Framework/Ft_Esd_TouchTag.c **** static Ft_Esd_TouchPos_t s_TouchPos = { 0 };
+  30:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+  31:FT_Esd_Framework/Ft_Esd_TouchTag.c **** static Ft_Esd_TouchTag *s_TagHandlers[256] = {
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 2
+
+
+  32:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	[0] = &s_NullTag,
+  33:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	[255] = &s_NullTag
+  34:FT_Esd_Framework/Ft_Esd_TouchTag.c **** };
+  35:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+  36:FT_Esd_Framework/Ft_Esd_TouchTag.c **** void Ft_Esd_TouchTag__Initializer(Ft_Esd_TouchTag *context)
+  37:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+  28              		.loc 1 37 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34 0000 30B4     		push	{r4, r5}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 5, -4
+  38:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	*context = s_NullTag;
+  39              		.loc 1 38 0
+  40 0002 0446     		mov	r4, r0
+  41 0004 044D     		ldr	r5, .L3
+  42 0006 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  43              	.LVL1:
+  44 0008 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  45              	.LVL2:
+  46 000a 95E80300 		ldm	r5, {r0, r1}
+  47 000e 84E80300 		stm	r4, {r0, r1}
+  39:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+  48              		.loc 1 39 0
+  49 0012 30BC     		pop	{r4, r5}
+  50              	.LCFI1:
+  51              		.cfi_restore 5
+  52              		.cfi_restore 4
+  53              		.cfi_def_cfa_offset 0
+  54              	.LVL3:
+  55 0014 7047     		bx	lr
+  56              	.L4:
+  57 0016 00BF     		.align	2
+  58              	.L3:
+  59 0018 00000000 		.word	.LANCHOR0
+  60              		.cfi_endproc
+  61              	.LFE3:
+  63              		.section	.text.Ft_Esd_TouchTag_End,"ax",%progbits
+  64              		.align	1
+  65              		.global	Ft_Esd_TouchTag_End
+  66              		.syntax unified
+  67              		.thumb
+  68              		.thumb_func
+  69              		.fpu fpv5-sp-d16
+  71              	Ft_Esd_TouchTag_End:
+  72              	.LFB6:
+  40:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+  41:FT_Esd_Framework/Ft_Esd_TouchTag.c **** void Ft_Esd_TouchTag_Start(Ft_Esd_TouchTag *context)
+  42:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+  43:FT_Esd_Framework/Ft_Esd_TouchTag.c **** #if ESD_SIMULATION
+  44:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (s_LastTagFrame > Ft_Esd_Frame && (s_LastTagFrame != ~0))
+  45:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 3
+
+
+  46:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		// Reset static
+  47:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		s_LastTagFrame = ~0;
+  48:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		for (int i = 1; i < 255; ++i)
+  49:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+  50:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_TagHandlers[i] = NULL;
+  51:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+  52:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		s_GpuRegTouchTag = 0;
+  53:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		s_TagDown = 0;
+  54:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		s_TagUp = 0;
+  55:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		s_TouchPos.XY = 0;
+  56:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+  57:FT_Esd_Framework/Ft_Esd_TouchTag.c **** #endif
+  58:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+  59:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (context->Tag)
+  60:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+  61:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		Ft_Esd_TouchTag_End(context);
+  62:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+  63:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	
+  64:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	// Allocate tag
+  65:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	for (int i = 1; i < 255; ++i)
+  66:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+  67:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		if (!s_TagHandlers[i])
+  68:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+  69:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_TagHandlers[i] = context;
+  70:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			context->Tag = i;
+  71:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			break;
+  72:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+  73:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+  74:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+  75:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+  76:FT_Esd_Framework/Ft_Esd_TouchTag.c **** void Ft_Esd_TouchTag_Update(Ft_Esd_TouchTag *context)
+  77:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+  78:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (s_LastTagFrame != Ft_Esd_Frame)
+  79:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+  80:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		// Global tag update
+  81:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		s_LastTagFrame = Ft_Esd_Frame;
+  82:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+  83:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		// Read registers
+  84:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		ft_uint32_t regTouchXY = Ft_Gpu_Hal_Rd32(Ft_Esd_Host, REG_TOUCH_TAG_XY);
+  85:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		ft_uint8_t regTouchTag;
+  86:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		if (regTouchXY & 0x80008000)
+  87:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+  88:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			// No touch
+  89:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			regTouchTag = 0;
+  90:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+  91:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		else
+  92:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+  93:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			regTouchTag = Ft_Gpu_Hal_Rd8(Ft_Esd_Host, REG_TOUCH_TAG);
+  94:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			if (!regTouchTag)
+  95:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			{
+  96:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 				// Fallback when touching but touch tag 0 reported, stick to the last recorded tag
+  97:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 				// Happens when REG_TOUCH_TAG_XY is ahead of REG_TOUCH_TAG (tag is only detected after render),
+  98:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 				// Can also happen in case the user improperly draws a tag 0 somewhere, this causes issue when 
+  99:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 				regTouchTag = s_GpuRegTouchTag;
+ 100:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			}
+ 101:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			if (regTouchTag && s_SuppressCurrentTags)
+ 102:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			{
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 4
+
+
+ 103:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 				regTouchTag = 255;
+ 104:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			}
+ 105:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_TouchPos.XY = regTouchXY;
+ 106:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 107:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 108:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		// Update up and down tags
+ 109:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		if (!s_TagDown)
+ 110:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 111:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_TagDown = regTouchTag;
+ 112:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 113:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 114:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		if (!regTouchTag)
+ 115:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 116:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_TagUp = s_GpuRegTouchTag;
+ 117:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_TagDown = 0;
+ 118:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_SuppressCurrentTags = 0;
+ 119:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 120:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 121:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		s_GpuRegTouchTag = regTouchTag;
+ 122:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+ 123:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 124:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (!context || !context->Tag)
+ 125:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		return;
+ 126:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 127:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (s_TagHandlers[context->Tag] != context)
+ 128:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 129:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		// Tag was forced taken over by another widget (CMD_KEYS for example), need to get a new tag...
+ 130:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		context->Tag = 0;
+ 131:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		Ft_Esd_TouchTag_Start(context);
+ 132:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+ 133:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 134:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	// Tag is set
+ 135:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (context->Set)
+ 136:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 137:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		// Tag unset
+ 138:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		if (s_TagDown != context->Tag)
+ 139:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 140:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			context->Set = 0;
+ 141:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			context->Up(context->Parent);
+ 142:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			if (s_TagUp == context->Tag)
+ 143:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			{
+ 144:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 				// Down and up were the same, tap (TODO: Allow to supress tap when user was swiping)
+ 145:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 				context->Tap(context->Parent);
+ 146:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			}
+ 147:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 148:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+ 149:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	else
+ 150:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 151:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		// Tag set
+ 152:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		if (s_TagDown == context->Tag)
+ 153:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 154:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			context->Set = 1;
+ 155:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			context->Down(context->Parent);
+ 156:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 157:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+ 158:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ 159:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 5
+
+
+ 160:FT_Esd_Framework/Ft_Esd_TouchTag.c **** void Ft_Esd_TouchTag_End(Ft_Esd_TouchTag *context)
+ 161:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+  73              		.loc 1 161 0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77              		@ link register save eliminated.
+  78              	.LVL4:
+ 162:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (context->Tag)
+  79              		.loc 1 162 0
+  80 0000 0369     		ldr	r3, [r0, #16]
+  81 0002 33B1     		cbz	r3, .L5
+ 163:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 164:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		// Free tag
+ 165:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		if (s_TagHandlers[context->Tag] == context)
+  82              		.loc 1 165 0
+  83 0004 064A     		ldr	r2, .L9
+  84 0006 52F82320 		ldr	r2, [r2, r3, lsl #2]
+  85 000a 8242     		cmp	r2, r0
+  86 000c 02D0     		beq	.L8
+  87              	.L7:
+ 166:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 167:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_TagHandlers[context->Tag] = 0;
+ 168:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 169:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		context->Tag = 0;
+  88              		.loc 1 169 0
+  89 000e 0023     		movs	r3, #0
+  90 0010 0361     		str	r3, [r0, #16]
+  91              	.L5:
+ 170:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+ 171:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+  92              		.loc 1 171 0
+  93 0012 7047     		bx	lr
+  94              	.L8:
+ 167:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+  95              		.loc 1 167 0
+  96 0014 024A     		ldr	r2, .L9
+  97 0016 0021     		movs	r1, #0
+  98 0018 42F82310 		str	r1, [r2, r3, lsl #2]
+  99 001c F7E7     		b	.L7
+ 100              	.L10:
+ 101 001e 00BF     		.align	2
+ 102              	.L9:
+ 103 0020 00000000 		.word	.LANCHOR1
+ 104              		.cfi_endproc
+ 105              	.LFE6:
+ 107              		.section	.text.Ft_Esd_TouchTag_Start,"ax",%progbits
+ 108              		.align	1
+ 109              		.global	Ft_Esd_TouchTag_Start
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.fpu fpv5-sp-d16
+ 115              	Ft_Esd_TouchTag_Start:
+ 116              	.LFB4:
+  42:FT_Esd_Framework/Ft_Esd_TouchTag.c **** #if ESD_SIMULATION
+ 117              		.loc 1 42 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 6
+
+
+ 118              		.cfi_startproc
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121              	.LVL5:
+ 122 0000 10B5     		push	{r4, lr}
+ 123              	.LCFI2:
+ 124              		.cfi_def_cfa_offset 8
+ 125              		.cfi_offset 4, -8
+ 126              		.cfi_offset 14, -4
+ 127 0002 0446     		mov	r4, r0
+  59:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 128              		.loc 1 59 0
+ 129 0004 0369     		ldr	r3, [r0, #16]
+ 130 0006 43B9     		cbnz	r3, .L18
+ 131              	.LVL6:
+ 132              	.L12:
+ 133              	.LBB2:
+  65:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 134              		.loc 1 65 0
+ 135 0008 0123     		movs	r3, #1
+ 136              	.LVL7:
+ 137              	.L13:
+  65:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 138              		.loc 1 65 0 is_stmt 0 discriminator 1
+ 139 000a FE2B     		cmp	r3, #254
+ 140 000c 0CDC     		bgt	.L11
+  67:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 141              		.loc 1 67 0 is_stmt 1
+ 142 000e 074A     		ldr	r2, .L20
+ 143 0010 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 144 0014 22B1     		cbz	r2, .L19
+  65:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 145              		.loc 1 65 0 discriminator 2
+ 146 0016 0133     		adds	r3, r3, #1
+ 147              	.LVL8:
+ 148 0018 F7E7     		b	.L13
+ 149              	.LVL9:
+ 150              	.L18:
+ 151              	.LBE2:
+  61:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+ 152              		.loc 1 61 0
+ 153 001a FFF7FEFF 		bl	Ft_Esd_TouchTag_End
+ 154              	.LVL10:
+ 155 001e F3E7     		b	.L12
+ 156              	.LVL11:
+ 157              	.L19:
+ 158              	.LBB3:
+  69:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			context->Tag = i;
+ 159              		.loc 1 69 0
+ 160 0020 024A     		ldr	r2, .L20
+ 161 0022 42F82340 		str	r4, [r2, r3, lsl #2]
+  70:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			break;
+ 162              		.loc 1 70 0
+ 163 0026 2361     		str	r3, [r4, #16]
+ 164              	.L11:
+ 165              	.LBE3:
+  74:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 7
+
+
+ 166              		.loc 1 74 0
+ 167 0028 10BD     		pop	{r4, pc}
+ 168              	.LVL12:
+ 169              	.L21:
+ 170 002a 00BF     		.align	2
+ 171              	.L20:
+ 172 002c 00000000 		.word	.LANCHOR1
+ 173              		.cfi_endproc
+ 174              	.LFE4:
+ 176              		.section	.text.Ft_Esd_TouchTag_Update,"ax",%progbits
+ 177              		.align	1
+ 178              		.global	Ft_Esd_TouchTag_Update
+ 179              		.syntax unified
+ 180              		.thumb
+ 181              		.thumb_func
+ 182              		.fpu fpv5-sp-d16
+ 184              	Ft_Esd_TouchTag_Update:
+ 185              	.LFB5:
+  77:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (s_LastTagFrame != Ft_Esd_Frame)
+ 186              		.loc 1 77 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 0
+ 189              		@ frame_needed = 0, uses_anonymous_args = 0
+ 190              	.LVL13:
+ 191 0000 38B5     		push	{r3, r4, r5, lr}
+ 192              	.LCFI3:
+ 193              		.cfi_def_cfa_offset 16
+ 194              		.cfi_offset 3, -16
+ 195              		.cfi_offset 4, -12
+ 196              		.cfi_offset 5, -8
+ 197              		.cfi_offset 14, -4
+ 198 0002 0446     		mov	r4, r0
+  78:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 199              		.loc 1 78 0
+ 200 0004 324B     		ldr	r3, .L37
+ 201 0006 1A68     		ldr	r2, [r3]
+ 202 0008 324B     		ldr	r3, .L37+4
+ 203 000a 1B68     		ldr	r3, [r3]
+ 204 000c 9A42     		cmp	r2, r3
+ 205 000e 24D1     		bne	.L35
+ 206              	.LVL14:
+ 207              	.L23:
+ 124:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		return;
+ 208              		.loc 1 124 0
+ 209 0010 002C     		cmp	r4, #0
+ 210 0012 5BD0     		beq	.L22
+ 124:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		return;
+ 211              		.loc 1 124 0 is_stmt 0 discriminator 1
+ 212 0014 2369     		ldr	r3, [r4, #16]
+ 213 0016 002B     		cmp	r3, #0
+ 214 0018 58D0     		beq	.L22
+ 127:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 215              		.loc 1 127 0 is_stmt 1
+ 216 001a 2F4A     		ldr	r2, .L37+8
+ 217 001c 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 218 0020 A342     		cmp	r3, r4
+ 219 0022 04D0     		beq	.L30
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 8
+
+
+ 130:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		Ft_Esd_TouchTag_Start(context);
+ 220              		.loc 1 130 0
+ 221 0024 0023     		movs	r3, #0
+ 222 0026 2361     		str	r3, [r4, #16]
+ 131:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+ 223              		.loc 1 131 0
+ 224 0028 2046     		mov	r0, r4
+ 225 002a FFF7FEFF 		bl	Ft_Esd_TouchTag_Start
+ 226              	.LVL15:
+ 227              	.L30:
+ 135:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	{
+ 228              		.loc 1 135 0
+ 229 002e 6369     		ldr	r3, [r4, #20]
+ 230 0030 002B     		cmp	r3, #0
+ 231 0032 41D0     		beq	.L31
+ 138:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 232              		.loc 1 138 0
+ 233 0034 294B     		ldr	r3, .L37+12
+ 234 0036 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 235 0038 2369     		ldr	r3, [r4, #16]
+ 236 003a 9A42     		cmp	r2, r3
+ 237 003c 46D0     		beq	.L22
+ 140:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			context->Up(context->Parent);
+ 238              		.loc 1 140 0
+ 239 003e 0023     		movs	r3, #0
+ 240 0040 6361     		str	r3, [r4, #20]
+ 141:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			if (s_TagUp == context->Tag)
+ 241              		.loc 1 141 0
+ 242 0042 A368     		ldr	r3, [r4, #8]
+ 243 0044 2068     		ldr	r0, [r4]
+ 244 0046 9847     		blx	r3
+ 245              	.LVL16:
+ 142:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			{
+ 246              		.loc 1 142 0
+ 247 0048 254B     		ldr	r3, .L37+16
+ 248 004a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 249 004c 2369     		ldr	r3, [r4, #16]
+ 250 004e 9A42     		cmp	r2, r3
+ 251 0050 3CD1     		bne	.L22
+ 145:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			}
+ 252              		.loc 1 145 0
+ 253 0052 E368     		ldr	r3, [r4, #12]
+ 254 0054 2068     		ldr	r0, [r4]
+ 255 0056 9847     		blx	r3
+ 256              	.LVL17:
+ 257 0058 38E0     		b	.L22
+ 258              	.LVL18:
+ 259              	.L35:
+ 260              	.LBB4:
+  81:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 261              		.loc 1 81 0
+ 262 005a 1D4A     		ldr	r2, .L37
+ 263 005c 1360     		str	r3, [r2]
+  84:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		ft_uint8_t regTouchTag;
+ 264              		.loc 1 84 0
+ 265 005e 2149     		ldr	r1, .L37+20
+ 266 0060 214B     		ldr	r3, .L37+24
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 9
+
+
+ 267 0062 1868     		ldr	r0, [r3]
+ 268              	.LVL19:
+ 269 0064 FFF7FEFF 		bl	Ft_Gpu_Hal_Rd32
+ 270              	.LVL20:
+ 271 0068 0546     		mov	r5, r0
+ 272              	.LVL21:
+  86:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 273              		.loc 1 86 0
+ 274 006a 10F0802F 		tst	r0, #-2147450880
+ 275 006e 12D0     		beq	.L36
+  89:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 276              		.loc 1 89 0
+ 277 0070 0023     		movs	r3, #0
+ 278              	.LVL22:
+ 279              	.L24:
+ 109:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 280              		.loc 1 109 0
+ 281 0072 1A4A     		ldr	r2, .L37+12
+ 282 0074 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 283 0076 0AB9     		cbnz	r2, .L27
+ 111:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 284              		.loc 1 111 0
+ 285 0078 184A     		ldr	r2, .L37+12
+ 286 007a 1370     		strb	r3, [r2]
+ 287              	.L27:
+ 114:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 288              		.loc 1 114 0
+ 289 007c 43B9     		cbnz	r3, .L28
+ 116:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_TagDown = 0;
+ 290              		.loc 1 116 0
+ 291 007e 1B4A     		ldr	r2, .L37+28
+ 292 0080 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
+ 293 0082 174A     		ldr	r2, .L37+16
+ 294 0084 1170     		strb	r1, [r2]
+ 117:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			s_SuppressCurrentTags = 0;
+ 295              		.loc 1 117 0
+ 296 0086 0022     		movs	r2, #0
+ 297 0088 1449     		ldr	r1, .L37+12
+ 298 008a 0A70     		strb	r2, [r1]
+ 118:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 299              		.loc 1 118 0
+ 300 008c 1849     		ldr	r1, .L37+32
+ 301 008e 0A70     		strb	r2, [r1]
+ 302              	.L28:
+ 121:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	}
+ 303              		.loc 1 121 0
+ 304 0090 164A     		ldr	r2, .L37+28
+ 305 0092 1370     		strb	r3, [r2]
+ 306 0094 BCE7     		b	.L23
+ 307              	.LVL23:
+ 308              	.L36:
+  93:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			if (!regTouchTag)
+ 309              		.loc 1 93 0
+ 310 0096 1749     		ldr	r1, .L37+36
+ 311 0098 134B     		ldr	r3, .L37+24
+ 312 009a 1868     		ldr	r0, [r3]
+ 313              	.LVL24:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 10
+
+
+ 314 009c FFF7FEFF 		bl	Ft_Gpu_Hal_Rd8
+ 315              	.LVL25:
+  94:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			{
+ 316              		.loc 1 94 0
+ 317 00a0 0346     		mov	r3, r0
+ 318 00a2 08B9     		cbnz	r0, .L25
+  99:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			}
+ 319              		.loc 1 99 0
+ 320 00a4 114B     		ldr	r3, .L37+28
+ 321 00a6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 322              	.LVL26:
+ 323              	.L25:
+ 101:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			{
+ 324              		.loc 1 101 0
+ 325 00a8 1BB1     		cbz	r3, .L26
+ 101:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			{
+ 326              		.loc 1 101 0 is_stmt 0 discriminator 1
+ 327 00aa 114A     		ldr	r2, .L37+32
+ 328 00ac 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 329 00ae 02B1     		cbz	r2, .L26
+ 103:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			}
+ 330              		.loc 1 103 0 is_stmt 1
+ 331 00b0 FF23     		movs	r3, #255
+ 332              	.LVL27:
+ 333              	.L26:
+ 105:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 334              		.loc 1 105 0
+ 335 00b2 114A     		ldr	r2, .L37+40
+ 336 00b4 1560     		str	r5, [r2]
+ 337 00b6 DCE7     		b	.L24
+ 338              	.LVL28:
+ 339              	.L31:
+ 340              	.LBE4:
+ 152:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		{
+ 341              		.loc 1 152 0
+ 342 00b8 084B     		ldr	r3, .L37+12
+ 343 00ba 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 344 00bc 2369     		ldr	r3, [r4, #16]
+ 345 00be 9A42     		cmp	r2, r3
+ 346 00c0 04D1     		bne	.L22
+ 154:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 			context->Down(context->Parent);
+ 347              		.loc 1 154 0
+ 348 00c2 0123     		movs	r3, #1
+ 349 00c4 6361     		str	r3, [r4, #20]
+ 155:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 		}
+ 350              		.loc 1 155 0
+ 351 00c6 6368     		ldr	r3, [r4, #4]
+ 352 00c8 2068     		ldr	r0, [r4]
+ 353 00ca 9847     		blx	r3
+ 354              	.LVL29:
+ 355              	.L22:
+ 158:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 356              		.loc 1 158 0
+ 357 00cc 38BD     		pop	{r3, r4, r5, pc}
+ 358              	.LVL30:
+ 359              	.L38:
+ 360 00ce 00BF     		.align	2
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 11
+
+
+ 361              	.L37:
+ 362 00d0 00000000 		.word	.LANCHOR2
+ 363 00d4 00000000 		.word	Ft_Esd_Frame
+ 364 00d8 00000000 		.word	.LANCHOR1
+ 365 00dc 00000000 		.word	.LANCHOR6
+ 366 00e0 00000000 		.word	.LANCHOR7
+ 367 00e4 28213000 		.word	3154216
+ 368 00e8 00000000 		.word	Ft_Esd_Host
+ 369 00ec 00000000 		.word	.LANCHOR3
+ 370 00f0 00000000 		.word	.LANCHOR4
+ 371 00f4 2C213000 		.word	3154220
+ 372 00f8 00000000 		.word	.LANCHOR5
+ 373              		.cfi_endproc
+ 374              	.LFE5:
+ 376              		.section	.text.Ft_Esd_TouchTag_Touching,"ax",%progbits
+ 377              		.align	1
+ 378              		.global	Ft_Esd_TouchTag_Touching
+ 379              		.syntax unified
+ 380              		.thumb
+ 381              		.thumb_func
+ 382              		.fpu fpv5-sp-d16
+ 384              	Ft_Esd_TouchTag_Touching:
+ 385              	.LFB7:
+ 172:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 173:FT_Esd_Framework/Ft_Esd_TouchTag.c **** ft_bool_t Ft_Esd_TouchTag_Touching(Ft_Esd_TouchTag *context)
+ 174:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+ 386              		.loc 1 174 0
+ 387              		.cfi_startproc
+ 388              		@ args = 0, pretend = 0, frame = 0
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390              		@ link register save eliminated.
+ 391              	.LVL31:
+ 175:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	return context->Tag && (s_TagDown == context->Tag);
+ 392              		.loc 1 175 0
+ 393 0000 0369     		ldr	r3, [r0, #16]
+ 394 0002 2BB1     		cbz	r3, .L41
+ 395              		.loc 1 175 0 is_stmt 0 discriminator 1
+ 396 0004 044A     		ldr	r2, .L43
+ 397 0006 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 398 0008 9342     		cmp	r3, r2
+ 399 000a 03D0     		beq	.L42
+ 400              		.loc 1 175 0
+ 401 000c 0020     		movs	r0, #0
+ 402              	.LVL32:
+ 403 000e 7047     		bx	lr
+ 404              	.LVL33:
+ 405              	.L41:
+ 406 0010 0020     		movs	r0, #0
+ 407              	.LVL34:
+ 408 0012 7047     		bx	lr
+ 409              	.LVL35:
+ 410              	.L42:
+ 411 0014 0120     		movs	r0, #1
+ 412              	.LVL36:
+ 176:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ 413              		.loc 1 176 0 is_stmt 1
+ 414 0016 7047     		bx	lr
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 12
+
+
+ 415              	.L44:
+ 416              		.align	2
+ 417              	.L43:
+ 418 0018 00000000 		.word	.LANCHOR6
+ 419              		.cfi_endproc
+ 420              	.LFE7:
+ 422              		.section	.text.Ft_Esd_TouchTag_Inside,"ax",%progbits
+ 423              		.align	1
+ 424              		.global	Ft_Esd_TouchTag_Inside
+ 425              		.syntax unified
+ 426              		.thumb
+ 427              		.thumb_func
+ 428              		.fpu fpv5-sp-d16
+ 430              	Ft_Esd_TouchTag_Inside:
+ 431              	.LFB8:
+ 177:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 178:FT_Esd_Framework/Ft_Esd_TouchTag.c **** ft_bool_t Ft_Esd_TouchTag_Inside(Ft_Esd_TouchTag *context)
+ 179:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+ 432              		.loc 1 179 0
+ 433              		.cfi_startproc
+ 434              		@ args = 0, pretend = 0, frame = 0
+ 435              		@ frame_needed = 0, uses_anonymous_args = 0
+ 436              		@ link register save eliminated.
+ 437              	.LVL37:
+ 180:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	return context->Tag && (s_TagDown == context->Tag) && (s_GpuRegTouchTag == context->Tag);
+ 438              		.loc 1 180 0
+ 439 0000 0369     		ldr	r3, [r0, #16]
+ 440 0002 5BB1     		cbz	r3, .L47
+ 441              		.loc 1 180 0 is_stmt 0 discriminator 1
+ 442 0004 074A     		ldr	r2, .L51
+ 443 0006 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 444 0008 9342     		cmp	r3, r2
+ 445 000a 01D0     		beq	.L50
+ 446              		.loc 1 180 0
+ 447 000c 0020     		movs	r0, #0
+ 448              	.LVL38:
+ 449 000e 7047     		bx	lr
+ 450              	.LVL39:
+ 451              	.L50:
+ 452              		.loc 1 180 0 discriminator 3
+ 453 0010 054A     		ldr	r2, .L51+4
+ 454 0012 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 455 0014 9342     		cmp	r3, r2
+ 456 0016 03D0     		beq	.L49
+ 457              		.loc 1 180 0
+ 458 0018 0020     		movs	r0, #0
+ 459              	.LVL40:
+ 460 001a 7047     		bx	lr
+ 461              	.LVL41:
+ 462              	.L47:
+ 463 001c 0020     		movs	r0, #0
+ 464              	.LVL42:
+ 465 001e 7047     		bx	lr
+ 466              	.LVL43:
+ 467              	.L49:
+ 468 0020 0120     		movs	r0, #1
+ 469              	.LVL44:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 13
+
+
+ 181:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ 470              		.loc 1 181 0 is_stmt 1
+ 471 0022 7047     		bx	lr
+ 472              	.L52:
+ 473              		.align	2
+ 474              	.L51:
+ 475 0024 00000000 		.word	.LANCHOR6
+ 476 0028 00000000 		.word	.LANCHOR3
+ 477              		.cfi_endproc
+ 478              	.LFE8:
+ 480              		.section	.text.Ft_Esd_TouchTag_Hover,"ax",%progbits
+ 481              		.align	1
+ 482              		.global	Ft_Esd_TouchTag_Hover
+ 483              		.syntax unified
+ 484              		.thumb
+ 485              		.thumb_func
+ 486              		.fpu fpv5-sp-d16
+ 488              	Ft_Esd_TouchTag_Hover:
+ 489              	.LFB9:
+ 182:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 183:FT_Esd_Framework/Ft_Esd_TouchTag.c **** ft_bool_t Ft_Esd_TouchTag_Hover(Ft_Esd_TouchTag *context)
+ 184:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+ 490              		.loc 1 184 0
+ 491              		.cfi_startproc
+ 492              		@ args = 0, pretend = 0, frame = 0
+ 493              		@ frame_needed = 0, uses_anonymous_args = 0
+ 494              		@ link register save eliminated.
+ 495              	.LVL45:
+ 185:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	return context->Tag && (s_GpuRegTouchTag == context->Tag);
+ 496              		.loc 1 185 0
+ 497 0000 0369     		ldr	r3, [r0, #16]
+ 498 0002 2BB1     		cbz	r3, .L55
+ 499              		.loc 1 185 0 is_stmt 0 discriminator 1
+ 500 0004 044A     		ldr	r2, .L57
+ 501 0006 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 502 0008 9342     		cmp	r3, r2
+ 503 000a 03D0     		beq	.L56
+ 504              		.loc 1 185 0
+ 505 000c 0020     		movs	r0, #0
+ 506              	.LVL46:
+ 507 000e 7047     		bx	lr
+ 508              	.LVL47:
+ 509              	.L55:
+ 510 0010 0020     		movs	r0, #0
+ 511              	.LVL48:
+ 512 0012 7047     		bx	lr
+ 513              	.LVL49:
+ 514              	.L56:
+ 515 0014 0120     		movs	r0, #1
+ 516              	.LVL50:
+ 186:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ 517              		.loc 1 186 0 is_stmt 1
+ 518 0016 7047     		bx	lr
+ 519              	.L58:
+ 520              		.align	2
+ 521              	.L57:
+ 522 0018 00000000 		.word	.LANCHOR3
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 14
+
+
+ 523              		.cfi_endproc
+ 524              	.LFE9:
+ 526              		.section	.text.Ft_Esd_TouchTag_Tag,"ax",%progbits
+ 527              		.align	1
+ 528              		.global	Ft_Esd_TouchTag_Tag
+ 529              		.syntax unified
+ 530              		.thumb
+ 531              		.thumb_func
+ 532              		.fpu fpv5-sp-d16
+ 534              	Ft_Esd_TouchTag_Tag:
+ 535              	.LFB10:
+ 187:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 188:FT_Esd_Framework/Ft_Esd_TouchTag.c **** ft_uint8_t Ft_Esd_TouchTag_Tag(Ft_Esd_TouchTag *context)
+ 189:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+ 536              		.loc 1 189 0
+ 537              		.cfi_startproc
+ 538              		@ args = 0, pretend = 0, frame = 0
+ 539              		@ frame_needed = 0, uses_anonymous_args = 0
+ 540              		@ link register save eliminated.
+ 541              	.LVL51:
+ 190:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	if (context->Tag) return context->Tag;
+ 542              		.loc 1 190 0
+ 543 0000 0069     		ldr	r0, [r0, #16]
+ 544              	.LVL52:
+ 545 0002 08B1     		cbz	r0, .L61
+ 546              		.loc 1 190 0 is_stmt 0 discriminator 1
+ 547 0004 C0B2     		uxtb	r0, r0
+ 548 0006 7047     		bx	lr
+ 549              	.L61:
+ 191:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	else return 255; // Always return non-tag value if no tag
+ 550              		.loc 1 191 0 is_stmt 1
+ 551 0008 FF20     		movs	r0, #255
+ 192:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ 552              		.loc 1 192 0
+ 553 000a 7047     		bx	lr
+ 554              		.cfi_endproc
+ 555              	.LFE10:
+ 557              		.section	.text.Ft_Esd_TouchTag_CurrentTag,"ax",%progbits
+ 558              		.align	1
+ 559              		.global	Ft_Esd_TouchTag_CurrentTag
+ 560              		.syntax unified
+ 561              		.thumb
+ 562              		.thumb_func
+ 563              		.fpu fpv5-sp-d16
+ 565              	Ft_Esd_TouchTag_CurrentTag:
+ 566              	.LFB11:
+ 193:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 194:FT_Esd_Framework/Ft_Esd_TouchTag.c **** ft_uint8_t Ft_Esd_TouchTag_CurrentTag(Ft_Esd_TouchTag *context)
+ 195:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+ 567              		.loc 1 195 0
+ 568              		.cfi_startproc
+ 569              		@ args = 0, pretend = 0, frame = 0
+ 570              		@ frame_needed = 0, uses_anonymous_args = 0
+ 571              		@ link register save eliminated.
+ 572              	.LVL53:
+ 196:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	return s_GpuRegTouchTag;
+ 197:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 15
+
+
+ 573              		.loc 1 197 0
+ 574 0000 014B     		ldr	r3, .L63
+ 575 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 576              	.LVL54:
+ 577 0004 7047     		bx	lr
+ 578              	.L64:
+ 579 0006 00BF     		.align	2
+ 580              	.L63:
+ 581 0008 00000000 		.word	.LANCHOR3
+ 582              		.cfi_endproc
+ 583              	.LFE11:
+ 585              		.section	.text.Ft_Esd_TouchTag_TouchX,"ax",%progbits
+ 586              		.align	1
+ 587              		.global	Ft_Esd_TouchTag_TouchX
+ 588              		.syntax unified
+ 589              		.thumb
+ 590              		.thumb_func
+ 591              		.fpu fpv5-sp-d16
+ 593              	Ft_Esd_TouchTag_TouchX:
+ 594              	.LFB12:
+ 198:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 199:FT_Esd_Framework/Ft_Esd_TouchTag.c **** ft_int16_t Ft_Esd_TouchTag_TouchX(Ft_Esd_TouchTag *context)
+ 200:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+ 595              		.loc 1 200 0
+ 596              		.cfi_startproc
+ 597              		@ args = 0, pretend = 0, frame = 0
+ 598              		@ frame_needed = 0, uses_anonymous_args = 0
+ 599              		@ link register save eliminated.
+ 600              	.LVL55:
+ 201:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	return s_TouchPos.X;
+ 202:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ 601              		.loc 1 202 0
+ 602 0000 014B     		ldr	r3, .L66
+ 603 0002 B3F90200 		ldrsh	r0, [r3, #2]
+ 604              	.LVL56:
+ 605 0006 7047     		bx	lr
+ 606              	.L67:
+ 607              		.align	2
+ 608              	.L66:
+ 609 0008 00000000 		.word	.LANCHOR5
+ 610              		.cfi_endproc
+ 611              	.LFE12:
+ 613              		.section	.text.Ft_Esd_TouchTag_TouchY,"ax",%progbits
+ 614              		.align	1
+ 615              		.global	Ft_Esd_TouchTag_TouchY
+ 616              		.syntax unified
+ 617              		.thumb
+ 618              		.thumb_func
+ 619              		.fpu fpv5-sp-d16
+ 621              	Ft_Esd_TouchTag_TouchY:
+ 622              	.LFB13:
+ 203:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 204:FT_Esd_Framework/Ft_Esd_TouchTag.c **** ft_int16_t Ft_Esd_TouchTag_TouchY(Ft_Esd_TouchTag *context)
+ 205:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+ 623              		.loc 1 205 0
+ 624              		.cfi_startproc
+ 625              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 16
+
+
+ 626              		@ frame_needed = 0, uses_anonymous_args = 0
+ 627              		@ link register save eliminated.
+ 628              	.LVL57:
+ 206:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	return s_TouchPos.Y;
+ 207:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ 629              		.loc 1 207 0
+ 630 0000 014B     		ldr	r3, .L69
+ 631 0002 B3F90000 		ldrsh	r0, [r3]
+ 632              	.LVL58:
+ 633 0006 7047     		bx	lr
+ 634              	.L70:
+ 635              		.align	2
+ 636              	.L69:
+ 637 0008 00000000 		.word	.LANCHOR5
+ 638              		.cfi_endproc
+ 639              	.LFE13:
+ 641              		.section	.text.Ft_Esd_TouchTag_SuppressCurrentTags,"ax",%progbits
+ 642              		.align	1
+ 643              		.global	Ft_Esd_TouchTag_SuppressCurrentTags
+ 644              		.syntax unified
+ 645              		.thumb
+ 646              		.thumb_func
+ 647              		.fpu fpv5-sp-d16
+ 649              	Ft_Esd_TouchTag_SuppressCurrentTags:
+ 650              	.LFB14:
+ 208:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 
+ 209:FT_Esd_Framework/Ft_Esd_TouchTag.c **** void Ft_Esd_TouchTag_SuppressCurrentTags()
+ 210:FT_Esd_Framework/Ft_Esd_TouchTag.c **** {
+ 651              		.loc 1 210 0
+ 652              		.cfi_startproc
+ 653              		@ args = 0, pretend = 0, frame = 0
+ 654              		@ frame_needed = 0, uses_anonymous_args = 0
+ 655              		@ link register save eliminated.
+ 211:FT_Esd_Framework/Ft_Esd_TouchTag.c **** 	s_SuppressCurrentTags = 1;
+ 656              		.loc 1 211 0
+ 657 0000 014B     		ldr	r3, .L72
+ 658 0002 0122     		movs	r2, #1
+ 659 0004 1A70     		strb	r2, [r3]
+ 212:FT_Esd_Framework/Ft_Esd_TouchTag.c **** }
+ 660              		.loc 1 212 0
+ 661 0006 7047     		bx	lr
+ 662              	.L73:
+ 663              		.align	2
+ 664              	.L72:
+ 665 0008 00000000 		.word	.LANCHOR4
+ 666              		.cfi_endproc
+ 667              	.LFE14:
+ 669              		.section	.bss.s_GpuRegTouchTag,"aw",%nobits
+ 670              		.set	.LANCHOR3,. + 0
+ 673              	s_GpuRegTouchTag:
+ 674 0000 00       		.space	1
+ 675              		.section	.bss.s_SuppressCurrentTags,"aw",%nobits
+ 676              		.set	.LANCHOR4,. + 0
+ 679              	s_SuppressCurrentTags:
+ 680 0000 00       		.space	1
+ 681              		.section	.bss.s_TagDown,"aw",%nobits
+ 682              		.set	.LANCHOR6,. + 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 17
+
+
+ 685              	s_TagDown:
+ 686 0000 00       		.space	1
+ 687              		.section	.bss.s_TagUp,"aw",%nobits
+ 688              		.set	.LANCHOR7,. + 0
+ 691              	s_TagUp:
+ 692 0000 00       		.space	1
+ 693              		.section	.bss.s_TouchPos,"aw",%nobits
+ 694              		.align	2
+ 695              		.set	.LANCHOR5,. + 0
+ 698              	s_TouchPos:
+ 699 0000 00000000 		.space	4
+ 700              		.section	.data.s_LastTagFrame,"aw",%progbits
+ 701              		.align	2
+ 702              		.set	.LANCHOR2,. + 0
+ 705              	s_LastTagFrame:
+ 706 0000 FFFFFFFF 		.word	-1
+ 707              		.section	.data.s_NullTag,"aw",%progbits
+ 708              		.align	2
+ 709              		.set	.LANCHOR0,. + 0
+ 712              	s_NullTag:
+ 713 0000 00000000 		.space	4
+ 714 0004 00000000 		.word	Ft_Esd_Noop
+ 715 0008 00000000 		.word	Ft_Esd_Noop
+ 716 000c 00000000 		.word	Ft_Esd_Noop
+ 717 0010 00000000 		.word	0
+ 718 0014 00000000 		.word	0
+ 719              		.section	.data.s_TagHandlers,"aw",%progbits
+ 720              		.align	2
+ 721              		.set	.LANCHOR1,. + 0
+ 724              	s_TagHandlers:
+ 725 0000 00000000 		.word	s_NullTag
+ 726 0004 00000000 		.space	1016
+ 726      00000000 
+ 726      00000000 
+ 726      00000000 
+ 726      00000000 
+ 727 03fc 00000000 		.word	s_NullTag
+ 728              		.text
+ 729              	.Letext0:
+ 730              		.file 2 "FT_Eve_Hal/FT_DataTypes.h"
+ 731              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 732              		.file 4 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 733              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 734              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 735              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 736              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 737              		.file 9 "FT_Eve_Hal/FT_Gpu_Hal.h"
+ 738              		.file 10 "FT_Esd_Framework/Ft_Esd_TouchTag.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Ft_Esd_TouchTag.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:18     .text.Ft_Esd_TouchTag__Initializer:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:25     .text.Ft_Esd_TouchTag__Initializer:0000000000000000 Ft_Esd_TouchTag__Initializer
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:59     .text.Ft_Esd_TouchTag__Initializer:0000000000000018 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:64     .text.Ft_Esd_TouchTag_End:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:71     .text.Ft_Esd_TouchTag_End:0000000000000000 Ft_Esd_TouchTag_End
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:103    .text.Ft_Esd_TouchTag_End:0000000000000020 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:108    .text.Ft_Esd_TouchTag_Start:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:115    .text.Ft_Esd_TouchTag_Start:0000000000000000 Ft_Esd_TouchTag_Start
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:172    .text.Ft_Esd_TouchTag_Start:000000000000002c $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:177    .text.Ft_Esd_TouchTag_Update:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:184    .text.Ft_Esd_TouchTag_Update:0000000000000000 Ft_Esd_TouchTag_Update
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:362    .text.Ft_Esd_TouchTag_Update:00000000000000d0 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:377    .text.Ft_Esd_TouchTag_Touching:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:384    .text.Ft_Esd_TouchTag_Touching:0000000000000000 Ft_Esd_TouchTag_Touching
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:418    .text.Ft_Esd_TouchTag_Touching:0000000000000018 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:423    .text.Ft_Esd_TouchTag_Inside:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:430    .text.Ft_Esd_TouchTag_Inside:0000000000000000 Ft_Esd_TouchTag_Inside
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:475    .text.Ft_Esd_TouchTag_Inside:0000000000000024 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:481    .text.Ft_Esd_TouchTag_Hover:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:488    .text.Ft_Esd_TouchTag_Hover:0000000000000000 Ft_Esd_TouchTag_Hover
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:522    .text.Ft_Esd_TouchTag_Hover:0000000000000018 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:527    .text.Ft_Esd_TouchTag_Tag:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:534    .text.Ft_Esd_TouchTag_Tag:0000000000000000 Ft_Esd_TouchTag_Tag
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:558    .text.Ft_Esd_TouchTag_CurrentTag:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:565    .text.Ft_Esd_TouchTag_CurrentTag:0000000000000000 Ft_Esd_TouchTag_CurrentTag
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:581    .text.Ft_Esd_TouchTag_CurrentTag:0000000000000008 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:586    .text.Ft_Esd_TouchTag_TouchX:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:593    .text.Ft_Esd_TouchTag_TouchX:0000000000000000 Ft_Esd_TouchTag_TouchX
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:609    .text.Ft_Esd_TouchTag_TouchX:0000000000000008 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:614    .text.Ft_Esd_TouchTag_TouchY:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:621    .text.Ft_Esd_TouchTag_TouchY:0000000000000000 Ft_Esd_TouchTag_TouchY
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:637    .text.Ft_Esd_TouchTag_TouchY:0000000000000008 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:642    .text.Ft_Esd_TouchTag_SuppressCurrentTags:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:649    .text.Ft_Esd_TouchTag_SuppressCurrentTags:0000000000000000 Ft_Esd_TouchTag_SuppressCurrentTags
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:665    .text.Ft_Esd_TouchTag_SuppressCurrentTags:0000000000000008 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:673    .bss.s_GpuRegTouchTag:0000000000000000 s_GpuRegTouchTag
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:674    .bss.s_GpuRegTouchTag:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:679    .bss.s_SuppressCurrentTags:0000000000000000 s_SuppressCurrentTags
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:680    .bss.s_SuppressCurrentTags:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:685    .bss.s_TagDown:0000000000000000 s_TagDown
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:686    .bss.s_TagDown:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:691    .bss.s_TagUp:0000000000000000 s_TagUp
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:692    .bss.s_TagUp:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:694    .bss.s_TouchPos:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:698    .bss.s_TouchPos:0000000000000000 s_TouchPos
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:701    .data.s_LastTagFrame:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:705    .data.s_LastTagFrame:0000000000000000 s_LastTagFrame
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:708    .data.s_NullTag:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:712    .data.s_NullTag:0000000000000000 s_NullTag
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:720    .data.s_TagHandlers:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s:724    .data.s_TagHandlers:0000000000000000 s_TagHandlers
+
+UNDEFINED SYMBOLS
+Ft_Gpu_Hal_Rd32
+Ft_Gpu_Hal_Rd8
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccbomHxJ.s 			page 19
+
+
+Ft_Esd_Frame
+Ft_Esd_Host
+Ft_Esd_Noop
