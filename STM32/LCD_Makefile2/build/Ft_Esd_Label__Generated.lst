@@ -1,0 +1,1761 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Ft_Esd_Label__Generated.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Ft_Esd_Theme_GetTextColor,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-sp-d16
+  24              	Ft_Esd_Theme_GetTextColor:
+  25              	.LFB5:
+  26              		.file 1 "FT_Esd_Widgets/FT_Esd_Theme.h"
+   1:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+   2:FT_Esd_Widgets/FT_Esd_Theme.h **** #ifndef FT_ESD_THEME_H
+   3:FT_Esd_Widgets/FT_Esd_Theme.h **** #define FT_ESD_THEME_H
+   4:FT_Esd_Widgets/FT_Esd_Theme.h **** #include "FT_DataTypes.h"
+   5:FT_Esd_Widgets/FT_Esd_Theme.h **** #include "Ft_Esd.h"
+   6:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+   7:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_CATEGORY(EsdTheme, DisplayName = "ESD Theme")
+   8:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_CATEGORY(EsdTheme_Themes, DisplayName = "Themes", Category = EsdTheme)
+   9:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+  10:FT_Esd_Widgets/FT_Esd_Theme.h **** typedef unsigned int ft_uint32_t;
+  11:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+  12:FT_Esd_Widgets/FT_Esd_Theme.h **** typedef struct
+  13:FT_Esd_Widgets/FT_Esd_Theme.h **** {
+  14:FT_Esd_Widgets/FT_Esd_Theme.h **** 	ft_rgb32_t ClearColor;
+  15:FT_Esd_Widgets/FT_Esd_Theme.h **** 	ft_rgb32_t BackColor;
+  16:FT_Esd_Widgets/FT_Esd_Theme.h **** 	ft_rgb32_t TextColor;
+  17:FT_Esd_Widgets/FT_Esd_Theme.h **** 	ft_rgb32_t ButtonTextColor;
+  18:FT_Esd_Widgets/FT_Esd_Theme.h **** 	ft_rgb32_t DefaultColor;
+  19:FT_Esd_Widgets/FT_Esd_Theme.h **** 	ft_rgb32_t PrimaryColor;
+  20:FT_Esd_Widgets/FT_Esd_Theme.h **** } Ft_Esd_Theme;
+  21:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+  22:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_TYPE(Ft_Esd_Theme *, Native = Pointer, Edit = Library)
+  23:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+  24:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_RENDER(Ft_Esd_Theme_SetCurrent, DisplayName = "Set Current Theme", Category = EsdTheme, Include
+  25:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_PARAMETER(theme, Type = Ft_Esd_Theme *)
+  26:FT_Esd_Widgets/FT_Esd_Theme.h **** void Ft_Esd_Theme_SetCurrent(Ft_Esd_Theme *theme);
+  27:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+  28:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_FUNCTION(Ft_Esd_Theme_GetCurrent, DisplayName = "Current Theme", Category = EsdTheme, Type = Ft
+  29:FT_Esd_Widgets/FT_Esd_Theme.h **** Ft_Esd_Theme *Ft_Esd_Theme_GetCurrent();
+  30:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+  31:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_FUNCTION(Ft_Esd_Theme_GetClearColor, DisplayName = "Get Clear Color", Category = EsdTheme, Type
+  32:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_PARAMETER(theme, Type = Ft_Esd_Theme *, Default = Ft_Esd_Theme_GetCurrent)
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 2
+
+
+  33:FT_Esd_Widgets/FT_Esd_Theme.h **** inline static ft_rgb32_t Ft_Esd_Theme_GetClearColor(Ft_Esd_Theme *theme) { if (!theme) return Ft_Es
+  34:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+  35:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_FUNCTION(Ft_Esd_Theme_GetBackColor, DisplayName = "Get Back Color", Category = EsdTheme, Type =
+  36:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_PARAMETER(theme, Type = Ft_Esd_Theme *, Default = Ft_Esd_Theme_GetCurrent)
+  37:FT_Esd_Widgets/FT_Esd_Theme.h **** inline static ft_rgb32_t Ft_Esd_Theme_GetBackColor(Ft_Esd_Theme *theme) { if (!theme) return Ft_Esd
+  38:FT_Esd_Widgets/FT_Esd_Theme.h **** 
+  39:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_FUNCTION(Ft_Esd_Theme_GetTextColor, DisplayName = "Get Text Color", Category = EsdTheme, Type =
+  40:FT_Esd_Widgets/FT_Esd_Theme.h **** ESD_PARAMETER(theme, Type = Ft_Esd_Theme *, Default = Ft_Esd_Theme_GetCurrent)
+  41:FT_Esd_Widgets/FT_Esd_Theme.h **** inline static ft_rgb32_t Ft_Esd_Theme_GetTextColor(Ft_Esd_Theme *theme) { if (!theme) return Ft_Esd
+  27              		.loc 1 41 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 82B0     		sub	sp, sp, #8
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  43              		.loc 1 41 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 002B     		cmp	r3, #0
+  46 000c 04D1     		bne	.L2
+  47              		.loc 1 41 0 is_stmt 0 discriminator 1
+  48 000e FFF7FEFF 		bl	Ft_Esd_Theme_GetCurrent
+  49 0012 0346     		mov	r3, r0
+  50 0014 9B68     		ldr	r3, [r3, #8]
+  51 0016 01E0     		b	.L3
+  52              	.L2:
+  53              		.loc 1 41 0 discriminator 2
+  54 0018 7B68     		ldr	r3, [r7, #4]
+  55 001a 9B68     		ldr	r3, [r3, #8]
+  56              	.L3:
+  57              		.loc 1 41 0
+  58 001c 1846     		mov	r0, r3
+  59 001e 0837     		adds	r7, r7, #8
+  60              	.LCFI3:
+  61              		.cfi_def_cfa_offset 8
+  62 0020 BD46     		mov	sp, r7
+  63              	.LCFI4:
+  64              		.cfi_def_cfa_register 13
+  65              		@ sp needed
+  66 0022 80BD     		pop	{r7, pc}
+  67              		.cfi_endproc
+  68              	.LFE5:
+  70              		.section	.text.Ft_Esd_BitmapCell_GetInfo,"ax",%progbits
+  71              		.align	1
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  75              		.fpu fpv5-sp-d16
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 3
+
+
+  77              	Ft_Esd_BitmapCell_GetInfo:
+  78              	.LFB9:
+  79              		.file 2 "FT_Esd_Framework/Ft_Esd_BitmapInfo.h"
+   1:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** /*
+   2:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** Bitmap info structure
+   3:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** */
+   4:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+   5:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #ifndef FT_ESD_BITMAPINFO_H
+   6:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #define FT_ESD_BITMAPINFO_H
+   7:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+   8:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "Ft_Esd.h"
+   9:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "FT_DataTypes.h"
+  10:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "Ft_Esd_GpuAlloc.h"
+  11:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  12:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapInfo, Native = Struct) // TODO: Struct support, expose values
+  13:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  14:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  15:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Width;
+  16:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Height;
+  17:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Stride;
+  18:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Format;
+  19:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Size;
+  20:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	const char *File;
+  21:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  22:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Handle pointing to the address in RAM_G if it is allocated
+  23:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_GpuHandle GpuHandle;
+  24:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  25:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Bitmap handle that is being used
+  26:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_uint32_t BitmapHandle;
+  27:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  28:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	const char *PaletteFile;
+  29:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_GpuHandle PaletteGpuHandle;
+  30:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  31:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// When this is set, the allocated ram is not free'd automatically
+  32:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Use Ft_Esd_GpuAlloc_Free(GpuAlloc, GpuHandle) to free the GPU ram manually
+  33:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_bool_t Persistent;
+  34:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  35:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_BitmapInfo;
+  36:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  37:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapInfo *, Native = Pointer, Edit = Library)
+  38:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  39:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapCell, Native = Struct) // TODO: Struct support, expose values
+  40:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  41:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  42:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapInfo *Info;
+  43:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Cell;
+  44:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_BitmapCell;
+  45:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  46:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapCell *, Native = Pointer, Edit = Library)
+  47:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  48:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // Attempts to load the specified bitmap if it has not been loaded into RAM_G yet.
+  49:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // Call during the Update cycle of each frame to keep the bitmap flagged as in use, otherwise the m
+  50:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_LoadBitmap, Type = ft_uint32_t, Include = "Ft_Esd_BitmapInfo.h", DisplayName = 
+  51:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapInfo, Type = Ft_Esd_BitmapInfo *)
+  52:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ft_uint32_t Ft_Esd_LoadBitmap(Ft_Esd_BitmapInfo *bitmapInfo);
+  53:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  54:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_LoadPalette, Type = ft_uint32_t, Include = "Ft_Esd_BitmapInfo.h", DisplayName =
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 4
+
+
+  55:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapInfo, Type = Ft_Esd_BitmapInfo *)
+  56:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ft_uint32_t Ft_Esd_LoadPalette(Ft_Esd_BitmapInfo *bitmapInfo);
+  57:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  58:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_ENUM(_BitmapResourceFormat, DisplayName = "Bitmap Format")
+  59:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB1555)
+  60:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L1)
+  61:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L2)
+  62:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L4)
+  63:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L8)
+  64:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(RGB332)
+  65:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB2)
+  66:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB4)
+  67:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(RGB565)
+  68:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(PALETTED565)
+  69:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(PALETTED4444)
+  70:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(PALETTED8)
+  71:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(JPEG)
+  72:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(PNG)
+  73:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_END()
+  74:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  75:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_LOGIC(Ft_Esd_SwitchBitmapCell, Callback, Include = "Ft_Esd_BitmapInfo.h", DisplayName = "Switch
+  76:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  77:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  78:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Callback
+  79:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	void *Parent;
+  80:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  81:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  82:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Input
+  83:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  84:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  85:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ESD_INPUT(BitmapInfo, Type = Ft_Esd_BitmapInfo *, DisplayName = "Bitmap Info")
+  86:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapInfo *(* BitmapInfo)(void *context);
+  87:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  88:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ESD_INPUT(Cell, Type = ft_uint8_t, DisplayName = "Cell")
+  89:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_uint8_t(* Cell)(void *context);
+  90:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  91:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  92:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Variables
+  93:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  94:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  95:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// BitmapCell object
+  96:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapCell BitmapCell;
+  97:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  98:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_SwitchBitmapCell;
+  99:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 100:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** void Ft_Esd_SwitchBitmapCell__Initializer(Ft_Esd_SwitchBitmapCell *context);
+ 101:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 102:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_OUTPUT(BitmapCell, Type = Ft_Esd_BitmapCell *, DisplayName = "Bitmap Cell")
+ 103:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** Ft_Esd_BitmapCell *Ft_Esd_SwitchBitmapCell_BitmapCell(Ft_Esd_SwitchBitmapCell *context);
+ 104:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 105:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_UPDATE(Ft_Esd_BitmapPersist, DisplayName = "Bitmap Persist", Category = EsdUtilities)
+ 106:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *)
+ 107:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** void Ft_Esd_BitmapPersist(Ft_Esd_BitmapCell *bitmapCell);
+ 108:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 109:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_BitmapCell_GetInfo, Type = Ft_Esd_BitmapInfo *, DisplayName = "ESD BitmapCell G
+ 110:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *)
+ 111:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** static Ft_Esd_BitmapInfo *Ft_Esd_BitmapCell_GetInfo(Ft_Esd_BitmapCell *bitmapCell)
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 5
+
+
+ 112:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  80              		.loc 2 112 0 is_stmt 1
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 8
+  83              		@ frame_needed = 1, uses_anonymous_args = 0
+  84              		@ link register save eliminated.
+  85 0000 80B4     		push	{r7}
+  86              	.LCFI5:
+  87              		.cfi_def_cfa_offset 4
+  88              		.cfi_offset 7, -4
+  89 0002 83B0     		sub	sp, sp, #12
+  90              	.LCFI6:
+  91              		.cfi_def_cfa_offset 16
+  92 0004 00AF     		add	r7, sp, #0
+  93              	.LCFI7:
+  94              		.cfi_def_cfa_register 7
+  95 0006 7860     		str	r0, [r7, #4]
+ 113:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	if (!bitmapCell) return 0;
+  96              		.loc 2 113 0
+  97 0008 7B68     		ldr	r3, [r7, #4]
+  98 000a 002B     		cmp	r3, #0
+  99 000c 01D1     		bne	.L5
+ 100              		.loc 2 113 0 is_stmt 0 discriminator 1
+ 101 000e 0023     		movs	r3, #0
+ 102 0010 01E0     		b	.L6
+ 103              	.L5:
+ 114:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	return bitmapCell->Info;
+ 104              		.loc 2 114 0 is_stmt 1
+ 105 0012 7B68     		ldr	r3, [r7, #4]
+ 106 0014 1B68     		ldr	r3, [r3]
+ 107              	.L6:
+ 115:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** }
+ 108              		.loc 2 115 0
+ 109 0016 1846     		mov	r0, r3
+ 110 0018 0C37     		adds	r7, r7, #12
+ 111              	.LCFI8:
+ 112              		.cfi_def_cfa_offset 4
+ 113 001a BD46     		mov	sp, r7
+ 114              	.LCFI9:
+ 115              		.cfi_def_cfa_register 13
+ 116              		@ sp needed
+ 117 001c 5DF8047B 		ldr	r7, [sp], #4
+ 118              	.LCFI10:
+ 119              		.cfi_restore 7
+ 120              		.cfi_def_cfa_offset 0
+ 121 0020 7047     		bx	lr
+ 122              		.cfi_endproc
+ 123              	.LFE9:
+ 125              		.section	.text.Ft_Esd_Dl_COLOR_RGB,"ax",%progbits
+ 126              		.align	1
+ 127              		.syntax unified
+ 128              		.thumb
+ 129              		.thumb_func
+ 130              		.fpu fpv5-sp-d16
+ 132              	Ft_Esd_Dl_COLOR_RGB:
+ 133              	.LFB13:
+ 134              		.file 3 "FT_Esd_Framework/FT_Esd_Dl.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 6
+
+
+   1:FT_Esd_Framework/FT_Esd_Dl.h **** 
+   2:FT_Esd_Framework/FT_Esd_Dl.h **** #ifndef FT_ESD_DL_H
+   3:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_DL_H
+   4:FT_Esd_Framework/FT_Esd_Dl.h **** 
+   5:FT_Esd_Framework/FT_Esd_Dl.h **** #include "FT_DataTypes.h"
+   6:FT_Esd_Framework/FT_Esd_Dl.h **** #include "FT_Platform.h"
+   7:FT_Esd_Framework/FT_Esd_Dl.h **** #include "Ft_Esd.h"
+   8:FT_Esd_Framework/FT_Esd_Dl.h **** #include "FT_Gpu.h"
+   9:FT_Esd_Framework/FT_Esd_Dl.h **** #include "Ft_Esd_BitmapInfo.h"
+  10:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  11:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_CATEGORY(EsdUtilities, DisplayName = "ESD Utilities")
+  12:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_CATEGORY(EveRenderFunctions, DisplayName = "EVE Render Functions")
+  13:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  14:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_TYPE(Ft_Gpu_Hal_Context_t *, Native = Pointer, Edit = Library)
+  15:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  16:FT_Esd_Framework/FT_Esd_Dl.h **** // Keep cache of displaylist values that don't often change but are generally set by every widget t
+  17:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_OPTIMIZE_DISPLAYLIST 1
+  18:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_STATE_STACK_SIZE 5
+  19:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  20:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_BITMAPHANDLE_INVALID 255
+  21:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  22:FT_Esd_Framework/FT_Esd_Dl.h **** //
+  23:FT_Esd_Framework/FT_Esd_Dl.h **** // Structs
+  24:FT_Esd_Framework/FT_Esd_Dl.h **** //
+  25:FT_Esd_Framework/FT_Esd_Dl.h **** #ifdef FT_ESD_OPTIMIZE_DISPLAYLIST
+  26:FT_Esd_Framework/FT_Esd_Dl.h **** #define FT_ESD_STATE Ft_Esd_GpuState[Ft_Esd_GpuState_I]
+  27:FT_Esd_Framework/FT_Esd_Dl.h **** typedef struct
+  28:FT_Esd_Framework/FT_Esd_Dl.h **** {
+  29:FT_Esd_Framework/FT_Esd_Dl.h **** 	// Keep to a minimum
+  30:FT_Esd_Framework/FT_Esd_Dl.h **** #ifdef FT_81X_ENABLE
+  31:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint32_t PaletteSource;
+  32:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  33:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint32_t ColorRGB;
+  34:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint8_t ColorA;
+  35:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint8_t Handle;         // Current handle
+  36:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint8_t Cell;           // Current cell
+  37:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_bool_t BitmapTransform; // BitmapTransform other than default is set
+  38:FT_Esd_Framework/FT_Esd_Dl.h **** #ifdef FT_81X_ENABLE
+  39:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_uint8_t VertexFormat;   // Current vertex format
+  40:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  41:FT_Esd_Framework/FT_Esd_Dl.h **** } Ft_Esd_GpuState_T;
+  42:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  43:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  44:FT_Esd_Framework/FT_Esd_Dl.h **** //
+  45:FT_Esd_Framework/FT_Esd_Dl.h **** // Globals
+  46:FT_Esd_Framework/FT_Esd_Dl.h **** //
+  47:FT_Esd_Framework/FT_Esd_Dl.h **** extern Ft_Gpu_Hal_Context_t *Ft_Esd_Host;
+  48:FT_Esd_Framework/FT_Esd_Dl.h **** extern ft_uint16_t Ft_Esd_FontHeight[32];
+  49:FT_Esd_Framework/FT_Esd_Dl.h **** #ifdef FT_ESD_OPTIMIZE_DISPLAYLIST
+  50:FT_Esd_Framework/FT_Esd_Dl.h **** extern Ft_Esd_GpuState_T Ft_Esd_GpuState[FT_ESD_STATE_STACK_SIZE];
+  51:FT_Esd_Framework/FT_Esd_Dl.h **** extern ft_uint8_t Ft_Esd_GpuState_I;
+  52:FT_Esd_Framework/FT_Esd_Dl.h **** extern ft_uint32_t Ft_Esd_CoFgColor;
+  53:FT_Esd_Framework/FT_Esd_Dl.h **** extern ft_uint32_t Ft_Esd_CoBgColor;
+  54:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  55:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  56:FT_Esd_Framework/FT_Esd_Dl.h **** //Get the height of builtin font
+  57:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_FUNCTION(Ft_Esd_GetFontHeight, Type = ft_uint16_t ,DisplayName = "Get Font Height", Category = 
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 7
+
+
+  58:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_PARAMETER(i, Type = int, DisplayName = "Bitmap Handle", Default = 0, Min = 0, Max = 31)
+  59:FT_Esd_Framework/FT_Esd_Dl.h **** // inline static ft_uint16_t Ft_Esd_GetFontHeight(int i) { return Ft_Esd_FontHeight[i]; }
+  60:FT_Esd_Framework/FT_Esd_Dl.h **** #define Ft_Esd_GetFontHeight(i) (Ft_Esd_FontHeight[i]);
+  61:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  62:FT_Esd_Framework/FT_Esd_Dl.h **** // Reset any cached state
+  63:FT_Esd_Framework/FT_Esd_Dl.h **** void Ft_Esd_ResetGpuState();
+  64:FT_Esd_Framework/FT_Esd_Dl.h **** void Ft_Esd_ResetCoState();
+  65:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  66:FT_Esd_Framework/FT_Esd_Dl.h **** ft_uint32_t Ft_Esd_BitmapHandle_GetTotalUsed();
+  67:FT_Esd_Framework/FT_Esd_Dl.h **** ft_uint32_t Ft_Esd_BitmapHandle_GetTotal();
+  68:FT_Esd_Framework/FT_Esd_Dl.h **** 
+  69:FT_Esd_Framework/FT_Esd_Dl.h **** /// Set current tag. Must be returned to 255 after usage, to ensure next widgets don't draw with in
+  70:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_FUNCTION(Ft_Esd_Dl_TAG, Type = ft_void_t, Category = EveRenderFunctions, Inline)
+  71:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_PARAMETER(s, Type = ft_uint8_t, DisplayName = "Tag", Default = 255, Min = 0, Max = 255)
+  72:FT_Esd_Framework/FT_Esd_Dl.h **** inline static ft_void_t Ft_Esd_Dl_TAG(ft_uint8_t s)
+  73:FT_Esd_Framework/FT_Esd_Dl.h **** {
+  74:FT_Esd_Framework/FT_Esd_Dl.h **** 	Ft_Gpu_Hal_WrCmd32(Ft_Esd_Host, TAG(s));
+  75:FT_Esd_Framework/FT_Esd_Dl.h **** }
+  76:FT_Esd_Framework/FT_Esd_Dl.h **** //Specify color RGB
+  77:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_FUNCTION(Ft_Esd_Dl_COLOR_RGB, Type = ft_void_t, Category = EveRenderFunctions, Inline)
+  78:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_PARAMETER(c, Type = ft_rgb32_t, DisplayName = "Color")
+  79:FT_Esd_Framework/FT_Esd_Dl.h **** inline static ft_void_t Ft_Esd_Dl_COLOR_RGB(ft_rgb32_t c)
+  80:FT_Esd_Framework/FT_Esd_Dl.h **** {
+ 135              		.loc 3 80 0
+ 136              		.cfi_startproc
+ 137              		@ args = 0, pretend = 0, frame = 16
+ 138              		@ frame_needed = 1, uses_anonymous_args = 0
+ 139 0000 80B5     		push	{r7, lr}
+ 140              	.LCFI11:
+ 141              		.cfi_def_cfa_offset 8
+ 142              		.cfi_offset 7, -8
+ 143              		.cfi_offset 14, -4
+ 144 0002 84B0     		sub	sp, sp, #16
+ 145              	.LCFI12:
+ 146              		.cfi_def_cfa_offset 24
+ 147 0004 00AF     		add	r7, sp, #0
+ 148              	.LCFI13:
+ 149              		.cfi_def_cfa_register 7
+ 150 0006 7860     		str	r0, [r7, #4]
+  81:FT_Esd_Framework/FT_Esd_Dl.h **** #if FT_ESD_OPTIMIZE_DISPLAYLIST
+  82:FT_Esd_Framework/FT_Esd_Dl.h **** 	ft_rgb32_t rgb = c & 0xFFFFFF;
+ 151              		.loc 3 82 0
+ 152 0008 7B68     		ldr	r3, [r7, #4]
+ 153 000a 23F07F43 		bic	r3, r3, #-16777216
+ 154 000e FB60     		str	r3, [r7, #12]
+  83:FT_Esd_Framework/FT_Esd_Dl.h **** 	if (rgb != FT_ESD_STATE.ColorRGB)
+ 155              		.loc 3 83 0
+ 156 0010 0F4B     		ldr	r3, .L10
+ 157 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 158 0014 0F4A     		ldr	r2, .L10+4
+ 159 0016 1B01     		lsls	r3, r3, #4
+ 160 0018 1344     		add	r3, r3, r2
+ 161 001a 0433     		adds	r3, r3, #4
+ 162 001c 1B68     		ldr	r3, [r3]
+ 163 001e FA68     		ldr	r2, [r7, #12]
+ 164 0020 9A42     		cmp	r2, r3
+ 165 0022 10D0     		beq	.L9
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 8
+
+
+  84:FT_Esd_Framework/FT_Esd_Dl.h **** 	{
+  85:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  86:FT_Esd_Framework/FT_Esd_Dl.h **** 		Ft_Gpu_Hal_WrCmd32(Ft_Esd_Host, (4UL << 24) | (rgb));
+ 166              		.loc 3 86 0
+ 167 0024 0C4B     		ldr	r3, .L10+8
+ 168 0026 1A68     		ldr	r2, [r3]
+ 169 0028 FB68     		ldr	r3, [r7, #12]
+ 170 002a 43F08063 		orr	r3, r3, #67108864
+ 171 002e 1946     		mov	r1, r3
+ 172 0030 1046     		mov	r0, r2
+ 173 0032 FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+  87:FT_Esd_Framework/FT_Esd_Dl.h **** #if FT_ESD_OPTIMIZE_DISPLAYLIST
+  88:FT_Esd_Framework/FT_Esd_Dl.h **** 		FT_ESD_STATE.ColorRGB = rgb;
+ 174              		.loc 3 88 0
+ 175 0036 064B     		ldr	r3, .L10
+ 176 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 177 003a 064A     		ldr	r2, .L10+4
+ 178 003c 1B01     		lsls	r3, r3, #4
+ 179 003e 1344     		add	r3, r3, r2
+ 180 0040 0433     		adds	r3, r3, #4
+ 181 0042 FA68     		ldr	r2, [r7, #12]
+ 182 0044 1A60     		str	r2, [r3]
+ 183              	.L9:
+  89:FT_Esd_Framework/FT_Esd_Dl.h **** 	}
+  90:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+  91:FT_Esd_Framework/FT_Esd_Dl.h **** }
+ 184              		.loc 3 91 0
+ 185 0046 00BF     		nop
+ 186 0048 1037     		adds	r7, r7, #16
+ 187              	.LCFI14:
+ 188              		.cfi_def_cfa_offset 8
+ 189 004a BD46     		mov	sp, r7
+ 190              	.LCFI15:
+ 191              		.cfi_def_cfa_register 13
+ 192              		@ sp needed
+ 193 004c 80BD     		pop	{r7, pc}
+ 194              	.L11:
+ 195 004e 00BF     		.align	2
+ 196              	.L10:
+ 197 0050 00000000 		.word	Ft_Esd_GpuState_I
+ 198 0054 00000000 		.word	Ft_Esd_GpuState
+ 199 0058 00000000 		.word	Ft_Esd_Host
+ 200              		.cfi_endproc
+ 201              	.LFE13:
+ 203              		.section	.text.Ft_Esd_Dl_COLOR_A,"ax",%progbits
+ 204              		.align	1
+ 205              		.syntax unified
+ 206              		.thumb
+ 207              		.thumb_func
+ 208              		.fpu fpv5-sp-d16
+ 210              	Ft_Esd_Dl_COLOR_A:
+ 211              	.LFB14:
+  92:FT_Esd_Framework/FT_Esd_Dl.h **** //Specify alpha channel
+  93:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_FUNCTION(Ft_Esd_Dl_COLOR_A, Type = ft_void_t, Category = EveRenderFunctions, Inline)
+  94:FT_Esd_Framework/FT_Esd_Dl.h **** ESD_PARAMETER(alpha, Type = ft_uint8_t, Default = 255, Min = 0, Max = 255)
+  95:FT_Esd_Framework/FT_Esd_Dl.h **** inline static ft_void_t Ft_Esd_Dl_COLOR_A(ft_uint8_t alpha)
+  96:FT_Esd_Framework/FT_Esd_Dl.h **** {
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 9
+
+
+ 212              		.loc 3 96 0
+ 213              		.cfi_startproc
+ 214              		@ args = 0, pretend = 0, frame = 8
+ 215              		@ frame_needed = 1, uses_anonymous_args = 0
+ 216 0000 80B5     		push	{r7, lr}
+ 217              	.LCFI16:
+ 218              		.cfi_def_cfa_offset 8
+ 219              		.cfi_offset 7, -8
+ 220              		.cfi_offset 14, -4
+ 221 0002 82B0     		sub	sp, sp, #8
+ 222              	.LCFI17:
+ 223              		.cfi_def_cfa_offset 16
+ 224 0004 00AF     		add	r7, sp, #0
+ 225              	.LCFI18:
+ 226              		.cfi_def_cfa_register 7
+ 227 0006 0346     		mov	r3, r0
+ 228 0008 FB71     		strb	r3, [r7, #7]
+  97:FT_Esd_Framework/FT_Esd_Dl.h **** #if FT_ESD_OPTIMIZE_DISPLAYLIST
+  98:FT_Esd_Framework/FT_Esd_Dl.h **** 	if (alpha != FT_ESD_STATE.ColorA)
+ 229              		.loc 3 98 0
+ 230 000a 0F4B     		ldr	r3, .L15
+ 231 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 232 000e 0F4A     		ldr	r2, .L15+4
+ 233 0010 1B01     		lsls	r3, r3, #4
+ 234 0012 1344     		add	r3, r3, r2
+ 235 0014 0833     		adds	r3, r3, #8
+ 236 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 237 0018 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 238 001a 9A42     		cmp	r2, r3
+ 239 001c 10D0     		beq	.L14
+  99:FT_Esd_Framework/FT_Esd_Dl.h **** 	{
+ 100:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+ 101:FT_Esd_Framework/FT_Esd_Dl.h **** 		Ft_Gpu_Hal_WrCmd32(Ft_Esd_Host, COLOR_A(alpha));
+ 240              		.loc 3 101 0
+ 241 001e 0C4B     		ldr	r3, .L15+8
+ 242 0020 1A68     		ldr	r2, [r3]
+ 243 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 244 0024 43F08053 		orr	r3, r3, #268435456
+ 245 0028 1946     		mov	r1, r3
+ 246 002a 1046     		mov	r0, r2
+ 247 002c FFF7FEFF 		bl	Ft_Gpu_Hal_WrCmd32
+ 102:FT_Esd_Framework/FT_Esd_Dl.h **** #if FT_ESD_OPTIMIZE_DISPLAYLIST
+ 103:FT_Esd_Framework/FT_Esd_Dl.h **** 		FT_ESD_STATE.ColorA = alpha;
+ 248              		.loc 3 103 0
+ 249 0030 054B     		ldr	r3, .L15
+ 250 0032 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 251 0034 054A     		ldr	r2, .L15+4
+ 252 0036 1B01     		lsls	r3, r3, #4
+ 253 0038 1344     		add	r3, r3, r2
+ 254 003a 0833     		adds	r3, r3, #8
+ 255 003c FA79     		ldrb	r2, [r7, #7]
+ 256 003e 1A70     		strb	r2, [r3]
+ 257              	.L14:
+ 104:FT_Esd_Framework/FT_Esd_Dl.h **** 	}
+ 105:FT_Esd_Framework/FT_Esd_Dl.h **** #endif
+ 106:FT_Esd_Framework/FT_Esd_Dl.h **** }
+ 258              		.loc 3 106 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 10
+
+
+ 259 0040 00BF     		nop
+ 260 0042 0837     		adds	r7, r7, #8
+ 261              	.LCFI19:
+ 262              		.cfi_def_cfa_offset 8
+ 263 0044 BD46     		mov	sp, r7
+ 264              	.LCFI20:
+ 265              		.cfi_def_cfa_register 13
+ 266              		@ sp needed
+ 267 0046 80BD     		pop	{r7, pc}
+ 268              	.L16:
+ 269              		.align	2
+ 270              	.L15:
+ 271 0048 00000000 		.word	Ft_Esd_GpuState_I
+ 272 004c 00000000 		.word	Ft_Esd_GpuState
+ 273 0050 00000000 		.word	Ft_Esd_Host
+ 274              		.cfi_endproc
+ 275              	.LFE14:
+ 277              		.section	.text.Ft_Esd_Label_Theme__Default,"ax",%progbits
+ 278              		.align	1
+ 279              		.global	Ft_Esd_Label_Theme__Default
+ 280              		.syntax unified
+ 281              		.thumb
+ 282              		.thumb_func
+ 283              		.fpu fpv5-sp-d16
+ 285              	Ft_Esd_Label_Theme__Default:
+ 286              	.LFB23:
+ 287              		.file 4 "FT_Esd_Widgets/Ft_Esd_Label__Generated.c"
+   1:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** /*
+   2:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** This file is automatically generated
+   3:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** Ft_Esd_Label
+   4:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** C Source
+   5:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** */
+   6:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 
+   7:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** #include "Ft_Esd_Label.h"
+   8:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 
+   9:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** #include "FT_Esd_CoPro_Cmds.h"
+  10:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** #include "FT_Esd_Dl.h"
+  11:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 
+  12:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** extern void Ft_Esd_Noop(void *context);
+  13:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** Ft_Esd_Theme * Ft_Esd_Label_Theme__Default(void *context) { return Ft_Esd_Theme_GetCurrent(); }
+ 288              		.loc 4 13 0
+ 289              		.cfi_startproc
+ 290              		@ args = 0, pretend = 0, frame = 8
+ 291              		@ frame_needed = 1, uses_anonymous_args = 0
+ 292 0000 80B5     		push	{r7, lr}
+ 293              	.LCFI21:
+ 294              		.cfi_def_cfa_offset 8
+ 295              		.cfi_offset 7, -8
+ 296              		.cfi_offset 14, -4
+ 297 0002 82B0     		sub	sp, sp, #8
+ 298              	.LCFI22:
+ 299              		.cfi_def_cfa_offset 16
+ 300 0004 00AF     		add	r7, sp, #0
+ 301              	.LCFI23:
+ 302              		.cfi_def_cfa_register 7
+ 303 0006 7860     		str	r0, [r7, #4]
+ 304              		.loc 4 13 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 11
+
+
+ 305 0008 FFF7FEFF 		bl	Ft_Esd_Theme_GetCurrent
+ 306 000c 0346     		mov	r3, r0
+ 307 000e 1846     		mov	r0, r3
+ 308 0010 0837     		adds	r7, r7, #8
+ 309              	.LCFI24:
+ 310              		.cfi_def_cfa_offset 8
+ 311 0012 BD46     		mov	sp, r7
+ 312              	.LCFI25:
+ 313              		.cfi_def_cfa_register 13
+ 314              		@ sp needed
+ 315 0014 80BD     		pop	{r7, pc}
+ 316              		.cfi_endproc
+ 317              	.LFE23:
+ 319              		.section	.text.Ft_Esd_Label_Font__Default,"ax",%progbits
+ 320              		.align	1
+ 321              		.global	Ft_Esd_Label_Font__Default
+ 322              		.syntax unified
+ 323              		.thumb
+ 324              		.thumb_func
+ 325              		.fpu fpv5-sp-d16
+ 327              	Ft_Esd_Label_Font__Default:
+ 328              	.LFB24:
+  14:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** ft_int16_t Ft_Esd_Label_Font__Default(void *context) { return 27; }
+ 329              		.loc 4 14 0
+ 330              		.cfi_startproc
+ 331              		@ args = 0, pretend = 0, frame = 8
+ 332              		@ frame_needed = 1, uses_anonymous_args = 0
+ 333              		@ link register save eliminated.
+ 334 0000 80B4     		push	{r7}
+ 335              	.LCFI26:
+ 336              		.cfi_def_cfa_offset 4
+ 337              		.cfi_offset 7, -4
+ 338 0002 83B0     		sub	sp, sp, #12
+ 339              	.LCFI27:
+ 340              		.cfi_def_cfa_offset 16
+ 341 0004 00AF     		add	r7, sp, #0
+ 342              	.LCFI28:
+ 343              		.cfi_def_cfa_register 7
+ 344 0006 7860     		str	r0, [r7, #4]
+ 345              		.loc 4 14 0
+ 346 0008 1B23     		movs	r3, #27
+ 347 000a 1846     		mov	r0, r3
+ 348 000c 0C37     		adds	r7, r7, #12
+ 349              	.LCFI29:
+ 350              		.cfi_def_cfa_offset 4
+ 351 000e BD46     		mov	sp, r7
+ 352              	.LCFI30:
+ 353              		.cfi_def_cfa_register 13
+ 354              		@ sp needed
+ 355 0010 5DF8047B 		ldr	r7, [sp], #4
+ 356              	.LCFI31:
+ 357              		.cfi_restore 7
+ 358              		.cfi_def_cfa_offset 0
+ 359 0014 7047     		bx	lr
+ 360              		.cfi_endproc
+ 361              	.LFE24:
+ 363              		.section	.rodata
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 12
+
+
+ 364              		.align	2
+ 365              	.LC0:
+ 366 0000 4C616265 		.ascii	"Label\000"
+ 366      6C00
+ 367              		.section	.text.Ft_Esd_Label_Text__Default,"ax",%progbits
+ 368              		.align	1
+ 369              		.global	Ft_Esd_Label_Text__Default
+ 370              		.syntax unified
+ 371              		.thumb
+ 372              		.thumb_func
+ 373              		.fpu fpv5-sp-d16
+ 375              	Ft_Esd_Label_Text__Default:
+ 376              	.LFB25:
+  15:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** const char * Ft_Esd_Label_Text__Default(void *context) { return "Label"; }
+ 377              		.loc 4 15 0
+ 378              		.cfi_startproc
+ 379              		@ args = 0, pretend = 0, frame = 8
+ 380              		@ frame_needed = 1, uses_anonymous_args = 0
+ 381              		@ link register save eliminated.
+ 382 0000 80B4     		push	{r7}
+ 383              	.LCFI32:
+ 384              		.cfi_def_cfa_offset 4
+ 385              		.cfi_offset 7, -4
+ 386 0002 83B0     		sub	sp, sp, #12
+ 387              	.LCFI33:
+ 388              		.cfi_def_cfa_offset 16
+ 389 0004 00AF     		add	r7, sp, #0
+ 390              	.LCFI34:
+ 391              		.cfi_def_cfa_register 7
+ 392 0006 7860     		str	r0, [r7, #4]
+ 393              		.loc 4 15 0
+ 394 0008 034B     		ldr	r3, .L23
+ 395 000a 1846     		mov	r0, r3
+ 396 000c 0C37     		adds	r7, r7, #12
+ 397              	.LCFI35:
+ 398              		.cfi_def_cfa_offset 4
+ 399 000e BD46     		mov	sp, r7
+ 400              	.LCFI36:
+ 401              		.cfi_def_cfa_register 13
+ 402              		@ sp needed
+ 403 0010 5DF8047B 		ldr	r7, [sp], #4
+ 404              	.LCFI37:
+ 405              		.cfi_restore 7
+ 406              		.cfi_def_cfa_offset 0
+ 407 0014 7047     		bx	lr
+ 408              	.L24:
+ 409 0016 00BF     		.align	2
+ 410              	.L23:
+ 411 0018 00000000 		.word	.LC0
+ 412              		.cfi_endproc
+ 413              	.LFE25:
+ 415              		.section	.text.Ft_Esd_Label_X__Default,"ax",%progbits
+ 416              		.align	1
+ 417              		.global	Ft_Esd_Label_X__Default
+ 418              		.syntax unified
+ 419              		.thumb
+ 420              		.thumb_func
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 13
+
+
+ 421              		.fpu fpv5-sp-d16
+ 423              	Ft_Esd_Label_X__Default:
+ 424              	.LFB26:
+  16:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** ft_int16_t Ft_Esd_Label_X__Default(void *context) { return 0; }
+ 425              		.loc 4 16 0
+ 426              		.cfi_startproc
+ 427              		@ args = 0, pretend = 0, frame = 8
+ 428              		@ frame_needed = 1, uses_anonymous_args = 0
+ 429              		@ link register save eliminated.
+ 430 0000 80B4     		push	{r7}
+ 431              	.LCFI38:
+ 432              		.cfi_def_cfa_offset 4
+ 433              		.cfi_offset 7, -4
+ 434 0002 83B0     		sub	sp, sp, #12
+ 435              	.LCFI39:
+ 436              		.cfi_def_cfa_offset 16
+ 437 0004 00AF     		add	r7, sp, #0
+ 438              	.LCFI40:
+ 439              		.cfi_def_cfa_register 7
+ 440 0006 7860     		str	r0, [r7, #4]
+ 441              		.loc 4 16 0
+ 442 0008 0023     		movs	r3, #0
+ 443 000a 1846     		mov	r0, r3
+ 444 000c 0C37     		adds	r7, r7, #12
+ 445              	.LCFI41:
+ 446              		.cfi_def_cfa_offset 4
+ 447 000e BD46     		mov	sp, r7
+ 448              	.LCFI42:
+ 449              		.cfi_def_cfa_register 13
+ 450              		@ sp needed
+ 451 0010 5DF8047B 		ldr	r7, [sp], #4
+ 452              	.LCFI43:
+ 453              		.cfi_restore 7
+ 454              		.cfi_def_cfa_offset 0
+ 455 0014 7047     		bx	lr
+ 456              		.cfi_endproc
+ 457              	.LFE26:
+ 459              		.section	.text.Ft_Esd_Label_Y__Default,"ax",%progbits
+ 460              		.align	1
+ 461              		.global	Ft_Esd_Label_Y__Default
+ 462              		.syntax unified
+ 463              		.thumb
+ 464              		.thumb_func
+ 465              		.fpu fpv5-sp-d16
+ 467              	Ft_Esd_Label_Y__Default:
+ 468              	.LFB27:
+  17:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** ft_int16_t Ft_Esd_Label_Y__Default(void *context) { return 0; }
+ 469              		.loc 4 17 0
+ 470              		.cfi_startproc
+ 471              		@ args = 0, pretend = 0, frame = 8
+ 472              		@ frame_needed = 1, uses_anonymous_args = 0
+ 473              		@ link register save eliminated.
+ 474 0000 80B4     		push	{r7}
+ 475              	.LCFI44:
+ 476              		.cfi_def_cfa_offset 4
+ 477              		.cfi_offset 7, -4
+ 478 0002 83B0     		sub	sp, sp, #12
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 14
+
+
+ 479              	.LCFI45:
+ 480              		.cfi_def_cfa_offset 16
+ 481 0004 00AF     		add	r7, sp, #0
+ 482              	.LCFI46:
+ 483              		.cfi_def_cfa_register 7
+ 484 0006 7860     		str	r0, [r7, #4]
+ 485              		.loc 4 17 0
+ 486 0008 0023     		movs	r3, #0
+ 487 000a 1846     		mov	r0, r3
+ 488 000c 0C37     		adds	r7, r7, #12
+ 489              	.LCFI47:
+ 490              		.cfi_def_cfa_offset 4
+ 491 000e BD46     		mov	sp, r7
+ 492              	.LCFI48:
+ 493              		.cfi_def_cfa_register 13
+ 494              		@ sp needed
+ 495 0010 5DF8047B 		ldr	r7, [sp], #4
+ 496              	.LCFI49:
+ 497              		.cfi_restore 7
+ 498              		.cfi_def_cfa_offset 0
+ 499 0014 7047     		bx	lr
+ 500              		.cfi_endproc
+ 501              	.LFE27:
+ 503              		.section	.text.Ft_Esd_Label_Width__Default,"ax",%progbits
+ 504              		.align	1
+ 505              		.global	Ft_Esd_Label_Width__Default
+ 506              		.syntax unified
+ 507              		.thumb
+ 508              		.thumb_func
+ 509              		.fpu fpv5-sp-d16
+ 511              	Ft_Esd_Label_Width__Default:
+ 512              	.LFB28:
+  18:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** ft_int16_t Ft_Esd_Label_Width__Default(void *context) { return 120; }
+ 513              		.loc 4 18 0
+ 514              		.cfi_startproc
+ 515              		@ args = 0, pretend = 0, frame = 8
+ 516              		@ frame_needed = 1, uses_anonymous_args = 0
+ 517              		@ link register save eliminated.
+ 518 0000 80B4     		push	{r7}
+ 519              	.LCFI50:
+ 520              		.cfi_def_cfa_offset 4
+ 521              		.cfi_offset 7, -4
+ 522 0002 83B0     		sub	sp, sp, #12
+ 523              	.LCFI51:
+ 524              		.cfi_def_cfa_offset 16
+ 525 0004 00AF     		add	r7, sp, #0
+ 526              	.LCFI52:
+ 527              		.cfi_def_cfa_register 7
+ 528 0006 7860     		str	r0, [r7, #4]
+ 529              		.loc 4 18 0
+ 530 0008 7823     		movs	r3, #120
+ 531 000a 1846     		mov	r0, r3
+ 532 000c 0C37     		adds	r7, r7, #12
+ 533              	.LCFI53:
+ 534              		.cfi_def_cfa_offset 4
+ 535 000e BD46     		mov	sp, r7
+ 536              	.LCFI54:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 15
+
+
+ 537              		.cfi_def_cfa_register 13
+ 538              		@ sp needed
+ 539 0010 5DF8047B 		ldr	r7, [sp], #4
+ 540              	.LCFI55:
+ 541              		.cfi_restore 7
+ 542              		.cfi_def_cfa_offset 0
+ 543 0014 7047     		bx	lr
+ 544              		.cfi_endproc
+ 545              	.LFE28:
+ 547              		.section	.text.Ft_Esd_Label_Height__Default,"ax",%progbits
+ 548              		.align	1
+ 549              		.global	Ft_Esd_Label_Height__Default
+ 550              		.syntax unified
+ 551              		.thumb
+ 552              		.thumb_func
+ 553              		.fpu fpv5-sp-d16
+ 555              	Ft_Esd_Label_Height__Default:
+ 556              	.LFB29:
+  19:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** ft_int16_t Ft_Esd_Label_Height__Default(void *context) { return 36; }
+ 557              		.loc 4 19 0
+ 558              		.cfi_startproc
+ 559              		@ args = 0, pretend = 0, frame = 8
+ 560              		@ frame_needed = 1, uses_anonymous_args = 0
+ 561              		@ link register save eliminated.
+ 562 0000 80B4     		push	{r7}
+ 563              	.LCFI56:
+ 564              		.cfi_def_cfa_offset 4
+ 565              		.cfi_offset 7, -4
+ 566 0002 83B0     		sub	sp, sp, #12
+ 567              	.LCFI57:
+ 568              		.cfi_def_cfa_offset 16
+ 569 0004 00AF     		add	r7, sp, #0
+ 570              	.LCFI58:
+ 571              		.cfi_def_cfa_register 7
+ 572 0006 7860     		str	r0, [r7, #4]
+ 573              		.loc 4 19 0
+ 574 0008 2423     		movs	r3, #36
+ 575 000a 1846     		mov	r0, r3
+ 576 000c 0C37     		adds	r7, r7, #12
+ 577              	.LCFI59:
+ 578              		.cfi_def_cfa_offset 4
+ 579 000e BD46     		mov	sp, r7
+ 580              	.LCFI60:
+ 581              		.cfi_def_cfa_register 13
+ 582              		@ sp needed
+ 583 0010 5DF8047B 		ldr	r7, [sp], #4
+ 584              	.LCFI61:
+ 585              		.cfi_restore 7
+ 586              		.cfi_def_cfa_offset 0
+ 587 0014 7047     		bx	lr
+ 588              		.cfi_endproc
+ 589              	.LFE29:
+ 591              		.section	.text.Ft_Esd_Label_AlignX__Default,"ax",%progbits
+ 592              		.align	1
+ 593              		.global	Ft_Esd_Label_AlignX__Default
+ 594              		.syntax unified
+ 595              		.thumb
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 16
+
+
+ 596              		.thumb_func
+ 597              		.fpu fpv5-sp-d16
+ 599              	Ft_Esd_Label_AlignX__Default:
+ 600              	.LFB30:
+  20:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** ft_uint16_t Ft_Esd_Label_AlignX__Default(void *context) { return OPT_ALIGN_LEFT; }
+ 601              		.loc 4 20 0
+ 602              		.cfi_startproc
+ 603              		@ args = 0, pretend = 0, frame = 8
+ 604              		@ frame_needed = 1, uses_anonymous_args = 0
+ 605              		@ link register save eliminated.
+ 606 0000 80B4     		push	{r7}
+ 607              	.LCFI62:
+ 608              		.cfi_def_cfa_offset 4
+ 609              		.cfi_offset 7, -4
+ 610 0002 83B0     		sub	sp, sp, #12
+ 611              	.LCFI63:
+ 612              		.cfi_def_cfa_offset 16
+ 613 0004 00AF     		add	r7, sp, #0
+ 614              	.LCFI64:
+ 615              		.cfi_def_cfa_register 7
+ 616 0006 7860     		str	r0, [r7, #4]
+ 617              		.loc 4 20 0
+ 618 0008 0023     		movs	r3, #0
+ 619 000a 1846     		mov	r0, r3
+ 620 000c 0C37     		adds	r7, r7, #12
+ 621              	.LCFI65:
+ 622              		.cfi_def_cfa_offset 4
+ 623 000e BD46     		mov	sp, r7
+ 624              	.LCFI66:
+ 625              		.cfi_def_cfa_register 13
+ 626              		@ sp needed
+ 627 0010 5DF8047B 		ldr	r7, [sp], #4
+ 628              	.LCFI67:
+ 629              		.cfi_restore 7
+ 630              		.cfi_def_cfa_offset 0
+ 631 0014 7047     		bx	lr
+ 632              		.cfi_endproc
+ 633              	.LFE30:
+ 635              		.section	.text.Ft_Esd_Label_AlignY__Default,"ax",%progbits
+ 636              		.align	1
+ 637              		.global	Ft_Esd_Label_AlignY__Default
+ 638              		.syntax unified
+ 639              		.thumb
+ 640              		.thumb_func
+ 641              		.fpu fpv5-sp-d16
+ 643              	Ft_Esd_Label_AlignY__Default:
+ 644              	.LFB31:
+  21:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** ft_uint16_t Ft_Esd_Label_AlignY__Default(void *context) { return OPT_ALIGN_TOP; }
+ 645              		.loc 4 21 0
+ 646              		.cfi_startproc
+ 647              		@ args = 0, pretend = 0, frame = 8
+ 648              		@ frame_needed = 1, uses_anonymous_args = 0
+ 649              		@ link register save eliminated.
+ 650 0000 80B4     		push	{r7}
+ 651              	.LCFI68:
+ 652              		.cfi_def_cfa_offset 4
+ 653              		.cfi_offset 7, -4
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 17
+
+
+ 654 0002 83B0     		sub	sp, sp, #12
+ 655              	.LCFI69:
+ 656              		.cfi_def_cfa_offset 16
+ 657 0004 00AF     		add	r7, sp, #0
+ 658              	.LCFI70:
+ 659              		.cfi_def_cfa_register 7
+ 660 0006 7860     		str	r0, [r7, #4]
+ 661              		.loc 4 21 0
+ 662 0008 0023     		movs	r3, #0
+ 663 000a 1846     		mov	r0, r3
+ 664 000c 0C37     		adds	r7, r7, #12
+ 665              	.LCFI71:
+ 666              		.cfi_def_cfa_offset 4
+ 667 000e BD46     		mov	sp, r7
+ 668              	.LCFI72:
+ 669              		.cfi_def_cfa_register 13
+ 670              		@ sp needed
+ 671 0010 5DF8047B 		ldr	r7, [sp], #4
+ 672              	.LCFI73:
+ 673              		.cfi_restore 7
+ 674              		.cfi_def_cfa_offset 0
+ 675 0014 7047     		bx	lr
+ 676              		.cfi_endproc
+ 677              	.LFE31:
+ 679              		.section	.text.Ft_Esd_Label__Initializer,"ax",%progbits
+ 680              		.align	1
+ 681              		.global	Ft_Esd_Label__Initializer
+ 682              		.syntax unified
+ 683              		.thumb
+ 684              		.thumb_func
+ 685              		.fpu fpv5-sp-d16
+ 687              	Ft_Esd_Label__Initializer:
+ 688              	.LFB32:
+  22:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 
+  23:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** Ft_Esd_Theme * Ft_Esd_Theme_GetCurrent();
+  24:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** Ft_Gpu_Hal_Context_t * Ft_Esd_GetHost();
+  25:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 
+  26:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 
+  27:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** void Ft_Esd_Label__Initializer(Ft_Esd_Label *context)
+  28:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** {
+ 689              		.loc 4 28 0
+ 690              		.cfi_startproc
+ 691              		@ args = 0, pretend = 0, frame = 8
+ 692              		@ frame_needed = 1, uses_anonymous_args = 0
+ 693              		@ link register save eliminated.
+ 694 0000 80B4     		push	{r7}
+ 695              	.LCFI74:
+ 696              		.cfi_def_cfa_offset 4
+ 697              		.cfi_offset 7, -4
+ 698 0002 83B0     		sub	sp, sp, #12
+ 699              	.LCFI75:
+ 700              		.cfi_def_cfa_offset 16
+ 701 0004 00AF     		add	r7, sp, #0
+ 702              	.LCFI76:
+ 703              		.cfi_def_cfa_register 7
+ 704 0006 7860     		str	r0, [r7, #4]
+  29:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->Parent = 0;
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 18
+
+
+ 705              		.loc 4 29 0
+ 706 0008 7B68     		ldr	r3, [r7, #4]
+ 707 000a 0022     		movs	r2, #0
+ 708 000c 1A60     		str	r2, [r3]
+  30:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->Theme = Ft_Esd_Label_Theme__Default;
+ 709              		.loc 4 30 0
+ 710 000e 7B68     		ldr	r3, [r7, #4]
+ 711 0010 0F4A     		ldr	r2, .L38
+ 712 0012 5A60     		str	r2, [r3, #4]
+  31:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->Font = Ft_Esd_Label_Font__Default;
+ 713              		.loc 4 31 0
+ 714 0014 7B68     		ldr	r3, [r7, #4]
+ 715 0016 0F4A     		ldr	r2, .L38+4
+ 716 0018 9A60     		str	r2, [r3, #8]
+  32:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->Text = Ft_Esd_Label_Text__Default;
+ 717              		.loc 4 32 0
+ 718 001a 7B68     		ldr	r3, [r7, #4]
+ 719 001c 0E4A     		ldr	r2, .L38+8
+ 720 001e DA60     		str	r2, [r3, #12]
+  33:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->X = Ft_Esd_Label_X__Default;
+ 721              		.loc 4 33 0
+ 722 0020 7B68     		ldr	r3, [r7, #4]
+ 723 0022 0E4A     		ldr	r2, .L38+12
+ 724 0024 1A61     		str	r2, [r3, #16]
+  34:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->Y = Ft_Esd_Label_Y__Default;
+ 725              		.loc 4 34 0
+ 726 0026 7B68     		ldr	r3, [r7, #4]
+ 727 0028 0D4A     		ldr	r2, .L38+16
+ 728 002a 5A61     		str	r2, [r3, #20]
+  35:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->Width = Ft_Esd_Label_Width__Default;
+ 729              		.loc 4 35 0
+ 730 002c 7B68     		ldr	r3, [r7, #4]
+ 731 002e 0D4A     		ldr	r2, .L38+20
+ 732 0030 9A61     		str	r2, [r3, #24]
+  36:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->Height = Ft_Esd_Label_Height__Default;
+ 733              		.loc 4 36 0
+ 734 0032 7B68     		ldr	r3, [r7, #4]
+ 735 0034 0C4A     		ldr	r2, .L38+24
+ 736 0036 DA61     		str	r2, [r3, #28]
+  37:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->AlignX = Ft_Esd_Label_AlignX__Default;
+ 737              		.loc 4 37 0
+ 738 0038 7B68     		ldr	r3, [r7, #4]
+ 739 003a 0C4A     		ldr	r2, .L38+28
+ 740 003c 1A62     		str	r2, [r3, #32]
+  38:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	context->AlignY = Ft_Esd_Label_AlignY__Default;
+ 741              		.loc 4 38 0
+ 742 003e 7B68     		ldr	r3, [r7, #4]
+ 743 0040 0B4A     		ldr	r2, .L38+32
+ 744 0042 5A62     		str	r2, [r3, #36]
+  39:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** }
+ 745              		.loc 4 39 0
+ 746 0044 00BF     		nop
+ 747 0046 0C37     		adds	r7, r7, #12
+ 748              	.LCFI77:
+ 749              		.cfi_def_cfa_offset 4
+ 750 0048 BD46     		mov	sp, r7
+ 751              	.LCFI78:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 19
+
+
+ 752              		.cfi_def_cfa_register 13
+ 753              		@ sp needed
+ 754 004a 5DF8047B 		ldr	r7, [sp], #4
+ 755              	.LCFI79:
+ 756              		.cfi_restore 7
+ 757              		.cfi_def_cfa_offset 0
+ 758 004e 7047     		bx	lr
+ 759              	.L39:
+ 760              		.align	2
+ 761              	.L38:
+ 762 0050 00000000 		.word	Ft_Esd_Label_Theme__Default
+ 763 0054 00000000 		.word	Ft_Esd_Label_Font__Default
+ 764 0058 00000000 		.word	Ft_Esd_Label_Text__Default
+ 765 005c 00000000 		.word	Ft_Esd_Label_X__Default
+ 766 0060 00000000 		.word	Ft_Esd_Label_Y__Default
+ 767 0064 00000000 		.word	Ft_Esd_Label_Width__Default
+ 768 0068 00000000 		.word	Ft_Esd_Label_Height__Default
+ 769 006c 00000000 		.word	Ft_Esd_Label_AlignX__Default
+ 770 0070 00000000 		.word	Ft_Esd_Label_AlignY__Default
+ 771              		.cfi_endproc
+ 772              	.LFE32:
+ 774              		.section	.text.Ft_Esd_Label_Render,"ax",%progbits
+ 775              		.align	1
+ 776              		.global	Ft_Esd_Label_Render
+ 777              		.syntax unified
+ 778              		.thumb
+ 779              		.thumb_func
+ 780              		.fpu fpv5-sp-d16
+ 782              	Ft_Esd_Label_Render:
+ 783              	.LFB33:
+  40:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 
+  41:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** ft_void_t Ft_Gpu_CoCmd_Text(Ft_Gpu_Hal_Context_t *, ft_int16_t, ft_int16_t, ft_int16_t, ft_uint16_t
+  42:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 
+  43:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** void Ft_Esd_Label_Render(Ft_Esd_Label *context)
+  44:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** {
+ 784              		.loc 4 44 0
+ 785              		.cfi_startproc
+ 786              		@ args = 0, pretend = 0, frame = 176
+ 787              		@ frame_needed = 1, uses_anonymous_args = 0
+ 788 0000 80B5     		push	{r7, lr}
+ 789              	.LCFI80:
+ 790              		.cfi_def_cfa_offset 8
+ 791              		.cfi_offset 7, -8
+ 792              		.cfi_offset 14, -4
+ 793 0002 AEB0     		sub	sp, sp, #184
+ 794              	.LCFI81:
+ 795              		.cfi_def_cfa_offset 192
+ 796 0004 02AF     		add	r7, sp, #8
+ 797              	.LCFI82:
+ 798              		.cfi_def_cfa 7, 184
+ 799 0006 7860     		str	r0, [r7, #4]
+  45:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	void *parent = context->Parent;
+ 800              		.loc 4 45 0
+ 801 0008 7B68     		ldr	r3, [r7, #4]
+ 802 000a 1B68     		ldr	r3, [r3]
+ 803 000c C7F8A030 		str	r3, [r7, #160]
+  46:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_uint8_t alpha = 255;
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 20
+
+
+ 804              		.loc 4 46 0
+ 805 0010 FF23     		movs	r3, #255
+ 806 0012 87F89F30 		strb	r3, [r7, #159]
+  47:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	Ft_Esd_Dl_COLOR_A(alpha);
+ 807              		.loc 4 47 0
+ 808 0016 97F89F30 		ldrb	r3, [r7, #159]	@ zero_extendqisi2
+ 809 001a 1846     		mov	r0, r3
+ 810 001c FFF7FEFF 		bl	Ft_Esd_Dl_COLOR_A
+  48:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	Ft_Esd_Theme * theme = context->Theme(parent);
+ 811              		.loc 4 48 0
+ 812 0020 7B68     		ldr	r3, [r7, #4]
+ 813 0022 5B68     		ldr	r3, [r3, #4]
+ 814 0024 D7F8A000 		ldr	r0, [r7, #160]
+ 815 0028 9847     		blx	r3
+ 816              	.LVL0:
+ 817 002a C7F89800 		str	r0, [r7, #152]
+  49:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_rgb32_t c = Ft_Esd_Theme_GetTextColor(theme);
+ 818              		.loc 4 49 0
+ 819 002e D7F89800 		ldr	r0, [r7, #152]
+ 820 0032 FFF7FEFF 		bl	Ft_Esd_Theme_GetTextColor
+ 821 0036 C7F89400 		str	r0, [r7, #148]
+  50:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	Ft_Esd_Dl_COLOR_RGB(c);
+ 822              		.loc 4 50 0
+ 823 003a D7F89400 		ldr	r0, [r7, #148]
+ 824 003e FFF7FEFF 		bl	Ft_Esd_Dl_COLOR_RGB
+  51:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	Ft_Gpu_Hal_Context_t * phost = Ft_Esd_GetHost();
+ 825              		.loc 4 51 0
+ 826 0042 FFF7FEFF 		bl	Ft_Esd_GetHost
+ 827 0046 C7F89000 		str	r0, [r7, #144]
+  52:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_uint16_t left = context->AlignX(parent);
+ 828              		.loc 4 52 0
+ 829 004a 7B68     		ldr	r3, [r7, #4]
+ 830 004c 1B6A     		ldr	r3, [r3, #32]
+ 831 004e D7F8A000 		ldr	r0, [r7, #160]
+ 832 0052 9847     		blx	r3
+ 833              	.LVL1:
+ 834 0054 0346     		mov	r3, r0
+ 835 0056 A7F88E30 		strh	r3, [r7, #142]	@ movhi
+  53:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int right = 0L;
+ 836              		.loc 4 53 0
+ 837 005a 0023     		movs	r3, #0
+ 838 005c C7F88830 		str	r3, [r7, #136]
+  54:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int if_1 = left == right;
+ 839              		.loc 4 54 0
+ 840 0060 B7F88E30 		ldrh	r3, [r7, #142]
+ 841 0064 D7F88820 		ldr	r2, [r7, #136]
+ 842 0068 9A42     		cmp	r2, r3
+ 843 006a 0CBF     		ite	eq
+ 844 006c 0123     		moveq	r3, #1
+ 845 006e 0023     		movne	r3, #0
+ 846 0070 DBB2     		uxtb	r3, r3
+ 847 0072 C7F88430 		str	r3, [r7, #132]
+  55:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int x;
+  56:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	if (if_1)
+ 848              		.loc 4 56 0
+ 849 0076 D7F88430 		ldr	r3, [r7, #132]
+ 850 007a 002B     		cmp	r3, #0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 21
+
+
+ 851 007c 08D0     		beq	.L41
+  57:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	{
+  58:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		x = context->X(parent);
+ 852              		.loc 4 58 0
+ 853 007e 7B68     		ldr	r3, [r7, #4]
+ 854 0080 1B69     		ldr	r3, [r3, #16]
+ 855 0082 D7F8A000 		ldr	r0, [r7, #160]
+ 856 0086 9847     		blx	r3
+ 857              	.LVL2:
+ 858 0088 0346     		mov	r3, r0
+ 859 008a C7F8AC30 		str	r3, [r7, #172]
+ 860 008e 4BE0     		b	.L42
+ 861              	.L41:
+ 862              	.LBB2:
+  59:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	}
+  60:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	else
+  61:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	{
+  62:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		ft_uint16_t left_1 = context->AlignX(parent);
+ 863              		.loc 4 62 0
+ 864 0090 7B68     		ldr	r3, [r7, #4]
+ 865 0092 1B6A     		ldr	r3, [r3, #32]
+ 866 0094 D7F8A000 		ldr	r0, [r7, #160]
+ 867 0098 9847     		blx	r3
+ 868              	.LVL3:
+ 869 009a 0346     		mov	r3, r0
+ 870 009c A7F88230 		strh	r3, [r7, #130]	@ movhi
+  63:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		int right_1 = 2L;
+ 871              		.loc 4 63 0
+ 872 00a0 0223     		movs	r3, #2
+ 873 00a2 FB67     		str	r3, [r7, #124]
+  64:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		int if_2 = left_1 == right_1;
+ 874              		.loc 4 64 0
+ 875 00a4 B7F88230 		ldrh	r3, [r7, #130]
+ 876 00a8 FA6F     		ldr	r2, [r7, #124]
+ 877 00aa 9A42     		cmp	r2, r3
+ 878 00ac 0CBF     		ite	eq
+ 879 00ae 0123     		moveq	r3, #1
+ 880 00b0 0023     		movne	r3, #0
+ 881 00b2 DBB2     		uxtb	r3, r3
+ 882 00b4 BB67     		str	r3, [r7, #120]
+  65:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		if (if_2)
+ 883              		.loc 4 65 0
+ 884 00b6 BB6F     		ldr	r3, [r7, #120]
+ 885 00b8 002B     		cmp	r3, #0
+ 886 00ba 17D0     		beq	.L43
+ 887              	.LBB3:
+  66:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		{
+  67:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			ft_int16_t left_2 = context->X(parent);
+ 888              		.loc 4 67 0
+ 889 00bc 7B68     		ldr	r3, [r7, #4]
+ 890 00be 1B69     		ldr	r3, [r3, #16]
+ 891 00c0 D7F8A000 		ldr	r0, [r7, #160]
+ 892 00c4 9847     		blx	r3
+ 893              	.LVL4:
+ 894 00c6 0346     		mov	r3, r0
+ 895 00c8 A7F86A30 		strh	r3, [r7, #106]	@ movhi
+  68:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			ft_int16_t right_2 = context->Width(parent);
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 22
+
+
+ 896              		.loc 4 68 0
+ 897 00cc 7B68     		ldr	r3, [r7, #4]
+ 898 00ce 9B69     		ldr	r3, [r3, #24]
+ 899 00d0 D7F8A000 		ldr	r0, [r7, #160]
+ 900 00d4 9847     		blx	r3
+ 901              	.LVL5:
+ 902 00d6 0346     		mov	r3, r0
+ 903 00d8 A7F86830 		strh	r3, [r7, #104]	@ movhi
+  69:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			x = left_2 + right_2;
+ 904              		.loc 4 69 0
+ 905 00dc B7F96A20 		ldrsh	r2, [r7, #106]
+ 906 00e0 B7F96830 		ldrsh	r3, [r7, #104]
+ 907 00e4 1344     		add	r3, r3, r2
+ 908 00e6 C7F8AC30 		str	r3, [r7, #172]
+ 909              	.LBE3:
+ 910 00ea 1DE0     		b	.L42
+ 911              	.L43:
+ 912              	.LBB4:
+  70:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		}
+  71:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		else
+  72:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		{
+  73:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			ft_int16_t left_3 = context->X(parent);
+ 913              		.loc 4 73 0
+ 914 00ec 7B68     		ldr	r3, [r7, #4]
+ 915 00ee 1B69     		ldr	r3, [r3, #16]
+ 916 00f0 D7F8A000 		ldr	r0, [r7, #160]
+ 917 00f4 9847     		blx	r3
+ 918              	.LVL6:
+ 919 00f6 0346     		mov	r3, r0
+ 920 00f8 A7F87630 		strh	r3, [r7, #118]	@ movhi
+  74:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			ft_int16_t left_4 = context->Width(parent);
+ 921              		.loc 4 74 0
+ 922 00fc 7B68     		ldr	r3, [r7, #4]
+ 923 00fe 9B69     		ldr	r3, [r3, #24]
+ 924 0100 D7F8A000 		ldr	r0, [r7, #160]
+ 925 0104 9847     		blx	r3
+ 926              	.LVL7:
+ 927 0106 0346     		mov	r3, r0
+ 928 0108 A7F87430 		strh	r3, [r7, #116]	@ movhi
+  75:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			int right_4 = 2L;
+ 929              		.loc 4 75 0
+ 930 010c 0223     		movs	r3, #2
+ 931 010e 3B67     		str	r3, [r7, #112]
+  76:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			int right_3 = left_4 / right_4;
+ 932              		.loc 4 76 0
+ 933 0110 B7F97420 		ldrsh	r2, [r7, #116]
+ 934 0114 3B6F     		ldr	r3, [r7, #112]
+ 935 0116 92FBF3F3 		sdiv	r3, r2, r3
+ 936 011a FB66     		str	r3, [r7, #108]
+  77:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			x = left_3 + right_3;
+ 937              		.loc 4 77 0
+ 938 011c B7F97630 		ldrsh	r3, [r7, #118]
+ 939 0120 FA6E     		ldr	r2, [r7, #108]
+ 940 0122 1344     		add	r3, r3, r2
+ 941 0124 C7F8AC30 		str	r3, [r7, #172]
+ 942              	.L42:
+ 943              	.LBE4:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 23
+
+
+ 944              	.LBE2:
+  78:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		}
+  79:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	}
+  80:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_uint16_t left_5 = context->AlignY(parent);
+ 945              		.loc 4 80 0
+ 946 0128 7B68     		ldr	r3, [r7, #4]
+ 947 012a 5B6A     		ldr	r3, [r3, #36]
+ 948 012c D7F8A000 		ldr	r0, [r7, #160]
+ 949 0130 9847     		blx	r3
+ 950              	.LVL8:
+ 951 0132 0346     		mov	r3, r0
+ 952 0134 A7F86630 		strh	r3, [r7, #102]	@ movhi
+  81:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int right_5 = 1L;
+ 953              		.loc 4 81 0
+ 954 0138 0123     		movs	r3, #1
+ 955 013a 3B66     		str	r3, [r7, #96]
+  82:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int if_3 = left_5 == right_5;
+ 956              		.loc 4 82 0
+ 957 013c B7F86630 		ldrh	r3, [r7, #102]
+ 958 0140 3A6E     		ldr	r2, [r7, #96]
+ 959 0142 9A42     		cmp	r2, r3
+ 960 0144 0CBF     		ite	eq
+ 961 0146 0123     		moveq	r3, #1
+ 962 0148 0023     		movne	r3, #0
+ 963 014a DBB2     		uxtb	r3, r3
+ 964 014c FB65     		str	r3, [r7, #92]
+  83:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int y;
+  84:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	if (if_3)
+ 965              		.loc 4 84 0
+ 966 014e FB6D     		ldr	r3, [r7, #92]
+ 967 0150 002B     		cmp	r3, #0
+ 968 0152 1ED0     		beq	.L44
+ 969              	.LBB5:
+  85:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	{
+  86:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		ft_int16_t left_6 = context->Y(parent);
+ 970              		.loc 4 86 0
+ 971 0154 7B68     		ldr	r3, [r7, #4]
+ 972 0156 5B69     		ldr	r3, [r3, #20]
+ 973 0158 D7F8A000 		ldr	r0, [r7, #160]
+ 974 015c 9847     		blx	r3
+ 975              	.LVL9:
+ 976 015e 0346     		mov	r3, r0
+ 977 0160 A7F84230 		strh	r3, [r7, #66]	@ movhi
+  87:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		ft_int16_t left_7 = context->Height(parent);
+ 978              		.loc 4 87 0
+ 979 0164 7B68     		ldr	r3, [r7, #4]
+ 980 0166 DB69     		ldr	r3, [r3, #28]
+ 981 0168 D7F8A000 		ldr	r0, [r7, #160]
+ 982 016c 9847     		blx	r3
+ 983              	.LVL10:
+ 984 016e 0346     		mov	r3, r0
+ 985 0170 A7F84030 		strh	r3, [r7, #64]	@ movhi
+  88:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		int right_7 = 2L;
+ 986              		.loc 4 88 0
+ 987 0174 0223     		movs	r3, #2
+ 988 0176 FB63     		str	r3, [r7, #60]
+  89:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		int right_6 = left_7 / right_7;
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 24
+
+
+ 989              		.loc 4 89 0
+ 990 0178 B7F94020 		ldrsh	r2, [r7, #64]
+ 991 017c FB6B     		ldr	r3, [r7, #60]
+ 992 017e 92FBF3F3 		sdiv	r3, r2, r3
+ 993 0182 BB63     		str	r3, [r7, #56]
+  90:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		y = left_6 + right_6;
+ 994              		.loc 4 90 0
+ 995 0184 B7F94230 		ldrsh	r3, [r7, #66]
+ 996 0188 BA6B     		ldr	r2, [r7, #56]
+ 997 018a 1344     		add	r3, r3, r2
+ 998 018c C7F8A830 		str	r3, [r7, #168]
+ 999              	.LBE5:
+ 1000 0190 49E0     		b	.L45
+ 1001              	.L44:
+ 1002              	.LBB6:
+  91:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	}
+  92:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	else
+  93:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	{
+  94:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		ft_uint16_t left_8 = context->AlignY(parent);
+ 1003              		.loc 4 94 0
+ 1004 0192 7B68     		ldr	r3, [r7, #4]
+ 1005 0194 5B6A     		ldr	r3, [r3, #36]
+ 1006 0196 D7F8A000 		ldr	r0, [r7, #160]
+ 1007 019a 9847     		blx	r3
+ 1008              	.LVL11:
+ 1009 019c 0346     		mov	r3, r0
+ 1010 019e A7F85A30 		strh	r3, [r7, #90]	@ movhi
+  95:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		int right_8 = 0L;
+ 1011              		.loc 4 95 0
+ 1012 01a2 0023     		movs	r3, #0
+ 1013 01a4 7B65     		str	r3, [r7, #84]
+  96:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		int if_4 = left_8 == right_8;
+ 1014              		.loc 4 96 0
+ 1015 01a6 B7F85A30 		ldrh	r3, [r7, #90]
+ 1016 01aa 7A6D     		ldr	r2, [r7, #84]
+ 1017 01ac 9A42     		cmp	r2, r3
+ 1018 01ae 0CBF     		ite	eq
+ 1019 01b0 0123     		moveq	r3, #1
+ 1020 01b2 0023     		movne	r3, #0
+ 1021 01b4 DBB2     		uxtb	r3, r3
+ 1022 01b6 3B65     		str	r3, [r7, #80]
+  97:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		if (if_4)
+ 1023              		.loc 4 97 0
+ 1024 01b8 3B6D     		ldr	r3, [r7, #80]
+ 1025 01ba 002B     		cmp	r3, #0
+ 1026 01bc 08D0     		beq	.L46
+  98:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		{
+  99:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			y = context->Y(parent);
+ 1027              		.loc 4 99 0
+ 1028 01be 7B68     		ldr	r3, [r7, #4]
+ 1029 01c0 5B69     		ldr	r3, [r3, #20]
+ 1030 01c2 D7F8A000 		ldr	r0, [r7, #160]
+ 1031 01c6 9847     		blx	r3
+ 1032              	.LVL12:
+ 1033 01c8 0346     		mov	r3, r0
+ 1034 01ca C7F8A830 		str	r3, [r7, #168]
+ 1035 01ce 2AE0     		b	.L45
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 25
+
+
+ 1036              	.L46:
+ 1037              	.LBB7:
+ 100:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		}
+ 101:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		else
+ 102:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		{
+ 103:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			ft_int16_t left_10 = context->Y(parent);
+ 1038              		.loc 4 103 0
+ 1039 01d0 7B68     		ldr	r3, [r7, #4]
+ 1040 01d2 5B69     		ldr	r3, [r3, #20]
+ 1041 01d4 D7F8A000 		ldr	r0, [r7, #160]
+ 1042 01d8 9847     		blx	r3
+ 1043              	.LVL13:
+ 1044 01da 0346     		mov	r3, r0
+ 1045 01dc A7F84E30 		strh	r3, [r7, #78]	@ movhi
+ 104:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			ft_int16_t right_9 = context->Height(parent);
+ 1046              		.loc 4 104 0
+ 1047 01e0 7B68     		ldr	r3, [r7, #4]
+ 1048 01e2 DB69     		ldr	r3, [r3, #28]
+ 1049 01e4 D7F8A000 		ldr	r0, [r7, #160]
+ 1050 01e8 9847     		blx	r3
+ 1051              	.LVL14:
+ 1052 01ea 0346     		mov	r3, r0
+ 1053 01ec A7F84C30 		strh	r3, [r7, #76]	@ movhi
+ 105:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			int left_9 = left_10 + right_9;
+ 1054              		.loc 4 105 0
+ 1055 01f0 B7F94E20 		ldrsh	r2, [r7, #78]
+ 1056 01f4 B7F94C30 		ldrsh	r3, [r7, #76]
+ 1057 01f8 1344     		add	r3, r3, r2
+ 1058 01fa BB64     		str	r3, [r7, #72]
+ 106:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			ft_int16_t i = context->Font(parent);
+ 1059              		.loc 4 106 0
+ 1060 01fc 7B68     		ldr	r3, [r7, #4]
+ 1061 01fe 9B68     		ldr	r3, [r3, #8]
+ 1062 0200 D7F8A000 		ldr	r0, [r7, #160]
+ 1063 0204 9847     		blx	r3
+ 1064              	.LVL15:
+ 1065 0206 0346     		mov	r3, r0
+ 1066 0208 A7F84630 		strh	r3, [r7, #70]	@ movhi
+ 107:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			ft_uint16_t right_10 = Ft_Esd_GetFontHeight(i);
+ 1067              		.loc 4 107 0
+ 1068 020c B7F94630 		ldrsh	r3, [r7, #70]
+ 1069 0210 414A     		ldr	r2, .L52
+ 1070 0212 32F81330 		ldrh	r3, [r2, r3, lsl #1]	@ movhi
+ 1071 0216 A7F84430 		strh	r3, [r7, #68]	@ movhi
+ 108:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			y = left_9 - right_10;
+ 1072              		.loc 4 108 0
+ 1073 021a B7F84430 		ldrh	r3, [r7, #68]
+ 1074 021e BA6C     		ldr	r2, [r7, #72]
+ 1075 0220 D31A     		subs	r3, r2, r3
+ 1076 0222 C7F8A830 		str	r3, [r7, #168]
+ 1077              	.L45:
+ 1078              	.LBE7:
+ 1079              	.LBE6:
+ 109:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		}
+ 110:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	}
+ 111:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_int16_t font = context->Font(parent);
+ 1080              		.loc 4 111 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 26
+
+
+ 1081 0226 7B68     		ldr	r3, [r7, #4]
+ 1082 0228 9B68     		ldr	r3, [r3, #8]
+ 1083 022a D7F8A000 		ldr	r0, [r7, #160]
+ 1084 022e 9847     		blx	r3
+ 1085              	.LVL16:
+ 1086 0230 0346     		mov	r3, r0
+ 1087 0232 FB86     		strh	r3, [r7, #54]	@ movhi
+ 112:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_uint16_t left_12 = context->AlignX(parent);
+ 1088              		.loc 4 112 0
+ 1089 0234 7B68     		ldr	r3, [r7, #4]
+ 1090 0236 1B6A     		ldr	r3, [r3, #32]
+ 1091 0238 D7F8A000 		ldr	r0, [r7, #160]
+ 1092 023c 9847     		blx	r3
+ 1093              	.LVL17:
+ 1094 023e 0346     		mov	r3, r0
+ 1095 0240 BB86     		strh	r3, [r7, #52]	@ movhi
+ 113:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int right_11 = 0L;
+ 1096              		.loc 4 113 0
+ 1097 0242 0023     		movs	r3, #0
+ 1098 0244 3B63     		str	r3, [r7, #48]
+ 114:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int if_5 = left_12 == right_11;
+ 1099              		.loc 4 114 0
+ 1100 0246 BB8E     		ldrh	r3, [r7, #52]
+ 1101 0248 3A6B     		ldr	r2, [r7, #48]
+ 1102 024a 9A42     		cmp	r2, r3
+ 1103 024c 0CBF     		ite	eq
+ 1104 024e 0123     		moveq	r3, #1
+ 1105 0250 0023     		movne	r3, #0
+ 1106 0252 DBB2     		uxtb	r3, r3
+ 1107 0254 FB62     		str	r3, [r7, #44]
+ 115:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_uint16_t left_11;
+ 116:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	if (if_5)
+ 1108              		.loc 4 116 0
+ 1109 0256 FB6A     		ldr	r3, [r7, #44]
+ 1110 0258 002B     		cmp	r3, #0
+ 1111 025a 03D0     		beq	.L47
+ 117:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	{
+ 118:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		left_11 = 0;
+ 1112              		.loc 4 118 0
+ 1113 025c 0023     		movs	r3, #0
+ 1114 025e A7F8A630 		strh	r3, [r7, #166]	@ movhi
+ 1115 0262 1CE0     		b	.L48
+ 1116              	.L47:
+ 1117              	.LBB8:
+ 119:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	}
+ 120:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	else
+ 121:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	{
+ 122:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		ft_uint16_t left_13 = context->AlignX(parent);
+ 1118              		.loc 4 122 0
+ 1119 0264 7B68     		ldr	r3, [r7, #4]
+ 1120 0266 1B6A     		ldr	r3, [r3, #32]
+ 1121 0268 D7F8A000 		ldr	r0, [r7, #160]
+ 1122 026c 9847     		blx	r3
+ 1123              	.LVL18:
+ 1124 026e 0346     		mov	r3, r0
+ 1125 0270 7B85     		strh	r3, [r7, #42]	@ movhi
+ 123:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		int right_12 = 2L;
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 27
+
+
+ 1126              		.loc 4 123 0
+ 1127 0272 0223     		movs	r3, #2
+ 1128 0274 7B62     		str	r3, [r7, #36]
+ 124:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		int if_6 = left_13 == right_12;
+ 1129              		.loc 4 124 0
+ 1130 0276 7B8D     		ldrh	r3, [r7, #42]
+ 1131 0278 7A6A     		ldr	r2, [r7, #36]
+ 1132 027a 9A42     		cmp	r2, r3
+ 1133 027c 0CBF     		ite	eq
+ 1134 027e 0123     		moveq	r3, #1
+ 1135 0280 0023     		movne	r3, #0
+ 1136 0282 DBB2     		uxtb	r3, r3
+ 1137 0284 3B62     		str	r3, [r7, #32]
+ 125:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		if (if_6)
+ 1138              		.loc 4 125 0
+ 1139 0286 3B6A     		ldr	r3, [r7, #32]
+ 1140 0288 002B     		cmp	r3, #0
+ 1141 028a 04D0     		beq	.L49
+ 126:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		{
+ 127:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			left_11 = OPT_RIGHTX;
+ 1142              		.loc 4 127 0
+ 1143 028c 4FF40063 		mov	r3, #2048
+ 1144 0290 A7F8A630 		strh	r3, [r7, #166]	@ movhi
+ 1145 0294 03E0     		b	.L48
+ 1146              	.L49:
+ 128:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		}
+ 129:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		else
+ 130:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		{
+ 131:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 			left_11 = OPT_CENTERX;
+ 1147              		.loc 4 131 0
+ 1148 0296 4FF40073 		mov	r3, #512
+ 1149 029a A7F8A630 		strh	r3, [r7, #166]	@ movhi
+ 1150              	.L48:
+ 1151              	.LBE8:
+ 132:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		}
+ 133:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	}
+ 134:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_uint16_t left_14 = context->AlignY(parent);
+ 1152              		.loc 4 134 0
+ 1153 029e 7B68     		ldr	r3, [r7, #4]
+ 1154 02a0 5B6A     		ldr	r3, [r3, #36]
+ 1155 02a2 D7F8A000 		ldr	r0, [r7, #160]
+ 1156 02a6 9847     		blx	r3
+ 1157              	.LVL19:
+ 1158 02a8 0346     		mov	r3, r0
+ 1159 02aa FB83     		strh	r3, [r7, #30]	@ movhi
+ 135:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int right_14 = 1L;
+ 1160              		.loc 4 135 0
+ 1161 02ac 0123     		movs	r3, #1
+ 1162 02ae BB61     		str	r3, [r7, #24]
+ 136:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	int if_7 = left_14 == right_14;
+ 1163              		.loc 4 136 0
+ 1164 02b0 FB8B     		ldrh	r3, [r7, #30]
+ 1165 02b2 BA69     		ldr	r2, [r7, #24]
+ 1166 02b4 9A42     		cmp	r2, r3
+ 1167 02b6 0CBF     		ite	eq
+ 1168 02b8 0123     		moveq	r3, #1
+ 1169 02ba 0023     		movne	r3, #0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 28
+
+
+ 1170 02bc DBB2     		uxtb	r3, r3
+ 1171 02be 7B61     		str	r3, [r7, #20]
+ 137:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_uint16_t right_13;
+ 138:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	if (if_7)
+ 1172              		.loc 4 138 0
+ 1173 02c0 7B69     		ldr	r3, [r7, #20]
+ 1174 02c2 002B     		cmp	r3, #0
+ 1175 02c4 04D0     		beq	.L50
+ 139:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	{
+ 140:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		right_13 = OPT_CENTERY;
+ 1176              		.loc 4 140 0
+ 1177 02c6 4FF48063 		mov	r3, #1024
+ 1178 02ca A7F8A430 		strh	r3, [r7, #164]	@ movhi
+ 1179 02ce 02E0     		b	.L51
+ 1180              	.L50:
+ 141:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	}
+ 142:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	else
+ 143:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	{
+ 144:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 		right_13 = 0;
+ 1181              		.loc 4 144 0
+ 1182 02d0 0023     		movs	r3, #0
+ 1183 02d2 A7F8A430 		strh	r3, [r7, #164]	@ movhi
+ 1184              	.L51:
+ 145:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	}
+ 146:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	ft_uint16_t options = left_11 | right_13;
+ 1185              		.loc 4 146 0
+ 1186 02d6 B7F8A620 		ldrh	r2, [r7, #166]	@ movhi
+ 1187 02da B7F8A430 		ldrh	r3, [r7, #164]	@ movhi
+ 1188 02de 1343     		orrs	r3, r3, r2
+ 1189 02e0 7B82     		strh	r3, [r7, #18]	@ movhi
+ 147:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	const char * s = context->Text(parent);
+ 1190              		.loc 4 147 0
+ 1191 02e2 7B68     		ldr	r3, [r7, #4]
+ 1192 02e4 DB68     		ldr	r3, [r3, #12]
+ 1193 02e6 D7F8A000 		ldr	r0, [r7, #160]
+ 1194 02ea 9847     		blx	r3
+ 1195              	.LVL20:
+ 1196 02ec F860     		str	r0, [r7, #12]
+ 148:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** 	Ft_Gpu_CoCmd_Text(phost, x, y, font, options, s);
+ 1197              		.loc 4 148 0
+ 1198 02ee D7F8AC30 		ldr	r3, [r7, #172]
+ 1199 02f2 19B2     		sxth	r1, r3
+ 1200 02f4 D7F8A830 		ldr	r3, [r7, #168]
+ 1201 02f8 1AB2     		sxth	r2, r3
+ 1202 02fa B7F93600 		ldrsh	r0, [r7, #54]
+ 1203 02fe FB68     		ldr	r3, [r7, #12]
+ 1204 0300 0193     		str	r3, [sp, #4]
+ 1205 0302 7B8A     		ldrh	r3, [r7, #18]
+ 1206 0304 0093     		str	r3, [sp]
+ 1207 0306 0346     		mov	r3, r0
+ 1208 0308 D7F89000 		ldr	r0, [r7, #144]
+ 1209 030c FFF7FEFF 		bl	Ft_Gpu_CoCmd_Text
+ 149:FT_Esd_Widgets/Ft_Esd_Label__Generated.c **** }
+ 1210              		.loc 4 149 0
+ 1211 0310 00BF     		nop
+ 1212 0312 B037     		adds	r7, r7, #176
+ 1213              	.LCFI83:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 29
+
+
+ 1214              		.cfi_def_cfa_offset 8
+ 1215 0314 BD46     		mov	sp, r7
+ 1216              	.LCFI84:
+ 1217              		.cfi_def_cfa_register 13
+ 1218              		@ sp needed
+ 1219 0316 80BD     		pop	{r7, pc}
+ 1220              	.L53:
+ 1221              		.align	2
+ 1222              	.L52:
+ 1223 0318 00000000 		.word	Ft_Esd_FontHeight
+ 1224              		.cfi_endproc
+ 1225              	.LFE33:
+ 1227              		.text
+ 1228              	.Letext0:
+ 1229              		.file 5 "FT_Eve_Hal/FT_DataTypes.h"
+ 1230              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 1231              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 1232              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 1233              		.file 9 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 1234              		.file 10 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 1235              		.file 11 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 1236              		.file 12 "FT_Eve_Hal/FT_Gpu_Hal.h"
+ 1237              		.file 13 "FT_Esd_Framework/Ft_Esd.h"
+ 1238              		.file 14 "FT_Esd_Widgets/Ft_Esd_DefaultTheme.h"
+ 1239              		.file 15 "FT_Esd_Widgets/Ft_Esd_Label.h"
+ 1240              		.file 16 "FT_Esd_Framework/FT_Esd_CoPro_Cmds.h"
+ 1241              		.file 17 "FT_Esd_Framework/Ft_Esd_GpuAlloc.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s 			page 30
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Ft_Esd_Label__Generated.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:18     .text.Ft_Esd_Theme_GetTextColor:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:24     .text.Ft_Esd_Theme_GetTextColor:0000000000000000 Ft_Esd_Theme_GetTextColor
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:71     .text.Ft_Esd_BitmapCell_GetInfo:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:77     .text.Ft_Esd_BitmapCell_GetInfo:0000000000000000 Ft_Esd_BitmapCell_GetInfo
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:126    .text.Ft_Esd_Dl_COLOR_RGB:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:132    .text.Ft_Esd_Dl_COLOR_RGB:0000000000000000 Ft_Esd_Dl_COLOR_RGB
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:197    .text.Ft_Esd_Dl_COLOR_RGB:0000000000000050 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:204    .text.Ft_Esd_Dl_COLOR_A:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:210    .text.Ft_Esd_Dl_COLOR_A:0000000000000000 Ft_Esd_Dl_COLOR_A
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:271    .text.Ft_Esd_Dl_COLOR_A:0000000000000048 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:278    .text.Ft_Esd_Label_Theme__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:285    .text.Ft_Esd_Label_Theme__Default:0000000000000000 Ft_Esd_Label_Theme__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:320    .text.Ft_Esd_Label_Font__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:327    .text.Ft_Esd_Label_Font__Default:0000000000000000 Ft_Esd_Label_Font__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:364    .rodata:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:368    .text.Ft_Esd_Label_Text__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:375    .text.Ft_Esd_Label_Text__Default:0000000000000000 Ft_Esd_Label_Text__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:411    .text.Ft_Esd_Label_Text__Default:0000000000000018 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:416    .text.Ft_Esd_Label_X__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:423    .text.Ft_Esd_Label_X__Default:0000000000000000 Ft_Esd_Label_X__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:460    .text.Ft_Esd_Label_Y__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:467    .text.Ft_Esd_Label_Y__Default:0000000000000000 Ft_Esd_Label_Y__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:504    .text.Ft_Esd_Label_Width__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:511    .text.Ft_Esd_Label_Width__Default:0000000000000000 Ft_Esd_Label_Width__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:548    .text.Ft_Esd_Label_Height__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:555    .text.Ft_Esd_Label_Height__Default:0000000000000000 Ft_Esd_Label_Height__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:592    .text.Ft_Esd_Label_AlignX__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:599    .text.Ft_Esd_Label_AlignX__Default:0000000000000000 Ft_Esd_Label_AlignX__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:636    .text.Ft_Esd_Label_AlignY__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:643    .text.Ft_Esd_Label_AlignY__Default:0000000000000000 Ft_Esd_Label_AlignY__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:680    .text.Ft_Esd_Label__Initializer:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:687    .text.Ft_Esd_Label__Initializer:0000000000000000 Ft_Esd_Label__Initializer
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:762    .text.Ft_Esd_Label__Initializer:0000000000000050 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:775    .text.Ft_Esd_Label_Render:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:782    .text.Ft_Esd_Label_Render:0000000000000000 Ft_Esd_Label_Render
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccK6bPdg.s:1223   .text.Ft_Esd_Label_Render:0000000000000318 $d
+
+UNDEFINED SYMBOLS
+Ft_Esd_Theme_GetCurrent
+Ft_Gpu_Hal_WrCmd32
+Ft_Esd_GpuState_I
+Ft_Esd_GpuState
+Ft_Esd_Host
+Ft_Esd_GetHost
+Ft_Gpu_CoCmd_Text
+Ft_Esd_FontHeight

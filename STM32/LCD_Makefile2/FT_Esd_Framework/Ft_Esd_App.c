@@ -23,9 +23,16 @@
 #include <FT_Platform.h>
 #include "Ft_Esd.h"
 #include "Ft_Esd_GpuAlloc.h"
+#include "main.h"
+
 #ifdef FT900_PLATFORM
 #include "ff.h"
 #endif
+
+// External variables
+extern UART_HandleTypeDef huart6;
+
+
 
 //
 // Static
@@ -45,6 +52,8 @@ ft_uint32_t Ft_Esd_Millis = 0;  // Time in milliseconds for current frame
 ft_uint32_t Ft_Esd_DeltaMs = 0; // Delta time in milliseconds between frames
 ft_uint32_t Ft_Esd_Frame = 0;   // Number of times Render has been called
 ft_rgb32_t Ft_Esd_ClearColor = 0x212121; // Screen clear color
+
+
 
 ESD_FUNCTION(Ft_Esd_GetMillis, Type = ft_uint32_t,
 		DisplayName = "Get Milliseconds", Category = EsdUtilities)ft_uint32_t Ft_Esd_GetMillis() {
@@ -176,7 +185,10 @@ ft_void_t FT800_BootupConfig() {
 		chipid = Ft_Gpu_Hal_Rd8(&s_Host, REG_ID);
 		while (chipid != 0x7C) {
 			chipid = Ft_Gpu_Hal_Rd8(&s_Host, REG_ID);
+
+//			char buff[] = "";
 			printf("VC1 register ID after wake up %x\n", chipid);
+//			HAL_UART_Transmit(&huart6,(uint8_t * ) buff, sizeof(buff) - 1, HAL_MAX_DELAY);
 			ft_delay(100);
 		}
 #if defined(MSVC_PLATFORM) || defined (FT900_PLATFORM) || defined(ESD_SIMULATION)

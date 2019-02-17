@@ -1,0 +1,208 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Ft_Esd_Theme.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	Ft_Esd_DefaultTheme
+  18              		.section	.data.Ft_Esd_DefaultTheme,"aw",%progbits
+  19              		.align	2
+  22              	Ft_Esd_DefaultTheme:
+  23 0000 21212100 		.word	2171169
+  24 0004 15151500 		.word	1381653
+  25 0008 FFFFFF00 		.word	16777215
+  26 000c FFFFFF00 		.word	16777215
+  27 0010 6B6B6B00 		.word	7039851
+  28 0014 3F7FFF00 		.word	16744255
+  29              		.section	.data.s_DefaultTheme,"aw",%progbits
+  30              		.align	2
+  33              	s_DefaultTheme:
+  34 0000 00000000 		.word	Ft_Esd_DefaultTheme
+  35              		.section	.text.Ft_Esd_Theme_SetCurrent,"ax",%progbits
+  36              		.align	1
+  37              		.global	Ft_Esd_Theme_SetCurrent
+  38              		.syntax unified
+  39              		.thumb
+  40              		.thumb_func
+  41              		.fpu fpv5-sp-d16
+  43              	Ft_Esd_Theme_SetCurrent:
+  44              	.LFB9:
+  45              		.file 1 "FT_Esd_Widgets/Ft_Esd_Theme.c"
+   1:FT_Esd_Widgets/Ft_Esd_Theme.c **** 
+   2:FT_Esd_Widgets/Ft_Esd_Theme.c **** #include "FT_Esd_DefaultTheme.h"
+   3:FT_Esd_Widgets/Ft_Esd_Theme.c **** #include "FT_Esd_Theme.h"
+   4:FT_Esd_Widgets/Ft_Esd_Theme.c **** 
+   5:FT_Esd_Widgets/Ft_Esd_Theme.c **** extern ft_rgb32_t Ft_Esd_ClearColor;
+   6:FT_Esd_Widgets/Ft_Esd_Theme.c **** 
+   7:FT_Esd_Widgets/Ft_Esd_Theme.c **** Ft_Esd_Theme Ft_Esd_DefaultTheme = {
+   8:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	.ClearColor = 0x212121,
+   9:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	.BackColor = 0x151515,
+  10:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	.TextColor = 0xFFFFFF,
+  11:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	.ButtonTextColor = 0xFFFFFF,
+  12:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	.DefaultColor = 0x6B6B6B,
+  13:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	.PrimaryColor = 0xFF7F3F
+  14:FT_Esd_Widgets/Ft_Esd_Theme.c **** };
+  15:FT_Esd_Widgets/Ft_Esd_Theme.c **** 
+  16:FT_Esd_Widgets/Ft_Esd_Theme.c **** static Ft_Esd_Theme *s_DefaultTheme = &Ft_Esd_DefaultTheme;
+  17:FT_Esd_Widgets/Ft_Esd_Theme.c **** 
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s 			page 2
+
+
+  18:FT_Esd_Widgets/Ft_Esd_Theme.c **** void Ft_Esd_Theme_SetCurrent(Ft_Esd_Theme *theme)
+  19:FT_Esd_Widgets/Ft_Esd_Theme.c **** {
+  46              		.loc 1 19 0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 8
+  49              		@ frame_needed = 1, uses_anonymous_args = 0
+  50              		@ link register save eliminated.
+  51 0000 80B4     		push	{r7}
+  52              	.LCFI0:
+  53              		.cfi_def_cfa_offset 4
+  54              		.cfi_offset 7, -4
+  55 0002 83B0     		sub	sp, sp, #12
+  56              	.LCFI1:
+  57              		.cfi_def_cfa_offset 16
+  58 0004 00AF     		add	r7, sp, #0
+  59              	.LCFI2:
+  60              		.cfi_def_cfa_register 7
+  61 0006 7860     		str	r0, [r7, #4]
+  20:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	if (!theme)
+  62              		.loc 1 20 0
+  63 0008 7B68     		ldr	r3, [r7, #4]
+  64 000a 002B     		cmp	r3, #0
+  65 000c 01D1     		bne	.L2
+  21:FT_Esd_Widgets/Ft_Esd_Theme.c **** 		theme = &Ft_Esd_DefaultTheme;
+  66              		.loc 1 21 0
+  67 000e 074B     		ldr	r3, .L3
+  68 0010 7B60     		str	r3, [r7, #4]
+  69              	.L2:
+  22:FT_Esd_Widgets/Ft_Esd_Theme.c **** 
+  23:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	s_DefaultTheme = theme;
+  70              		.loc 1 23 0
+  71 0012 074A     		ldr	r2, .L3+4
+  72 0014 7B68     		ldr	r3, [r7, #4]
+  73 0016 1360     		str	r3, [r2]
+  24:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	Ft_Esd_ClearColor = theme->ClearColor;
+  74              		.loc 1 24 0
+  75 0018 7B68     		ldr	r3, [r7, #4]
+  76 001a 1B68     		ldr	r3, [r3]
+  77 001c 054A     		ldr	r2, .L3+8
+  78 001e 1360     		str	r3, [r2]
+  25:FT_Esd_Widgets/Ft_Esd_Theme.c **** }
+  79              		.loc 1 25 0
+  80 0020 00BF     		nop
+  81 0022 0C37     		adds	r7, r7, #12
+  82              	.LCFI3:
+  83              		.cfi_def_cfa_offset 4
+  84 0024 BD46     		mov	sp, r7
+  85              	.LCFI4:
+  86              		.cfi_def_cfa_register 13
+  87              		@ sp needed
+  88 0026 5DF8047B 		ldr	r7, [sp], #4
+  89              	.LCFI5:
+  90              		.cfi_restore 7
+  91              		.cfi_def_cfa_offset 0
+  92 002a 7047     		bx	lr
+  93              	.L4:
+  94              		.align	2
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s 			page 3
+
+
+  95              	.L3:
+  96 002c 00000000 		.word	Ft_Esd_DefaultTheme
+  97 0030 00000000 		.word	s_DefaultTheme
+  98 0034 00000000 		.word	Ft_Esd_ClearColor
+  99              		.cfi_endproc
+ 100              	.LFE9:
+ 102              		.section	.text.Ft_Esd_Theme_GetCurrent,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	Ft_Esd_Theme_GetCurrent
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 108              		.fpu fpv5-sp-d16
+ 110              	Ft_Esd_Theme_GetCurrent:
+ 111              	.LFB10:
+  26:FT_Esd_Widgets/Ft_Esd_Theme.c **** 
+  27:FT_Esd_Widgets/Ft_Esd_Theme.c **** Ft_Esd_Theme *Ft_Esd_Theme_GetCurrent()
+  28:FT_Esd_Widgets/Ft_Esd_Theme.c **** {
+ 112              		.loc 1 28 0
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 0
+ 115              		@ frame_needed = 1, uses_anonymous_args = 0
+ 116              		@ link register save eliminated.
+ 117 0000 80B4     		push	{r7}
+ 118              	.LCFI6:
+ 119              		.cfi_def_cfa_offset 4
+ 120              		.cfi_offset 7, -4
+ 121 0002 00AF     		add	r7, sp, #0
+ 122              	.LCFI7:
+ 123              		.cfi_def_cfa_register 7
+  29:FT_Esd_Widgets/Ft_Esd_Theme.c **** 	return s_DefaultTheme;
+ 124              		.loc 1 29 0
+ 125 0004 034B     		ldr	r3, .L7
+ 126 0006 1B68     		ldr	r3, [r3]
+  30:FT_Esd_Widgets/Ft_Esd_Theme.c **** }
+ 127              		.loc 1 30 0
+ 128 0008 1846     		mov	r0, r3
+ 129 000a BD46     		mov	sp, r7
+ 130              	.LCFI8:
+ 131              		.cfi_def_cfa_register 13
+ 132              		@ sp needed
+ 133 000c 5DF8047B 		ldr	r7, [sp], #4
+ 134              	.LCFI9:
+ 135              		.cfi_restore 7
+ 136              		.cfi_def_cfa_offset 0
+ 137 0010 7047     		bx	lr
+ 138              	.L8:
+ 139 0012 00BF     		.align	2
+ 140              	.L7:
+ 141 0014 00000000 		.word	s_DefaultTheme
+ 142              		.cfi_endproc
+ 143              	.LFE10:
+ 145              		.text
+ 146              	.Letext0:
+ 147              		.file 2 "FT_Eve_Hal/FT_DataTypes.h"
+ 148              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 149              		.file 4 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s 			page 4
+
+
+ 150              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 151              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 152              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 153              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 154              		.file 9 "FT_Esd_Framework/Ft_Esd.h"
+ 155              		.file 10 "FT_Esd_Widgets/FT_Esd_Theme.h"
+ 156              		.file 11 "FT_Esd_Widgets/FT_Esd_DefaultTheme.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Ft_Esd_Theme.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:22     .data.Ft_Esd_DefaultTheme:0000000000000000 Ft_Esd_DefaultTheme
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:19     .data.Ft_Esd_DefaultTheme:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:30     .data.s_DefaultTheme:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:33     .data.s_DefaultTheme:0000000000000000 s_DefaultTheme
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:36     .text.Ft_Esd_Theme_SetCurrent:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:43     .text.Ft_Esd_Theme_SetCurrent:0000000000000000 Ft_Esd_Theme_SetCurrent
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:96     .text.Ft_Esd_Theme_SetCurrent:000000000000002c $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:103    .text.Ft_Esd_Theme_GetCurrent:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:110    .text.Ft_Esd_Theme_GetCurrent:0000000000000000 Ft_Esd_Theme_GetCurrent
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//cch1KH7O.s:141    .text.Ft_Esd_Theme_GetCurrent:0000000000000014 $d
+
+UNDEFINED SYMBOLS
+Ft_Esd_ClearColor

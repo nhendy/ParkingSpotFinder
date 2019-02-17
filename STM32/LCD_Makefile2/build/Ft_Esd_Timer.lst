@@ -1,0 +1,675 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Ft_Esd_Timer.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.comm	Ft_Esd_TimerEntries,512,4
+  18              		.global	Ft_Esd_TimerEntryNb
+  19              		.section	.bss.Ft_Esd_TimerEntryNb,"aw",%nobits
+  20              		.align	2
+  23              	Ft_Esd_TimerEntryNb:
+  24 0000 00000000 		.space	4
+  25              		.section	.text.Ft_Esd_Timer_RunGlobal,"ax",%progbits
+  26              		.align	1
+  27              		.global	Ft_Esd_Timer_RunGlobal
+  28              		.syntax unified
+  29              		.thumb
+  30              		.thumb_func
+  31              		.fpu fpv5-sp-d16
+  33              	Ft_Esd_Timer_RunGlobal:
+  34              	.LFB3:
+  35              		.file 1 "FT_Esd_Framework/Ft_Esd_Timer.c"
+   1:FT_Esd_Framework/Ft_Esd_Timer.c **** #include "Ft_Esd.h"
+   2:FT_Esd_Framework/Ft_Esd_Timer.c **** #include "Ft_Esd_Timer.h"
+   3:FT_Esd_Framework/Ft_Esd_Timer.c **** #include <stdio.h>
+   4:FT_Esd_Framework/Ft_Esd_Timer.c **** 
+   5:FT_Esd_Framework/Ft_Esd_Timer.c **** ft_uint32_t Ft_Esd_GetMillis();
+   6:FT_Esd_Framework/Ft_Esd_Timer.c **** 
+   7:FT_Esd_Framework/Ft_Esd_Timer.c **** #define FT_ESD_TIMER_MAXNB 64
+   8:FT_Esd_Framework/Ft_Esd_Timer.c **** typedef struct
+   9:FT_Esd_Framework/Ft_Esd_Timer.c **** {
+  10:FT_Esd_Framework/Ft_Esd_Timer.c **** 	ft_int32_t TimeMs;
+  11:FT_Esd_Framework/Ft_Esd_Timer.c **** 	Ft_Esd_Timer *Timer;
+  12:FT_Esd_Framework/Ft_Esd_Timer.c **** } Ft_Esd_TimerEntry;
+  13:FT_Esd_Framework/Ft_Esd_Timer.c **** Ft_Esd_TimerEntry Ft_Esd_TimerEntries[FT_ESD_TIMER_MAXNB];
+  14:FT_Esd_Framework/Ft_Esd_Timer.c **** unsigned int Ft_Esd_TimerEntryNb = 0;
+  15:FT_Esd_Framework/Ft_Esd_Timer.c **** 
+  16:FT_Esd_Framework/Ft_Esd_Timer.c **** void Ft_Esd_Timer_RunGlobal(Ft_Esd_Timer *timer, ft_int32_t timeMs)
+  17:FT_Esd_Framework/Ft_Esd_Timer.c **** {
+  36              		.loc 1 17 0
+  37              		.cfi_startproc
+  38              		@ args = 0, pretend = 0, frame = 16
+  39              		@ frame_needed = 1, uses_anonymous_args = 0
+  40              		@ link register save eliminated.
+  41 0000 80B4     		push	{r7}
+  42              	.LCFI0:
+  43              		.cfi_def_cfa_offset 4
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 2
+
+
+  44              		.cfi_offset 7, -4
+  45 0002 85B0     		sub	sp, sp, #20
+  46              	.LCFI1:
+  47              		.cfi_def_cfa_offset 24
+  48 0004 00AF     		add	r7, sp, #0
+  49              	.LCFI2:
+  50              		.cfi_def_cfa_register 7
+  51 0006 7860     		str	r0, [r7, #4]
+  52 0008 3960     		str	r1, [r7]
+  18:FT_Esd_Framework/Ft_Esd_Timer.c **** 	if (Ft_Esd_TimerEntryNb < FT_ESD_TIMER_MAXNB)
+  53              		.loc 1 18 0
+  54 000a 254B     		ldr	r3, .L11
+  55 000c 1B68     		ldr	r3, [r3]
+  56 000e 3F2B     		cmp	r3, #63
+  57 0010 3FD8     		bhi	.L9
+  58              	.LBB2:
+  19:FT_Esd_Framework/Ft_Esd_Timer.c **** 	{
+  20:FT_Esd_Framework/Ft_Esd_Timer.c **** 		int i = 0;
+  59              		.loc 1 20 0
+  60 0012 0023     		movs	r3, #0
+  61 0014 FB60     		str	r3, [r7, #12]
+  21:FT_Esd_Framework/Ft_Esd_Timer.c **** 		for (i = 0; i < Ft_Esd_TimerEntryNb; ++i)
+  62              		.loc 1 21 0
+  63 0016 0023     		movs	r3, #0
+  64 0018 FB60     		str	r3, [r7, #12]
+  65 001a 0AE0     		b	.L3
+  66              	.L6:
+  22:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+  23:FT_Esd_Framework/Ft_Esd_Timer.c **** 			if ((timeMs - Ft_Esd_TimerEntries[i].TimeMs) >= 0)
+  67              		.loc 1 23 0
+  68 001c 214A     		ldr	r2, .L11+4
+  69 001e FB68     		ldr	r3, [r7, #12]
+  70 0020 52F83330 		ldr	r3, [r2, r3, lsl #3]
+  71 0024 3A68     		ldr	r2, [r7]
+  72 0026 D31A     		subs	r3, r2, r3
+  73 0028 002B     		cmp	r3, #0
+  74 002a 08DA     		bge	.L10
+  21:FT_Esd_Framework/Ft_Esd_Timer.c **** 		for (i = 0; i < Ft_Esd_TimerEntryNb; ++i)
+  75              		.loc 1 21 0 discriminator 2
+  76 002c FB68     		ldr	r3, [r7, #12]
+  77 002e 0133     		adds	r3, r3, #1
+  78 0030 FB60     		str	r3, [r7, #12]
+  79              	.L3:
+  21:FT_Esd_Framework/Ft_Esd_Timer.c **** 		for (i = 0; i < Ft_Esd_TimerEntryNb; ++i)
+  80              		.loc 1 21 0 is_stmt 0 discriminator 1
+  81 0032 FA68     		ldr	r2, [r7, #12]
+  82 0034 1A4B     		ldr	r3, .L11
+  83 0036 1B68     		ldr	r3, [r3]
+  84 0038 9A42     		cmp	r2, r3
+  85 003a EFD3     		bcc	.L6
+  86 003c 00E0     		b	.L5
+  87              	.L10:
+  24:FT_Esd_Framework/Ft_Esd_Timer.c **** 			{
+  25:FT_Esd_Framework/Ft_Esd_Timer.c **** 				break;
+  88              		.loc 1 25 0 is_stmt 1
+  89 003e 00BF     		nop
+  90              	.L5:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 3
+
+
+  91              	.LBB3:
+  26:FT_Esd_Framework/Ft_Esd_Timer.c **** 			}
+  27:FT_Esd_Framework/Ft_Esd_Timer.c **** 		}
+  28:FT_Esd_Framework/Ft_Esd_Timer.c **** 		for (int j = Ft_Esd_TimerEntryNb - 1; j >= i; --j)
+  92              		.loc 1 28 0
+  93 0040 174B     		ldr	r3, .L11
+  94 0042 1B68     		ldr	r3, [r3]
+  95 0044 013B     		subs	r3, r3, #1
+  96 0046 BB60     		str	r3, [r7, #8]
+  97 0048 0FE0     		b	.L7
+  98              	.L8:
+  29:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+  30:FT_Esd_Framework/Ft_Esd_Timer.c **** 			Ft_Esd_TimerEntries[j + 1] = Ft_Esd_TimerEntries[j];
+  99              		.loc 1 30 0 discriminator 3
+ 100 004a BB68     		ldr	r3, [r7, #8]
+ 101 004c 0133     		adds	r3, r3, #1
+ 102 004e 1548     		ldr	r0, .L11+4
+ 103 0050 1449     		ldr	r1, .L11+4
+ 104 0052 BA68     		ldr	r2, [r7, #8]
+ 105 0054 DB00     		lsls	r3, r3, #3
+ 106 0056 0344     		add	r3, r3, r0
+ 107 0058 D200     		lsls	r2, r2, #3
+ 108 005a 0A44     		add	r2, r2, r1
+ 109 005c 92E80300 		ldm	r2, {r0, r1}
+ 110 0060 83E80300 		stm	r3, {r0, r1}
+  28:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+ 111              		.loc 1 28 0 discriminator 3
+ 112 0064 BB68     		ldr	r3, [r7, #8]
+ 113 0066 013B     		subs	r3, r3, #1
+ 114 0068 BB60     		str	r3, [r7, #8]
+ 115              	.L7:
+  28:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+ 116              		.loc 1 28 0 is_stmt 0 discriminator 1
+ 117 006a BA68     		ldr	r2, [r7, #8]
+ 118 006c FB68     		ldr	r3, [r7, #12]
+ 119 006e 9A42     		cmp	r2, r3
+ 120 0070 EBDA     		bge	.L8
+ 121              	.LBE3:
+  31:FT_Esd_Framework/Ft_Esd_Timer.c **** 		}
+  32:FT_Esd_Framework/Ft_Esd_Timer.c **** 		Ft_Esd_TimerEntries[i].Timer = timer;
+ 122              		.loc 1 32 0 is_stmt 1
+ 123 0072 0C4A     		ldr	r2, .L11+4
+ 124 0074 FB68     		ldr	r3, [r7, #12]
+ 125 0076 DB00     		lsls	r3, r3, #3
+ 126 0078 1344     		add	r3, r3, r2
+ 127 007a 7A68     		ldr	r2, [r7, #4]
+ 128 007c 5A60     		str	r2, [r3, #4]
+  33:FT_Esd_Framework/Ft_Esd_Timer.c **** 		Ft_Esd_TimerEntries[i].TimeMs = timeMs;
+ 129              		.loc 1 33 0
+ 130 007e 0949     		ldr	r1, .L11+4
+ 131 0080 FB68     		ldr	r3, [r7, #12]
+ 132 0082 3A68     		ldr	r2, [r7]
+ 133 0084 41F83320 		str	r2, [r1, r3, lsl #3]
+  34:FT_Esd_Framework/Ft_Esd_Timer.c **** 		++Ft_Esd_TimerEntryNb;
+ 134              		.loc 1 34 0
+ 135 0088 054B     		ldr	r3, .L11
+ 136 008a 1B68     		ldr	r3, [r3]
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 4
+
+
+ 137 008c 0133     		adds	r3, r3, #1
+ 138 008e 044A     		ldr	r2, .L11
+ 139 0090 1360     		str	r3, [r2]
+ 140              	.L9:
+ 141              	.LBE2:
+  35:FT_Esd_Framework/Ft_Esd_Timer.c **** 	}
+  36:FT_Esd_Framework/Ft_Esd_Timer.c **** }
+ 142              		.loc 1 36 0
+ 143 0092 00BF     		nop
+ 144 0094 1437     		adds	r7, r7, #20
+ 145              	.LCFI3:
+ 146              		.cfi_def_cfa_offset 4
+ 147 0096 BD46     		mov	sp, r7
+ 148              	.LCFI4:
+ 149              		.cfi_def_cfa_register 13
+ 150              		@ sp needed
+ 151 0098 5DF8047B 		ldr	r7, [sp], #4
+ 152              	.LCFI5:
+ 153              		.cfi_restore 7
+ 154              		.cfi_def_cfa_offset 0
+ 155 009c 7047     		bx	lr
+ 156              	.L12:
+ 157 009e 00BF     		.align	2
+ 158              	.L11:
+ 159 00a0 00000000 		.word	Ft_Esd_TimerEntryNb
+ 160 00a4 00000000 		.word	Ft_Esd_TimerEntries
+ 161              		.cfi_endproc
+ 162              	.LFE3:
+ 164              		.section	.text.Ft_Esd_Timer_UpdateGlobal,"ax",%progbits
+ 165              		.align	1
+ 166              		.global	Ft_Esd_Timer_UpdateGlobal
+ 167              		.syntax unified
+ 168              		.thumb
+ 169              		.thumb_func
+ 170              		.fpu fpv5-sp-d16
+ 172              	Ft_Esd_Timer_UpdateGlobal:
+ 173              	.LFB4:
+  37:FT_Esd_Framework/Ft_Esd_Timer.c **** 
+  38:FT_Esd_Framework/Ft_Esd_Timer.c **** void Ft_Esd_Timer_UpdateGlobal()
+  39:FT_Esd_Framework/Ft_Esd_Timer.c **** {
+ 174              		.loc 1 39 0
+ 175              		.cfi_startproc
+ 176              		@ args = 0, pretend = 0, frame = 16
+ 177              		@ frame_needed = 1, uses_anonymous_args = 0
+ 178 0000 80B5     		push	{r7, lr}
+ 179              	.LCFI6:
+ 180              		.cfi_def_cfa_offset 8
+ 181              		.cfi_offset 7, -8
+ 182              		.cfi_offset 14, -4
+ 183 0002 84B0     		sub	sp, sp, #16
+ 184              	.LCFI7:
+ 185              		.cfi_def_cfa_offset 24
+ 186 0004 00AF     		add	r7, sp, #0
+ 187              	.LCFI8:
+ 188              		.cfi_def_cfa_register 7
+  40:FT_Esd_Framework/Ft_Esd_Timer.c **** 	if (Ft_Esd_TimerEntryNb)
+ 189              		.loc 1 40 0
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 5
+
+
+ 190 0006 214B     		ldr	r3, .L21
+ 191 0008 1B68     		ldr	r3, [r3]
+ 192 000a 002B     		cmp	r3, #0
+ 193 000c 39D0     		beq	.L19
+ 194              	.LBB4:
+  41:FT_Esd_Framework/Ft_Esd_Timer.c **** 	{
+  42:FT_Esd_Framework/Ft_Esd_Timer.c **** 		ft_int32_t timeMs = (ft_int32_t)Ft_Esd_GetMillis();
+ 195              		.loc 1 42 0
+ 196 000e FFF7FEFF 		bl	Ft_Esd_GetMillis
+ 197 0012 0346     		mov	r3, r0
+ 198 0014 FB60     		str	r3, [r7, #12]
+ 199              	.L18:
+ 200              	.LBB5:
+  43:FT_Esd_Framework/Ft_Esd_Timer.c **** 		do
+  44:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+  45:FT_Esd_Framework/Ft_Esd_Timer.c **** 			int i = Ft_Esd_TimerEntryNb - 1;
+ 201              		.loc 1 45 0
+ 202 0016 1D4B     		ldr	r3, .L21
+ 203 0018 1B68     		ldr	r3, [r3]
+ 204 001a 013B     		subs	r3, r3, #1
+ 205 001c BB60     		str	r3, [r7, #8]
+  46:FT_Esd_Framework/Ft_Esd_Timer.c **** 			if ((timeMs - Ft_Esd_TimerEntries[i].TimeMs) >= 0)
+ 206              		.loc 1 46 0
+ 207 001e 1C4A     		ldr	r2, .L21+4
+ 208 0020 BB68     		ldr	r3, [r7, #8]
+ 209 0022 52F83330 		ldr	r3, [r2, r3, lsl #3]
+ 210 0026 FA68     		ldr	r2, [r7, #12]
+ 211 0028 D31A     		subs	r3, r2, r3
+ 212 002a 002B     		cmp	r3, #0
+ 213 002c 28DB     		blt	.L20
+ 214              	.LBB6:
+  47:FT_Esd_Framework/Ft_Esd_Timer.c **** 			{
+  48:FT_Esd_Framework/Ft_Esd_Timer.c **** 				Ft_Esd_Timer *timer = Ft_Esd_TimerEntries[i].Timer;
+ 215              		.loc 1 48 0
+ 216 002e 184A     		ldr	r2, .L21+4
+ 217 0030 BB68     		ldr	r3, [r7, #8]
+ 218 0032 DB00     		lsls	r3, r3, #3
+ 219 0034 1344     		add	r3, r3, r2
+ 220 0036 5B68     		ldr	r3, [r3, #4]
+ 221 0038 7B60     		str	r3, [r7, #4]
+  49:FT_Esd_Framework/Ft_Esd_Timer.c **** 				timer->Fired(timer->Parent);
+ 222              		.loc 1 49 0
+ 223 003a 7B68     		ldr	r3, [r7, #4]
+ 224 003c 5B68     		ldr	r3, [r3, #4]
+ 225 003e 7A68     		ldr	r2, [r7, #4]
+ 226 0040 1268     		ldr	r2, [r2]
+ 227 0042 1046     		mov	r0, r2
+ 228 0044 9847     		blx	r3
+ 229              	.LVL0:
+  50:FT_Esd_Framework/Ft_Esd_Timer.c **** 				--Ft_Esd_TimerEntryNb;
+ 230              		.loc 1 50 0
+ 231 0046 114B     		ldr	r3, .L21
+ 232 0048 1B68     		ldr	r3, [r3]
+ 233 004a 013B     		subs	r3, r3, #1
+ 234 004c 0F4A     		ldr	r2, .L21
+ 235 004e 1360     		str	r3, [r2]
+  51:FT_Esd_Framework/Ft_Esd_Timer.c **** 				if (timer->Repeat && timer->TimeoutMs)
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 6
+
+
+ 236              		.loc 1 51 0
+ 237 0050 7B68     		ldr	r3, [r7, #4]
+ 238 0052 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 239 0054 002B     		cmp	r3, #0
+ 240 0056 0ED0     		beq	.L17
+ 241              		.loc 1 51 0 is_stmt 0 discriminator 1
+ 242 0058 7B68     		ldr	r3, [r7, #4]
+ 243 005a 9B68     		ldr	r3, [r3, #8]
+ 244 005c 002B     		cmp	r3, #0
+ 245 005e 0AD0     		beq	.L17
+  52:FT_Esd_Framework/Ft_Esd_Timer.c **** 				{
+  53:FT_Esd_Framework/Ft_Esd_Timer.c **** 					Ft_Esd_Timer_RunGlobal(timer, timer->TimeoutMs + Ft_Esd_TimerEntries[i].TimeMs); 
+ 246              		.loc 1 53 0 is_stmt 1
+ 247 0060 7B68     		ldr	r3, [r7, #4]
+ 248 0062 9A68     		ldr	r2, [r3, #8]
+ 249 0064 0A49     		ldr	r1, .L21+4
+ 250 0066 BB68     		ldr	r3, [r7, #8]
+ 251 0068 51F83330 		ldr	r3, [r1, r3, lsl #3]
+ 252 006c 1344     		add	r3, r3, r2
+ 253 006e 1946     		mov	r1, r3
+ 254 0070 7868     		ldr	r0, [r7, #4]
+ 255 0072 FFF7FEFF 		bl	Ft_Esd_Timer_RunGlobal
+ 256              	.L17:
+ 257              	.LBE6:
+ 258              	.LBE5:
+  54:FT_Esd_Framework/Ft_Esd_Timer.c **** 				}
+  55:FT_Esd_Framework/Ft_Esd_Timer.c **** 			}
+  56:FT_Esd_Framework/Ft_Esd_Timer.c **** 			else
+  57:FT_Esd_Framework/Ft_Esd_Timer.c **** 			{
+  58:FT_Esd_Framework/Ft_Esd_Timer.c **** 				break;
+  59:FT_Esd_Framework/Ft_Esd_Timer.c **** 			}
+  60:FT_Esd_Framework/Ft_Esd_Timer.c **** 		} while (Ft_Esd_TimerEntryNb);
+ 259              		.loc 1 60 0
+ 260 0076 054B     		ldr	r3, .L21
+ 261 0078 1B68     		ldr	r3, [r3]
+ 262 007a 002B     		cmp	r3, #0
+ 263 007c CBD1     		bne	.L18
+ 264              	.LBE4:
+  61:FT_Esd_Framework/Ft_Esd_Timer.c **** 	}
+  62:FT_Esd_Framework/Ft_Esd_Timer.c **** }
+ 265              		.loc 1 62 0
+ 266 007e 00E0     		b	.L19
+ 267              	.L20:
+ 268              	.LBB8:
+ 269              	.LBB7:
+  58:FT_Esd_Framework/Ft_Esd_Timer.c **** 			}
+ 270              		.loc 1 58 0
+ 271 0080 00BF     		nop
+ 272              	.L19:
+ 273              	.LBE7:
+ 274              	.LBE8:
+ 275              		.loc 1 62 0
+ 276 0082 00BF     		nop
+ 277 0084 1037     		adds	r7, r7, #16
+ 278              	.LCFI9:
+ 279              		.cfi_def_cfa_offset 8
+ 280 0086 BD46     		mov	sp, r7
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 7
+
+
+ 281              	.LCFI10:
+ 282              		.cfi_def_cfa_register 13
+ 283              		@ sp needed
+ 284 0088 80BD     		pop	{r7, pc}
+ 285              	.L22:
+ 286 008a 00BF     		.align	2
+ 287              	.L21:
+ 288 008c 00000000 		.word	Ft_Esd_TimerEntryNb
+ 289 0090 00000000 		.word	Ft_Esd_TimerEntries
+ 290              		.cfi_endproc
+ 291              	.LFE4:
+ 293              		.section	.text.Ft_Esd_Timer_CancelGlobal,"ax",%progbits
+ 294              		.align	1
+ 295              		.global	Ft_Esd_Timer_CancelGlobal
+ 296              		.syntax unified
+ 297              		.thumb
+ 298              		.thumb_func
+ 299              		.fpu fpv5-sp-d16
+ 301              	Ft_Esd_Timer_CancelGlobal:
+ 302              	.LFB5:
+  63:FT_Esd_Framework/Ft_Esd_Timer.c **** 
+  64:FT_Esd_Framework/Ft_Esd_Timer.c **** void Ft_Esd_Timer_CancelGlobal()
+  65:FT_Esd_Framework/Ft_Esd_Timer.c **** {
+ 303              		.loc 1 65 0
+ 304              		.cfi_startproc
+ 305              		@ args = 0, pretend = 0, frame = 0
+ 306              		@ frame_needed = 1, uses_anonymous_args = 0
+ 307              		@ link register save eliminated.
+ 308 0000 80B4     		push	{r7}
+ 309              	.LCFI11:
+ 310              		.cfi_def_cfa_offset 4
+ 311              		.cfi_offset 7, -4
+ 312 0002 00AF     		add	r7, sp, #0
+ 313              	.LCFI12:
+ 314              		.cfi_def_cfa_register 7
+  66:FT_Esd_Framework/Ft_Esd_Timer.c **** 	Ft_Esd_TimerEntryNb = 0;
+ 315              		.loc 1 66 0
+ 316 0004 034B     		ldr	r3, .L24
+ 317 0006 0022     		movs	r2, #0
+ 318 0008 1A60     		str	r2, [r3]
+  67:FT_Esd_Framework/Ft_Esd_Timer.c **** }
+ 319              		.loc 1 67 0
+ 320 000a 00BF     		nop
+ 321 000c BD46     		mov	sp, r7
+ 322              	.LCFI13:
+ 323              		.cfi_def_cfa_register 13
+ 324              		@ sp needed
+ 325 000e 5DF8047B 		ldr	r7, [sp], #4
+ 326              	.LCFI14:
+ 327              		.cfi_restore 7
+ 328              		.cfi_def_cfa_offset 0
+ 329 0012 7047     		bx	lr
+ 330              	.L25:
+ 331              		.align	2
+ 332              	.L24:
+ 333 0014 00000000 		.word	Ft_Esd_TimerEntryNb
+ 334              		.cfi_endproc
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 8
+
+
+ 335              	.LFE5:
+ 337              		.section	.text.Ft_Esd_Timer_End_Signal,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	Ft_Esd_Timer_End_Signal
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 343              		.fpu fpv5-sp-d16
+ 345              	Ft_Esd_Timer_End_Signal:
+ 346              	.LFB6:
+  68:FT_Esd_Framework/Ft_Esd_Timer.c **** 
+  69:FT_Esd_Framework/Ft_Esd_Timer.c **** ESD_METHOD(Ft_Esd_Timer_End_Signal, Context = Ft_Esd_Timer)
+  70:FT_Esd_Framework/Ft_Esd_Timer.c **** void Ft_Esd_Timer_End_Signal(Ft_Esd_Timer *context)
+  71:FT_Esd_Framework/Ft_Esd_Timer.c **** {
+ 347              		.loc 1 71 0
+ 348              		.cfi_startproc
+ 349              		@ args = 0, pretend = 0, frame = 16
+ 350              		@ frame_needed = 1, uses_anonymous_args = 0
+ 351              		@ link register save eliminated.
+ 352 0000 80B4     		push	{r7}
+ 353              	.LCFI15:
+ 354              		.cfi_def_cfa_offset 4
+ 355              		.cfi_offset 7, -4
+ 356 0002 85B0     		sub	sp, sp, #20
+ 357              	.LCFI16:
+ 358              		.cfi_def_cfa_offset 24
+ 359 0004 00AF     		add	r7, sp, #0
+ 360              	.LCFI17:
+ 361              		.cfi_def_cfa_register 7
+ 362 0006 7860     		str	r0, [r7, #4]
+  72:FT_Esd_Framework/Ft_Esd_Timer.c **** 	if (Ft_Esd_TimerEntryNb)
+ 363              		.loc 1 72 0
+ 364 0008 1F4B     		ldr	r3, .L36
+ 365 000a 1B68     		ldr	r3, [r3]
+ 366 000c 002B     		cmp	r3, #0
+ 367 000e 34D0     		beq	.L34
+ 368              	.LBB9:
+  73:FT_Esd_Framework/Ft_Esd_Timer.c **** 	{
+  74:FT_Esd_Framework/Ft_Esd_Timer.c **** 		int i;
+  75:FT_Esd_Framework/Ft_Esd_Timer.c **** 		for (i = 0; i < Ft_Esd_TimerEntryNb; ++i)
+ 369              		.loc 1 75 0
+ 370 0010 0023     		movs	r3, #0
+ 371 0012 FB60     		str	r3, [r7, #12]
+ 372 0014 0AE0     		b	.L28
+ 373              	.L31:
+  76:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+  77:FT_Esd_Framework/Ft_Esd_Timer.c **** 			if (Ft_Esd_TimerEntries[i].Timer == context)
+ 374              		.loc 1 77 0
+ 375 0016 1D4A     		ldr	r2, .L36+4
+ 376 0018 FB68     		ldr	r3, [r7, #12]
+ 377 001a DB00     		lsls	r3, r3, #3
+ 378 001c 1344     		add	r3, r3, r2
+ 379 001e 5B68     		ldr	r3, [r3, #4]
+ 380 0020 7A68     		ldr	r2, [r7, #4]
+ 381 0022 9A42     		cmp	r2, r3
+ 382 0024 08D0     		beq	.L35
+  75:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 9
+
+
+ 383              		.loc 1 75 0 discriminator 2
+ 384 0026 FB68     		ldr	r3, [r7, #12]
+ 385 0028 0133     		adds	r3, r3, #1
+ 386 002a FB60     		str	r3, [r7, #12]
+ 387              	.L28:
+  75:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+ 388              		.loc 1 75 0 is_stmt 0 discriminator 1
+ 389 002c FA68     		ldr	r2, [r7, #12]
+ 390 002e 164B     		ldr	r3, .L36
+ 391 0030 1B68     		ldr	r3, [r3]
+ 392 0032 9A42     		cmp	r2, r3
+ 393 0034 EFD3     		bcc	.L31
+ 394 0036 00E0     		b	.L30
+ 395              	.L35:
+  78:FT_Esd_Framework/Ft_Esd_Timer.c **** 			{
+  79:FT_Esd_Framework/Ft_Esd_Timer.c **** 				break;
+ 396              		.loc 1 79 0 is_stmt 1
+ 397 0038 00BF     		nop
+ 398              	.L30:
+  80:FT_Esd_Framework/Ft_Esd_Timer.c **** 			}
+  81:FT_Esd_Framework/Ft_Esd_Timer.c **** 		}
+  82:FT_Esd_Framework/Ft_Esd_Timer.c **** 		if (i < Ft_Esd_TimerEntryNb)
+ 399              		.loc 1 82 0
+ 400 003a FA68     		ldr	r2, [r7, #12]
+ 401 003c 124B     		ldr	r3, .L36
+ 402 003e 1B68     		ldr	r3, [r3]
+ 403 0040 9A42     		cmp	r2, r3
+ 404 0042 1AD2     		bcs	.L34
+  83:FT_Esd_Framework/Ft_Esd_Timer.c **** 		{
+  84:FT_Esd_Framework/Ft_Esd_Timer.c **** 			--Ft_Esd_TimerEntryNb;
+ 405              		.loc 1 84 0
+ 406 0044 104B     		ldr	r3, .L36
+ 407 0046 1B68     		ldr	r3, [r3]
+ 408 0048 013B     		subs	r3, r3, #1
+ 409 004a 0F4A     		ldr	r2, .L36
+ 410 004c 1360     		str	r3, [r2]
+  85:FT_Esd_Framework/Ft_Esd_Timer.c **** 			for (; i < Ft_Esd_TimerEntryNb; ++i)
+ 411              		.loc 1 85 0
+ 412 004e 0FE0     		b	.L32
+ 413              	.L33:
+  86:FT_Esd_Framework/Ft_Esd_Timer.c **** 			{
+  87:FT_Esd_Framework/Ft_Esd_Timer.c **** 				Ft_Esd_TimerEntries[i] = Ft_Esd_TimerEntries[i + 1];
+ 414              		.loc 1 87 0 discriminator 2
+ 415 0050 FB68     		ldr	r3, [r7, #12]
+ 416 0052 5A1C     		adds	r2, r3, #1
+ 417 0054 0D48     		ldr	r0, .L36+4
+ 418 0056 FB68     		ldr	r3, [r7, #12]
+ 419 0058 0C49     		ldr	r1, .L36+4
+ 420 005a DB00     		lsls	r3, r3, #3
+ 421 005c 0344     		add	r3, r3, r0
+ 422 005e D200     		lsls	r2, r2, #3
+ 423 0060 0A44     		add	r2, r2, r1
+ 424 0062 92E80300 		ldm	r2, {r0, r1}
+ 425 0066 83E80300 		stm	r3, {r0, r1}
+  85:FT_Esd_Framework/Ft_Esd_Timer.c **** 			for (; i < Ft_Esd_TimerEntryNb; ++i)
+ 426              		.loc 1 85 0 discriminator 2
+ 427 006a FB68     		ldr	r3, [r7, #12]
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 10
+
+
+ 428 006c 0133     		adds	r3, r3, #1
+ 429 006e FB60     		str	r3, [r7, #12]
+ 430              	.L32:
+  85:FT_Esd_Framework/Ft_Esd_Timer.c **** 			for (; i < Ft_Esd_TimerEntryNb; ++i)
+ 431              		.loc 1 85 0 is_stmt 0 discriminator 1
+ 432 0070 FA68     		ldr	r2, [r7, #12]
+ 433 0072 054B     		ldr	r3, .L36
+ 434 0074 1B68     		ldr	r3, [r3]
+ 435 0076 9A42     		cmp	r2, r3
+ 436 0078 EAD3     		bcc	.L33
+ 437              	.L34:
+ 438              	.LBE9:
+  88:FT_Esd_Framework/Ft_Esd_Timer.c **** 			}
+  89:FT_Esd_Framework/Ft_Esd_Timer.c **** 		}
+  90:FT_Esd_Framework/Ft_Esd_Timer.c **** 	}
+  91:FT_Esd_Framework/Ft_Esd_Timer.c **** }
+ 439              		.loc 1 91 0 is_stmt 1
+ 440 007a 00BF     		nop
+ 441 007c 1437     		adds	r7, r7, #20
+ 442              	.LCFI18:
+ 443              		.cfi_def_cfa_offset 4
+ 444 007e BD46     		mov	sp, r7
+ 445              	.LCFI19:
+ 446              		.cfi_def_cfa_register 13
+ 447              		@ sp needed
+ 448 0080 5DF8047B 		ldr	r7, [sp], #4
+ 449              	.LCFI20:
+ 450              		.cfi_restore 7
+ 451              		.cfi_def_cfa_offset 0
+ 452 0084 7047     		bx	lr
+ 453              	.L37:
+ 454 0086 00BF     		.align	2
+ 455              	.L36:
+ 456 0088 00000000 		.word	Ft_Esd_TimerEntryNb
+ 457 008c 00000000 		.word	Ft_Esd_TimerEntries
+ 458              		.cfi_endproc
+ 459              	.LFE6:
+ 461              		.section	.text.Ft_Esd_Timer_Run_Signal,"ax",%progbits
+ 462              		.align	1
+ 463              		.global	Ft_Esd_Timer_Run_Signal
+ 464              		.syntax unified
+ 465              		.thumb
+ 466              		.thumb_func
+ 467              		.fpu fpv5-sp-d16
+ 469              	Ft_Esd_Timer_Run_Signal:
+ 470              	.LFB7:
+  92:FT_Esd_Framework/Ft_Esd_Timer.c **** 
+  93:FT_Esd_Framework/Ft_Esd_Timer.c **** ESD_METHOD(Ft_Esd_Timer_Run_Signal, Context = Ft_Esd_Timer)
+  94:FT_Esd_Framework/Ft_Esd_Timer.c **** void Ft_Esd_Timer_Run_Signal(Ft_Esd_Timer *context)
+  95:FT_Esd_Framework/Ft_Esd_Timer.c **** {
+ 471              		.loc 1 95 0
+ 472              		.cfi_startproc
+ 473              		@ args = 0, pretend = 0, frame = 8
+ 474              		@ frame_needed = 1, uses_anonymous_args = 0
+ 475 0000 90B5     		push	{r4, r7, lr}
+ 476              	.LCFI21:
+ 477              		.cfi_def_cfa_offset 12
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 11
+
+
+ 478              		.cfi_offset 4, -12
+ 479              		.cfi_offset 7, -8
+ 480              		.cfi_offset 14, -4
+ 481 0002 83B0     		sub	sp, sp, #12
+ 482              	.LCFI22:
+ 483              		.cfi_def_cfa_offset 24
+ 484 0004 00AF     		add	r7, sp, #0
+ 485              	.LCFI23:
+ 486              		.cfi_def_cfa_register 7
+ 487 0006 7860     		str	r0, [r7, #4]
+  96:FT_Esd_Framework/Ft_Esd_Timer.c **** 	Ft_Esd_Timer_End_Signal(context);
+ 488              		.loc 1 96 0
+ 489 0008 7868     		ldr	r0, [r7, #4]
+ 490 000a FFF7FEFF 		bl	Ft_Esd_Timer_End_Signal
+  97:FT_Esd_Framework/Ft_Esd_Timer.c **** 	Ft_Esd_Timer_RunGlobal(context, context->TimeoutMs + (ft_int32_t)Ft_Esd_GetMillis()); 
+ 491              		.loc 1 97 0
+ 492 000e 7B68     		ldr	r3, [r7, #4]
+ 493 0010 9C68     		ldr	r4, [r3, #8]
+ 494 0012 FFF7FEFF 		bl	Ft_Esd_GetMillis
+ 495 0016 0346     		mov	r3, r0
+ 496 0018 2344     		add	r3, r3, r4
+ 497 001a 1946     		mov	r1, r3
+ 498 001c 7868     		ldr	r0, [r7, #4]
+ 499 001e FFF7FEFF 		bl	Ft_Esd_Timer_RunGlobal
+  98:FT_Esd_Framework/Ft_Esd_Timer.c **** }
+ 500              		.loc 1 98 0
+ 501 0022 00BF     		nop
+ 502 0024 0C37     		adds	r7, r7, #12
+ 503              	.LCFI24:
+ 504              		.cfi_def_cfa_offset 12
+ 505 0026 BD46     		mov	sp, r7
+ 506              	.LCFI25:
+ 507              		.cfi_def_cfa_register 13
+ 508              		@ sp needed
+ 509 0028 90BD     		pop	{r4, r7, pc}
+ 510              		.cfi_endproc
+ 511              	.LFE7:
+ 513              		.text
+ 514              	.Letext0:
+ 515              		.file 2 "FT_Eve_Hal/FT_DataTypes.h"
+ 516              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 517              		.file 4 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 518              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 519              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 520              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 521              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 522              		.file 9 "FT_Esd_Framework/Ft_Esd_Timer.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Ft_Esd_Timer.c
+                            *COM*:0000000000000200 Ft_Esd_TimerEntries
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:23     .bss.Ft_Esd_TimerEntryNb:0000000000000000 Ft_Esd_TimerEntryNb
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:20     .bss.Ft_Esd_TimerEntryNb:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:26     .text.Ft_Esd_Timer_RunGlobal:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:33     .text.Ft_Esd_Timer_RunGlobal:0000000000000000 Ft_Esd_Timer_RunGlobal
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:159    .text.Ft_Esd_Timer_RunGlobal:00000000000000a0 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:165    .text.Ft_Esd_Timer_UpdateGlobal:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:172    .text.Ft_Esd_Timer_UpdateGlobal:0000000000000000 Ft_Esd_Timer_UpdateGlobal
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:288    .text.Ft_Esd_Timer_UpdateGlobal:000000000000008c $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:294    .text.Ft_Esd_Timer_CancelGlobal:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:301    .text.Ft_Esd_Timer_CancelGlobal:0000000000000000 Ft_Esd_Timer_CancelGlobal
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:333    .text.Ft_Esd_Timer_CancelGlobal:0000000000000014 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:338    .text.Ft_Esd_Timer_End_Signal:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:345    .text.Ft_Esd_Timer_End_Signal:0000000000000000 Ft_Esd_Timer_End_Signal
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:456    .text.Ft_Esd_Timer_End_Signal:0000000000000088 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:462    .text.Ft_Esd_Timer_Run_Signal:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccAF9mrM.s:469    .text.Ft_Esd_Timer_Run_Signal:0000000000000000 Ft_Esd_Timer_Run_Signal
+
+UNDEFINED SYMBOLS
+Ft_Esd_GetMillis

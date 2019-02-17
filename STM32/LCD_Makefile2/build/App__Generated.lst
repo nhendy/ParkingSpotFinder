@@ -1,0 +1,1061 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"App__Generated.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Ft_Esd_BitmapCell_GetInfo,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-sp-d16
+  24              	Ft_Esd_BitmapCell_GetInfo:
+  25              	.LFB9:
+  26              		.file 1 "FT_Esd_Framework/Ft_Esd_BitmapInfo.h"
+   1:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** /*
+   2:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** Bitmap info structure
+   3:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** */
+   4:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+   5:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #ifndef FT_ESD_BITMAPINFO_H
+   6:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #define FT_ESD_BITMAPINFO_H
+   7:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+   8:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "Ft_Esd.h"
+   9:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "FT_DataTypes.h"
+  10:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "Ft_Esd_GpuAlloc.h"
+  11:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  12:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapInfo, Native = Struct) // TODO: Struct support, expose values
+  13:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  14:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  15:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Width;
+  16:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Height;
+  17:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Stride;
+  18:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Format;
+  19:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Size;
+  20:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	const char *File;
+  21:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  22:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Handle pointing to the address in RAM_G if it is allocated
+  23:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_GpuHandle GpuHandle;
+  24:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  25:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Bitmap handle that is being used
+  26:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_uint32_t BitmapHandle;
+  27:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  28:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	const char *PaletteFile;
+  29:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_GpuHandle PaletteGpuHandle;
+  30:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  31:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// When this is set, the allocated ram is not free'd automatically
+  32:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Use Ft_Esd_GpuAlloc_Free(GpuAlloc, GpuHandle) to free the GPU ram manually
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 2
+
+
+  33:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_bool_t Persistent;
+  34:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  35:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_BitmapInfo;
+  36:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  37:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapInfo *, Native = Pointer, Edit = Library)
+  38:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  39:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapCell, Native = Struct) // TODO: Struct support, expose values
+  40:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  41:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  42:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapInfo *Info;
+  43:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Cell;
+  44:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_BitmapCell;
+  45:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  46:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapCell *, Native = Pointer, Edit = Library)
+  47:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  48:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // Attempts to load the specified bitmap if it has not been loaded into RAM_G yet.
+  49:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // Call during the Update cycle of each frame to keep the bitmap flagged as in use, otherwise the m
+  50:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_LoadBitmap, Type = ft_uint32_t, Include = "Ft_Esd_BitmapInfo.h", DisplayName = 
+  51:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapInfo, Type = Ft_Esd_BitmapInfo *)
+  52:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ft_uint32_t Ft_Esd_LoadBitmap(Ft_Esd_BitmapInfo *bitmapInfo);
+  53:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  54:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_LoadPalette, Type = ft_uint32_t, Include = "Ft_Esd_BitmapInfo.h", DisplayName =
+  55:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapInfo, Type = Ft_Esd_BitmapInfo *)
+  56:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ft_uint32_t Ft_Esd_LoadPalette(Ft_Esd_BitmapInfo *bitmapInfo);
+  57:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  58:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_ENUM(_BitmapResourceFormat, DisplayName = "Bitmap Format")
+  59:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB1555)
+  60:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L1)
+  61:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L2)
+  62:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L4)
+  63:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L8)
+  64:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(RGB332)
+  65:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB2)
+  66:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB4)
+  67:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(RGB565)
+  68:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(PALETTED565)
+  69:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(PALETTED4444)
+  70:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(PALETTED8)
+  71:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(JPEG)
+  72:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(PNG)
+  73:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_END()
+  74:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  75:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_LOGIC(Ft_Esd_SwitchBitmapCell, Callback, Include = "Ft_Esd_BitmapInfo.h", DisplayName = "Switch
+  76:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  77:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  78:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Callback
+  79:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	void *Parent;
+  80:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  81:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  82:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Input
+  83:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  84:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  85:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ESD_INPUT(BitmapInfo, Type = Ft_Esd_BitmapInfo *, DisplayName = "Bitmap Info")
+  86:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapInfo *(* BitmapInfo)(void *context);
+  87:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  88:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ESD_INPUT(Cell, Type = ft_uint8_t, DisplayName = "Cell")
+  89:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_uint8_t(* Cell)(void *context);
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 3
+
+
+  90:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  91:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  92:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Variables
+  93:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  94:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  95:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// BitmapCell object
+  96:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapCell BitmapCell;
+  97:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  98:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_SwitchBitmapCell;
+  99:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 100:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** void Ft_Esd_SwitchBitmapCell__Initializer(Ft_Esd_SwitchBitmapCell *context);
+ 101:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 102:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_OUTPUT(BitmapCell, Type = Ft_Esd_BitmapCell *, DisplayName = "Bitmap Cell")
+ 103:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** Ft_Esd_BitmapCell *Ft_Esd_SwitchBitmapCell_BitmapCell(Ft_Esd_SwitchBitmapCell *context);
+ 104:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 105:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_UPDATE(Ft_Esd_BitmapPersist, DisplayName = "Bitmap Persist", Category = EsdUtilities)
+ 106:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *)
+ 107:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** void Ft_Esd_BitmapPersist(Ft_Esd_BitmapCell *bitmapCell);
+ 108:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 109:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_BitmapCell_GetInfo, Type = Ft_Esd_BitmapInfo *, DisplayName = "ESD BitmapCell G
+ 110:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *)
+ 111:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** static Ft_Esd_BitmapInfo *Ft_Esd_BitmapCell_GetInfo(Ft_Esd_BitmapCell *bitmapCell)
+ 112:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  27              		.loc 1 112 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+ 113:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	if (!bitmapCell) return 0;
+  43              		.loc 1 113 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 002B     		cmp	r3, #0
+  46 000c 01D1     		bne	.L2
+  47              		.loc 1 113 0 is_stmt 0 discriminator 1
+  48 000e 0023     		movs	r3, #0
+  49 0010 01E0     		b	.L3
+  50              	.L2:
+ 114:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	return bitmapCell->Info;
+  51              		.loc 1 114 0 is_stmt 1
+  52 0012 7B68     		ldr	r3, [r7, #4]
+  53 0014 1B68     		ldr	r3, [r3]
+  54              	.L3:
+ 115:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** }
+  55              		.loc 1 115 0
+  56 0016 1846     		mov	r0, r3
+  57 0018 0C37     		adds	r7, r7, #12
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 4
+
+
+  58              	.LCFI3:
+  59              		.cfi_def_cfa_offset 4
+  60 001a BD46     		mov	sp, r7
+  61              	.LCFI4:
+  62              		.cfi_def_cfa_register 13
+  63              		@ sp needed
+  64 001c 5DF8047B 		ldr	r7, [sp], #4
+  65              	.LCFI5:
+  66              		.cfi_restore 7
+  67              		.cfi_def_cfa_offset 0
+  68 0020 7047     		bx	lr
+  69              		.cfi_endproc
+  70              	.LFE9:
+  72              		.section	.text.App__Initializer,"ax",%progbits
+  73              		.align	1
+  74              		.global	App__Initializer
+  75              		.syntax unified
+  76              		.thumb
+  77              		.thumb_func
+  78              		.fpu fpv5-sp-d16
+  80              	App__Initializer:
+  81              	.LFB15:
+  82              		.file 2 "Timer/App__Generated.c"
+   1:Timer/App__Generated.c **** /*
+   2:Timer/App__Generated.c **** This file is automatically generated
+   3:Timer/App__Generated.c **** App
+   4:Timer/App__Generated.c **** C Source
+   5:Timer/App__Generated.c **** */
+   6:Timer/App__Generated.c **** 
+   7:Timer/App__Generated.c **** #include "App.h"
+   8:Timer/App__Generated.c **** 
+   9:Timer/App__Generated.c **** #include "stdlib.h"
+  10:Timer/App__Generated.c **** 
+  11:Timer/App__Generated.c **** extern void Ft_Esd_Noop(void *context);
+  12:Timer/App__Generated.c **** extern void Ft_Esd_Spinner_Popup();
+  13:Timer/App__Generated.c **** 
+  14:Timer/App__Generated.c **** 
+  15:Timer/App__Generated.c **** 
+  16:Timer/App__Generated.c **** #define Main_Page__ID 1
+  17:Timer/App__Generated.c **** 
+  18:Timer/App__Generated.c **** void App__Initializer(App *context)
+  19:Timer/App__Generated.c **** {
+  83              		.loc 2 19 0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 8
+  86              		@ frame_needed = 1, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
+  88 0000 80B4     		push	{r7}
+  89              	.LCFI6:
+  90              		.cfi_def_cfa_offset 4
+  91              		.cfi_offset 7, -4
+  92 0002 83B0     		sub	sp, sp, #12
+  93              	.LCFI7:
+  94              		.cfi_def_cfa_offset 16
+  95 0004 00AF     		add	r7, sp, #0
+  96              	.LCFI8:
+  97              		.cfi_def_cfa_register 7
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 5
+
+
+  98 0006 7860     		str	r0, [r7, #4]
+  20:Timer/App__Generated.c **** 	context->Parent = 0;
+  99              		.loc 2 20 0
+ 100 0008 7B68     		ldr	r3, [r7, #4]
+ 101 000a 0022     		movs	r2, #0
+ 102 000c 1A60     		str	r2, [r3]
+  21:Timer/App__Generated.c **** 	context->_ActivePage = 0;
+ 103              		.loc 2 21 0
+ 104 000e 7B68     		ldr	r3, [r7, #4]
+ 105 0010 0022     		movs	r2, #0
+ 106 0012 5A60     		str	r2, [r3, #4]
+  22:Timer/App__Generated.c **** 	context->Main_Page = 0;
+ 107              		.loc 2 22 0
+ 108 0014 7B68     		ldr	r3, [r7, #4]
+ 109 0016 0022     		movs	r2, #0
+ 110 0018 9A60     		str	r2, [r3, #8]
+  23:Timer/App__Generated.c **** 	context->Main_Page__Active = 0;
+ 111              		.loc 2 23 0
+ 112 001a 7B68     		ldr	r3, [r7, #4]
+ 113 001c 0022     		movs	r2, #0
+ 114 001e DA60     		str	r2, [r3, #12]
+  24:Timer/App__Generated.c **** }
+ 115              		.loc 2 24 0
+ 116 0020 00BF     		nop
+ 117 0022 0C37     		adds	r7, r7, #12
+ 118              	.LCFI9:
+ 119              		.cfi_def_cfa_offset 4
+ 120 0024 BD46     		mov	sp, r7
+ 121              	.LCFI10:
+ 122              		.cfi_def_cfa_register 13
+ 123              		@ sp needed
+ 124 0026 5DF8047B 		ldr	r7, [sp], #4
+ 125              	.LCFI11:
+ 126              		.cfi_restore 7
+ 127              		.cfi_def_cfa_offset 0
+ 128 002a 7047     		bx	lr
+ 129              		.cfi_endproc
+ 130              	.LFE15:
+ 132              		.section	.text.App__Main_Page__Validate,"ax",%progbits
+ 133              		.align	1
+ 134              		.syntax unified
+ 135              		.thumb
+ 136              		.thumb_func
+ 137              		.fpu fpv5-sp-d16
+ 139              	App__Main_Page__Validate:
+ 140              	.LFB16:
+  25:Timer/App__Generated.c **** 
+  26:Timer/App__Generated.c **** static void App__Main_Page__Validate(App *context)
+  27:Timer/App__Generated.c **** {
+ 141              		.loc 2 27 0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 16
+ 144              		@ frame_needed = 1, uses_anonymous_args = 0
+ 145 0000 80B5     		push	{r7, lr}
+ 146              	.LCFI12:
+ 147              		.cfi_def_cfa_offset 8
+ 148              		.cfi_offset 7, -8
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 6
+
+
+ 149              		.cfi_offset 14, -4
+ 150 0002 84B0     		sub	sp, sp, #16
+ 151              	.LCFI13:
+ 152              		.cfi_def_cfa_offset 24
+ 153 0004 00AF     		add	r7, sp, #0
+ 154              	.LCFI14:
+ 155              		.cfi_def_cfa_register 7
+ 156 0006 7860     		str	r0, [r7, #4]
+  28:Timer/App__Generated.c **** 	void *parent = context->Parent;
+ 157              		.loc 2 28 0
+ 158 0008 7B68     		ldr	r3, [r7, #4]
+ 159 000a 1B68     		ldr	r3, [r3]
+ 160 000c FB60     		str	r3, [r7, #12]
+  29:Timer/App__Generated.c **** 	if (!context->Main_Page)
+ 161              		.loc 2 29 0
+ 162 000e 7B68     		ldr	r3, [r7, #4]
+ 163 0010 9B68     		ldr	r3, [r3, #8]
+ 164 0012 002B     		cmp	r3, #0
+ 165 0014 15D1     		bne	.L7
+  30:Timer/App__Generated.c **** 	{
+  31:Timer/App__Generated.c **** 		context->Main_Page = (MainPage *)malloc(sizeof(MainPage));
+ 166              		.loc 2 31 0
+ 167 0016 40F24C40 		movw	r0, #1100
+ 168 001a FFF7FEFF 		bl	malloc
+ 169 001e 0346     		mov	r3, r0
+ 170 0020 1A46     		mov	r2, r3
+ 171 0022 7B68     		ldr	r3, [r7, #4]
+ 172 0024 9A60     		str	r2, [r3, #8]
+  32:Timer/App__Generated.c **** 		MainPage__Initializer(context->Main_Page);
+ 173              		.loc 2 32 0
+ 174 0026 7B68     		ldr	r3, [r7, #4]
+ 175 0028 9B68     		ldr	r3, [r3, #8]
+ 176 002a 1846     		mov	r0, r3
+ 177 002c FFF7FEFF 		bl	MainPage__Initializer
+  33:Timer/App__Generated.c **** 		context->Main_Page->Parent = context;
+ 178              		.loc 2 33 0
+ 179 0030 7B68     		ldr	r3, [r7, #4]
+ 180 0032 9B68     		ldr	r3, [r3, #8]
+ 181 0034 7A68     		ldr	r2, [r7, #4]
+ 182 0036 1A60     		str	r2, [r3]
+  34:Timer/App__Generated.c **** 		MainPage_Start(context->Main_Page);
+ 183              		.loc 2 34 0
+ 184 0038 7B68     		ldr	r3, [r7, #4]
+ 185 003a 9B68     		ldr	r3, [r3, #8]
+ 186 003c 1846     		mov	r0, r3
+ 187 003e FFF7FEFF 		bl	MainPage_Start
+ 188              	.L7:
+  35:Timer/App__Generated.c **** 	}
+  36:Timer/App__Generated.c **** }
+ 189              		.loc 2 36 0
+ 190 0042 00BF     		nop
+ 191 0044 1037     		adds	r7, r7, #16
+ 192              	.LCFI15:
+ 193              		.cfi_def_cfa_offset 8
+ 194 0046 BD46     		mov	sp, r7
+ 195              	.LCFI16:
+ 196              		.cfi_def_cfa_register 13
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 7
+
+
+ 197              		@ sp needed
+ 198 0048 80BD     		pop	{r7, pc}
+ 199              		.cfi_endproc
+ 200              	.LFE16:
+ 202              		.section	.text.App__Main_Page__Create,"ax",%progbits
+ 203              		.align	1
+ 204              		.syntax unified
+ 205              		.thumb
+ 206              		.thumb_func
+ 207              		.fpu fpv5-sp-d16
+ 209              	App__Main_Page__Create:
+ 210              	.LFB17:
+  37:Timer/App__Generated.c **** 
+  38:Timer/App__Generated.c **** static void App__Main_Page__Create(App *context)
+  39:Timer/App__Generated.c **** {
+ 211              		.loc 2 39 0
+ 212              		.cfi_startproc
+ 213              		@ args = 0, pretend = 0, frame = 8
+ 214              		@ frame_needed = 1, uses_anonymous_args = 0
+ 215 0000 80B5     		push	{r7, lr}
+ 216              	.LCFI17:
+ 217              		.cfi_def_cfa_offset 8
+ 218              		.cfi_offset 7, -8
+ 219              		.cfi_offset 14, -4
+ 220 0002 82B0     		sub	sp, sp, #8
+ 221              	.LCFI18:
+ 222              		.cfi_def_cfa_offset 16
+ 223 0004 00AF     		add	r7, sp, #0
+ 224              	.LCFI19:
+ 225              		.cfi_def_cfa_register 7
+ 226 0006 7860     		str	r0, [r7, #4]
+  40:Timer/App__Generated.c **** 	App__Main_Page__Validate(context);
+ 227              		.loc 2 40 0
+ 228 0008 7868     		ldr	r0, [r7, #4]
+ 229 000a FFF7FEFF 		bl	App__Main_Page__Validate
+  41:Timer/App__Generated.c **** 	context->Main_Page__Active = 1;
+ 230              		.loc 2 41 0
+ 231 000e 7B68     		ldr	r3, [r7, #4]
+ 232 0010 0122     		movs	r2, #1
+ 233 0012 DA60     		str	r2, [r3, #12]
+  42:Timer/App__Generated.c **** }
+ 234              		.loc 2 42 0
+ 235 0014 00BF     		nop
+ 236 0016 0837     		adds	r7, r7, #8
+ 237              	.LCFI20:
+ 238              		.cfi_def_cfa_offset 8
+ 239 0018 BD46     		mov	sp, r7
+ 240              	.LCFI21:
+ 241              		.cfi_def_cfa_register 13
+ 242              		@ sp needed
+ 243 001a 80BD     		pop	{r7, pc}
+ 244              		.cfi_endproc
+ 245              	.LFE17:
+ 247              		.section	.text.App__Main_Page__Destroy,"ax",%progbits
+ 248              		.align	1
+ 249              		.syntax unified
+ 250              		.thumb
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 8
+
+
+ 251              		.thumb_func
+ 252              		.fpu fpv5-sp-d16
+ 254              	App__Main_Page__Destroy:
+ 255              	.LFB18:
+  43:Timer/App__Generated.c **** 
+  44:Timer/App__Generated.c **** static void App__Main_Page__Destroy(App *context, int final)
+  45:Timer/App__Generated.c **** {
+ 256              		.loc 2 45 0
+ 257              		.cfi_startproc
+ 258              		@ args = 0, pretend = 0, frame = 8
+ 259              		@ frame_needed = 1, uses_anonymous_args = 0
+ 260 0000 80B5     		push	{r7, lr}
+ 261              	.LCFI22:
+ 262              		.cfi_def_cfa_offset 8
+ 263              		.cfi_offset 7, -8
+ 264              		.cfi_offset 14, -4
+ 265 0002 82B0     		sub	sp, sp, #8
+ 266              	.LCFI23:
+ 267              		.cfi_def_cfa_offset 16
+ 268 0004 00AF     		add	r7, sp, #0
+ 269              	.LCFI24:
+ 270              		.cfi_def_cfa_register 7
+ 271 0006 7860     		str	r0, [r7, #4]
+ 272 0008 3960     		str	r1, [r7]
+  46:Timer/App__Generated.c **** 	if (context->Main_Page__Active)
+ 273              		.loc 2 46 0
+ 274 000a 7B68     		ldr	r3, [r7, #4]
+ 275 000c DB68     		ldr	r3, [r3, #12]
+ 276 000e 002B     		cmp	r3, #0
+ 277 0010 02D0     		beq	.L10
+  47:Timer/App__Generated.c **** 	{
+  48:Timer/App__Generated.c **** 		context->Main_Page__Active = 0;
+ 278              		.loc 2 48 0
+ 279 0012 7B68     		ldr	r3, [r7, #4]
+ 280 0014 0022     		movs	r2, #0
+ 281 0016 DA60     		str	r2, [r3, #12]
+ 282              	.L10:
+  49:Timer/App__Generated.c **** 	}
+  50:Timer/App__Generated.c **** 	if (context->Main_Page)
+ 283              		.loc 2 50 0
+ 284 0018 7B68     		ldr	r3, [r7, #4]
+ 285 001a 9B68     		ldr	r3, [r3, #8]
+ 286 001c 002B     		cmp	r3, #0
+ 287 001e 0CD0     		beq	.L12
+  51:Timer/App__Generated.c **** 	{
+  52:Timer/App__Generated.c **** 		MainPage_End(context->Main_Page);
+ 288              		.loc 2 52 0
+ 289 0020 7B68     		ldr	r3, [r7, #4]
+ 290 0022 9B68     		ldr	r3, [r3, #8]
+ 291 0024 1846     		mov	r0, r3
+ 292 0026 FFF7FEFF 		bl	MainPage_End
+  53:Timer/App__Generated.c **** 		free(context->Main_Page);
+ 293              		.loc 2 53 0
+ 294 002a 7B68     		ldr	r3, [r7, #4]
+ 295 002c 9B68     		ldr	r3, [r3, #8]
+ 296 002e 1846     		mov	r0, r3
+ 297 0030 FFF7FEFF 		bl	free
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 9
+
+
+  54:Timer/App__Generated.c **** 		context->Main_Page = 0;
+ 298              		.loc 2 54 0
+ 299 0034 7B68     		ldr	r3, [r7, #4]
+ 300 0036 0022     		movs	r2, #0
+ 301 0038 9A60     		str	r2, [r3, #8]
+ 302              	.L12:
+  55:Timer/App__Generated.c **** 	}
+  56:Timer/App__Generated.c **** }
+ 303              		.loc 2 56 0
+ 304 003a 00BF     		nop
+ 305 003c 0837     		adds	r7, r7, #8
+ 306              	.LCFI25:
+ 307              		.cfi_def_cfa_offset 8
+ 308 003e BD46     		mov	sp, r7
+ 309              	.LCFI26:
+ 310              		.cfi_def_cfa_register 13
+ 311              		@ sp needed
+ 312 0040 80BD     		pop	{r7, pc}
+ 313              		.cfi_endproc
+ 314              	.LFE18:
+ 316              		.section	.text.App_Start,"ax",%progbits
+ 317              		.align	1
+ 318              		.global	App_Start
+ 319              		.syntax unified
+ 320              		.thumb
+ 321              		.thumb_func
+ 322              		.fpu fpv5-sp-d16
+ 324              	App_Start:
+ 325              	.LFB19:
+  57:Timer/App__Generated.c **** 
+  58:Timer/App__Generated.c **** void App_Start(App *context)
+  59:Timer/App__Generated.c **** {
+ 326              		.loc 2 59 0
+ 327              		.cfi_startproc
+ 328              		@ args = 0, pretend = 0, frame = 16
+ 329              		@ frame_needed = 1, uses_anonymous_args = 0
+ 330 0000 80B5     		push	{r7, lr}
+ 331              	.LCFI27:
+ 332              		.cfi_def_cfa_offset 8
+ 333              		.cfi_offset 7, -8
+ 334              		.cfi_offset 14, -4
+ 335 0002 84B0     		sub	sp, sp, #16
+ 336              	.LCFI28:
+ 337              		.cfi_def_cfa_offset 24
+ 338 0004 00AF     		add	r7, sp, #0
+ 339              	.LCFI29:
+ 340              		.cfi_def_cfa_register 7
+ 341 0006 7860     		str	r0, [r7, #4]
+  60:Timer/App__Generated.c **** 	void *parent = context->Parent;
+ 342              		.loc 2 60 0
+ 343 0008 7B68     		ldr	r3, [r7, #4]
+ 344 000a 1B68     		ldr	r3, [r3]
+ 345 000c FB60     		str	r3, [r7, #12]
+  61:Timer/App__Generated.c **** 	App__Main_Page__Create(context);
+ 346              		.loc 2 61 0
+ 347 000e 7868     		ldr	r0, [r7, #4]
+ 348 0010 FFF7FEFF 		bl	App__Main_Page__Create
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 10
+
+
+  62:Timer/App__Generated.c **** }
+ 349              		.loc 2 62 0
+ 350 0014 00BF     		nop
+ 351 0016 1037     		adds	r7, r7, #16
+ 352              	.LCFI30:
+ 353              		.cfi_def_cfa_offset 8
+ 354 0018 BD46     		mov	sp, r7
+ 355              	.LCFI31:
+ 356              		.cfi_def_cfa_register 13
+ 357              		@ sp needed
+ 358 001a 80BD     		pop	{r7, pc}
+ 359              		.cfi_endproc
+ 360              	.LFE19:
+ 362              		.section	.text.App_Update,"ax",%progbits
+ 363              		.align	1
+ 364              		.global	App_Update
+ 365              		.syntax unified
+ 366              		.thumb
+ 367              		.thumb_func
+ 368              		.fpu fpv5-sp-d16
+ 370              	App_Update:
+ 371              	.LFB20:
+  63:Timer/App__Generated.c **** 
+  64:Timer/App__Generated.c **** void App_Update(App *context)
+  65:Timer/App__Generated.c **** {
+ 372              		.loc 2 65 0
+ 373              		.cfi_startproc
+ 374              		@ args = 0, pretend = 0, frame = 16
+ 375              		@ frame_needed = 1, uses_anonymous_args = 0
+ 376 0000 80B5     		push	{r7, lr}
+ 377              	.LCFI32:
+ 378              		.cfi_def_cfa_offset 8
+ 379              		.cfi_offset 7, -8
+ 380              		.cfi_offset 14, -4
+ 381 0002 84B0     		sub	sp, sp, #16
+ 382              	.LCFI33:
+ 383              		.cfi_def_cfa_offset 24
+ 384 0004 00AF     		add	r7, sp, #0
+ 385              	.LCFI34:
+ 386              		.cfi_def_cfa_register 7
+ 387 0006 7860     		str	r0, [r7, #4]
+  66:Timer/App__Generated.c **** 	void *parent = context->Parent;
+ 388              		.loc 2 66 0
+ 389 0008 7B68     		ldr	r3, [r7, #4]
+ 390 000a 1B68     		ldr	r3, [r3]
+ 391 000c FB60     		str	r3, [r7, #12]
+  67:Timer/App__Generated.c **** 	MainPage_Update(context->Main_Page);
+ 392              		.loc 2 67 0
+ 393 000e 7B68     		ldr	r3, [r7, #4]
+ 394 0010 9B68     		ldr	r3, [r3, #8]
+ 395 0012 1846     		mov	r0, r3
+ 396 0014 FFF7FEFF 		bl	MainPage_Update
+  68:Timer/App__Generated.c **** }
+ 397              		.loc 2 68 0
+ 398 0018 00BF     		nop
+ 399 001a 1037     		adds	r7, r7, #16
+ 400              	.LCFI35:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 11
+
+
+ 401              		.cfi_def_cfa_offset 8
+ 402 001c BD46     		mov	sp, r7
+ 403              	.LCFI36:
+ 404              		.cfi_def_cfa_register 13
+ 405              		@ sp needed
+ 406 001e 80BD     		pop	{r7, pc}
+ 407              		.cfi_endproc
+ 408              	.LFE20:
+ 410              		.section	.text.App_Render,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	App_Render
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ 416              		.fpu fpv5-sp-d16
+ 418              	App_Render:
+ 419              	.LFB21:
+  69:Timer/App__Generated.c **** 
+  70:Timer/App__Generated.c **** void App_Render(App *context)
+  71:Timer/App__Generated.c **** {
+ 420              		.loc 2 71 0
+ 421              		.cfi_startproc
+ 422              		@ args = 0, pretend = 0, frame = 16
+ 423              		@ frame_needed = 1, uses_anonymous_args = 0
+ 424 0000 80B5     		push	{r7, lr}
+ 425              	.LCFI37:
+ 426              		.cfi_def_cfa_offset 8
+ 427              		.cfi_offset 7, -8
+ 428              		.cfi_offset 14, -4
+ 429 0002 84B0     		sub	sp, sp, #16
+ 430              	.LCFI38:
+ 431              		.cfi_def_cfa_offset 24
+ 432 0004 00AF     		add	r7, sp, #0
+ 433              	.LCFI39:
+ 434              		.cfi_def_cfa_register 7
+ 435 0006 7860     		str	r0, [r7, #4]
+  72:Timer/App__Generated.c **** 	void *parent = context->Parent;
+ 436              		.loc 2 72 0
+ 437 0008 7B68     		ldr	r3, [r7, #4]
+ 438 000a 1B68     		ldr	r3, [r3]
+ 439 000c FB60     		str	r3, [r7, #12]
+  73:Timer/App__Generated.c **** 	MainPage_Render(context->Main_Page);
+ 440              		.loc 2 73 0
+ 441 000e 7B68     		ldr	r3, [r7, #4]
+ 442 0010 9B68     		ldr	r3, [r3, #8]
+ 443 0012 1846     		mov	r0, r3
+ 444 0014 FFF7FEFF 		bl	MainPage_Render
+  74:Timer/App__Generated.c **** }
+ 445              		.loc 2 74 0
+ 446 0018 00BF     		nop
+ 447 001a 1037     		adds	r7, r7, #16
+ 448              	.LCFI40:
+ 449              		.cfi_def_cfa_offset 8
+ 450 001c BD46     		mov	sp, r7
+ 451              	.LCFI41:
+ 452              		.cfi_def_cfa_register 13
+ 453              		@ sp needed
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 12
+
+
+ 454 001e 80BD     		pop	{r7, pc}
+ 455              		.cfi_endproc
+ 456              	.LFE21:
+ 458              		.section	.text.App_Idle,"ax",%progbits
+ 459              		.align	1
+ 460              		.global	App_Idle
+ 461              		.syntax unified
+ 462              		.thumb
+ 463              		.thumb_func
+ 464              		.fpu fpv5-sp-d16
+ 466              	App_Idle:
+ 467              	.LFB22:
+  75:Timer/App__Generated.c **** 
+  76:Timer/App__Generated.c **** void App_Idle(App *context)
+  77:Timer/App__Generated.c **** {
+ 468              		.loc 2 77 0
+ 469              		.cfi_startproc
+ 470              		@ args = 0, pretend = 0, frame = 16
+ 471              		@ frame_needed = 1, uses_anonymous_args = 0
+ 472 0000 80B5     		push	{r7, lr}
+ 473              	.LCFI42:
+ 474              		.cfi_def_cfa_offset 8
+ 475              		.cfi_offset 7, -8
+ 476              		.cfi_offset 14, -4
+ 477 0002 84B0     		sub	sp, sp, #16
+ 478              	.LCFI43:
+ 479              		.cfi_def_cfa_offset 24
+ 480 0004 00AF     		add	r7, sp, #0
+ 481              	.LCFI44:
+ 482              		.cfi_def_cfa_register 7
+ 483 0006 7860     		str	r0, [r7, #4]
+  78:Timer/App__Generated.c **** 	void *parent = context->Parent;
+ 484              		.loc 2 78 0
+ 485 0008 7B68     		ldr	r3, [r7, #4]
+ 486 000a 1B68     		ldr	r3, [r3]
+ 487 000c FB60     		str	r3, [r7, #12]
+  79:Timer/App__Generated.c **** 	MainPage_Idle(context->Main_Page);
+ 488              		.loc 2 79 0
+ 489 000e 7B68     		ldr	r3, [r7, #4]
+ 490 0010 9B68     		ldr	r3, [r3, #8]
+ 491 0012 1846     		mov	r0, r3
+ 492 0014 FFF7FEFF 		bl	MainPage_Idle
+  80:Timer/App__Generated.c **** }
+ 493              		.loc 2 80 0
+ 494 0018 00BF     		nop
+ 495 001a 1037     		adds	r7, r7, #16
+ 496              	.LCFI45:
+ 497              		.cfi_def_cfa_offset 8
+ 498 001c BD46     		mov	sp, r7
+ 499              	.LCFI46:
+ 500              		.cfi_def_cfa_register 13
+ 501              		@ sp needed
+ 502 001e 80BD     		pop	{r7, pc}
+ 503              		.cfi_endproc
+ 504              	.LFE22:
+ 506              		.section	.text.App_End,"ax",%progbits
+ 507              		.align	1
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 13
+
+
+ 508              		.global	App_End
+ 509              		.syntax unified
+ 510              		.thumb
+ 511              		.thumb_func
+ 512              		.fpu fpv5-sp-d16
+ 514              	App_End:
+ 515              	.LFB23:
+  81:Timer/App__Generated.c **** 
+  82:Timer/App__Generated.c **** void App_End(App *context)
+  83:Timer/App__Generated.c **** {
+ 516              		.loc 2 83 0
+ 517              		.cfi_startproc
+ 518              		@ args = 0, pretend = 0, frame = 16
+ 519              		@ frame_needed = 1, uses_anonymous_args = 0
+ 520 0000 80B5     		push	{r7, lr}
+ 521              	.LCFI47:
+ 522              		.cfi_def_cfa_offset 8
+ 523              		.cfi_offset 7, -8
+ 524              		.cfi_offset 14, -4
+ 525 0002 84B0     		sub	sp, sp, #16
+ 526              	.LCFI48:
+ 527              		.cfi_def_cfa_offset 24
+ 528 0004 00AF     		add	r7, sp, #0
+ 529              	.LCFI49:
+ 530              		.cfi_def_cfa_register 7
+ 531 0006 7860     		str	r0, [r7, #4]
+  84:Timer/App__Generated.c **** 	void *parent = context->Parent;
+ 532              		.loc 2 84 0
+ 533 0008 7B68     		ldr	r3, [r7, #4]
+ 534 000a 1B68     		ldr	r3, [r3]
+ 535 000c FB60     		str	r3, [r7, #12]
+  85:Timer/App__Generated.c **** 	App__Main_Page__Destroy(context, 1);
+ 536              		.loc 2 85 0
+ 537 000e 0121     		movs	r1, #1
+ 538 0010 7868     		ldr	r0, [r7, #4]
+ 539 0012 FFF7FEFF 		bl	App__Main_Page__Destroy
+  86:Timer/App__Generated.c **** }
+ 540              		.loc 2 86 0
+ 541 0016 00BF     		nop
+ 542 0018 1037     		adds	r7, r7, #16
+ 543              	.LCFI50:
+ 544              		.cfi_def_cfa_offset 8
+ 545 001a BD46     		mov	sp, r7
+ 546              	.LCFI51:
+ 547              		.cfi_def_cfa_register 13
+ 548              		@ sp needed
+ 549 001c 80BD     		pop	{r7, pc}
+ 550              		.cfi_endproc
+ 551              	.LFE23:
+ 553              		.section	.bss.application,"aw",%nobits
+ 554              		.align	2
+ 557              	application:
+ 558 0000 00000000 		.space	16
+ 558      00000000 
+ 558      00000000 
+ 558      00000000 
+ 559              		.section	.text.Ft_Main__Start,"ax",%progbits
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 14
+
+
+ 560              		.align	1
+ 561              		.global	Ft_Main__Start
+ 562              		.syntax unified
+ 563              		.thumb
+ 564              		.thumb_func
+ 565              		.fpu fpv5-sp-d16
+ 567              	Ft_Main__Start:
+ 568              	.LFB24:
+  87:Timer/App__Generated.c **** 
+  88:Timer/App__Generated.c **** static App application;
+  89:Timer/App__Generated.c **** 
+  90:Timer/App__Generated.c **** void Ft_Main__Start()
+  91:Timer/App__Generated.c **** {
+ 569              		.loc 2 91 0
+ 570              		.cfi_startproc
+ 571              		@ args = 0, pretend = 0, frame = 0
+ 572              		@ frame_needed = 1, uses_anonymous_args = 0
+ 573 0000 80B5     		push	{r7, lr}
+ 574              	.LCFI52:
+ 575              		.cfi_def_cfa_offset 8
+ 576              		.cfi_offset 7, -8
+ 577              		.cfi_offset 14, -4
+ 578 0002 00AF     		add	r7, sp, #0
+ 579              	.LCFI53:
+ 580              		.cfi_def_cfa_register 7
+  92:Timer/App__Generated.c **** 	App__Initializer(&application);
+ 581              		.loc 2 92 0
+ 582 0004 0348     		ldr	r0, .L19
+ 583 0006 FFF7FEFF 		bl	App__Initializer
+  93:Timer/App__Generated.c **** 	App_Start(&application);
+ 584              		.loc 2 93 0
+ 585 000a 0248     		ldr	r0, .L19
+ 586 000c FFF7FEFF 		bl	App_Start
+  94:Timer/App__Generated.c **** }
+ 587              		.loc 2 94 0
+ 588 0010 00BF     		nop
+ 589 0012 80BD     		pop	{r7, pc}
+ 590              	.L20:
+ 591              		.align	2
+ 592              	.L19:
+ 593 0014 00000000 		.word	application
+ 594              		.cfi_endproc
+ 595              	.LFE24:
+ 597              		.section	.text.Ft_Main__Update,"ax",%progbits
+ 598              		.align	1
+ 599              		.global	Ft_Main__Update
+ 600              		.syntax unified
+ 601              		.thumb
+ 602              		.thumb_func
+ 603              		.fpu fpv5-sp-d16
+ 605              	Ft_Main__Update:
+ 606              	.LFB25:
+  95:Timer/App__Generated.c **** 
+  96:Timer/App__Generated.c **** void Ft_Main__Update()
+  97:Timer/App__Generated.c **** {
+ 607              		.loc 2 97 0
+ 608              		.cfi_startproc
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 15
+
+
+ 609              		@ args = 0, pretend = 0, frame = 0
+ 610              		@ frame_needed = 1, uses_anonymous_args = 0
+ 611 0000 80B5     		push	{r7, lr}
+ 612              	.LCFI54:
+ 613              		.cfi_def_cfa_offset 8
+ 614              		.cfi_offset 7, -8
+ 615              		.cfi_offset 14, -4
+ 616 0002 00AF     		add	r7, sp, #0
+ 617              	.LCFI55:
+ 618              		.cfi_def_cfa_register 7
+  98:Timer/App__Generated.c **** 	App_Update(&application);
+ 619              		.loc 2 98 0
+ 620 0004 0248     		ldr	r0, .L22
+ 621 0006 FFF7FEFF 		bl	App_Update
+  99:Timer/App__Generated.c **** }
+ 622              		.loc 2 99 0
+ 623 000a 00BF     		nop
+ 624 000c 80BD     		pop	{r7, pc}
+ 625              	.L23:
+ 626 000e 00BF     		.align	2
+ 627              	.L22:
+ 628 0010 00000000 		.word	application
+ 629              		.cfi_endproc
+ 630              	.LFE25:
+ 632              		.section	.text.Ft_Main__Render,"ax",%progbits
+ 633              		.align	1
+ 634              		.global	Ft_Main__Render
+ 635              		.syntax unified
+ 636              		.thumb
+ 637              		.thumb_func
+ 638              		.fpu fpv5-sp-d16
+ 640              	Ft_Main__Render:
+ 641              	.LFB26:
+ 100:Timer/App__Generated.c **** 
+ 101:Timer/App__Generated.c **** void Ft_Main__Render()
+ 102:Timer/App__Generated.c **** {
+ 642              		.loc 2 102 0
+ 643              		.cfi_startproc
+ 644              		@ args = 0, pretend = 0, frame = 0
+ 645              		@ frame_needed = 1, uses_anonymous_args = 0
+ 646 0000 80B5     		push	{r7, lr}
+ 647              	.LCFI56:
+ 648              		.cfi_def_cfa_offset 8
+ 649              		.cfi_offset 7, -8
+ 650              		.cfi_offset 14, -4
+ 651 0002 00AF     		add	r7, sp, #0
+ 652              	.LCFI57:
+ 653              		.cfi_def_cfa_register 7
+ 103:Timer/App__Generated.c **** 	App_Render(&application);
+ 654              		.loc 2 103 0
+ 655 0004 0248     		ldr	r0, .L25
+ 656 0006 FFF7FEFF 		bl	App_Render
+ 104:Timer/App__Generated.c **** }
+ 657              		.loc 2 104 0
+ 658 000a 00BF     		nop
+ 659 000c 80BD     		pop	{r7, pc}
+ 660              	.L26:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 16
+
+
+ 661 000e 00BF     		.align	2
+ 662              	.L25:
+ 663 0010 00000000 		.word	application
+ 664              		.cfi_endproc
+ 665              	.LFE26:
+ 667              		.section	.text.Ft_Main__Idle,"ax",%progbits
+ 668              		.align	1
+ 669              		.global	Ft_Main__Idle
+ 670              		.syntax unified
+ 671              		.thumb
+ 672              		.thumb_func
+ 673              		.fpu fpv5-sp-d16
+ 675              	Ft_Main__Idle:
+ 676              	.LFB27:
+ 105:Timer/App__Generated.c **** 
+ 106:Timer/App__Generated.c **** void Ft_Main__Idle()
+ 107:Timer/App__Generated.c **** {
+ 677              		.loc 2 107 0
+ 678              		.cfi_startproc
+ 679              		@ args = 0, pretend = 0, frame = 0
+ 680              		@ frame_needed = 1, uses_anonymous_args = 0
+ 681 0000 80B5     		push	{r7, lr}
+ 682              	.LCFI58:
+ 683              		.cfi_def_cfa_offset 8
+ 684              		.cfi_offset 7, -8
+ 685              		.cfi_offset 14, -4
+ 686 0002 00AF     		add	r7, sp, #0
+ 687              	.LCFI59:
+ 688              		.cfi_def_cfa_register 7
+ 108:Timer/App__Generated.c **** 	App_Idle(&application);
+ 689              		.loc 2 108 0
+ 690 0004 0248     		ldr	r0, .L28
+ 691 0006 FFF7FEFF 		bl	App_Idle
+ 109:Timer/App__Generated.c **** }
+ 692              		.loc 2 109 0
+ 693 000a 00BF     		nop
+ 694 000c 80BD     		pop	{r7, pc}
+ 695              	.L29:
+ 696 000e 00BF     		.align	2
+ 697              	.L28:
+ 698 0010 00000000 		.word	application
+ 699              		.cfi_endproc
+ 700              	.LFE27:
+ 702              		.section	.text.Ft_Main__End,"ax",%progbits
+ 703              		.align	1
+ 704              		.global	Ft_Main__End
+ 705              		.syntax unified
+ 706              		.thumb
+ 707              		.thumb_func
+ 708              		.fpu fpv5-sp-d16
+ 710              	Ft_Main__End:
+ 711              	.LFB28:
+ 110:Timer/App__Generated.c **** 
+ 111:Timer/App__Generated.c **** void Ft_Main__End()
+ 112:Timer/App__Generated.c **** {
+ 712              		.loc 2 112 0
+ 713              		.cfi_startproc
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 17
+
+
+ 714              		@ args = 0, pretend = 0, frame = 0
+ 715              		@ frame_needed = 1, uses_anonymous_args = 0
+ 716 0000 80B5     		push	{r7, lr}
+ 717              	.LCFI60:
+ 718              		.cfi_def_cfa_offset 8
+ 719              		.cfi_offset 7, -8
+ 720              		.cfi_offset 14, -4
+ 721 0002 00AF     		add	r7, sp, #0
+ 722              	.LCFI61:
+ 723              		.cfi_def_cfa_register 7
+ 113:Timer/App__Generated.c **** 	App_End(&application);
+ 724              		.loc 2 113 0
+ 725 0004 0248     		ldr	r0, .L31
+ 726 0006 FFF7FEFF 		bl	App_End
+ 114:Timer/App__Generated.c **** }
+ 727              		.loc 2 114 0
+ 728 000a 00BF     		nop
+ 729 000c 80BD     		pop	{r7, pc}
+ 730              	.L32:
+ 731 000e 00BF     		.align	2
+ 732              	.L31:
+ 733 0010 00000000 		.word	application
+ 734              		.cfi_endproc
+ 735              	.LFE28:
+ 737              		.text
+ 738              	.Letext0:
+ 739              		.file 3 "FT_Eve_Hal/FT_DataTypes.h"
+ 740              		.file 4 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 741              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 742              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 743              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 744              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 745              		.file 9 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 746              		.file 10 "FT_Esd_Framework/Ft_Esd.h"
+ 747              		.file 11 "FT_Esd_Widgets/FT_Esd_Theme.h"
+ 748              		.file 12 "FT_Esd_Widgets/Ft_Esd_DefaultTheme.h"
+ 749              		.file 13 "FT_Esd_Widgets/Ft_Esd_Label.h"
+ 750              		.file 14 "FT_Esd_Framework/Ft_Esd_TouchTag.h"
+ 751              		.file 15 "FT_Esd_Widgets/Ft_Esd_PushButton.h"
+ 752              		.file 16 "FT_Esd_Framework/Ft_Esd_GpuAlloc.h"
+ 753              		.file 17 "FT_Esd_Widgets/LayoutMargin.h"
+ 754              		.file 18 "FT_Esd_Widgets/LayoutSplit.h"
+ 755              		.file 19 "FT_Esd_Widgets/Ft_Esd_SpinBox.h"
+ 756              		.file 20 "FT_Esd_Framework/Ft_Esd_Timer.h"
+ 757              		.file 21 "Timer/MainPage.h"
+ 758              		.file 22 "Timer/App.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 App__Generated.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:18     .text.Ft_Esd_BitmapCell_GetInfo:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:24     .text.Ft_Esd_BitmapCell_GetInfo:0000000000000000 Ft_Esd_BitmapCell_GetInfo
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:73     .text.App__Initializer:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:80     .text.App__Initializer:0000000000000000 App__Initializer
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:133    .text.App__Main_Page__Validate:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:139    .text.App__Main_Page__Validate:0000000000000000 App__Main_Page__Validate
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:203    .text.App__Main_Page__Create:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:209    .text.App__Main_Page__Create:0000000000000000 App__Main_Page__Create
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:248    .text.App__Main_Page__Destroy:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:254    .text.App__Main_Page__Destroy:0000000000000000 App__Main_Page__Destroy
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:317    .text.App_Start:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:324    .text.App_Start:0000000000000000 App_Start
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:363    .text.App_Update:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:370    .text.App_Update:0000000000000000 App_Update
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:411    .text.App_Render:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:418    .text.App_Render:0000000000000000 App_Render
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:459    .text.App_Idle:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:466    .text.App_Idle:0000000000000000 App_Idle
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:507    .text.App_End:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:514    .text.App_End:0000000000000000 App_End
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:554    .bss.application:0000000000000000 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:557    .bss.application:0000000000000000 application
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:560    .text.Ft_Main__Start:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:567    .text.Ft_Main__Start:0000000000000000 Ft_Main__Start
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:593    .text.Ft_Main__Start:0000000000000014 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:598    .text.Ft_Main__Update:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:605    .text.Ft_Main__Update:0000000000000000 Ft_Main__Update
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:628    .text.Ft_Main__Update:0000000000000010 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:633    .text.Ft_Main__Render:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:640    .text.Ft_Main__Render:0000000000000000 Ft_Main__Render
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:663    .text.Ft_Main__Render:0000000000000010 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:668    .text.Ft_Main__Idle:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:675    .text.Ft_Main__Idle:0000000000000000 Ft_Main__Idle
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:698    .text.Ft_Main__Idle:0000000000000010 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:703    .text.Ft_Main__End:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:710    .text.Ft_Main__End:0000000000000000 Ft_Main__End
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccBUofMM.s:733    .text.Ft_Main__End:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+malloc
+MainPage__Initializer
+MainPage_Start
+MainPage_End
+free
+MainPage_Update
+MainPage_Render
+MainPage_Idle

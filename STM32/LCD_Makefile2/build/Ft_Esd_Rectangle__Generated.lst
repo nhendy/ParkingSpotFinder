@@ -1,0 +1,900 @@
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Ft_Esd_Rectangle__Generated.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Ft_Esd_BitmapCell_GetInfo,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-sp-d16
+  24              	Ft_Esd_BitmapCell_GetInfo:
+  25              	.LFB3:
+  26              		.file 1 "FT_Esd_Framework/Ft_Esd_BitmapInfo.h"
+   1:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** /*
+   2:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** Bitmap info structure
+   3:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** */
+   4:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+   5:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #ifndef FT_ESD_BITMAPINFO_H
+   6:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #define FT_ESD_BITMAPINFO_H
+   7:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+   8:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "Ft_Esd.h"
+   9:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "FT_DataTypes.h"
+  10:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** #include "Ft_Esd_GpuAlloc.h"
+  11:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  12:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapInfo, Native = Struct) // TODO: Struct support, expose values
+  13:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  14:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  15:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Width;
+  16:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Height;
+  17:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Stride;
+  18:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Format;
+  19:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Size;
+  20:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	const char *File;
+  21:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  22:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Handle pointing to the address in RAM_G if it is allocated
+  23:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_GpuHandle GpuHandle;
+  24:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  25:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Bitmap handle that is being used
+  26:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_uint32_t BitmapHandle;
+  27:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  28:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	const char *PaletteFile;
+  29:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_GpuHandle PaletteGpuHandle;
+  30:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  31:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// When this is set, the allocated ram is not free'd automatically
+  32:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Use Ft_Esd_GpuAlloc_Free(GpuAlloc, GpuHandle) to free the GPU ram manually
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 2
+
+
+  33:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_bool_t Persistent;
+  34:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  35:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_BitmapInfo;
+  36:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  37:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapInfo *, Native = Pointer, Edit = Library)
+  38:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  39:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapCell, Native = Struct) // TODO: Struct support, expose values
+  40:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  41:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  42:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapInfo *Info;
+  43:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_int32_t Cell;
+  44:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_BitmapCell;
+  45:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  46:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_TYPE(Ft_Esd_BitmapCell *, Native = Pointer, Edit = Library)
+  47:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  48:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // Attempts to load the specified bitmap if it has not been loaded into RAM_G yet.
+  49:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // Call during the Update cycle of each frame to keep the bitmap flagged as in use, otherwise the m
+  50:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_LoadBitmap, Type = ft_uint32_t, Include = "Ft_Esd_BitmapInfo.h", DisplayName = 
+  51:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapInfo, Type = Ft_Esd_BitmapInfo *)
+  52:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ft_uint32_t Ft_Esd_LoadBitmap(Ft_Esd_BitmapInfo *bitmapInfo);
+  53:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  54:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_LoadPalette, Type = ft_uint32_t, Include = "Ft_Esd_BitmapInfo.h", DisplayName =
+  55:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapInfo, Type = Ft_Esd_BitmapInfo *)
+  56:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ft_uint32_t Ft_Esd_LoadPalette(Ft_Esd_BitmapInfo *bitmapInfo);
+  57:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  58:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_ENUM(_BitmapResourceFormat, DisplayName = "Bitmap Format")
+  59:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB1555)
+  60:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L1)
+  61:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L2)
+  62:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L4)
+  63:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(L8)
+  64:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(RGB332)
+  65:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB2)
+  66:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(ARGB4)
+  67:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(RGB565)
+  68:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(PALETTED565)
+  69:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_IDENTIFIER(PALETTED4444)
+  70:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(PALETTED8)
+  71:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(JPEG)
+  72:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** // ESD_IDENTIFIER(PNG)
+  73:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_END()
+  74:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  75:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_LOGIC(Ft_Esd_SwitchBitmapCell, Callback, Include = "Ft_Esd_BitmapInfo.h", DisplayName = "Switch
+  76:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** typedef struct
+  77:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  78:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Callback
+  79:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	void *Parent;
+  80:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  81:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  82:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Input
+  83:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  84:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  85:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ESD_INPUT(BitmapInfo, Type = Ft_Esd_BitmapInfo *, DisplayName = "Bitmap Info")
+  86:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapInfo *(* BitmapInfo)(void *context);
+  87:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  88:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ESD_INPUT(Cell, Type = ft_uint8_t, DisplayName = "Cell")
+  89:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	ft_uint8_t(* Cell)(void *context);
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 3
+
+
+  90:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  91:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  92:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// Variables
+  93:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	//
+  94:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  95:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	// BitmapCell object
+  96:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	Ft_Esd_BitmapCell BitmapCell;
+  97:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+  98:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** } Ft_Esd_SwitchBitmapCell;
+  99:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 100:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** void Ft_Esd_SwitchBitmapCell__Initializer(Ft_Esd_SwitchBitmapCell *context);
+ 101:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 102:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_OUTPUT(BitmapCell, Type = Ft_Esd_BitmapCell *, DisplayName = "Bitmap Cell")
+ 103:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** Ft_Esd_BitmapCell *Ft_Esd_SwitchBitmapCell_BitmapCell(Ft_Esd_SwitchBitmapCell *context);
+ 104:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 105:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_UPDATE(Ft_Esd_BitmapPersist, DisplayName = "Bitmap Persist", Category = EsdUtilities)
+ 106:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *)
+ 107:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** void Ft_Esd_BitmapPersist(Ft_Esd_BitmapCell *bitmapCell);
+ 108:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 
+ 109:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_FUNCTION(Ft_Esd_BitmapCell_GetInfo, Type = Ft_Esd_BitmapInfo *, DisplayName = "ESD BitmapCell G
+ 110:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *)
+ 111:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** static Ft_Esd_BitmapInfo *Ft_Esd_BitmapCell_GetInfo(Ft_Esd_BitmapCell *bitmapCell)
+ 112:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** {
+  27              		.loc 1 112 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+ 113:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	if (!bitmapCell) return 0;
+  43              		.loc 1 113 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 002B     		cmp	r3, #0
+  46 000c 01D1     		bne	.L2
+  47              		.loc 1 113 0 is_stmt 0 discriminator 1
+  48 000e 0023     		movs	r3, #0
+  49 0010 01E0     		b	.L3
+  50              	.L2:
+ 114:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** 	return bitmapCell->Info;
+  51              		.loc 1 114 0 is_stmt 1
+  52 0012 7B68     		ldr	r3, [r7, #4]
+  53 0014 1B68     		ldr	r3, [r3]
+  54              	.L3:
+ 115:FT_Esd_Framework/Ft_Esd_BitmapInfo.h **** }
+  55              		.loc 1 115 0
+  56 0016 1846     		mov	r0, r3
+  57 0018 0C37     		adds	r7, r7, #12
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 4
+
+
+  58              	.LCFI3:
+  59              		.cfi_def_cfa_offset 4
+  60 001a BD46     		mov	sp, r7
+  61              	.LCFI4:
+  62              		.cfi_def_cfa_register 13
+  63              		@ sp needed
+  64 001c 5DF8047B 		ldr	r7, [sp], #4
+  65              	.LCFI5:
+  66              		.cfi_restore 7
+  67              		.cfi_def_cfa_offset 0
+  68 0020 7047     		bx	lr
+  69              		.cfi_endproc
+  70              	.LFE3:
+  72              		.section	.text.Ft_Esd_Render_Rectangle,"ax",%progbits
+  73              		.align	1
+  74              		.syntax unified
+  75              		.thumb
+  76              		.thumb_func
+  77              		.fpu fpv5-sp-d16
+  79              	Ft_Esd_Render_Rectangle:
+  80              	.LFB24:
+  81              		.file 2 "FT_Esd_Framework/FT_Esd_Primitives.h"
+   1:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+   2:FT_Esd_Framework/FT_Esd_Primitives.h **** #ifndef FT_ESD_PRIMITIVES_H
+   3:FT_Esd_Framework/FT_Esd_Primitives.h **** #define FT_ESD_PRIMITIVES_H
+   4:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+   5:FT_Esd_Framework/FT_Esd_Primitives.h **** #include "Ft_Esd.h"
+   6:FT_Esd_Framework/FT_Esd_Primitives.h **** #include "Ft_Esd_Theme.h"
+   7:FT_Esd_Framework/FT_Esd_Primitives.h **** #include "Ft_Esd_DefaultTheme.h"
+   8:FT_Esd_Framework/FT_Esd_Primitives.h **** #include "Ft_Esd_BitmapInfo.h"
+   9:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  10:FT_Esd_Framework/FT_Esd_Primitives.h **** // Ft_Esd_Render_Rectangle
+  11:FT_Esd_Framework/FT_Esd_Primitives.h **** // Ft_Esd_Render_Line
+  12:FT_Esd_Framework/FT_Esd_Primitives.h **** // Ft_Esd_Render_Point
+  13:FT_Esd_Framework/FT_Esd_Primitives.h **** // Ft_Esd_Render_Bitmap
+  14:FT_Esd_Framework/FT_Esd_Primitives.h **** // Ft_Esd_Render_LineStrip
+  15:FT_Esd_Framework/FT_Esd_Primitives.h **** // Ft_Esd_Render_EdgeStrip
+  16:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  17:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_CATEGORY(EsdWidgets, DisplayName = "ESD Widgets")
+  18:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_CATEGORY(EsdElements, DisplayName = "Elements", Category = EsdWidgets)
+  19:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_CATEGORY(EsdPrimitives, DisplayName = "ESD Primitives")
+  20:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  21:FT_Esd_Framework/FT_Esd_Primitives.h **** // TODO: Hooking RGB to ARGB should automatically 0xFF the alpha channel in the code generation
+  22:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_FUNCTION(Ft_Esd_ColorARGB_Combine, Type = ft_argb32_t, DisplayName = "Color A+RGB Combine", Cat
+  23:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(rgb, Type = ft_rgb32_t, Default = #FFFFFF)
+  24:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(a, Type = ft_uint8_t, Default = 255)
+  25:FT_Esd_Framework/FT_Esd_Primitives.h **** static inline ft_argb32_t Ft_Esd_ColorARGB_Combine(ft_rgb32_t rgb, ft_uint8_t a)
+  26:FT_Esd_Framework/FT_Esd_Primitives.h **** { return (rgb & 0xFFFFFF) | (((ft_argb32_t)a) << 24); }
+  27:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  28:FT_Esd_Framework/FT_Esd_Primitives.h **** // Basic bitmap rendering
+  29:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_RENDER(Ft_Esd_Render_Bitmap, Type = ft_void_t, DisplayName = "ESD Bitmap", Category = EsdPrimit
+  30:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(x, Type = ft_int16_t, Default = 0)
+  31:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(y, Type = ft_int16_t, Default = 0)
+  32:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *, DisplayName = "Bitmap Cell")
+  33:FT_Esd_Framework/FT_Esd_Primitives.h **** // Color to be multiplied with bitmap color, can be used for alpha fade for example
+  34:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(c, Type = ft_argb32_t, DisplayName = "Color", Default = #FFFFFFFF)
+  35:FT_Esd_Framework/FT_Esd_Primitives.h **** ft_void_t Ft_Esd_Render_Bitmap(ft_int16_t x, ft_int16_t y, Ft_Esd_BitmapCell *bitmapCell, ft_argb32
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 5
+
+
+  36:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  37:FT_Esd_Framework/FT_Esd_Primitives.h **** // Scaled bitmap rendering
+  38:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_RENDER(Ft_Esd_Render_BitmapScaled, Type = ft_void_t, DisplayName = "ESD Bitmap Scaled", Categor
+  39:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(x, Type = ft_int16_t, Default = 0)
+  40:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(y, Type = ft_int16_t, Default = 0)
+  41:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *, DisplayName = "Bitmap Cell")
+  42:FT_Esd_Framework/FT_Esd_Primitives.h **** // Color to be multiplied with bitmap color, can be used for alpha fade for example
+  43:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(c, Type = ft_argb32_t, DisplayName = "Color", Default = #FFFFFFFF)
+  44:FT_Esd_Framework/FT_Esd_Primitives.h **** // Horizontal scaling factor
+  45:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(xscale, Type = ft_int32_f16_t, DisplayName = "Horizontal Scale", Default = 1)
+  46:FT_Esd_Framework/FT_Esd_Primitives.h **** // Vertical scaling factor
+  47:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(yscale, Type = ft_int32_f16_t, DisplayName = "Vertical Scale", Default = 1)
+  48:FT_Esd_Framework/FT_Esd_Primitives.h **** // Horizontal offset
+  49:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(xoffset, Type = ft_int32_f16_t, DisplayName = "X Offset", Default = 0)
+  50:FT_Esd_Framework/FT_Esd_Primitives.h **** // Vertical offset
+  51:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(yoffset, Type = ft_int32_f16_t, DisplayName = "Y Offset", Default = 0)
+  52:FT_Esd_Framework/FT_Esd_Primitives.h **** // Width used as rendering boundary
+  53:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(width, Type = ft_int16_t, DisplayName = "Render Width", Default = 200)
+  54:FT_Esd_Framework/FT_Esd_Primitives.h **** // Height used as rendering boundary
+  55:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(height, Type = ft_int16_t, DisplayName = "Render Height", Default = 100)
+  56:FT_Esd_Framework/FT_Esd_Primitives.h **** ft_void_t Ft_Esd_Render_BitmapScaled(ft_int16_t x, ft_int16_t y, Ft_Esd_BitmapCell *bitmapCell, ft_
+  57:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  58:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  59:FT_Esd_Framework/FT_Esd_Primitives.h **** // Rotated bitmap rendering
+  60:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_RENDER(Ft_Esd_Render_BitmapRotate, Type = ft_void_t, DisplayName = "ESD Bitmap Rotated", Catego
+  61:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(x, Type = ft_int16_t, Default = 0)
+  62:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(y, Type = ft_int16_t, Default = 0)
+  63:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(bitmapCell, Type = Ft_Esd_BitmapCell *, DisplayName = "Bitmap Cell")
+  64:FT_Esd_Framework/FT_Esd_Primitives.h **** // Color to be multiplied with bitmap color, can be used for alpha fade for example
+  65:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(c, Type = ft_argb32_t, DisplayName = "Color", Default = #FFFFFFFF)
+  66:FT_Esd_Framework/FT_Esd_Primitives.h **** //rotation parameter
+  67:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(rotateEffi, Type = ft_int32_t, DisplayName = "rotation angle", Default = 0)
+  68:FT_Esd_Framework/FT_Esd_Primitives.h **** // center point X 
+  69:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(x_center, Type = ft_int32_f16_t, DisplayName = "X of center point", Default = 0)
+  70:FT_Esd_Framework/FT_Esd_Primitives.h **** // certer point y
+  71:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(y_center, Type = ft_int32_f16_t, DisplayName = "Y of center point", Default = 0)
+  72:FT_Esd_Framework/FT_Esd_Primitives.h **** // Width used as rendering boundary
+  73:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(width, Type = ft_int16_t, DisplayName = "Render Width", Default = 200)
+  74:FT_Esd_Framework/FT_Esd_Primitives.h **** // Height used as rendering boundary
+  75:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(height, Type = ft_int16_t, DisplayName = "Render Height", Default = 100)
+  76:FT_Esd_Framework/FT_Esd_Primitives.h **** //radius of needle
+  77:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(radius, Type = ft_int16_t, DisplayName = "rotation radius", Default = 0)
+  78:FT_Esd_Framework/FT_Esd_Primitives.h **** ft_void_t Ft_Esd_Render_BitmapRotate(ft_int16_t x, ft_int16_t y, Ft_Esd_BitmapCell *bitmapCell, ft_
+  79:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  80:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  81:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_RENDER(Ft_Esd_Render_RectangleF, Type = ft_void_t, DisplayName = "ESD Rectangle (Fixed Point)",
+  82:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(x, Type = ft_int32_f4_t, Default = 0)
+  83:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(y, Type = ft_int32_f4_t, Default = 0)
+  84:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(width, Type = ft_int32_f4_t, Default = 60)
+  85:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(height, Type = ft_int32_f4_t, Default = 20)
+  86:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(radius, Type = ft_int32_f4_t, Default = 4)
+  87:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(color, Type = ft_argb32_t, DisplayName = "Color", Default = #FFFFFFFF)
+  88:FT_Esd_Framework/FT_Esd_Primitives.h **** ft_void_t Ft_Esd_Render_RectangleF(ft_int32_f4_t x, ft_int32_f4_t y, ft_int32_f4_t w, ft_int32_f4_t
+  89:FT_Esd_Framework/FT_Esd_Primitives.h **** 
+  90:FT_Esd_Framework/FT_Esd_Primitives.h **** // Basic rectangle rendering
+  91:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_RENDER(Ft_Esd_Render_Rectangle, Type = ft_void_t, DisplayName = "ESD Rectangle (Integer)", Incl
+  92:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(x, Type = ft_int32_t, Default = 0)
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 6
+
+
+  93:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(y, Type = ft_int32_t, Default = 0)
+  94:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(width, Type = ft_int32_t, Default = 60)
+  95:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(height, Type = ft_int32_t, Default = 20)
+  96:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(radius, Type = ft_int32_t, Default = 4)
+  97:FT_Esd_Framework/FT_Esd_Primitives.h **** ESD_PARAMETER(color, Type = ft_argb32_t, DisplayName = "Color", Default = #FFFFFFFF)
+  98:FT_Esd_Framework/FT_Esd_Primitives.h **** static inline ft_void_t Ft_Esd_Render_Rectangle(ft_int32_t x, ft_int32_t y, ft_int32_f4_t w, ft_int
+  99:FT_Esd_Framework/FT_Esd_Primitives.h **** { Ft_Esd_Render_RectangleF(x << 4, y << 4, w << 4, h << 4, radius << 4, color); }
+  82              		.loc 2 99 0
+  83              		.cfi_startproc
+  84              		@ args = 8, pretend = 0, frame = 16
+  85              		@ frame_needed = 1, uses_anonymous_args = 0
+  86 0000 B0B5     		push	{r4, r5, r7, lr}
+  87              	.LCFI6:
+  88              		.cfi_def_cfa_offset 16
+  89              		.cfi_offset 4, -16
+  90              		.cfi_offset 5, -12
+  91              		.cfi_offset 7, -8
+  92              		.cfi_offset 14, -4
+  93 0002 86B0     		sub	sp, sp, #24
+  94              	.LCFI7:
+  95              		.cfi_def_cfa_offset 40
+  96 0004 02AF     		add	r7, sp, #8
+  97              	.LCFI8:
+  98              		.cfi_def_cfa 7, 32
+  99 0006 F860     		str	r0, [r7, #12]
+ 100 0008 B960     		str	r1, [r7, #8]
+ 101 000a 7A60     		str	r2, [r7, #4]
+ 102 000c 3B60     		str	r3, [r7]
+ 103              		.loc 2 99 0
+ 104 000e FB68     		ldr	r3, [r7, #12]
+ 105 0010 1801     		lsls	r0, r3, #4
+ 106 0012 BB68     		ldr	r3, [r7, #8]
+ 107 0014 1901     		lsls	r1, r3, #4
+ 108 0016 7B68     		ldr	r3, [r7, #4]
+ 109 0018 1C01     		lsls	r4, r3, #4
+ 110 001a 3B68     		ldr	r3, [r7]
+ 111 001c 1D01     		lsls	r5, r3, #4
+ 112 001e 3B6A     		ldr	r3, [r7, #32]
+ 113 0020 1B01     		lsls	r3, r3, #4
+ 114 0022 7A6A     		ldr	r2, [r7, #36]
+ 115 0024 0192     		str	r2, [sp, #4]
+ 116 0026 0093     		str	r3, [sp]
+ 117 0028 2B46     		mov	r3, r5
+ 118 002a 2246     		mov	r2, r4
+ 119 002c FFF7FEFF 		bl	Ft_Esd_Render_RectangleF
+ 120 0030 00BF     		nop
+ 121 0032 1037     		adds	r7, r7, #16
+ 122              	.LCFI9:
+ 123              		.cfi_def_cfa_offset 16
+ 124 0034 BD46     		mov	sp, r7
+ 125              	.LCFI10:
+ 126              		.cfi_def_cfa_register 13
+ 127              		@ sp needed
+ 128 0036 B0BD     		pop	{r4, r5, r7, pc}
+ 129              		.cfi_endproc
+ 130              	.LFE24:
+ 132              		.section	.text.Ft_Esd_Rectangle_X__Default,"ax",%progbits
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 7
+
+
+ 133              		.align	1
+ 134              		.global	Ft_Esd_Rectangle_X__Default
+ 135              		.syntax unified
+ 136              		.thumb
+ 137              		.thumb_func
+ 138              		.fpu fpv5-sp-d16
+ 140              	Ft_Esd_Rectangle_X__Default:
+ 141              	.LFB26:
+ 142              		.file 3 "FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c"
+   1:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** /*
+   2:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** This file is automatically generated
+   3:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** Ft_Esd_Rectangle
+   4:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** C Source
+   5:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** */
+   6:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 
+   7:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** #include "Ft_Esd_Rectangle.h"
+   8:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 
+   9:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** #include "FT_Esd_Primitives.h"
+  10:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 
+  11:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** extern void Ft_Esd_Noop(void *context);
+  12:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** ft_int16_t Ft_Esd_Rectangle_X__Default(void *context) { return 0; }
+ 143              		.loc 3 12 0
+ 144              		.cfi_startproc
+ 145              		@ args = 0, pretend = 0, frame = 8
+ 146              		@ frame_needed = 1, uses_anonymous_args = 0
+ 147              		@ link register save eliminated.
+ 148 0000 80B4     		push	{r7}
+ 149              	.LCFI11:
+ 150              		.cfi_def_cfa_offset 4
+ 151              		.cfi_offset 7, -4
+ 152 0002 83B0     		sub	sp, sp, #12
+ 153              	.LCFI12:
+ 154              		.cfi_def_cfa_offset 16
+ 155 0004 00AF     		add	r7, sp, #0
+ 156              	.LCFI13:
+ 157              		.cfi_def_cfa_register 7
+ 158 0006 7860     		str	r0, [r7, #4]
+ 159              		.loc 3 12 0
+ 160 0008 0023     		movs	r3, #0
+ 161 000a 1846     		mov	r0, r3
+ 162 000c 0C37     		adds	r7, r7, #12
+ 163              	.LCFI14:
+ 164              		.cfi_def_cfa_offset 4
+ 165 000e BD46     		mov	sp, r7
+ 166              	.LCFI15:
+ 167              		.cfi_def_cfa_register 13
+ 168              		@ sp needed
+ 169 0010 5DF8047B 		ldr	r7, [sp], #4
+ 170              	.LCFI16:
+ 171              		.cfi_restore 7
+ 172              		.cfi_def_cfa_offset 0
+ 173 0014 7047     		bx	lr
+ 174              		.cfi_endproc
+ 175              	.LFE26:
+ 177              		.section	.text.Ft_Esd_Rectangle_Y__Default,"ax",%progbits
+ 178              		.align	1
+ 179              		.global	Ft_Esd_Rectangle_Y__Default
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 8
+
+
+ 180              		.syntax unified
+ 181              		.thumb
+ 182              		.thumb_func
+ 183              		.fpu fpv5-sp-d16
+ 185              	Ft_Esd_Rectangle_Y__Default:
+ 186              	.LFB27:
+  13:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** ft_int16_t Ft_Esd_Rectangle_Y__Default(void *context) { return 0; }
+ 187              		.loc 3 13 0
+ 188              		.cfi_startproc
+ 189              		@ args = 0, pretend = 0, frame = 8
+ 190              		@ frame_needed = 1, uses_anonymous_args = 0
+ 191              		@ link register save eliminated.
+ 192 0000 80B4     		push	{r7}
+ 193              	.LCFI17:
+ 194              		.cfi_def_cfa_offset 4
+ 195              		.cfi_offset 7, -4
+ 196 0002 83B0     		sub	sp, sp, #12
+ 197              	.LCFI18:
+ 198              		.cfi_def_cfa_offset 16
+ 199 0004 00AF     		add	r7, sp, #0
+ 200              	.LCFI19:
+ 201              		.cfi_def_cfa_register 7
+ 202 0006 7860     		str	r0, [r7, #4]
+ 203              		.loc 3 13 0
+ 204 0008 0023     		movs	r3, #0
+ 205 000a 1846     		mov	r0, r3
+ 206 000c 0C37     		adds	r7, r7, #12
+ 207              	.LCFI20:
+ 208              		.cfi_def_cfa_offset 4
+ 209 000e BD46     		mov	sp, r7
+ 210              	.LCFI21:
+ 211              		.cfi_def_cfa_register 13
+ 212              		@ sp needed
+ 213 0010 5DF8047B 		ldr	r7, [sp], #4
+ 214              	.LCFI22:
+ 215              		.cfi_restore 7
+ 216              		.cfi_def_cfa_offset 0
+ 217 0014 7047     		bx	lr
+ 218              		.cfi_endproc
+ 219              	.LFE27:
+ 221              		.section	.text.Ft_Esd_Rectangle_Width__Default,"ax",%progbits
+ 222              		.align	1
+ 223              		.global	Ft_Esd_Rectangle_Width__Default
+ 224              		.syntax unified
+ 225              		.thumb
+ 226              		.thumb_func
+ 227              		.fpu fpv5-sp-d16
+ 229              	Ft_Esd_Rectangle_Width__Default:
+ 230              	.LFB28:
+  14:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** ft_int16_t Ft_Esd_Rectangle_Width__Default(void *context) { return 80; }
+ 231              		.loc 3 14 0
+ 232              		.cfi_startproc
+ 233              		@ args = 0, pretend = 0, frame = 8
+ 234              		@ frame_needed = 1, uses_anonymous_args = 0
+ 235              		@ link register save eliminated.
+ 236 0000 80B4     		push	{r7}
+ 237              	.LCFI23:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 9
+
+
+ 238              		.cfi_def_cfa_offset 4
+ 239              		.cfi_offset 7, -4
+ 240 0002 83B0     		sub	sp, sp, #12
+ 241              	.LCFI24:
+ 242              		.cfi_def_cfa_offset 16
+ 243 0004 00AF     		add	r7, sp, #0
+ 244              	.LCFI25:
+ 245              		.cfi_def_cfa_register 7
+ 246 0006 7860     		str	r0, [r7, #4]
+ 247              		.loc 3 14 0
+ 248 0008 5023     		movs	r3, #80
+ 249 000a 1846     		mov	r0, r3
+ 250 000c 0C37     		adds	r7, r7, #12
+ 251              	.LCFI26:
+ 252              		.cfi_def_cfa_offset 4
+ 253 000e BD46     		mov	sp, r7
+ 254              	.LCFI27:
+ 255              		.cfi_def_cfa_register 13
+ 256              		@ sp needed
+ 257 0010 5DF8047B 		ldr	r7, [sp], #4
+ 258              	.LCFI28:
+ 259              		.cfi_restore 7
+ 260              		.cfi_def_cfa_offset 0
+ 261 0014 7047     		bx	lr
+ 262              		.cfi_endproc
+ 263              	.LFE28:
+ 265              		.section	.text.Ft_Esd_Rectangle_Height__Default,"ax",%progbits
+ 266              		.align	1
+ 267              		.global	Ft_Esd_Rectangle_Height__Default
+ 268              		.syntax unified
+ 269              		.thumb
+ 270              		.thumb_func
+ 271              		.fpu fpv5-sp-d16
+ 273              	Ft_Esd_Rectangle_Height__Default:
+ 274              	.LFB29:
+  15:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** ft_int16_t Ft_Esd_Rectangle_Height__Default(void *context) { return 36; }
+ 275              		.loc 3 15 0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 8
+ 278              		@ frame_needed = 1, uses_anonymous_args = 0
+ 279              		@ link register save eliminated.
+ 280 0000 80B4     		push	{r7}
+ 281              	.LCFI29:
+ 282              		.cfi_def_cfa_offset 4
+ 283              		.cfi_offset 7, -4
+ 284 0002 83B0     		sub	sp, sp, #12
+ 285              	.LCFI30:
+ 286              		.cfi_def_cfa_offset 16
+ 287 0004 00AF     		add	r7, sp, #0
+ 288              	.LCFI31:
+ 289              		.cfi_def_cfa_register 7
+ 290 0006 7860     		str	r0, [r7, #4]
+ 291              		.loc 3 15 0
+ 292 0008 2423     		movs	r3, #36
+ 293 000a 1846     		mov	r0, r3
+ 294 000c 0C37     		adds	r7, r7, #12
+ 295              	.LCFI32:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 10
+
+
+ 296              		.cfi_def_cfa_offset 4
+ 297 000e BD46     		mov	sp, r7
+ 298              	.LCFI33:
+ 299              		.cfi_def_cfa_register 13
+ 300              		@ sp needed
+ 301 0010 5DF8047B 		ldr	r7, [sp], #4
+ 302              	.LCFI34:
+ 303              		.cfi_restore 7
+ 304              		.cfi_def_cfa_offset 0
+ 305 0014 7047     		bx	lr
+ 306              		.cfi_endproc
+ 307              	.LFE29:
+ 309              		.section	.text.Ft_Esd_Rectangle_Radius__Default,"ax",%progbits
+ 310              		.align	1
+ 311              		.global	Ft_Esd_Rectangle_Radius__Default
+ 312              		.syntax unified
+ 313              		.thumb
+ 314              		.thumb_func
+ 315              		.fpu fpv5-sp-d16
+ 317              	Ft_Esd_Rectangle_Radius__Default:
+ 318              	.LFB30:
+  16:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** ft_int16_t Ft_Esd_Rectangle_Radius__Default(void *context) { return 4; }
+ 319              		.loc 3 16 0
+ 320              		.cfi_startproc
+ 321              		@ args = 0, pretend = 0, frame = 8
+ 322              		@ frame_needed = 1, uses_anonymous_args = 0
+ 323              		@ link register save eliminated.
+ 324 0000 80B4     		push	{r7}
+ 325              	.LCFI35:
+ 326              		.cfi_def_cfa_offset 4
+ 327              		.cfi_offset 7, -4
+ 328 0002 83B0     		sub	sp, sp, #12
+ 329              	.LCFI36:
+ 330              		.cfi_def_cfa_offset 16
+ 331 0004 00AF     		add	r7, sp, #0
+ 332              	.LCFI37:
+ 333              		.cfi_def_cfa_register 7
+ 334 0006 7860     		str	r0, [r7, #4]
+ 335              		.loc 3 16 0
+ 336 0008 0423     		movs	r3, #4
+ 337 000a 1846     		mov	r0, r3
+ 338 000c 0C37     		adds	r7, r7, #12
+ 339              	.LCFI38:
+ 340              		.cfi_def_cfa_offset 4
+ 341 000e BD46     		mov	sp, r7
+ 342              	.LCFI39:
+ 343              		.cfi_def_cfa_register 13
+ 344              		@ sp needed
+ 345 0010 5DF8047B 		ldr	r7, [sp], #4
+ 346              	.LCFI40:
+ 347              		.cfi_restore 7
+ 348              		.cfi_def_cfa_offset 0
+ 349 0014 7047     		bx	lr
+ 350              		.cfi_endproc
+ 351              	.LFE30:
+ 353              		.section	.text.Ft_Esd_Rectangle_Color__Default,"ax",%progbits
+ 354              		.align	1
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 11
+
+
+ 355              		.global	Ft_Esd_Rectangle_Color__Default
+ 356              		.syntax unified
+ 357              		.thumb
+ 358              		.thumb_func
+ 359              		.fpu fpv5-sp-d16
+ 361              	Ft_Esd_Rectangle_Color__Default:
+ 362              	.LFB31:
+  17:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** ft_argb32_t Ft_Esd_Rectangle_Color__Default(void *context) { return 0xffffffffUL; }
+ 363              		.loc 3 17 0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 8
+ 366              		@ frame_needed = 1, uses_anonymous_args = 0
+ 367              		@ link register save eliminated.
+ 368 0000 80B4     		push	{r7}
+ 369              	.LCFI41:
+ 370              		.cfi_def_cfa_offset 4
+ 371              		.cfi_offset 7, -4
+ 372 0002 83B0     		sub	sp, sp, #12
+ 373              	.LCFI42:
+ 374              		.cfi_def_cfa_offset 16
+ 375 0004 00AF     		add	r7, sp, #0
+ 376              	.LCFI43:
+ 377              		.cfi_def_cfa_register 7
+ 378 0006 7860     		str	r0, [r7, #4]
+ 379              		.loc 3 17 0
+ 380 0008 4FF0FF33 		mov	r3, #-1
+ 381 000c 1846     		mov	r0, r3
+ 382 000e 0C37     		adds	r7, r7, #12
+ 383              	.LCFI44:
+ 384              		.cfi_def_cfa_offset 4
+ 385 0010 BD46     		mov	sp, r7
+ 386              	.LCFI45:
+ 387              		.cfi_def_cfa_register 13
+ 388              		@ sp needed
+ 389 0012 5DF8047B 		ldr	r7, [sp], #4
+ 390              	.LCFI46:
+ 391              		.cfi_restore 7
+ 392              		.cfi_def_cfa_offset 0
+ 393 0016 7047     		bx	lr
+ 394              		.cfi_endproc
+ 395              	.LFE31:
+ 397              		.section	.text.Ft_Esd_Rectangle__Initializer,"ax",%progbits
+ 398              		.align	1
+ 399              		.global	Ft_Esd_Rectangle__Initializer
+ 400              		.syntax unified
+ 401              		.thumb
+ 402              		.thumb_func
+ 403              		.fpu fpv5-sp-d16
+ 405              	Ft_Esd_Rectangle__Initializer:
+ 406              	.LFB32:
+  18:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 
+  19:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 
+  20:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 
+  21:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** void Ft_Esd_Rectangle__Initializer(Ft_Esd_Rectangle *context)
+  22:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** {
+ 407              		.loc 3 22 0
+ 408              		.cfi_startproc
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 12
+
+
+ 409              		@ args = 0, pretend = 0, frame = 8
+ 410              		@ frame_needed = 1, uses_anonymous_args = 0
+ 411              		@ link register save eliminated.
+ 412 0000 80B4     		push	{r7}
+ 413              	.LCFI47:
+ 414              		.cfi_def_cfa_offset 4
+ 415              		.cfi_offset 7, -4
+ 416 0002 83B0     		sub	sp, sp, #12
+ 417              	.LCFI48:
+ 418              		.cfi_def_cfa_offset 16
+ 419 0004 00AF     		add	r7, sp, #0
+ 420              	.LCFI49:
+ 421              		.cfi_def_cfa_register 7
+ 422 0006 7860     		str	r0, [r7, #4]
+  23:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	context->Parent = 0;
+ 423              		.loc 3 23 0
+ 424 0008 7B68     		ldr	r3, [r7, #4]
+ 425 000a 0022     		movs	r2, #0
+ 426 000c 1A60     		str	r2, [r3]
+  24:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	context->X = Ft_Esd_Rectangle_X__Default;
+ 427              		.loc 3 24 0
+ 428 000e 7B68     		ldr	r3, [r7, #4]
+ 429 0010 0B4A     		ldr	r2, .L18
+ 430 0012 5A60     		str	r2, [r3, #4]
+  25:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	context->Y = Ft_Esd_Rectangle_Y__Default;
+ 431              		.loc 3 25 0
+ 432 0014 7B68     		ldr	r3, [r7, #4]
+ 433 0016 0B4A     		ldr	r2, .L18+4
+ 434 0018 9A60     		str	r2, [r3, #8]
+  26:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	context->Width = Ft_Esd_Rectangle_Width__Default;
+ 435              		.loc 3 26 0
+ 436 001a 7B68     		ldr	r3, [r7, #4]
+ 437 001c 0A4A     		ldr	r2, .L18+8
+ 438 001e DA60     		str	r2, [r3, #12]
+  27:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	context->Height = Ft_Esd_Rectangle_Height__Default;
+ 439              		.loc 3 27 0
+ 440 0020 7B68     		ldr	r3, [r7, #4]
+ 441 0022 0A4A     		ldr	r2, .L18+12
+ 442 0024 1A61     		str	r2, [r3, #16]
+  28:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	context->Radius = Ft_Esd_Rectangle_Radius__Default;
+ 443              		.loc 3 28 0
+ 444 0026 7B68     		ldr	r3, [r7, #4]
+ 445 0028 094A     		ldr	r2, .L18+16
+ 446 002a 5A61     		str	r2, [r3, #20]
+  29:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	context->Color = Ft_Esd_Rectangle_Color__Default;
+ 447              		.loc 3 29 0
+ 448 002c 7B68     		ldr	r3, [r7, #4]
+ 449 002e 094A     		ldr	r2, .L18+20
+ 450 0030 9A61     		str	r2, [r3, #24]
+  30:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** }
+ 451              		.loc 3 30 0
+ 452 0032 00BF     		nop
+ 453 0034 0C37     		adds	r7, r7, #12
+ 454              	.LCFI50:
+ 455              		.cfi_def_cfa_offset 4
+ 456 0036 BD46     		mov	sp, r7
+ 457              	.LCFI51:
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 13
+
+
+ 458              		.cfi_def_cfa_register 13
+ 459              		@ sp needed
+ 460 0038 5DF8047B 		ldr	r7, [sp], #4
+ 461              	.LCFI52:
+ 462              		.cfi_restore 7
+ 463              		.cfi_def_cfa_offset 0
+ 464 003c 7047     		bx	lr
+ 465              	.L19:
+ 466 003e 00BF     		.align	2
+ 467              	.L18:
+ 468 0040 00000000 		.word	Ft_Esd_Rectangle_X__Default
+ 469 0044 00000000 		.word	Ft_Esd_Rectangle_Y__Default
+ 470 0048 00000000 		.word	Ft_Esd_Rectangle_Width__Default
+ 471 004c 00000000 		.word	Ft_Esd_Rectangle_Height__Default
+ 472 0050 00000000 		.word	Ft_Esd_Rectangle_Radius__Default
+ 473 0054 00000000 		.word	Ft_Esd_Rectangle_Color__Default
+ 474              		.cfi_endproc
+ 475              	.LFE32:
+ 477              		.section	.text.Ft_Esd_Rectangle_Render,"ax",%progbits
+ 478              		.align	1
+ 479              		.global	Ft_Esd_Rectangle_Render
+ 480              		.syntax unified
+ 481              		.thumb
+ 482              		.thumb_func
+ 483              		.fpu fpv5-sp-d16
+ 485              	Ft_Esd_Rectangle_Render:
+ 486              	.LFB33:
+  31:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 
+  32:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 
+  33:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** void Ft_Esd_Rectangle_Render(Ft_Esd_Rectangle *context)
+  34:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** {
+ 487              		.loc 3 34 0
+ 488              		.cfi_startproc
+ 489              		@ args = 0, pretend = 0, frame = 32
+ 490              		@ frame_needed = 1, uses_anonymous_args = 0
+ 491 0000 90B5     		push	{r4, r7, lr}
+ 492              	.LCFI53:
+ 493              		.cfi_def_cfa_offset 12
+ 494              		.cfi_offset 4, -12
+ 495              		.cfi_offset 7, -8
+ 496              		.cfi_offset 14, -4
+ 497 0002 8BB0     		sub	sp, sp, #44
+ 498              	.LCFI54:
+ 499              		.cfi_def_cfa_offset 56
+ 500 0004 02AF     		add	r7, sp, #8
+ 501              	.LCFI55:
+ 502              		.cfi_def_cfa 7, 48
+ 503 0006 7860     		str	r0, [r7, #4]
+  35:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	void *parent = context->Parent;
+ 504              		.loc 3 35 0
+ 505 0008 7B68     		ldr	r3, [r7, #4]
+ 506 000a 1B68     		ldr	r3, [r3]
+ 507 000c FB61     		str	r3, [r7, #28]
+  36:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	ft_int16_t x = context->X(parent);
+ 508              		.loc 3 36 0
+ 509 000e 7B68     		ldr	r3, [r7, #4]
+ 510 0010 5B68     		ldr	r3, [r3, #4]
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 14
+
+
+ 511 0012 F869     		ldr	r0, [r7, #28]
+ 512 0014 9847     		blx	r3
+ 513              	.LVL0:
+ 514 0016 0346     		mov	r3, r0
+ 515 0018 7B83     		strh	r3, [r7, #26]	@ movhi
+  37:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	ft_int16_t y = context->Y(parent);
+ 516              		.loc 3 37 0
+ 517 001a 7B68     		ldr	r3, [r7, #4]
+ 518 001c 9B68     		ldr	r3, [r3, #8]
+ 519 001e F869     		ldr	r0, [r7, #28]
+ 520 0020 9847     		blx	r3
+ 521              	.LVL1:
+ 522 0022 0346     		mov	r3, r0
+ 523 0024 3B83     		strh	r3, [r7, #24]	@ movhi
+  38:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	ft_int16_t width = context->Width(parent);
+ 524              		.loc 3 38 0
+ 525 0026 7B68     		ldr	r3, [r7, #4]
+ 526 0028 DB68     		ldr	r3, [r3, #12]
+ 527 002a F869     		ldr	r0, [r7, #28]
+ 528 002c 9847     		blx	r3
+ 529              	.LVL2:
+ 530 002e 0346     		mov	r3, r0
+ 531 0030 FB82     		strh	r3, [r7, #22]	@ movhi
+  39:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	ft_int16_t height = context->Height(parent);
+ 532              		.loc 3 39 0
+ 533 0032 7B68     		ldr	r3, [r7, #4]
+ 534 0034 1B69     		ldr	r3, [r3, #16]
+ 535 0036 F869     		ldr	r0, [r7, #28]
+ 536 0038 9847     		blx	r3
+ 537              	.LVL3:
+ 538 003a 0346     		mov	r3, r0
+ 539 003c BB82     		strh	r3, [r7, #20]	@ movhi
+  40:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	ft_int32_t radius = 4L;
+ 540              		.loc 3 40 0
+ 541 003e 0423     		movs	r3, #4
+ 542 0040 3B61     		str	r3, [r7, #16]
+  41:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	ft_argb32_t color = context->Color(parent);
+ 543              		.loc 3 41 0
+ 544 0042 7B68     		ldr	r3, [r7, #4]
+ 545 0044 9B69     		ldr	r3, [r3, #24]
+ 546 0046 F869     		ldr	r0, [r7, #28]
+ 547 0048 9847     		blx	r3
+ 548              	.LVL4:
+ 549 004a F860     		str	r0, [r7, #12]
+  42:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** 	Ft_Esd_Render_Rectangle(x, y, width, height, radius, color);
+ 550              		.loc 3 42 0
+ 551 004c B7F91A00 		ldrsh	r0, [r7, #26]
+ 552 0050 B7F91810 		ldrsh	r1, [r7, #24]
+ 553 0054 B7F91620 		ldrsh	r2, [r7, #22]
+ 554 0058 B7F91440 		ldrsh	r4, [r7, #20]
+ 555 005c FB68     		ldr	r3, [r7, #12]
+ 556 005e 0193     		str	r3, [sp, #4]
+ 557 0060 3B69     		ldr	r3, [r7, #16]
+ 558 0062 0093     		str	r3, [sp]
+ 559 0064 2346     		mov	r3, r4
+ 560 0066 FFF7FEFF 		bl	Ft_Esd_Render_Rectangle
+  43:FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c **** }
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 15
+
+
+ 561              		.loc 3 43 0
+ 562 006a 00BF     		nop
+ 563 006c 2437     		adds	r7, r7, #36
+ 564              	.LCFI56:
+ 565              		.cfi_def_cfa_offset 12
+ 566 006e BD46     		mov	sp, r7
+ 567              	.LCFI57:
+ 568              		.cfi_def_cfa_register 13
+ 569              		@ sp needed
+ 570 0070 90BD     		pop	{r4, r7, pc}
+ 571              		.cfi_endproc
+ 572              	.LFE33:
+ 574              		.text
+ 575              	.Letext0:
+ 576              		.file 4 "FT_Eve_Hal/FT_DataTypes.h"
+ 577              		.file 5 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/lock.h"
+ 578              		.file 6 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/_types.h"
+ 579              		.file 7 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h
+ 580              		.file 8 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/unistd.h"
+ 581              		.file 9 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/sys/reent.h"
+ 582              		.file 10 "/usr/local/Cellar/arm-none-eabi-gcc/20180627/arm-none-eabi/include/stdlib.h"
+ 583              		.file 11 "FT_Eve_Hal/FT_Gpu_Hal.h"
+ 584              		.file 12 "FT_Esd_Framework/Ft_Esd.h"
+ 585              		.file 13 "FT_Esd_Framework/Ft_Esd_GpuAlloc.h"
+ 586              		.file 14 "FT_Esd_Framework/FT_Esd_Dl.h"
+ 587              		.file 15 "FT_Esd_Widgets/Ft_Esd_Rectangle.h"
+ 588              		.file 16 "FT_Esd_Widgets/Ft_Esd_Theme.h"
+ 589              		.file 17 "FT_Esd_Widgets/Ft_Esd_DefaultTheme.h"
+ARM GAS  /var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Ft_Esd_Rectangle__Generated.c
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:18     .text.Ft_Esd_BitmapCell_GetInfo:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:24     .text.Ft_Esd_BitmapCell_GetInfo:0000000000000000 Ft_Esd_BitmapCell_GetInfo
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:73     .text.Ft_Esd_Render_Rectangle:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:79     .text.Ft_Esd_Render_Rectangle:0000000000000000 Ft_Esd_Render_Rectangle
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:133    .text.Ft_Esd_Rectangle_X__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:140    .text.Ft_Esd_Rectangle_X__Default:0000000000000000 Ft_Esd_Rectangle_X__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:178    .text.Ft_Esd_Rectangle_Y__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:185    .text.Ft_Esd_Rectangle_Y__Default:0000000000000000 Ft_Esd_Rectangle_Y__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:222    .text.Ft_Esd_Rectangle_Width__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:229    .text.Ft_Esd_Rectangle_Width__Default:0000000000000000 Ft_Esd_Rectangle_Width__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:266    .text.Ft_Esd_Rectangle_Height__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:273    .text.Ft_Esd_Rectangle_Height__Default:0000000000000000 Ft_Esd_Rectangle_Height__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:310    .text.Ft_Esd_Rectangle_Radius__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:317    .text.Ft_Esd_Rectangle_Radius__Default:0000000000000000 Ft_Esd_Rectangle_Radius__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:354    .text.Ft_Esd_Rectangle_Color__Default:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:361    .text.Ft_Esd_Rectangle_Color__Default:0000000000000000 Ft_Esd_Rectangle_Color__Default
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:398    .text.Ft_Esd_Rectangle__Initializer:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:405    .text.Ft_Esd_Rectangle__Initializer:0000000000000000 Ft_Esd_Rectangle__Initializer
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:468    .text.Ft_Esd_Rectangle__Initializer:0000000000000040 $d
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:478    .text.Ft_Esd_Rectangle_Render:0000000000000000 $t
+/var/folders/n8/cvzdcwlj0vl4g_wtyz1ffy300000gn/T//ccjx71io.s:485    .text.Ft_Esd_Rectangle_Render:0000000000000000 Ft_Esd_Rectangle_Render
+
+UNDEFINED SYMBOLS
+Ft_Esd_Render_RectangleF
