@@ -23,9 +23,16 @@
 #include <FT_Platform.h>
 #include "Ft_Esd.h"
 #include "Ft_Esd_GpuAlloc.h"
+#include "main.h"
+
 #ifdef FT900_PLATFORM
 #include "ff.h"
 #endif
+
+// External variables
+extern UART_HandleTypeDef huart6;
+extern void my_printf(const char *fmt, ...);
+
 
 //
 // Static
@@ -45,6 +52,8 @@ ft_uint32_t Ft_Esd_Millis = 0;  // Time in milliseconds for current frame
 ft_uint32_t Ft_Esd_DeltaMs = 0; // Delta time in milliseconds between frames
 ft_uint32_t Ft_Esd_Frame = 0;   // Number of times Render has been called
 ft_rgb32_t Ft_Esd_ClearColor = 0x212121; // Screen clear color
+
+
 
 ESD_FUNCTION(Ft_Esd_GetMillis, Type = ft_uint32_t,
 		DisplayName = "Get Milliseconds", Category = EsdUtilities)ft_uint32_t Ft_Esd_GetMillis() {
@@ -83,13 +92,24 @@ ft_char8_t FT_DispCSpread = 1;
 ft_char8_t FT_DispDither = 1;
 
 /* Initial boot up display list */
-const ft_uint32_t FT_DLCODE_BOOTUP[] = { CLEAR_COLOR_RGB(0, 0, 0), CLEAR(1, 1,
-		1), BITMAP_HANDLE(31), BEGIN(BITMAPS), VERTEX2II(6, 0, 31, 'E'),
-		VERTEX2II(29, 0, 31, 'S'), VERTEX2II(55, 0, 31, 'D'), VERTEX2II(83, 0,
-				31, '3'), BITMAP_HANDLE(28), BEGIN(BITMAPS), VERTEX2II(7, 43,
-				28, 'H'), VERTEX2II(22, 43, 28, 'e'), VERTEX2II(33, 43, 28,
-				'l'), VERTEX2II(39, 43, 28, 'l'), VERTEX2II(45, 43, 28, 'o'),
-		DISPLAY(), };
+		const ft_uint32_t FT_DLCODE_BOOTUP[] = {
+				CLEAR_COLOR_RGB(255, 0, 0),
+				CLEAR(1, 1, 1),
+				BITMAP_HANDLE(31),
+				BEGIN(BITMAPS),
+				VERTEX2II(6, 0, 31, 'F'),
+				VERTEX2II(29, 0, 31, 'U'),
+				VERTEX2II(55, 0, 31, 'C'),
+				VERTEX2II(83, 0, 31, 'K'),
+				BITMAP_HANDLE(28),
+				BEGIN(BITMAPS),
+				VERTEX2II(7, 43, 28, 'H'),
+				VERTEX2II(22, 43, 28, 'e'),
+				VERTEX2II(33, 43, 28, 'l'),
+				VERTEX2II(39, 43, 28, 'l'),
+				VERTEX2II(45, 43, 28, 'o'),
+				DISPLAY(),
+		};
 
 #define FT_WELCOME_MESSAGE "Copyright © BridgeTek Pte Ltd.\r\n"
 
@@ -149,7 +169,7 @@ ft_void_t FT900_Config()
 	/* useful for timer */
 	ft_millis_init();
 	interrupt_enable_globally();
-	//printf("ft900 config done \n");}
+	//my_my_printf("ft900 config done \n");}
 }
 #endif
 
@@ -176,11 +196,12 @@ ft_void_t FT800_BootupConfig() {
 		chipid = Ft_Gpu_Hal_Rd8(&s_Host, REG_ID);
 		while (chipid != 0x7C) {
 			chipid = Ft_Gpu_Hal_Rd8(&s_Host, REG_ID);
-			printf("VC1 register ID after wake up %x\n", chipid);
+
+			my_printf("VC1 register ID after wake up %x\n", chipid);
 			ft_delay(100);
 		}
 #if defined(MSVC_PLATFORM) || defined (FT900_PLATFORM) || defined(ESD_SIMULATION)
-		printf("VC1 register ID after wake up %x\n", chipid);
+		my_printf("VC1 register ID after wake up %x\n", chipid);
 #endif
 	}
 
@@ -291,7 +312,7 @@ ft_void_t FT800_BootupConfig() {
 #ifdef FT900_PLATFORM
 	ILI9488_Bootup();
 
-	printf("after ILI9488 bootup \n");
+	my_printf("after ILI9488 bootup \n");
 	//spi
 	// Initialize SPIM HW
 	sys_enable(sys_device_spi_master);
@@ -380,11 +401,11 @@ ft_void_t FT900_InitSDCard()
 
 	SDHOST_STATUS sd_status;
 	while ((sd_status = sdhost_card_detect()) != SDHOST_CARD_INSERTED)
-	printf("Waiting for SD Card (status: %i)\n", (int)sd_status);
-	printf("SD Card inserted\n");
+	my_printf("Waiting for SD Card (status: %i)\n", (int)sd_status);
+	my_printf("SD Card inserted\n");
 
-	if (f_mount(&s_FatFS, "", 1) != FR_OK) printf("FatFS mount failed\n");
-	else printf("FatFS mounted succesfully\n");
+	if (f_mount(&s_FatFS, "", 1) != FR_OK) my_printf("FatFS mount failed\n");
+	else my_printf("FatFS mounted succesfully\n");
 }
 #endif
 
@@ -410,7 +431,7 @@ ft_void_t App_CoPro_Widget_Calibrate() {
 	Ft_Gpu_Hal_RdMem(&s_Host, REG_TOUCH_TRANSFORM_A, (ft_uint8_t *) TransMatrix,
 			4 * 6); //read all the 6 coefficients
 #ifdef MSVC_PLATFORM
-					printf("Touch screen transform values are A 0x%x,B 0x%x,C 0x%x,D 0x%x,E 0x%x, F 0x%x",
+					my_printf("Touch screen transform values are A 0x%x,B 0x%x,C 0x%x,D 0x%x,E 0x%x, F 0x%x",
 							TransMatrix[0], TransMatrix[1], TransMatrix[2], TransMatrix[3], TransMatrix[4], TransMatrix[5]);
 #endif
 }
@@ -432,38 +453,39 @@ ft_void_t setup() {
 }
 
 // Ft_Esd_MainLoop
-ft_void_t Ft_Esd_MainLoop();
+// ft_void_t Ft_Esd_MainLoop()
 
-//#if defined(MSVC_PLATFORM) || defined(FT900_PLATFORM)
-///* Main entry point */
+// #if defined(MSVC_PLATFORM) || defined(FT900_PLATFORM)
+// /* Main entry point */
 //ft_int32_t main(ft_int32_t argc, ft_char8_t *argv[])
-//#endif
-//#if defined(ARDUINO_PLATFORM) || defined(MSVC_FT800EMU)
-//ft_void_t loop()
-//#endif
+//// #endif
+//// #if defined(ARDUINO_PLATFORM) || defined(MSVC_FT800EMU)
+//// ft_void_t loop();
+//// #endif
 //{
-//#ifdef ESD_SIMULATION
-//	printf("\f"); // Shows horizontal line in ESD output window
-//	printf(FT_WELCOME_MESSAGE);
-//#endif
-//
-//#ifdef FT900_PLATFORM
-//	FT900_Config();
-//#endif
+//// #ifdef ESD_SIMULATION
+//// 	printf("\f"); // Shows horizontal line in ESD output window
+//// 	printf(FT_WELCOME_MESSAGE);
+//// #endif
+////
+//// #ifdef FT900_PLATFORM
+//// 	FT900_Config();
+//// #endif
 //	Ft_Gpu_HalInit_t halinit;
 //
 //	halinit.TotalChannelNum = 1;
+//
 //
 //	Ft_Gpu_Hal_Init(&halinit);
 //	s_Host.hal_config.channel_no = 0;
 //	s_Host.hal_config.pdn_pin_no = FT800_PD_N;
 //	s_Host.hal_config.spi_cs_pin_no = FT800_SEL_PIN;
-//#ifdef MSVC_PLATFORM_SPI
-//	host.hal_config.spi_clockrate_khz = 12000; //in KHz
-//#endif
-//#ifdef ARDUINO_PLATFORM_SPI
-//	host.hal_config.spi_clockrate_khz = 4000; //in KHz
-//#endif
+//// #ifdef MSVC_PLATFORM_SPI
+//// 	host.hal_config.spi_clockrate_khz = 12000; //in KHz
+//// #endif
+//// #ifdef ARDUINO_PLATFORM_SPI
+//// 	host.hal_config.spi_clockrate_khz = 4000; //in KHz
+//// #endif
 //	Ft_Gpu_Hal_Open(&s_Host);
 //
 //	//printf("Ft_Gpu_Hal_Open done \n");
@@ -471,20 +493,20 @@ ft_void_t Ft_Esd_MainLoop();
 //
 //	FT800_BootupConfig();
 //
-//#if (defined FT900_PLATFORM) || defined(MSVC_PLATFORM) || defined(ESD_SIMULATION)
-//	printf("reg_touch_rz = 0x%x\n", Ft_Gpu_Hal_Rd16(&s_Host, REG_TOUCH_RZ));
-//	printf("reg_touch_rzthresh = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_RZTHRESH));
-//	printf("reg_touch_tag_xy = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG_XY));
-//	printf("reg_touch_tag = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG));
-//#endif
-//
-//#if FT900_PLATFORM
-//	FT900_InitSDCard();
-//#endif
-//
-//#ifndef ESD_SIMULATION
-//	App_CoPro_Widget_Calibrate();
-//#endif
+//// #if (defined FT900_PLATFORM) || defined(MSVC_PLATFORM) || defined(ESD_SIMULATION)
+//// 	printf("reg_touch_rz = 0x%x\n", Ft_Gpu_Hal_Rd16(&s_Host, REG_TOUCH_RZ));
+//// 	printf("reg_touch_rzthresh = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_RZTHRESH));
+//// 	printf("reg_touch_tag_xy = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG_XY));
+//// 	printf("reg_touch_tag = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG));
+//// #endif
+////
+//// #if FT900_PLATFORM
+//// 	FT900_InitSDCard();
+//// #endif
+////
+//// #ifndef ESD_SIMULATION
+//// 	App_CoPro_Widget_Calibrate();
+//// #endif
 //
 //	Ft_Esd_GAlloc = &s_GAlloc;
 //	Ft_Esd_GpuAlloc_Reset(&s_GAlloc);
@@ -501,15 +523,15 @@ ft_void_t Ft_Esd_MainLoop();
 //#endif
 //}
 
-ft_uint32_t Ft_Esd_GAlloc_GetTotalUsed(Ft_Esd_GpuAlloc *ga) {
-	if (!Ft_Esd_GAlloc)
-		return 0;
+ft_uint32_t Ft_Esd_GAlloc_GetTotalUsed(Ft_Esd_GpuAlloc *ga)
+{
+	if (!Ft_Esd_GAlloc) return 0;
 	return Ft_Esd_GpuAlloc_GetTotalUsed(Ft_Esd_GAlloc);
 }
 
-ft_uint32_t Ft_Esd_GAlloc_GetTotal(Ft_Esd_GpuAlloc *ga) {
-	if (!Ft_Esd_GAlloc)
-		return 0;
+ft_uint32_t Ft_Esd_GAlloc_GetTotal(Ft_Esd_GpuAlloc *ga)
+{
+	if (!Ft_Esd_GAlloc) return 0;
 	return Ft_Esd_GpuAlloc_GetTotal(Ft_Esd_GAlloc);
 }
 

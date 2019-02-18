@@ -7,6 +7,10 @@
 #include "FT_Esd_Dl.h"
 #include "Ft_Esd_GpuAlloc.h"
 
+/*External PFPs and variables*/
+extern void my_printf(const char *fmt, ...);
+
+
 extern Ft_Gpu_Hal_Context_t *Ft_Esd_Host;
 extern Ft_Esd_GpuAlloc *Ft_Esd_GAlloc;
 extern ft_uint32_t Ft_Esd_Millis;
@@ -52,6 +56,8 @@ void Ft_Esd_Timer_UpdateGlobal();
 
 ft_void_t Ft_Esd_MainLoop()
 {
+
+	my_printf("Staring APP!");
 	Ft_Gpu_Hal_Context_t *phost = Ft_Esd_Host;
 
 	// Initialize application
@@ -115,6 +121,8 @@ ft_void_t Ft_Esd_MainLoop()
 		Ft_Esd_ResetGpuState();
 		++Ft_Esd_Frame;
 	}
+
+	my_printf("ENDING APP!");
 
 	// Cleanup application (generally unreachable)
 	Ft_Esd_Timer_CancelGlobal();

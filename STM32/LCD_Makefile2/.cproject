@@ -116,6 +116,7 @@
 							<option id="fr.ac6.managedbuild.option.gnu.cross.instructionSet.291625269.647650619" name="Instruction Set" superClass="fr.ac6.managedbuild.option.gnu.cross.instructionSet.291625269"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.1792254301.210490838" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu.1792254301"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.638191479.15925478" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi.638191479"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.750775688" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1536702306">
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.2052997885" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1703193739" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
