@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Your spot has been booked{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form action="https://va3rx2p08e.execute-api.us-east-1.amazonaws.com/test/" method="get">
+      <body>
+      <ul>
+          This is where something will be displayed. Maybe the spot number? depends on what we do for database.
+      </ul>
+      </body>
+  </form>
+{% endblock %}
