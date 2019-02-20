@@ -226,6 +226,11 @@ $(BUILD_DIR):
 clean:
 	-rm -fR $(BUILD_DIR)
 
+
+.PHONY: flash
+flash:
+		st-flash write $(BUILD_DIR)/$(TARGET).bin 0x8000000
+
 #######################################
 # dependencies
 #######################################
