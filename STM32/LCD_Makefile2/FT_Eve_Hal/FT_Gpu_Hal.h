@@ -31,6 +31,8 @@ File Description:
 #define FT_GPU_HAL_H
 
 
+#include "FT_DataTypes.h"
+
 
 typedef enum {
 	FT_GPU_I2C_MODE = 0,
@@ -289,7 +291,7 @@ ft_void_t Ft_Gpu_81X_ResetRemoval(Ft_Gpu_Hal_Context_t *host);
 ft_uint32_t Ft_Gpu_CurrentFrequency(Ft_Gpu_Hal_Context_t *host);
 ft_int32_t Ft_Gpu_ClockTrimming(Ft_Gpu_Hal_Context_t *host, ft_int32_t LowFreq);
 
-#ifdef FT900_PLATFORM
+#if (defined(FT900_PLATFORM) || defined(STM32F7))
 ft_void_t ft_millis_init();
 ft_uint32_t ft_millis();
 ft_void_t ft_millis_exit();

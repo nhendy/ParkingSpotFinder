@@ -10,10 +10,13 @@ TARGET = LCD_Makefile2
 ######################################
 # building variables
 ######################################
+# print debug?
+PDEBUG = 0
 # debug build?
 DEBUG = 1
 # optimization
 OPT = -O0
+
 
 #######################################
 # pathes
@@ -171,6 +174,12 @@ ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
 endif
 
+ifeq ($(PDEBUG), 1)
+CFLAGS += -DPDEBUG
+endif
+
+
+
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
@@ -227,8 +236,8 @@ clean:
 	-rm -fR $(BUILD_DIR)
 
 
-.PHONY: flash
-flash:
+# .PHONY: flash
+flash: all
 		st-flash write $(BUILD_DIR)/$(TARGET).bin 0x8000000
 
 #######################################

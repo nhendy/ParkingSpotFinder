@@ -34,6 +34,7 @@ extern UART_HandleTypeDef huart6;
 extern void my_printf(const char *fmt, ...);
 
 
+//---------------------------------------------------------------------------------------
 //
 // Static
 //
@@ -42,7 +43,7 @@ static Ft_Esd_GpuAlloc s_GAlloc;
 #ifdef FT900_PLATFORM
 static FATFS s_FatFS;
 #endif
-
+//---------------------------------------------------------------------------------------
 //
 // Globals
 //
@@ -52,7 +53,7 @@ ft_uint32_t Ft_Esd_Millis = 0;  // Time in milliseconds for current frame
 ft_uint32_t Ft_Esd_DeltaMs = 0; // Delta time in milliseconds between frames
 ft_uint32_t Ft_Esd_Frame = 0;   // Number of times Render has been called
 ft_rgb32_t Ft_Esd_ClearColor = 0x212121; // Screen clear color
-
+//---------------------------------------------------------------------------------------
 
 
 ESD_FUNCTION(Ft_Esd_GetMillis, Type = ft_uint32_t,
@@ -97,10 +98,10 @@ ft_char8_t FT_DispDither = 1;
 				CLEAR(1, 1, 1),
 				BITMAP_HANDLE(31),
 				BEGIN(BITMAPS),
-				VERTEX2II(6, 0, 31, 'F'),
-				VERTEX2II(29, 0, 31, 'U'),
-				VERTEX2II(55, 0, 31, 'C'),
-				VERTEX2II(83, 0, 31, 'K'),
+				VERTEX2II(6, 0, 31, 'T'),
+				VERTEX2II(29, 0, 31, 'W'),
+				VERTEX2II(55, 0, 31, 'O'),
+				VERTEX2II(83, 0, 31, 'O'),
 				BITMAP_HANDLE(28),
 				BEGIN(BITMAPS),
 				VERTEX2II(7, 43, 28, 'H'),
@@ -174,6 +175,8 @@ ft_void_t FT900_Config()
 #endif
 
 ft_void_t FT800_BootupConfig() {
+
+//	Ft_Gpu
 	Ft_Gpu_Hal_Powercycle(&s_Host, FT_TRUE);
 
 	/* Access address 0 to wake up the FT800 */
@@ -229,7 +232,7 @@ ft_void_t FT800_BootupConfig() {
 	/* Values specific to QVGA LCD display */
 	FT_DispWidth = 800;
 	FT_DispHeight = 480;
-	FT_DispHCycle = 928;
+	FT_DispHCycle = 2000;
 	FT_DispHOffset = 88;
 	FT_DispHSync0 = 0;
 	FT_DispHSync1 = 48;
@@ -312,7 +315,7 @@ ft_void_t FT800_BootupConfig() {
 #ifdef FT900_PLATFORM
 	ILI9488_Bootup();
 
-	my_printf("after ILI9488 bootup \n");
+	my_printf("after ILI9488 bootup \t\n");
 	//spi
 	// Initialize SPIM HW
 	sys_enable(sys_device_spi_master);
@@ -402,10 +405,10 @@ ft_void_t FT900_InitSDCard()
 	SDHOST_STATUS sd_status;
 	while ((sd_status = sdhost_card_detect()) != SDHOST_CARD_INSERTED)
 	my_printf("Waiting for SD Card (status: %i)\n", (int)sd_status);
-	my_printf("SD Card inserted\n");
+	my_printf("SD Card inserted\t\n");
 
 	if (f_mount(&s_FatFS, "", 1) != FR_OK) my_printf("FatFS mount failed\n");
-	else my_printf("FatFS mounted succesfully\n");
+	else my_printf("FatFS mounted succesfully\r\n");
 }
 #endif
 

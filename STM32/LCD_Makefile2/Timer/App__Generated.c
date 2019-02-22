@@ -28,6 +28,8 @@ static void App__Main_Page__Validate(App *context)
 	void *parent = context->Parent;
 	if (!context->Main_Page)
 	{
+		my_printf("Context is correct in App__Main_Page__Validate\r\n");
+
 		context->Main_Page = (MainPage *)malloc(sizeof(MainPage));
 		MainPage__Initializer(context->Main_Page);
 		context->Main_Page->Parent = context;

@@ -215,8 +215,15 @@ void Ft_Esd_GpuAlloc_Free(Ft_Esd_GpuAlloc *ga, Ft_Esd_GpuHandle handle)
 	}
 }
 
+
+
+
+// UPDATE  BEING CALLED W/O INITIALIZING ga
 void Ft_Esd_GpuAlloc_Update(Ft_Esd_GpuAlloc *ga)
 {
+
+	my_printf("sizeof AllocEntries %d\r\n", ga -> NbAllocEntries );
+
 	for (int idx = 0; idx < ga->NbAllocEntries; ++idx)
 	{
 		// Check if allocation entry is allocated

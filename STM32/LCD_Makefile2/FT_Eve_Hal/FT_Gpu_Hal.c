@@ -138,7 +138,7 @@ ft_bool_t Ft_Gpu_Hal_Open(Ft_Gpu_Hal_Context_t *host) {
 #endif
 #endif
 
-	/* Initialize the context valriables */
+	/* Initialize the context variables */
 	/* CS and PD pins are driven low by default in MX_GPIO_Init */
 	host->ft_cmd_fifo_wp = host->ft_dl_buff_wp = 0;
 	host->spinumdummy = 1;//by default ft800/801/810/811 goes with single dummy byte for read
@@ -206,11 +206,11 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 		for (int i = 2; i >= 0; i--) {
 			if (HAL_SPI_Transmit(&hspi1, (uint8_t *) &cTempAddr[i], 1,
 			HAL_MAX_DELAY) != HAL_OK) {
-				my_printf("FAILED TO TRANSMIT in StartTransfer\n");
+				my_printf("FAILED TO TRANSMIT in StartTransfer\r\n");
 			} 			// Send Memory Write plus high address byte
 
 			else {
-				my_printf("SUCCESSFUL TRANSMISSION\n");
+				my_printf("SUCCESSFUL TRANSMISSION\r\n");
 			}
 
 		}
@@ -275,11 +275,11 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 		for (int i = 2; i >= 0; i--) {
 			if (HAL_SPI_Transmit(&hspi1, (uint8_t *) &cTempAddr[i], 1,
 			HAL_MAX_DELAY) != HAL_OK) {
-				my_printf("FAILED TO TRANSMIT in StartTransfer\n");
+				my_printf("FAILED TO TRANSMIT in StartTransfer\r\n");
 			} 			// Send Memory Write plus high address byte
 
 			else {
-				my_printf("SUCCESSFUL TRANSMISSION\n");
+				my_printf("SUCCESSFUL TRANSMISSION\r\n");
 			}
 		}
 #endif
@@ -346,11 +346,11 @@ ft_uint8_t Ft_Gpu_Hal_Transfer8(Ft_Gpu_Hal_Context_t *host, ft_uint8_t value) {
 	ft_uint8_t ReadByte;
 	if (host->status == FT_GPU_HAL_WRITING) {
 		if(HAL_SPI_Transmit(&hspi1, &value, 1, HAL_MAX_DELAY) != HAL_OK){
-			my_printf("FAILED TO TRANSMIT IN Ft_Gpu_Hal_Transfer8\n");
+			my_printf("FAILED TO TRANSMIT IN Ft_Gpu_Hal_Transfer8\r\n");
 		}
 	} else {
 		if(HAL_SPI_Receive(&hspi1, &ReadByte, 1, HAL_MAX_DELAY) != HAL_OK){
-			my_printf("FAILED TO RECEIVE IN Ft_Gpu_Hal_Transfer8\n");
+			my_printf("FAILED TO RECEIVE IN Ft_Gpu_Hal_Transfer8\r\n");
 		}
 	}
 	return ReadByte;
@@ -515,11 +515,11 @@ ft_void_t Ft_Gpu_HostCommand(Ft_Gpu_Hal_Context_t *host, ft_uint8_t cmd) {
 	for (int i = 2; i >= 0; i--) {
 		if (HAL_SPI_Transmit(&hspi1, (uint8_t *) &cTempAddr[i], 1,
 		HAL_MAX_DELAY) != HAL_OK) {
-			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\n");
+			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\r\n");
 		} 			// Send Memory Write plus high address byte
 
 		else {
-			my_printf("SUCCESSFUL TRANSMISSION\n");
+			my_printf("SUCCESSFUL TRANSMISSION\r\n");
 		}
 	}
 
@@ -645,11 +645,11 @@ ft_void_t Ft_Gpu_HostCommand_Ext3(Ft_Gpu_Hal_Context_t *host, ft_uint32_t cmd) {
 	for (int i = 2; i >= 0; i--) {
 		if (HAL_SPI_Transmit(&hspi1, (uint8_t *) &cTempAddr[i], 1,
 		HAL_MAX_DELAY) != HAL_OK) {
-			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\n");
+			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\r\n");
 		} 			// Send Memory Write plus high address byte
 
 		else {
-			my_printf("SUCCESSFUL TRANSMISSION\n");
+			my_printf("SUCCESSFUL TRANSMISSION\r\n");
 		}
 	}
 

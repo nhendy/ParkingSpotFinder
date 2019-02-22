@@ -6,6 +6,7 @@ Simulation wrapper
 
 /* Simulation wrapper for 'Ft_Esd_Render_Bitmap' */
 
+
 #ifdef ESD_SIMULATION
 #include <stdlib.h>
 #include "FT_Esd_Primitives.h"
