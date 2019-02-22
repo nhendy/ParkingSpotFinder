@@ -33,7 +33,7 @@ This file contains is functions for all UI fields.
 //#include "main.c"
 /* FT900 Platform */
 #ifndef STM32F7
-#define STM32F7								(1)
+// #define STM32F7								(1)
 #endif
 
 
@@ -49,10 +49,10 @@ This file contains is functions for all UI fields.
 //#define FT900DEMOBOARD								(1)
 
 /* ME8XX series modules */
-//#define ME800A_HV35R								(1)
+// #define ME800A_HV35R								(1)
 //#define ME810A_HV35R								(1)
-//#define ME813A_WV7C								(1)
-#define ME812A_WH50R								(1)
+// #define ME813A_WV7C								(1)
+// #define ME812A_WH50R								(1)
 //#define VM800B43_50									(1)
 
 /* CleO modules */
@@ -64,7 +64,7 @@ This file contains is functions for all UI fields.
 
 /* RTC configurations */
 #define FT900_PLATFORM_RTC_I2C						(1)
-#define RTC_PRESENT									(1) 
+#define RTC_PRESENT									(1)
 
 #endif
 
@@ -261,7 +261,3 @@ This file contains is functions for all UI fields.
 
 #endif /*_FT_PLATFORM_H_*/
 /* Nothing beyond this*/
-
-
-
-
