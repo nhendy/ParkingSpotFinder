@@ -18285,10 +18285,10 @@ Created 2014-06-04, Karrer Zheng&lt;br&gt;
 <pinref part="C8" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<wire x1="175.26" y1="10.16" x2="190.5" y2="10.16" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="VDD_7"/>
 <label x="185.42" y="10.16" size="1.778" layer="95"/>
 <pinref part="C9" gate="G$1" pin="1"/>
+<wire x1="175.26" y1="10.16" x2="190.5" y2="10.16" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="167.64" y1="-50.8" x2="167.64" y2="-35.56" width="0.1524" layer="91"/>
@@ -18387,16 +18387,17 @@ Created 2014-06-04, Karrer Zheng&lt;br&gt;
 <pinref part="P1" gate="G$1" pin="192"/>
 <label x="459.74" y="-101.6" size="1.778" layer="95"/>
 <pinref part="P1" gate="G$1" pin="194"/>
-<wire x1="464.82" y1="-104.14" x2="454.66" y2="-104.14" width="0.1524" layer="91"/>
 <wire x1="464.82" y1="-101.6" x2="464.82" y2="-104.14" width="0.1524" layer="91"/>
 <pinref part="C24" gate="G$1" pin="1"/>
 <pinref part="C23" gate="G$1" pin="1"/>
-<wire x1="480.06" y1="-104.14" x2="464.82" y2="-104.14" width="0.1524" layer="91"/>
 <junction x="480.06" y="-104.14"/>
 <junction x="454.66" y="-104.14"/>
 <wire x1="454.66" y1="-101.6" x2="464.82" y2="-101.6" width="0.1524" layer="91"/>
-<wire x1="454.66" y1="-104.14" x2="480.06" y2="-104.14" width="0.1524" layer="91"/>
+<wire x1="454.66" y1="-104.14" x2="464.82" y2="-104.14" width="0.1524" layer="91"/>
+<wire x1="467.36" y1="-104.14" x2="480.06" y2="-104.14" width="0.1524" layer="91"/>
 <wire x1="480.06" y1="-104.14" x2="487.68" y2="-104.14" width="0.1524" layer="91"/>
+<wire x1="464.82" y1="-104.14" x2="467.36" y2="-104.14" width="0.1524" layer="91"/>
+<junction x="464.82" y="-104.14"/>
 </segment>
 <segment>
 <pinref part="R3" gate="G$1" pin="2"/>
@@ -18447,13 +18448,15 @@ Created 2014-06-04, Karrer Zheng&lt;br&gt;
 <wire x1="-20.32" y1="243.84" x2="-20.32" y2="259.08" width="0.1524" layer="91"/>
 <junction x="-38.1" y="243.84"/>
 <wire x1="-20.32" y1="264.16" x2="-20.32" y2="259.08" width="0.1524" layer="91"/>
-<wire x1="-20.32" y1="259.08" x2="2.54" y2="259.08" width="0.1524" layer="91"/>
 <pinref part="R7" gate="G$1" pin="1"/>
+<wire x1="-17.78" y1="259.08" x2="2.54" y2="259.08" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="259.08" x2="2.54" y2="264.16" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="259.08" x2="17.78" y2="259.08" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="259.08" x2="17.78" y2="269.24" width="0.1524" layer="91"/>
 <junction x="2.54" y="259.08"/>
 <pinref part="C21" gate="A" pin="1"/>
+<wire x1="-20.32" y1="259.08" x2="-17.78" y2="259.08" width="0.1524" layer="91"/>
+<junction x="-20.32" y="259.08"/>
 </segment>
 <segment>
 <pinref part="P1" gate="G$1" pin="199"/>
@@ -18468,13 +18471,28 @@ Created 2014-06-04, Karrer Zheng&lt;br&gt;
 <wire x1="464.82" y1="-111.76" x2="454.66" y2="-111.76" width="0.1524" layer="91"/>
 <pinref part="P1" gate="G$1" pin="200"/>
 <label x="459.74" y="-111.76" size="1.778" layer="95"/>
-<wire x1="414.02" y1="-119.38" x2="464.82" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="414.02" y1="-119.38" x2="462.28" y2="-119.38" width="0.1524" layer="91"/>
 <wire x1="464.82" y1="-119.38" x2="464.82" y2="-111.76" width="0.1524" layer="91"/>
 <wire x1="464.82" y1="-109.22" x2="454.66" y2="-109.22" width="0.1524" layer="91"/>
 <pinref part="P1" gate="G$1" pin="198"/>
 <label x="459.74" y="-109.22" size="1.778" layer="95"/>
 <wire x1="464.82" y1="-111.76" x2="464.82" y2="-109.22" width="0.1524" layer="91"/>
 <junction x="464.82" y="-111.76"/>
+<pinref part="C27" gate="G$1" pin="1"/>
+<pinref part="C28" gate="G$1" pin="1"/>
+<wire x1="391.16" y1="-119.38" x2="398.78" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="398.78" y1="-119.38" x2="414.02" y2="-119.38" width="0.1524" layer="91"/>
+<junction x="398.78" y="-119.38"/>
+<label x="391.16" y="-119.38" size="1.778" layer="95"/>
+<pinref part="C29" gate="G$1" pin="1"/>
+<pinref part="C30" gate="G$1" pin="1"/>
+<wire x1="487.68" y1="-119.38" x2="480.06" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="480.06" y1="-119.38" x2="464.82" y2="-119.38" width="0.1524" layer="91"/>
+<junction x="480.06" y="-119.38"/>
+<label x="480.06" y="-119.38" size="1.778" layer="95"/>
+<junction x="414.02" y="-119.38"/>
+<wire x1="464.82" y1="-119.38" x2="462.28" y2="-119.38" width="0.1524" layer="91"/>
+<junction x="464.82" y="-119.38"/>
 </segment>
 <segment>
 <pinref part="X1" gate="-17" pin="KL"/>
@@ -18483,22 +18501,6 @@ Created 2014-06-04, Karrer Zheng&lt;br&gt;
 <wire x1="287.02" y1="223.52" x2="297.18" y2="223.52" width="0.1524" layer="91"/>
 <junction x="287.02" y="223.52"/>
 <label x="289.56" y="223.52" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="C29" gate="G$1" pin="1"/>
-<pinref part="C30" gate="G$1" pin="1"/>
-<wire x1="487.68" y1="-119.38" x2="480.06" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="480.06" y1="-119.38" x2="464.82" y2="-119.38" width="0.1524" layer="91"/>
-<junction x="480.06" y="-119.38"/>
-<label x="480.06" y="-119.38" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="C27" gate="G$1" pin="1"/>
-<pinref part="C28" gate="G$1" pin="1"/>
-<wire x1="391.16" y1="-119.38" x2="398.78" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="398.78" y1="-119.38" x2="414.02" y2="-119.38" width="0.1524" layer="91"/>
-<junction x="398.78" y="-119.38"/>
-<label x="391.16" y="-119.38" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="5VIN" class="0">
@@ -18633,16 +18635,17 @@ Created 2014-06-04, Karrer Zheng&lt;br&gt;
 <pinref part="C31" gate="G$1" pin="1"/>
 <pinref part="C32" gate="G$1" pin="1"/>
 <wire x1="391.16" y1="-93.98" x2="398.78" y2="-93.98" width="0.1524" layer="91"/>
-<wire x1="398.78" y1="-93.98" x2="416.56" y2="-93.98" width="0.1524" layer="91"/>
 <junction x="398.78" y="-93.98"/>
 <pinref part="P1" gate="G$1" pin="183"/>
 <label x="414.02" y="-91.44" size="1.778" layer="95"/>
 <pinref part="P1" gate="G$1" pin="185"/>
 <wire x1="414.02" y1="-91.44" x2="414.02" y2="-93.98" width="0.1524" layer="91"/>
-<wire x1="414.02" y1="-93.98" x2="424.18" y2="-93.98" width="0.1524" layer="91"/>
-<wire x1="398.78" y1="-93.98" x2="424.18" y2="-93.98" width="0.1524" layer="91"/>
+<wire x1="398.78" y1="-93.98" x2="414.02" y2="-93.98" width="0.1524" layer="91"/>
 <junction x="424.18" y="-93.98"/>
+<wire x1="416.56" y1="-93.98" x2="424.18" y2="-93.98" width="0.1524" layer="91"/>
 <wire x1="424.18" y1="-91.44" x2="414.02" y2="-91.44" width="0.1524" layer="91"/>
+<wire x1="414.02" y1="-93.98" x2="416.56" y2="-93.98" width="0.1524" layer="91"/>
+<junction x="414.02" y="-93.98"/>
 </segment>
 <segment>
 <pinref part="C33" gate="G$1" pin="1"/>
@@ -18842,6 +18845,17 @@ Created 2014-06-04, Karrer Zheng&lt;br&gt;
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,71.12,-2.54,IC1,VDD_2,VDD,,,"/>
+<approved hash="104,1,83.82,-35.56,IC1,VDD_3,VDD,,,"/>
+<approved hash="104,1,116.84,-35.56,IC1,VDD_4,VDD,,,"/>
+<approved hash="104,1,142.24,-35.56,IC1,VDD_5,VDD,,,"/>
+<approved hash="104,1,167.64,-35.56,IC1,VDD_6,VDD,,,"/>
+<approved hash="104,1,175.26,71.12,IC1,VDD_8,VDD,,,"/>
+<approved hash="104,1,175.26,10.16,IC1,VDD_7,VDD,,,"/>
+<approved hash="104,1,78.74,88.9,IC1,VDD_11,VDD,,,"/>
+<approved hash="104,1,111.76,88.9,IC1,VDD_10,VDD,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>
