@@ -1,0 +1,85 @@
+VE Screen Designer 4.5 Beta 2 Release 
+
+=================================================
+Featues: 
+	WYSIWYG IDE
+	Logic node based Visual Programming method for screen logic creation
+	ANSI C Code generation for completed project 
+	Live preview the designed project
+	Higher level widget and widget communication
+	Interactive widget
+	Extensible Widget Library
+	Tool Chain integration
+	Comprehensive example projects.
+	......
+
+Known Issue:
+	Simulation engine may need restart manually in some case. 
+	Emulation process may crash in some case but will resume after that. 
+	C code editor is not a full-feature editor. 
+	Video and Sketch features of EVE are not supported throuhg widget. 
+	If project file path is too long, it may have problem to open it. 
+	Logic node editor background may become white after windows hibernate.
+	When target platforms for xRelease configuration is selected during the new project creation time, by default Ft90x Debug/Release configuration is shown in the selection but it is corrected when reopening the project.
+
+History
+--------------------------------------------
+4.5 Beta 2:
+	Fixed Issue 507: VM816CC strings in ESD code needs to be updated with VM816C50A as per the new module name
+	Fixed Issue 505: Prompt user to install msvc 2010 redistributables when installing ESD. 
+
+4.5 Beta: 
+        Add circular gradient widget.
+        Fixed the issue showing compilation error when VM816CC target platforms were selected.
+        Fixed runtime error while executing the exe in exported MSVC project from MPSSE platform.
+        Fixed missing libmpsse.a and renamed libmpsse.a to libmpsse.lib
+		
+4.5 Alpha:  
+        Support VM816CC board with MPSSE or FT4222 boards. 
+        Update to latest EVE emulator for BT81X chip. 
+		
+4.2 Beta: Add new toolchain support for ME813AU WH50C, which include build as PC executable as "X86 Release".
+4.2 Alpha: Add new platform support for ME813AU WH50C, which also supports exporting ESD project as MS visual studio 2015 project.
+4.1 Beta 2: Update PanL35 New LCD driver.
+4.1 RC: Disable platforms: PanL35, PanL70 and PanL70Plus.
+4.1 Beta:
+        Add new platform support for PanL35, PanL70 and PanL70Plus.
+        Add new widgets: touch panel, circle line, arc line, ring and partial ring.
+        Add new layout: scroll switch panel layout.
+        Add new actor: idle checker.
+4.0 RC2 : 
+    Fix the issue of displaying "Palette8" format bitmap
+4.0 RC1 : 
+    Update ScrollPanel and Basic Exmaple projects
+    Add Alpha property to Circle and Panel Widgets
+    Update Image Button Widget
+    Add more tooltips for nodes in logic node editor
+    Fix some copy/paste issues
+
+4.0 Beta: First draft user guide for 4.0
+    Fix the issue showing wrong compilation status while closing project
+    Fix "New Logic Source File" issue
+    Improve several widgets for ease of use
+    Fix several UI issues and copyright issues in generated source code
+    Improve example projects
+
+4.0 Alpha: 
+    Add project creation dialogue.
+    Add layout feature and built-in project update utility.
+    Add several more built-in logic nodes.
+    Add several widgets: sketch, image rotate, scroll image etc.
+    Support Palette8/DXT1/PNG/JPEG in image widget.
+    Fix several common issues.
+    Improve layout editor, logic editor for ease of use.
+    Improve C editor
+
+3.0 RC3: 
+    Fix the bug of public variable setting issue
+    Fix the issue of wrong compilation status
+    Add building number and correct copyright information.
+3.0 RC2: 
+    Support 3.5 module and fix memory leak issue in RC1.
+    Build FatFs library from source code for FT90X 2.2.1 toolchain limitation.
+    Video Tutorial for example project and improved user guide.
+
+3.0 RC1: First internal release
