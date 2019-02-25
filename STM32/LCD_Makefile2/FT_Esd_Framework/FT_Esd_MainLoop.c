@@ -61,7 +61,7 @@ ft_void_t Ft_Esd_MainLoop()
 	my_printf("Staring APP!\r\n");
 	Ft_Gpu_Hal_Context_t *phost = Ft_Esd_Host;
 
-//	Ft_Esd_Render_Line( 0, 0, 100, 100, 10, 0xffffffffUL);
+	Ft_Esd_Render_Line( 10, 10, 100, 100, 10, 0xffffffffUL);
 
 	// Initialize application
  	Ft_Esd_ResetGpuState();
@@ -84,7 +84,7 @@ ft_void_t Ft_Esd_MainLoop()
  		Ft_Esd_Millis = ms;
 
  		/* TODO : MAYBE BUG! */
- //		Ft_Esd_GpuAlloc_Update(Ft_Esd_GAlloc); // Run GC
+ 		Ft_Esd_GpuAlloc_Update(Ft_Esd_GAlloc); // Run GC
  		Ft_Main__Update__ESD();
  		Ft_Esd_Timer_UpdateGlobal();
 
@@ -122,7 +122,7 @@ ft_void_t Ft_Esd_MainLoop()
  		phost->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(phost, REG_CMD_WRITE);
 
  		// Restore initial frame values
- 		// Ft_Gpu_CoCmd_LoadIdentity(phost); // ?
+ 		Ft_Gpu_CoCmd_LoadIdentity(phost); // ?
  		Ft_Esd_ResetGpuState();
  		++Ft_Esd_Frame;
  	}

@@ -33,9 +33,12 @@ This file contains is functions for all UI fields.
 //#include "main.c"
 /* FT900 Platform */
 #ifndef STM32F7
-// #define STM32F7								(1)
+ #define STM32F7								(1)
 #endif
 
+
+#define FT800_PD_N	GPIO_PIN_0
+#define FT800_CS_N	GPIO_PIN_1
 
 //#define USE_RTC_I2C
 //#define ENABLE_OV2640_CAMERA
@@ -52,7 +55,7 @@ This file contains is functions for all UI fields.
 // #define ME800A_HV35R								(1)
 //#define ME810A_HV35R								(1)
 // #define ME813A_WV7C								(1)
-// #define ME812A_WH50R								(1)
+ // #define ME812A_WH50R								(1)
 //#define VM800B43_50									(1)
 
 /* CleO modules */

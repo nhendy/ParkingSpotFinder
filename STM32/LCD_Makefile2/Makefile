@@ -10,6 +10,9 @@ TARGET = LCD_Makefile2
 ######################################
 # building variables
 ######################################
+
+# print debug?
+APPDEBUG = 1
 # print debug?
 PDEBUG = 0
 # debug build?
@@ -178,6 +181,10 @@ ifeq ($(PDEBUG), 1)
 CFLAGS += -DPDEBUG
 endif
 
+ifeq ($(APPDEBUG), 1)
+CFLAGS += -DAPPDEBUG
+endif
+
 
 
 
@@ -237,9 +244,13 @@ clean:
 
 
 # .PHONY: flash
+# flash:
+# 		make clean
+# 		make all
+# 		st-flash write $(BUILD_DIR)/$(TARGET).bin 0x8000000
+
 flash: all
 		st-flash write $(BUILD_DIR)/$(TARGET).bin 0x8000000
-
 #######################################
 # dependencies
 #######################################

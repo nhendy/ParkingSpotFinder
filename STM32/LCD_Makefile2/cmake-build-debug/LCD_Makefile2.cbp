@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="LCD_Makefile2"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="UPLOAD">
+				<Option working_dir="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 UPLOAD"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LCD_Makefile2.elf">
+				<Option output="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/LCD_Makefile2.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__weak=__attribute__((weak))"/>
+					<Add option="-D__packed=__attribute__((__packed__))"/>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F746xx"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Inc"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Device/ST/STM32F7xx/Include"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Timer"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal"/>
+					<Add directory="/usr/local/Cellar/arm-none-eabi-gcc/20180627/bin/../lib/gcc/arm-none-eabi/7.3.1/include"/>
+					<Add directory="/usr/local/Cellar/arm-none-eabi-gcc/20180627/bin/../lib/gcc/arm-none-eabi/7.3.1/include-fixed"/>
+					<Add directory="/usr/local/Cellar/arm-none-eabi-gcc/20180627/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 LCD_Makefile2.elf"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LCD_Makefile2.elf/fast">
+				<Option output="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/LCD_Makefile2.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__weak=__attribute__((weak))"/>
+					<Add option="-D__packed=__attribute__((__packed__))"/>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F746xx"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Inc"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Device/ST/STM32F7xx/Include"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Timer"/>
+					<Add directory="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal"/>
+					<Add directory="/usr/local/Cellar/arm-none-eabi-gcc/20180627/bin/../lib/gcc/arm-none-eabi/7.3.1/include"/>
+					<Add directory="/usr/local/Cellar/arm-none-eabi-gcc/20180627/bin/../lib/gcc/arm-none-eabi/7.3.1/include-fixed"/>
+					<Add directory="/usr/local/Cellar/arm-none-eabi-gcc/20180627/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 LCD_Makefile2.elf/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/arm_common_tables.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/arm_const_structs.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/arm_math.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/cmsis_armcc.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/cmsis_armcc_V6.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/cmsis_gcc.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_cm0.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_cm0plus.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_cm3.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_cm4.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_cm7.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_cmFunc.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_cmInstr.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_cmSimd.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_sc000.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/CMSIS/Include/core_sc300.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio_ex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_spi.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_spi.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/FT_Esd_CoPro_Cmds.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/FT_Esd_CoPro_Cmds__h__Simulation.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/FT_Esd_Dl.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/FT_Esd_Dl.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/FT_Esd_MainLoop.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/FT_Esd_Primitives.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/FT_Esd_Primitives.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/FT_Esd_Primitives__h__Simulation.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_App.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_BitmapInfo.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_BitmapInfo.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_GpuAlloc.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_GpuAlloc.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_Timer.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_Timer.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_Timer__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_TouchArea.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_TouchArea.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_TouchArea__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_TouchTag.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Framework/Ft_Esd_TouchTag.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_CheckBox.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_CheckBox__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Clock.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Clock__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ColorPicker.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ColorPicker.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ColorPicker__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_DefaultTheme.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_DemoPage.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_DemoPage__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Elements.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Elements.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Elements__h__Simulation.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Gauge.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Gauge__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ImageButton.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ImageButton__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_IntCounter.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_IntCounter__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Label.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_LabelButton.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_LabelButton__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Label__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Layout.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_NumericLabel.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_NumericLabel__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_PosSizeToRadius.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_PosSizeToRadius__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ProgressBar.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ProgressBar__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_PushButton.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_PushButton__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_RadioButton.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_RadioButton.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_RadioButton__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_RadioGroup.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_RadioGroup.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_RadioGroup__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Rectangle.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Rectangle__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ScrollPanel.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ScrollPanel.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_ScrollPanel__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Slider.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Slider.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Slider__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_SpinBox.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_SpinBox__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Theme.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Theme.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Theme_DarkOrange.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Theme_DarkOrange.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Theme_LightBlue.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Theme_LightBlue.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Theme__h__Simulation.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Toggle.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_Toggle__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/Ft_Esd_TouchArea.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/LayoutMargin.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/LayoutMargin__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/LayoutSplit.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/LayoutSplit__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/SwitchBool.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/SwitchBool__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/SwitchPage.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Esd_Widgets/SwitchPage.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_CoPro_Cmds.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_CoPro_Cmds.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_DataTypes.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_Emu_main.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_EveModule.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_Gpu.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_Gpu_Hal.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_Gpu_Hal.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_Hal_Utils.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_ILI9488.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_ILI9488.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/FT_Eve_Hal/FT_Platform.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Inc/main.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Inc/stm32f7xx_hal_conf.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Inc/stm32f7xx_it.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/STM32F746ZGTx_FLASH.ld">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Src/main.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Src/stm32f7xx_hal_msp.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Src/stm32f7xx_it.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Src/syscalls.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Src/system_stm32f7xx.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Timer/App.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Timer/App__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Timer/MainPage.h">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/Timer/MainPage__Generated.c">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/startup/startup_stm32f746xx.s">
+			<Option target="LCD_Makefile2.elf"/>
+		</Unit>
+		<Unit filename="/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

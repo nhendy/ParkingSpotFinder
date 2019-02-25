@@ -25,8 +25,7 @@
 #include "FT_Platform.h"
 #include <stm32f7xx_hal.h>
 #include "main.h"
-#define FT800_PD_N	GPIO_PIN_0
-#define FT800_CS_N	GPIO_PIN_1
+
 #define MEM_WRITE							0x80			// FT812 Host Memory Write
 #define MEM_READ							0x00			// FT812 Host Memory Read
 /* API to initialize the SPI interface */
@@ -141,8 +140,8 @@ ft_bool_t Ft_Gpu_Hal_Open(Ft_Gpu_Hal_Context_t *host) {
 	/* Initialize the context variables */
 	/* CS and PD pins are driven low by default in MX_GPIO_Init */
 	host->ft_cmd_fifo_wp = host->ft_dl_buff_wp = 0;
-	host->spinumdummy = 1;//by default ft800/801/810/811 goes with single dummy byte for read
-	host->spichannel = 0;
+	host->spinumdummy = FT_GPU_SPI_ONEDUMMY;//by default ft800/801/810/811 goes with single dummy byte for read
+	host->spichannel = FT_GPU_SPI_SINGLE_CHANNEL;
 	host->status = FT_GPU_HAL_OPENED;
 
 	return TRUE;
@@ -210,7 +209,9 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 			} 			// Send Memory Write plus high address byte
 
 			else {
+				#ifdef PDEBUG
 				my_printf("SUCCESSFUL TRANSMISSION\r\n");
+				#endif
 			}
 
 		}
@@ -279,7 +280,9 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 			} 			// Send Memory Write plus high address byte
 
 			else {
+				#ifdef PDEBUG
 				my_printf("SUCCESSFUL TRANSMISSION\r\n");
+				#endif
 			}
 		}
 #endif
@@ -350,7 +353,9 @@ ft_uint8_t Ft_Gpu_Hal_Transfer8(Ft_Gpu_Hal_Context_t *host, ft_uint8_t value) {
 		}
 	} else {
 		if(HAL_SPI_Receive(&hspi1, &ReadByte, 1, HAL_MAX_DELAY) != HAL_OK){
+			#ifdef PDEBUG
 			my_printf("FAILED TO RECEIVE IN Ft_Gpu_Hal_Transfer8\r\n");
+			#endif
 		}
 	}
 	return ReadByte;
@@ -519,7 +524,9 @@ ft_void_t Ft_Gpu_HostCommand(Ft_Gpu_Hal_Context_t *host, ft_uint8_t cmd) {
 		} 			// Send Memory Write plus high address byte
 
 		else {
+			#ifdef PDEBUG
 			my_printf("SUCCESSFUL TRANSMISSION\r\n");
+			#endif
 		}
 	}
 
@@ -649,7 +656,9 @@ ft_void_t Ft_Gpu_HostCommand_Ext3(Ft_Gpu_Hal_Context_t *host, ft_uint32_t cmd) {
 		} 			// Send Memory Write plus high address byte
 
 		else {
+			#ifdef PDEBUG
 			my_printf("SUCCESSFUL TRANSMISSION\r\n");
+			#endif
 		}
 	}
 
@@ -709,7 +718,7 @@ ft_void_t Ft_Gpu_Hal_Updatecmdfifo(Ft_Gpu_Hal_Context_t *host,
 ft_uint16_t Ft_Gpu_Cmdfifo_Freespace(Ft_Gpu_Hal_Context_t *host) {
 	ft_uint16_t fullness, retval;
 
-	//host->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(host,REG_CMD_WRITE);
+	host->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(host,REG_CMD_WRITE);
 
 	fullness = (host->ft_cmd_fifo_wp - Ft_Gpu_Hal_Rd16(host, REG_CMD_READ))
 			& 4095;
@@ -823,8 +832,11 @@ ft_void_t Ft_Gpu_Hal_CheckCmdBuffer(Ft_Gpu_Hal_Context_t *host,
 }
 ft_void_t Ft_Gpu_Hal_WaitCmdfifo_empty(Ft_Gpu_Hal_Context_t *host) {
 	while (Ft_Gpu_Hal_Rd16(host, REG_CMD_READ)
-			!= Ft_Gpu_Hal_Rd16(host, REG_CMD_WRITE))
-		;
+			!= Ft_Gpu_Hal_Rd16(host, REG_CMD_WRITE)){
+//        my_printf("Waiting for FIFO to empty\r\n");
+        my_printf("FIFO size is %d\r\n", Ft_Gpu_Cmdfifo_Freespace(host));
+
+    }
 
 	host->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(host, REG_CMD_WRITE);
 }

@@ -47,7 +47,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
- 
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -57,7 +57,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+int rx_idx;
+char rx_buffer[6];
+char rx_data[2];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -71,12 +73,13 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex-M7 Processor Interruption and Exception Handlers          */ 
+/*           Cortex-M7 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -211,7 +214,38 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32f7xx.s).                    */
 /******************************************************************************/
 
+/**
+  * @brief This function handles USART1 global interrupt.
+  */
+void USART1_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART1_IRQn 0 */
+
+  /* USER CODE END USART1_IRQn 0 */
+  HAL_UART_IRQHandler(&huart1);
+  /* USER CODE BEGIN USART1_IRQn 1 */
+  HAL_UART_Receive_IT(&huart1,  rx_data, 1);
+  /* USER CODE END USART1_IRQn 1 */
+}
+
 /* USER CODE BEGIN 1 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart1) {
+  // rx_buffer[5] = '\0';
+  // my_printf("%s", rx_buffer);
+  int i ;
+  if (rx_idx==0) {for (i=0;i<100;i++) rx_buffer[i]=0;}   //clear Rx_Buffer before receiving new data
+
+		if ((rx_data[0]==10) || (rx_data[0] == 13)) //if received data different from ascii 13 (enter)
+		{
+			rx_idx=0;
+		}
+		else            //if received data = 13
+		{
+			rx_buffer[rx_idx++]=rx_data[0];    //add data to Rx_Buffer
+		}
+
+    // my_printf("%s", rx_data);
+}
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
