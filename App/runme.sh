@@ -1,3 +1,5 @@
-export FLASK_APP=flaskr
-export FLASK_ENV=development
-flask run
+# export FLASK_APP=app
+# export FLASK_ENV=development
+# flask init-db
+# flask run
+gunicorn wsgi:app
