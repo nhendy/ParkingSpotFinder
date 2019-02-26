@@ -53,7 +53,7 @@
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
@@ -2271,30 +2271,7 @@
 <wire x1="0.3048" y1="6.1722" x2="-0.3048" y2="6.1722" width="0.1524" layer="51"/>
 <wire x1="-0.3048" y1="6.1722" x2="-0.3048" y2="6.477" width="0.1524" layer="51"/>
 <text x="-3.9878" y="5.1308" size="1.27" layer="51" ratio="6" rot="SR0">*</text>
-<wire x1="-0.6096" y1="-1.1684" x2="-0.9652" y2="-1.1938" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.9652" y1="-1.1938" x2="-0.6096" y2="-1.1684" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.6096" y1="-0.4064" x2="-0.9652" y2="-0.4064" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.9652" y1="-0.4064" x2="-0.6096" y2="-0.381" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.6096" y1="0.4064" x2="-0.9652" y2="0.381" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.9652" y1="0.381" x2="-0.6096" y2="0.4064" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.6096" y1="1.1684" x2="-0.9652" y2="1.1684" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.9652" y1="1.1684" x2="-0.6096" y2="1.1938" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.2032" y1="-1.1684" x2="-0.2032" y2="-1.1938" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.2032" y1="-1.1938" x2="0.2032" y2="-1.1684" width="0.127" layer="18" curve="-180"/>
 <wire x1="0.2032" y1="-0.4064" x2="-0.2032" y2="-0.4064" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.2032" y1="-0.4064" x2="0.2032" y2="-0.381" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.2032" y1="0.4064" x2="-0.2032" y2="0.381" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.2032" y1="0.381" x2="0.2032" y2="0.4064" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.2032" y1="1.1684" x2="-0.2032" y2="1.1684" width="0.127" layer="18" curve="-180"/>
-<wire x1="-0.2032" y1="1.1684" x2="0.2032" y2="1.1938" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.9652" y1="-1.1684" x2="0.6096" y2="-1.1938" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.6096" y1="-1.1938" x2="0.9652" y2="-1.1684" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.9652" y1="-0.4064" x2="0.6096" y2="-0.4064" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.6096" y1="-0.4064" x2="0.9652" y2="-0.381" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.9652" y1="0.4064" x2="0.6096" y2="0.381" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.6096" y1="0.381" x2="0.9652" y2="0.4064" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.9652" y1="1.1684" x2="0.6096" y2="1.1684" width="0.127" layer="18" curve="-180"/>
-<wire x1="0.6096" y1="1.1684" x2="0.9652" y2="1.1938" width="0.127" layer="18" curve="-180"/>
 <polygon width="0.0254" layer="31">
 <vertex x="-1.32006875" y="1.83006875"/>
 <vertex x="-1.32006875" y="1.2811"/>
@@ -2468,12 +2445,6 @@
 <vertex x="1.4585" y="1.9685"/>
 <vertex x="1.4585" y="1.3811"/>
 <vertex x="-1.4585" y="1.3811"/>
-</polygon>
-<polygon width="0.0254" layer="29">
-<vertex x="-1.4585" y="0.9811"/>
-<vertex x="1.4585" y="0.9811"/>
-<vertex x="1.4585" y="0.5937"/>
-<vertex x="-1.4585" y="0.5937"/>
 </polygon>
 <polygon width="0.0254" layer="29">
 <vertex x="-1.4585" y="0.1937"/>

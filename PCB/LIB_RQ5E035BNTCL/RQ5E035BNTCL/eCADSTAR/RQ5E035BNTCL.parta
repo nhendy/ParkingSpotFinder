@@ -1,0 +1,70 @@
+(Japanese_coding: sjis)
+(function "ECS_852762"
+    (uver 1)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (ctime 2017-10-25-10:15:34)
+    (utime 2018-06-02-06:32:03)
+    (interface
+        (port "1" (symbPinId 1) (portType INOUT))
+        (port "2" (symbPinId 2) (portType INOUT))
+        (port "3" (symbPinId 3) (portType INOUT))
+    )
+    (property "symbolName" "RQ5E035BNTCL")
+)
+
+
+(pinAssign "ECS_852762"
+    (uver 1)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (ctime 2017-10-25-10:15:34)
+    (utime 2018-06-02-06:32:03)
+    (interface
+        (port "1" (symbPinId 1) (portName "G") (portType INOUT))
+        (port "2" (symbPinId 2) (portName "S") (portType INOUT))
+        (port "3" (symbPinId 3) (portName "D") (portType INOUT))
+    )
+    (internal
+        (funcInst (functionRef "ECS_852762")
+                (port "1" (match "1"))
+                (port "2" (match "2"))
+                (port "3" (match "3"))
+        )
+    )
+    (property "usePowerBox" "No")
+    (property "symbolName" "RQ5E035BNTCL")
+)
+
+
+(part "RQ5E035BNTCL"
+    (uver 1)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (ctime 2017-10-25-10:15:34)
+    (utime 2018-06-02-06:32:03)
+    (packageRef "RQ5E035BNTCL")
+    (pinAssignRef "ECS_852762")
+    (interface
+        (port "1" (symbPinId 1) (portName "G") (portType INOUT))
+        (port "2" (symbPinId 2) (portName "S") (portType INOUT))
+        (port "3" (symbPinId 3) (portName "D") (portType INOUT))
+    )
+    (partClass UNDEF)
+    (useInSchema Y)
+    (useInLayout Y)
+    (inPartsList Y)
+    (partType NORMAL)
+    (placeRestriction FREE)
+    (property "enetNonSeries" "YES")
+    (property "refDesPrefix" "U")
+    (property "description" "ROHM - RQ5E035BNTCL.. - MOSFET, N-CH, 30V, 3.5A, TSMT-3")
+    (property "uaManufacturer" "ROHM Semiconductor")
+    (property "uaManufacturerPartNumber" "RQ5E035BNTCL")
+    (property "uaVendor" "RS")
+    (property "uaVendorReference" "1333300")
+    (property "uaAttribute1" "https://componentsearchengine.com/Datasheets/2/RQ5E035BNTCL.pdf")
+    (property "compAreaTopHeight" 1)
+)
+
+
