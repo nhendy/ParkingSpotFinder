@@ -5331,6 +5331,14 @@ Please make sure your boards conform to these design rules.
 <vertex x="45.339" y="51.689"/>
 <vertex x="43.307" y="51.689"/>
 </polygon>
+<via x="41.148" y="56.007" extent="1-16" drill="0.3302"/>
+<via x="41.148" y="48.895" extent="1-16" drill="0.3302"/>
+<via x="41.148" y="40.64" extent="1-16" drill="0.3302"/>
+<via x="41.148" y="33.02" extent="1-16" drill="0.3302"/>
+<via x="48.133" y="59.817" extent="1-16" drill="0.3302"/>
+<via x="51.054" y="59.817" extent="1-16" drill="0.3302"/>
+<via x="48.26" y="56.261" extent="1-16" drill="0.3302"/>
+<wire x1="48.133" y1="59.817" x2="48.26" y2="56.261" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VDD">
 <contactref element="IC1" pad="17"/>
@@ -6340,7 +6348,6 @@ Please make sure your boards conform to these design rules.
 <contactref element="P1" pad="186"/>
 <wire x1="39.624" y1="62.7415" x2="41.90999375" y2="62.7415" width="0.2032" layer="16"/>
 <via x="39.624" y="62.7415" extent="1-16" drill="0.3302" diameter="0.55"/>
-<wire x1="41.90999375" y1="61.59500625" x2="41.90999375" y2="62.7415" width="0.2032" layer="16"/>
 <polygon width="0.2032" layer="1">
 <vertex x="27.686" y="67.056"/>
 <vertex x="35.306" y="67.056"/>

@@ -1,0 +1,13 @@
+(unit MM)
+
+(package "US6K4TR"
+    (type UNDEF)
+    (uver 2)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (utime 2018-06-06-11:10:45)
+    (mountForm default
+        (footprintRef "SOTFL65P210X85-6N")
+        (spec "System")
+    )
+)

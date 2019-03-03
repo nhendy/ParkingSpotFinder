@@ -1,0 +1,13 @@
+(unit MM)
+
+(package "RW1A025APT2CR"
+    (type UNDEF)
+    (uver 2)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (utime 2018-06-21-11:10:19)
+    (mountForm default
+        (footprintRef "RW1A025APT2CR")
+        (spec "System")
+    )
+)
