@@ -490,15 +490,6 @@
 <vertex x="-2.5019" y="-3.35788125"/>
 </polygon>
 <text x="-3.2766" y="-0.635" size="1.27" layer="25" ratio="6" rot="SR0">&gt;Name</text>
-<pad name="P$4" x="-1.27" y="0" drill="0.35"/>
-<pad name="P$5" x="0" y="0" drill="0.35"/>
-<pad name="P$6" x="1.27" y="0" drill="0.35"/>
-<pad name="P$7" x="-1.27" y="-1.27" drill="0.35"/>
-<pad name="P$8" x="0" y="-1.27" drill="0.35"/>
-<pad name="P$9" x="1.27" y="-1.27" drill="0.35"/>
-<pad name="P$1" x="-1.27" y="1.27" drill="0.35"/>
-<pad name="P$2" x="0" y="1.27" drill="0.35"/>
-<pad name="P$3" x="1.27" y="1.27" drill="0.35"/>
 </package>
 <package name="IND_10040">
 <smd name="1" x="-4.05" y="0" dx="2.5" dy="3.2" layer="1"/>
@@ -2273,15 +2264,6 @@
 <wire x1="33.02" y1="5.08" x2="7.62" y2="5.08" width="0.1524" layer="94"/>
 <text x="15.5956" y="9.1186" size="2.0828" layer="95" ratio="6" rot="SR0">&gt;Name</text>
 <text x="14.9606" y="6.5786" size="2.0828" layer="96" ratio="6" rot="SR0">&gt;Value</text>
-<pin name="P$1" x="2.54" y="-25.4" visible="pin" length="middle" direction="pas"/>
-<pin name="P$2" x="2.54" y="-27.94" visible="pin" length="middle" direction="pas"/>
-<pin name="P$3" x="2.54" y="-30.48" visible="pin" length="middle" direction="pas"/>
-<pin name="P$4" x="2.54" y="-33.02" visible="pin" length="middle" direction="pas"/>
-<pin name="P$5" x="2.54" y="-35.56" visible="pin" length="middle" direction="pas"/>
-<pin name="P$6" x="2.54" y="-38.1" visible="pin" length="middle" direction="pas"/>
-<pin name="P$7" x="2.54" y="-40.64" visible="pin" length="middle" direction="pas"/>
-<pin name="P$8" x="2.54" y="-43.18" visible="pin" length="middle" direction="pas"/>
-<pin name="P$9" x="2.54" y="-45.72" visible="pin" length="middle" direction="pas"/>
 </symbol>
 <symbol name="GND">
 <description>GND Symbol</description>
@@ -2536,15 +2518,6 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/13fb/0900766b813fbe9b
 <connects>
 <connect gate="G$1" pin="BURST" pad="8"/>
 <connect gate="G$1" pin="FB" pad="13"/>
-<connect gate="G$1" pin="P$1" pad="P$1"/>
-<connect gate="G$1" pin="P$2" pad="P$2"/>
-<connect gate="G$1" pin="P$3" pad="P$3"/>
-<connect gate="G$1" pin="P$4" pad="P$4"/>
-<connect gate="G$1" pin="P$5" pad="P$5"/>
-<connect gate="G$1" pin="P$6" pad="P$6"/>
-<connect gate="G$1" pin="P$7" pad="P$7"/>
-<connect gate="G$1" pin="P$8" pad="P$8"/>
-<connect gate="G$1" pin="P$9" pad="P$9"/>
 <connect gate="G$1" pin="PGND" pad="1"/>
 <connect gate="G$1" pin="PGND_2" pad="10"/>
 <connect gate="G$1" pin="PGND_3" pad="11"/>
@@ -19460,7 +19433,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 <part name="SUPPLY2" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="Q1" library="Pchannel" deviceset="RZF013P01TL" device=""/>
 <part name="Q2" library="Pchannel" deviceset="RZF013P01TL" device=""/>
-<part name="R11" library="audio amplifier example" library_urn="urn:adsk.eagle:library:970892" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:970936/2" value="1k"/>
 </parts>
 <sheets>
 <sheet>
@@ -19827,10 +19799,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 <instance part="Q2" gate="G$1" x="12.7" y="48.26" smashed="yes">
 <attribute name="NAME" x="24.13" y="52.07" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="24.13" y="49.53" size="1.778" layer="96" align="center-left"/>
-</instance>
-<instance part="R11" gate="G$1" x="35.56" y="5.08" smashed="yes" rot="R90">
-<attribute name="NAME" x="34.0614" y="1.27" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="38.862" y="1.27" size="1.778" layer="96" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -20448,35 +20416,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="SUPPLY2" gate="GND" pin="GND"/>
 </segment>
-<segment>
-<pinref part="U$1" gate="G$1" pin="P$1"/>
-<pinref part="U$1" gate="G$1" pin="P$2"/>
-<wire x1="-73.66" y1="144.78" x2="-73.66" y2="142.24" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="P$3"/>
-<wire x1="-73.66" y1="142.24" x2="-73.66" y2="139.7" width="0.1524" layer="91"/>
-<junction x="-73.66" y="142.24"/>
-<pinref part="U$1" gate="G$1" pin="P$4"/>
-<wire x1="-73.66" y1="139.7" x2="-73.66" y2="137.16" width="0.1524" layer="91"/>
-<junction x="-73.66" y="139.7"/>
-<pinref part="U$1" gate="G$1" pin="P$5"/>
-<wire x1="-73.66" y1="137.16" x2="-73.66" y2="134.62" width="0.1524" layer="91"/>
-<junction x="-73.66" y="137.16"/>
-<pinref part="U$1" gate="G$1" pin="P$6"/>
-<wire x1="-73.66" y1="134.62" x2="-73.66" y2="132.08" width="0.1524" layer="91"/>
-<junction x="-73.66" y="134.62"/>
-<pinref part="U$1" gate="G$1" pin="P$7"/>
-<wire x1="-73.66" y1="132.08" x2="-73.66" y2="129.54" width="0.1524" layer="91"/>
-<junction x="-73.66" y="132.08"/>
-<pinref part="U$1" gate="G$1" pin="P$8"/>
-<wire x1="-73.66" y1="129.54" x2="-73.66" y2="127" width="0.1524" layer="91"/>
-<junction x="-73.66" y="129.54"/>
-<pinref part="U$1" gate="G$1" pin="P$9"/>
-<wire x1="-73.66" y1="127" x2="-73.66" y2="124.46" width="0.1524" layer="91"/>
-<junction x="-73.66" y="127"/>
-<wire x1="-73.66" y1="124.46" x2="-73.66" y2="119.38" width="0.1524" layer="91"/>
-<junction x="-73.66" y="124.46"/>
-<label x="-73.66" y="119.38" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="VDD" class="0">
 <segment>
@@ -20602,11 +20541,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 <pinref part="Q1" gate="G$1" pin="S"/>
 <wire x1="20.32" y1="60.96" x2="35.56" y2="60.96" width="0.1524" layer="91"/>
 <label x="30.48" y="60.96" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R11" gate="G$1" pin="1"/>
-<wire x1="35.56" y1="0" x2="35.56" y2="-2.54" width="0.1524" layer="91"/>
-<label x="35.56" y="-5.08" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="VREF" class="0">
@@ -20881,6 +20815,18 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 <label x="104.14" y="-48.26" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
+<net name="N$20" class="0">
+<segment>
+<pinref part="LCDCONNECTOR" gate="-13" pin="KL"/>
+<wire x1="254" y1="17.78" x2="264.16" y2="17.78" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$21" class="0">
+<segment>
+<pinref part="LCDCONNECTOR" gate="-14" pin="KL"/>
+<wire x1="254" y1="15.24" x2="264.16" y2="15.24" width="0.1524" layer="91"/>
+</segment>
+</net>
 <net name="QSPICLK" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB2"/>
@@ -21019,18 +20965,28 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 <label x="55.88" y="10.16" size="1.778" layer="95"/>
 <pinref part="S1" gate="G$1" pin="2"/>
 <wire x1="12.7" y1="10.16" x2="22.86" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="10.16" x2="35.56" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="10.16" x2="71.12" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="10.16" x2="71.12" y2="10.16" width="0.1524" layer="91"/>
 <wire x1="22.86" y1="10.16" x2="22.86" y2="7.62" width="0.1524" layer="91"/>
 <junction x="22.86" y="10.16"/>
 <pinref part="C1" gate="G$1" pin="1"/>
-<pinref part="R11" gate="G$1" pin="2"/>
-<junction x="35.56" y="10.16"/>
 </segment>
 <segment>
 <pinref part="J2" gate="G$1" pin="!RESET"/>
 <wire x1="261.62" y1="-20.32" x2="271.78" y2="-20.32" width="0.1524" layer="91"/>
 <label x="264.16" y="-20.32" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="KEY" class="0">
+<segment>
+<pinref part="J2" gate="G$1" pin="KEY"/>
+<wire x1="228.6" y1="-17.78" x2="220.98" y2="-17.78" width="0.1524" layer="91"/>
+<label x="220.98" y="-17.78" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$19" class="0">
+<segment>
+<pinref part="J2" gate="G$1" pin="NC/TDI"/>
+<wire x1="261.62" y1="-17.78" x2="271.78" y2="-17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SENSOR_UART" class="0">
@@ -21091,6 +21047,24 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 <pinref part="FTDI" gate="G$1" pin="5"/>
 <wire x1="284.48" y1="-17.78" x2="284.48" y2="-30.48" width="0.1524" layer="91"/>
 <label x="284.48" y="-30.48" size="1.778" layer="95" rot="R90"/>
+</segment>
+</net>
+<net name="N$12" class="0">
+<segment>
+<pinref part="FTDI" gate="G$1" pin="2"/>
+<wire x1="299.72" y1="-17.78" x2="299.72" y2="-30.48" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$16" class="0">
+<segment>
+<pinref part="FTDI" gate="G$1" pin="6"/>
+<wire x1="279.4" y1="-17.78" x2="279.4" y2="-30.48" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$15" class="0">
+<segment>
+<pinref part="PROXIMITYSENSOR" gate="G$1" pin="4"/>
+<wire x1="279.4" y1="35.56" x2="279.4" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VDD_MOSFET" class="0">
@@ -21202,13 +21176,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 </sheet>
 </sheets>
 <errors>
-<approved hash="101,1,254,33.02,LCDCONNECTOR-7,KL,,,,"/>
-<approved hash="101,1,254,27.94,LCDCONNECTOR-9,KL,,,,"/>
-<approved hash="101,1,254,25.4,LCDCONNECTOR-10,KL,,,,"/>
-<approved hash="101,1,254,17.78,LCDCONNECTOR-13,KL,,,,"/>
-<approved hash="101,1,254,15.24,LCDCONNECTOR-14,KL,,,,"/>
-<approved hash="101,1,254,12.7,LCDCONNECTOR-15,KL,,,,"/>
-<approved hash="101,1,254,10.16,LCDCONNECTOR-16,KL,,,,"/>
 <approved hash="104,1,71.12,33.02,IC1,VSS_1,GND,,,"/>
 <approved hash="104,1,71.12,30.48,IC1,VDD_1,VDD,,,"/>
 <approved hash="104,1,71.12,-2.54,IC1,VDD_2,VDD,,,"/>
@@ -21231,11 +21198,7 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RZF013P01TL.p
 <approved hash="104,1,114.3,88.9,IC1,VSS_9,GND,,,"/>
 <approved hash="104,1,137.16,88.9,IC1,VDD_9,VDD,,,"/>
 <approved hash="104,1,139.7,88.9,IC1,VSS_8,GND,,,"/>
-<approved hash="104,1,-111.76,-68.58,X2,VBUS,5VOUT,,,"/>
 <approved hash="113,1,11.4554,-17.78,FERRITE_BEAD,,,,,"/>
-<approved hash="113,1,-12.0021,10.9957,25MHZ_OSC,,,,,"/>
-<approved hash="113,1,292.1,-12.6746,FTDI,,,,,"/>
-<approved hash="113,1,287.133,40.6654,PROXIMITYSENSOR,,,,,"/>
 </errors>
 </schematic>
 </drawing>

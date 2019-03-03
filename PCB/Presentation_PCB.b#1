@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mm" altunit="mm"/>
+<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="yes" active="yes"/>
@@ -5508,6 +5508,7 @@ Please make sure your boards conform to these design rules.
 </polygon>
 <wire x1="52.832" y1="43.053" x2="54.102" y2="41.783" width="0.2032" layer="1"/>
 <wire x1="54.102" y1="41.783" x2="55.5625" y2="41.783" width="0.2032" layer="1"/>
+<wire x1="68.77" y1="65.722" x2="66.736" y2="65.659" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="VREF">
 <contactref element="IC1" pad="32"/>
@@ -6072,12 +6073,18 @@ Please make sure your boards conform to these design rules.
 <contactref element="LCDCONNECTOR" pad="6"/>
 <wire x1="90.792" y1="56.418" x2="83.309" y2="56.418" width="0.2032" layer="1"/>
 <wire x1="83.309" y1="56.418" x2="79.0296" y2="60.6974" width="0.2032" layer="1"/>
-<wire x1="60.75055" y1="81.3316" x2="58.7876" y2="81.3316" width="0.2032" layer="1"/>
+<wire x1="58.7876" y1="81.3316" x2="60.75055" y2="81.3316" width="0.2032" layer="1"/>
 <wire x1="58.782" y1="81.326" x2="58.7876" y2="81.3316" width="0.2032" layer="1"/>
-<wire x1="79.0296" y1="60.6974" x2="79.0296" y2="64.83055" width="0.2032" layer="1"/>
-<wire x1="79.0296" y1="64.83055" x2="75.56235" y2="68.2978" width="0.2032" layer="1"/>
-<wire x1="75.56235" y1="68.2978" x2="73.78435" y2="68.2978" width="0.2032" layer="1"/>
-<wire x1="73.78435" y1="68.2978" x2="60.75055" y2="81.3316" width="0.2032" layer="1"/>
+<wire x1="79.0296" y1="64.83055" x2="79.0296" y2="60.6974" width="0.2032" layer="1"/>
+<wire x1="60.75055" y1="81.3316" x2="64.73915" y2="77.343" width="0.2032" layer="1"/>
+<wire x1="64.73915" y1="77.343" x2="64.77" y2="77.343" width="0.2032" layer="1"/>
+<via x="64.77" y="77.343" extent="1-16" drill="0.3302"/>
+<wire x1="64.77" y1="77.343" x2="64.77" y2="68.199" width="0.2032" layer="16"/>
+<via x="64.77" y="68.199" extent="1-16" drill="0.3302"/>
+<wire x1="64.77" y1="68.199" x2="68.4260125" y2="68.199" width="0.2032" layer="1"/>
+<wire x1="68.4260125" y1="68.199" x2="70.0017125" y2="69.7747" width="0.2032" layer="1"/>
+<wire x1="70.0017125" y1="69.7747" x2="74.08545" y2="69.7747" width="0.2032" layer="1"/>
+<wire x1="74.08545" y1="69.7747" x2="79.0296" y2="64.83055" width="0.2032" layer="1"/>
 </signal>
 <signal name="SWDIO">
 <contactref element="IC1" pad="105"/>
