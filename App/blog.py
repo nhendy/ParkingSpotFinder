@@ -5,20 +5,42 @@ from werkzeug.exceptions import abort
 
 from auth import login_required
 from app import get_db
-import requests
-
+from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy import create_engine
 
 bp = Blueprint('blog', __name__)
+
+Base = declarative_base()
+class RequestsRecord(Base):
+    __tablename__ = 'requests_record'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    #time = Column(datetime, nullable=False)
 
 @bp.route('/')
 def index():
     db = get_db()
+    engine = create_engine('sqlite:///userRequestsDB.db')
+    Base.metadata.create_all(engine)
     posts = db.execute(
         'SELECT p.id, title, body, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
     return render_template('blog/indexParkMe.html', posts=posts)
+
+@bp.route('/auth_pi', methods=('GET', 'POST'))
+def auth_pi():
+    if request.method == 'POST':
+        content = request.json
+        print(content)
+        if (content["name"] == "PI" and content["password"] == "1234"):
+            return "ok"
+        else:
+            return "failed to authorize PI"
+    #return render_template('blog/create.html')
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -118,6 +140,15 @@ def bookSpot():
                 (title, body, g.user['id'])
             )
             db.commit()
+
+            # user request data
+            engine = create_engine('sqlite:///userRequestsDB.db')
+            Base.metadata.bind = engine
+            DBSession = sessionmaker(bind=engine)
+            session = DBSession()
+            new_person = RequestsRecord(id=23, name=g.user['id'])
+            session.add(new_person)
+            session.commit()
             return redirect(url_for('blog.index'))
 
     return render_template('blog/bookSpot.html')
