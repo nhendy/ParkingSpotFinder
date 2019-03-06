@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP RW1A025APT2CR
+D ROHM RW1A025APT2CR P-channel MOSFET, 2.5 A, 12 V RW1A025AP, 6-Pin SOT-563T
+K
+F https://www.rohm.com/datasheet/RW1A025AP/rw1a025ap-e
+$ENDCMP
+#
+#End Doc Library
