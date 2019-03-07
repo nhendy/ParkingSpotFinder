@@ -80,13 +80,13 @@ ft_uint16_t Ft_Esd_FontHeight[32] = {0}; // Font heights of currently set bitmap
 
 /* Global variables for display resolution to support various display panels */
 /* Default is WQVGA - 480x272 */
-ft_int16_t FT_DispWidth = 480;
-ft_int16_t FT_DispHeight = 272;
-ft_int16_t FT_DispHCycle = 548;
-ft_int16_t FT_DispHOffset = 43;
+ft_int16_t FT_DispWidth = 800;
+ft_int16_t FT_DispHeight = 480;
+ft_int16_t FT_DispHCycle = 928;
+ft_int16_t FT_DispHOffset = 88;
 ft_int16_t FT_DispHSync0 = 0;
-ft_int16_t FT_DispHSync1 = 41;
-ft_int16_t FT_DispVCycle = 292;
+ft_int16_t FT_DispHSync1 = 48;
+ft_int16_t FT_DispVCycle = 525;
 ft_int16_t FT_DispVOffset = 12;
 ft_int16_t FT_DispVSync0 = 0;
 ft_int16_t FT_DispVSync1 = 10;
@@ -96,6 +96,21 @@ ft_char8_t FT_DispPCLKPol = 1;
 ft_char8_t FT_DispCSpread = 1;
 ft_char8_t FT_DispDither = 1;
 
+//FT_DispWidth = 800;
+//FT_DispHeight = 480;
+//FT_DispHCycle = 928;
+//FT_DispHOffset = 88;
+//FT_DispHSync0 = 0;
+//FT_DispHSync1 = 48;
+//FT_DispVCycle = 525;
+//FT_DispVOffset = 32;
+//FT_DispVSync0 = 0;
+//FT_DispVSync1 = 3;
+//FT_DispPCLK = 2;
+//FT_DispSwizzle = 0;
+//FT_DispPCLKPol = 1;
+//FT_DispCSpread = 1;
+//FT_DispDither = 1;
 /* Initial boot up display list */
 const ft_uint32_t FT_DLCODE_BOOTUP[] = {
 		CLEAR_COLOR_RGB(255, 0, 0),
@@ -250,7 +265,7 @@ ft_void_t FT800_BootupConfig()
 
 #ifdef DISPLAY_RESOLUTION_WVGA
 	/* Values specific to QVGA LCD display */
-	FT_DispWidth = 400;
+	FT_DispWidth = 800;
 	FT_DispHeight = 480;
 	FT_DispHCycle = 928;
 	FT_DispHOffset = 88;
@@ -263,7 +278,7 @@ ft_void_t FT800_BootupConfig()
 	FT_DispPCLK = 2;
 	FT_DispSwizzle = 0;
 	FT_DispPCLKPol = 1;
-	FT_DispCSpread = 0;
+	FT_DispCSpread = 1;
 	FT_DispDither = 1;
 #endif
 
@@ -294,14 +309,24 @@ ft_void_t FT800_BootupConfig()
 	Ft_Gpu_ClockTrimming(&s_Host, LOW_FREQ_BOUND);
 #endif
 
-	Ft_Gpu_Hal_Wr16(&s_Host, REG_HCYCLE, FT_DispHCycle);
+
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HOFFSET, FT_DispHOffset);
+	Ft_Gpu_Hal_Wr16(&s_Host, REG_HOFFSET, FT_DispHOffset);
+	volatile int hoffset = Ft_Gpu_Hal_Rd16(&s_Host, REG_HOFFSET);
+	Ft_Gpu_Hal_Wr16(&s_Host, REG_HCYCLE, FT_DispHCycle);
+	volatile int hcycle = Ft_Gpu_Hal_Rd16(&s_Host, REG_HCYCLE);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HSYNC0, FT_DispHSync0);
+	volatile int hsync0 = Ft_Gpu_Hal_Rd16(&s_Host, REG_HSYNC0);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HSYNC1, FT_DispHSync1);
+	volatile int hsync1 = Ft_Gpu_Hal_Rd16(&s_Host, REG_HSYNC1);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VCYCLE, FT_DispVCycle);
+	volatile int vcycle = Ft_Gpu_Hal_Rd16(&s_Host, REG_VCYCLE);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VOFFSET, FT_DispVOffset);
+	volatile int voffset = Ft_Gpu_Hal_Rd16(&s_Host, REG_VOFFSET);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VSYNC0, FT_DispVSync0);
+	volatile int vsync0 = Ft_Gpu_Hal_Rd16(&s_Host, REG_VSYNC0);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_VSYNC1, FT_DispVSync1);
+	volatile int vsync1 = Ft_Gpu_Hal_Rd16(&s_Host, REG_VSYNC1);
 	Ft_Gpu_Hal_Wr8(&s_Host, REG_SWIZZLE, FT_DispSwizzle);
 	Ft_Gpu_Hal_Wr8(&s_Host, REG_PCLK_POL, FT_DispPCLKPol);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HSIZE, FT_DispWidth);
