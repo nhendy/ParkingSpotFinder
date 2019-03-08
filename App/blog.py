@@ -3,7 +3,6 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 import functools
-from auth import login_required
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker

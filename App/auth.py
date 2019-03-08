@@ -1,5 +1,5 @@
 import functools
-import random
+import db
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
@@ -46,10 +46,7 @@ def register():
         elif not Password:
             error = 'Password is required.'
 
-        engine = create_engine('sqlite:///userCredentialsDB.db')
-        app.Base.metadata.bind = engine
-        DBSession = sessionmaker(bind=engine)
-        session = DBSession()
+        session = db.load_db("UserCredentialsDB")
         new_person = app.Users(username=Username, password=Password)
         session.add(new_person)
         session.commit()
@@ -67,10 +64,19 @@ def register():
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        Username = request.form['username']
+        Password = request.form['password']
+
         error = None
-        error = None
+        try:
+            session = db.load_db("UserCredentialsDB")
+            user = session.query(app.Users).filter_by(username=Username)
+            if user is None:
+                error = "Unregistered user"
+            elif not (user.password == Password):
+                error = "Incorrect Password"
+        except:
+            pass
 
         if error is None:
             return redirect(url_for('blog.index'))
@@ -81,13 +87,3 @@ def login():
 @bp.route('/logout')
 def logout():
     return redirect(url_for('blog.index'))
-
-def login_required(view):
-    @functools.wraps(view)
-    def wrapped_view(**kwargs):
-        if g.user is None:
-            return redirect(url_for('auth.login'))
-
-        return view(**kwargs)
-
-    return wrapped_view
