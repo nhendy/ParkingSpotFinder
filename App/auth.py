@@ -6,7 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 import app
 from sqlalchemy.ext.automap import automap_base
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, exists
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine, select
@@ -41,18 +41,19 @@ def register():
         Username = request.form['username']
         Password = request.form['password']
 
+        error = None
+
         if not Username:
             error = 'Username is required.'
         elif not Password:
             error = 'Password is required.'
-
-        session = db.load_db("UserCredentialsDB")
-        new_person = app.Users(username=Username, password=Password)
-        session.add(new_person)
-        session.commit()
-        session.close
-
-        error = None
+        try:
+            sql_session = db.load_db("UserCredentialsDB")
+            new_person = app.Users(username=Username, password=Password)
+            sql_session.add(new_person)
+            sql_session.commit()
+        except Exception as e:
+            error = "could not register because: " + str(e)
 
         if error is None:
             return redirect(url_for('auth.login'))
@@ -69,21 +70,36 @@ def login():
 
         error = None
         try:
-            session = db.load_db("UserCredentialsDB")
-            user = session.query(app.Users).filter_by(username=Username)
-            if user is None:
-                error = "Unregistered user"
-            elif not (user.password == Password):
-                error = "Incorrect Password"
-        except:
-            pass
+            sql_session = db.load_db("UserCredentialsDB")
+            user = sql_session.query(app.Users).filter_by(username=Username, password=Password)
+            #exists = sql_session.query(sql_session.exists().where(app.Users.username == 'Username')).scalar()
+            if not user:
+                error = "Unregistered user or wrong password"
+            else:
+                error = None
+        except Exception as e:
+            error = "could not log you in because: " + str(e)
 
         if error is None:
-            return redirect(url_for('blog.index'))
+            session.clear()
+            session['user_id'] = Username
+            return redirect(url_for('blog.option_to_book'))
 
         flash(error)
     return render_template('auth/login.html')
 
+@bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        sql_session = db.load_db("UserCredentialsDB")
+        user = sql_session.query(app.Users).filter_by(username=user_id)
+        g.user = user
+
 @bp.route('/logout')
 def logout():
+    session.clear()
     return redirect(url_for('blog.index'))

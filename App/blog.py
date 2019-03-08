@@ -12,6 +12,10 @@ bp = Blueprint('blog', __name__)
 
 @bp.route('/')
 def index():
+    return render_template('blog/startingPage.html')
+
+@bp.route('/option_to_book')
+def option_to_book():
     return render_template('blog/indexParkMe.html')
 
 def check_credentials(credentials):

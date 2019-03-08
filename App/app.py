@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import Flask
+from flask import Flask, session
 from flask import current_app, g
 import sqlite3
 
@@ -12,22 +12,23 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 class RequestsRecord(Base):
     __tablename__ = 'requests_record'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True,autoincrement=True)
     name = Column(String(250), nullable=False)
     #time = Column(datetime, nullable=False)
 
 class Spots(Base):
     __tablename__ = "spots"
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True,autoincrement=True)
     state = Column(String(250), nullable=False)
 
 class Users(Base):
     __tablename__ = 'users'
-    userID = Column(Integer,primary_key=True)
+    userID = Column(Integer,primary_key=True,autoincrement=True)
     username = Column(String(250), nullable=False)
     password = Column(String(250), nullable=False)
 
 app = Flask(__name__, instance_relative_config=True)
+app.secret_key = "super_secret_key"
 
 def initialise_databases():
     engine_userRequests = create_engine('sqlite:///userRequestsDB.db')

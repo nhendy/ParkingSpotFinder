@@ -11,7 +11,7 @@ from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine, select
 
 def load_db(database):
-    db = "sqlite:///" + database + ".db"
+    db = "sqlite:///" + database + ".db?check_same_thread=False"
     engine = create_engine(db)
     app.Base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
