@@ -9,7 +9,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import Column, ForeignKey, Integer, String, exists
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
-from sqlalchemy import create_engine, select
+from sqlalchemy import create_engine, select, and_
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 #*********** HELPER FUNCTIONS ********************#
@@ -71,9 +71,8 @@ def login():
         error = None
         try:
             sql_session = db.load_db("UserCredentialsDB")
-            user = sql_session.query(app.Users).filter_by(username=Username, password=Password)
-            #exists = sql_session.query(sql_session.exists().where(app.Users.username == 'Username')).scalar()
-            if not user:
+            check = sql_session.query(exists().where(and_(app.Users.username == Username, app.Users.password == Password))).scalar()
+            if not check:
                 error = "Unregistered user or wrong password"
             else:
                 error = None

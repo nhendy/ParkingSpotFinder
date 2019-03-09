@@ -19,6 +19,7 @@ class RequestsRecord(Base):
 class Spots(Base):
     __tablename__ = "spots"
     id = Column(Integer, primary_key=True,autoincrement=True)
+    spot_id = Column(String(250),nullable=False)
     state = Column(String(250), nullable=False)
 
 class Users(Base):
