@@ -309,10 +309,11 @@ ft_void_t FT800_BootupConfig()
 	Ft_Gpu_ClockTrimming(&s_Host, LOW_FREQ_BOUND);
 #endif
 
-
-	Ft_Gpu_Hal_Wr16(&s_Host, REG_HOFFSET, FT_DispHOffset);
-	Ft_Gpu_Hal_Wr16(&s_Host, REG_HOFFSET, FT_DispHOffset);
 	volatile int hoffset = Ft_Gpu_Hal_Rd16(&s_Host, REG_HOFFSET);
+	Ft_Gpu_Hal_Wr16(&s_Host, REG_HOFFSET, FT_DispHOffset);
+	hoffset = Ft_Gpu_Hal_Rd16(&s_Host, REG_HOFFSET);
+	Ft_Gpu_Hal_Wr16(&s_Host, REG_HOFFSET, FT_DispHOffset);
+	hoffset = Ft_Gpu_Hal_Rd16(&s_Host, REG_HOFFSET);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HCYCLE, FT_DispHCycle);
 	volatile int hcycle = Ft_Gpu_Hal_Rd16(&s_Host, REG_HCYCLE);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HSYNC0, FT_DispHSync0);
