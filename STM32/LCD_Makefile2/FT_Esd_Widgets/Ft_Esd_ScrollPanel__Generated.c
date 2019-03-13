@@ -60,7 +60,8 @@ void Ft_Esd_ScrollPanel_Update_Scroll(Ft_Esd_ScrollPanel *context);
 void Ft_Esd_ScrollPanel_Update_Contents(Ft_Esd_ScrollPanel *context);
 void Ft_Esd_Elements_Panel(Ft_Esd_Theme *, ft_int16_t, ft_int16_t, ft_int16_t, ft_int16_t, ft_int16_t, ft_bool_t);
 
-void Ft_Esd_ScrollPanel_Render(Ft_Esd_ScrollPanel *context) {
+void Ft_Esd_ScrollPanel_Render(Ft_Esd_ScrollPanel *context)
+{
 	void *parent = context->Parent;
 	ft_uint8_t alpha = 255;
 	Ft_Esd_Dl_COLOR_A(alpha);
