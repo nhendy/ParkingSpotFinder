@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.username.label }}
+    {{ form.username }}
+    {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.password.label }}
+    {{ form.password }}
+    {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.submit(value="Register") }}
+  </form>
+{% endblock %}
