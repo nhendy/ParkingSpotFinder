@@ -1,0 +1,29 @@
+<!DOCTYPE _ApplicationDocument>
+<_ApplicationDocument icon="" defaultSignal="" _locked="false" comment="" _uuid="{45b33064-4d69-4a6d-b316-611e69aeb78d}" displayName="" category="">
+  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{592479ce-c137-4f10-bdd6-283aa49e53b8}">
+    <_Connection connectionType="SignalSlot" sourceConnector="signal" targetConnector="_switch" targetObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _locked="false" sourceObject="{849a166f-1ee5-48d8-958c-5dfa70320c12}" _name="Connection" _uuid="{4798a582-30cb-4f7f-9635-d7a05f53881d}"/>
+    <_Connection connectionType="SignalSlot" sourceConnector="Yes" targetConnector="_switch" targetObject="{f44b1af5-2e60-4e9d-8388-19b41a6aafca}" _locked="false" sourceObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="Connection" _uuid="{7c551bca-2f23-4be6-9063-082112ec455d}"/>
+    <_Connection connectionType="SignalSlot" sourceConnector="No" targetConnector="_switch" targetObject="{9df953e1-58c4-4c12-ae7a-6bd76dbc2631}" _locked="false" sourceObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="Connection" _uuid="{87ba2d93-5cdb-47e2-9183-e247f564bb92}"/>
+  </_ConnectionContainer>
+  <_NodeContainer _locked="false" _name="Nodes" _uuid="{ead66fa9-c867-4a5f-9f38-2f6e8c565bc7}">
+    <_LogicBlockSlot _x="-81" _displayName="Start" _locked="false" _name="Start" _uuid="{849a166f-1ee5-48d8-958c-5dfa70320c12}" _y="-423"/>
+  </_NodeContainer>
+  <_PageContainer _locked="false" _name="Pages" _uuid="{bbe6d343-1750-49f6-847d-53d6fb6cfa60}">
+    <MainMenu _z="0" _x="184" _locked="false" _name="MainMenu" _uuid="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _y="-407">
+      <__Properties>
+        <_persistence type="bool">false</_persistence>
+      </__Properties>
+    </MainMenu>
+    <YesPage _z="0" _x="130" _locked="false" _name="YesPage" _uuid="{f44b1af5-2e60-4e9d-8388-19b41a6aafca}" _y="-200">
+      <__Properties>
+        <_persistence type="bool">false</_persistence>
+        <Message type="String">Try</Message>
+      </__Properties>
+    </YesPage>
+    <NoPage _z="0" _x="414" _locked="false" _name="NoPage" _uuid="{9df953e1-58c4-4c12-ae7a-6bd76dbc2631}" _y="-166">
+      <__Properties>
+        <_persistence type="bool">false</_persistence>
+      </__Properties>
+    </NoPage>
+  </_PageContainer>
+</_ApplicationDocument>

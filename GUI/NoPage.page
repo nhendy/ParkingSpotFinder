@@ -1,0 +1,21 @@
+<!DOCTYPE _PageDocument>
+<_PageDocument icon="" defaultSignal="" _locked="false" comment="" _uuid="{c10758d6-f6c6-4c24-92f1-7bde56a74e5d}" displayName="" category="">
+  <_ActorContainer _locked="false" _name="Actors" _uuid="{81f86a62-e5de-48e1-8b4f-3d3d8f354a87}"/>
+  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{2fb65963-3d85-474e-be11-b92740c8e3b6}"/>
+  <_NodeContainer _locked="false" _name="Nodes" _uuid="{f5116ebb-3803-4d46-8390-4e59a0a33594}"/>
+  <_WidgetContainer _locked="false" _name="Widgets" _uuid="{d35e4ee0-40a6-4e6a-8bc8-d02637e0cdd2}">
+    <Ft_Esd_PushButton _z="1" _x="0" _locked="false" _name="ESD Push Button" _uuid="{579defd9-5aaa-44e7-bfe3-961a761ed1fb}" _y="0">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="double">335.16861428242356</X>
+        <Y type="double">202.2325394193526</Y>
+        <Width type="String">120</Width>
+        <Height type="String">36</Height>
+        <Font type="String">27</Font>
+        <Text type="String">No!</Text>
+        <Primary type="String">1</Primary>
+      </__Properties>
+    </Ft_Esd_PushButton>
+  </_WidgetContainer>
+</_PageDocument>
