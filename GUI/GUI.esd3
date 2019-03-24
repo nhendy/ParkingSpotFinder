@@ -1,0 +1,11 @@
+<!DOCTYPE _ProjectRoot>
+<_ProjectRoot _name="Project" _locked="false" _uuid="{3007a2c5-e83c-45eb-bd03-d545445a9874}" _defaultEveModule="ME810A-WH70R(800x480)" _ESDVersion="30000">
+  <_ProjectRootLink _name="FT_Esd_Widgets.esd3" _locked="false" _uuid="{f689d3bf-e42c-4ede-97b7-0cfa99e92e32}" fileName="%ESD30_LIBRARIES%/FT_Esd_Widgets/FT_Esd_Widgets.esd3" type="_ProjectRoot">
+    <__Properties>
+      <_target type="String">Default</_target>
+    </__Properties>
+  </_ProjectRootLink>
+  <_ProjectFileLink _name="App.main" _locked="false" _uuid="{f0a78ada-4cd1-4f1f-aac8-c4afb25b8aae}" fileName="App.main" type="_ApplicationDocument"/>
+  <_ProjectFileLink _name="MainPage.page" _locked="false" _uuid="{b0fce432-1bf5-49eb-8be3-99c6ea42fb7f}" fileName="MainPage.page" type="_PageDocument"/>
+  <_ProjectFileLink _name="YesPage.page" _locked="false" _uuid="{922a3fac-2751-48ef-9aee-6aa3279b0cd1}" fileName="YesPage.page" type="_PageDocument"/>
+</_ProjectRoot>
