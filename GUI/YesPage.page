@@ -1,40 +1,22 @@
 <!DOCTYPE _PageDocument>
 <_PageDocument icon="" defaultSignal="" _locked="false" comment="" _uuid="{b561c5dd-cca1-4b2d-8293-72f81eba776d}" displayName="" category="">
   <_ActorContainer _locked="false" _name="Actors" _uuid="{e4c91cde-8ada-48df-914a-ff12a0b17ac4}"/>
-  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{c0578214-f480-436d-81d7-96c319ce4d97}">
-    <_Connection connectionType="SignalSlot" sourceConnector="Pushed" targetConnector="_call" targetObject="{bdca87be-a028-45ee-9477-54f2a16d3649}" _locked="false" sourceObject="{91de9d27-999d-48ea-a69b-0174c8112269}" _name="Connection" _uuid="{07fd37b1-4855-4710-ae5f-8f28a7396360}"/>
-  </_ConnectionContainer>
-  <_NodeContainer _locked="false" _name="Nodes" _uuid="{45797a2d-adad-4ef5-826f-6d1ffd2ae971}">
-    <YesPage_ESD_Push_Button_Pushed _x="315" _locked="false" _name="ESD Push Button Pushed" _uuid="{bdca87be-a028-45ee-9477-54f2a16d3649}" _y="-41"/>
-    <_LogicBlockInput _x="160" _comment="" _displayName="" _type="const char *" _locked="false" _name="Message" _uuid="{ae11fd8b-0d5d-46de-ae49-18209dc53dba}" _y="245"/>
-  </_NodeContainer>
+  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{c0578214-f480-436d-81d7-96c319ce4d97}"/>
+  <_NodeContainer _locked="false" _name="Nodes" _uuid="{45797a2d-adad-4ef5-826f-6d1ffd2ae971}"/>
   <_WidgetContainer _locked="false" _name="Widgets" _uuid="{3779a037-b4b2-497c-bfc8-ac49cf9f20b0}">
     <Ft_Esd_Label _z="0" _x="102" _locked="false" _name="ESD Label" _uuid="{57e6e07f-b6ee-42f7-b14c-cbb29b2c9787}" _y="-13">
       <__Properties>
         <_active type="bool">true</_active>
         <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
         <Font type="String">27</Font>
-        <Text type="String">Yes!</Text>
-        <X type="double">281</X>
-        <Y type="double">189</Y>
-        <Width type="String">120</Width>
-        <Height type="String">36</Height>
+        <Text type="String">Welcome to parking spot finder, since you have a parking ID, please procees to parking ID locoation.</Text>
+        <X type="int">24</X>
+        <Y type="double">202.48528137423858</Y>
+        <Width type="double">772</Width>
+        <Height type="double">27</Height>
         <AlignX type="String">OPT_ALIGN_LEFT</AlignX>
         <AlignY type="String">OPT_ALIGN_TOP</AlignY>
       </__Properties>
     </Ft_Esd_Label>
-    <Ft_Esd_PushButton _z="1" _x="148" _locked="false" _name="ESD Push Button" _uuid="{91de9d27-999d-48ea-a69b-0174c8112269}" _y="-338">
-      <__Properties>
-        <_active type="bool">true</_active>
-        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
-        <X type="double">395</X>
-        <Y type="double">102</Y>
-        <Width type="String">120</Width>
-        <Height type="String">36</Height>
-        <Font type="String">27</Font>
-        <Text type="String">Button</Text>
-        <Primary type="String">1</Primary>
-      </__Properties>
-    </Ft_Esd_PushButton>
   </_WidgetContainer>
 </_PageDocument>

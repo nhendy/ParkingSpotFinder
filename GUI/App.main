@@ -17,12 +17,12 @@
     <YesPage _z="0" _x="130" _locked="false" _name="YesPage" _uuid="{f44b1af5-2e60-4e9d-8388-19b41a6aafca}" _y="-200">
       <__Properties>
         <_persistence type="bool">false</_persistence>
-        <Message type="String">Try</Message>
       </__Properties>
     </YesPage>
     <NoPage _z="0" _x="414" _locked="false" _name="NoPage" _uuid="{9df953e1-58c4-4c12-ae7a-6bd76dbc2631}" _y="-166">
       <__Properties>
         <_persistence type="bool">false</_persistence>
+        <Message type="int">1234</Message>
       </__Properties>
     </NoPage>
   </_PageContainer>

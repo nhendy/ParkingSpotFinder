@@ -9,7 +9,6 @@ Header
 
 #include "Ft_Esd.h"
 #include "Ft_Esd_Label.h"
-#include "Ft_Esd_PushButton.h"
 #include "Ft_Esd_Theme.h"
 
 #ifndef ESD_LOGIC
@@ -30,10 +29,7 @@ ESD_PAGE(YesPage, Include = "YesPage.h", Callback)
 typedef struct
 {
 	void *Parent;
-	ESD_INPUT(Message, Type = const char *)
-	const char *(* Message)(void *context);
 	Ft_Esd_Label ESD_Label;
-	Ft_Esd_PushButton ESD_Push_Button;
 } YesPage;
 
 void YesPage__Initializer(YesPage *context);

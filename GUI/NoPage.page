@@ -1,21 +1,38 @@
 <!DOCTYPE _PageDocument>
 <_PageDocument icon="" defaultSignal="" _locked="false" comment="" _uuid="{c10758d6-f6c6-4c24-92f1-7bde56a74e5d}" displayName="" category="">
   <_ActorContainer _locked="false" _name="Actors" _uuid="{81f86a62-e5de-48e1-8b4f-3d3d8f354a87}"/>
-  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{2fb65963-3d85-474e-be11-b92740c8e3b6}"/>
-  <_NodeContainer _locked="false" _name="Nodes" _uuid="{f5116ebb-3803-4d46-8390-4e59a0a33594}"/>
+  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{2fb65963-3d85-474e-be11-b92740c8e3b6}">
+    <_Connection connectionType="OutputInput" sourceConnector="value" targetConnector="Value" targetObject="{31cca0c3-6821-4ee8-a7b1-5b625ea760a1}" _locked="false" sourceObject="{7b04b655-243f-4a4d-9448-23baced6797f}" _name="Connection" _uuid="{aba8b890-698d-4c14-b510-1e828b1b3a36}"/>
+  </_ConnectionContainer>
+  <_NodeContainer _locked="false" _name="Nodes" _uuid="{f5116ebb-3803-4d46-8390-4e59a0a33594}">
+    <_LogicBlockInput _x="-198" _comment="" _displayName="" _type="int" _locked="false" _name="Message" _uuid="{7b04b655-243f-4a4d-9448-23baced6797f}" _y="245"/>
+  </_NodeContainer>
   <_WidgetContainer _locked="false" _name="Widgets" _uuid="{d35e4ee0-40a6-4e6a-8bc8-d02637e0cdd2}">
-    <Ft_Esd_PushButton _z="1" _x="0" _locked="false" _name="ESD Push Button" _uuid="{579defd9-5aaa-44e7-bfe3-961a761ed1fb}" _y="0">
+    <Ft_Esd_NumericLabel _z="0" _x="110" _locked="false" _name="ESD Numeric Label" _uuid="{31cca0c3-6821-4ee8-a7b1-5b625ea760a1}" _y="25">
       <__Properties>
         <_active type="bool">true</_active>
         <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
-        <X type="double">335.16861428242356</X>
-        <Y type="double">202.2325394193526</Y>
+        <X type="double">304</X>
+        <Y type="double">194</Y>
         <Width type="String">120</Width>
         <Height type="String">36</Height>
         <Font type="String">27</Font>
-        <Text type="String">No!</Text>
-        <Primary type="String">1</Primary>
+        <Value type="String">0</Value>
       </__Properties>
-    </Ft_Esd_PushButton>
+    </Ft_Esd_NumericLabel>
+    <Ft_Esd_Label _z="1" _x="-199" _locked="false" _name="ESD Label" _uuid="{b42d96b2-4d47-4406-a869-92dd0d8731a2}" _y="5">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="String">27</Font>
+        <Text type="String">The closest parking spot ID is: </Text>
+        <X type="int">65</X>
+        <Y type="int">196</Y>
+        <Width type="int">237</Width>
+        <Height type="int">33</Height>
+        <AlignX type="String">OPT_ALIGN_LEFT</AlignX>
+        <AlignY type="String">OPT_ALIGN_TOP</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
   </_WidgetContainer>
 </_PageDocument>

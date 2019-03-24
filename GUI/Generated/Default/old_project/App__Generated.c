@@ -11,7 +11,7 @@ C Source
 extern void Ft_Esd_Noop(void *context);
 extern void Ft_Esd_Spinner_Popup();
 
-static const char * App_YesPage_Message__Property(void *context) { return "Try"; }
+static int App_NoPage_Message__Property(void *context) { return 1234L; }
 
 static void App_MainMenu_Yes__Signal(void *context);
 static void App_MainMenu_No__Signal(void *context);
@@ -74,7 +74,6 @@ static void App__YesPage__Validate(App *context)
 		context->YesPage = (YesPage *)malloc(sizeof(YesPage));
 		YesPage__Initializer(context->YesPage);
 		context->YesPage->Parent = context;
-		context->YesPage->Message = App_YesPage_Message__Property;
 		YesPage_Start(context->YesPage);
 	}
 }
@@ -107,6 +106,7 @@ static void App__NoPage__Validate(App *context)
 		context->NoPage = (NoPage *)malloc(sizeof(NoPage));
 		NoPage__Initializer(context->NoPage);
 		context->NoPage->Parent = context;
+		context->NoPage->Message = App_NoPage_Message__Property;
 		NoPage_Start(context->NoPage);
 	}
 }

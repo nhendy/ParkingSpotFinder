@@ -7,39 +7,52 @@ C Source
 #include "NoPage.h"
 
 extern void Ft_Esd_Noop(void *context);
+int NoPage_Message__Default(void *context) { return 0L; }
 
 Ft_Esd_Theme * Ft_Esd_Theme_GetCurrent();
-static ft_int16_t NoPage_ESD_Push_Button_X__Property(void *context) { return 335; }
-static ft_int16_t NoPage_ESD_Push_Button_Y__Property(void *context) { return 202; }
-static const char * NoPage_ESD_Push_Button_Text__Property(void *context) { return "No!"; }
+static ft_int16_t NoPage_ESD_Numeric_Label_X__Property(void *context) { return 304; }
+static ft_int16_t NoPage_ESD_Numeric_Label_Y__Property(void *context) { return 194; }
+static ft_int32_t NoPage_ESD_Numeric_Label_Value__Property(void *context);
+static const char * NoPage_ESD_Label_Text__Property(void *context) { return "The closest parking spot ID is: "; }
+static ft_int16_t NoPage_ESD_Label_X__Property(void *context) { return 65; }
+static ft_int16_t NoPage_ESD_Label_Y__Property(void *context) { return 196; }
+static ft_int16_t NoPage_ESD_Label_Width__Property(void *context) { return 237; }
+static ft_int16_t NoPage_ESD_Label_Height__Property(void *context) { return 33; }
 
 
 void NoPage__Initializer(NoPage *context)
 {
 	context->Parent = 0;
-	Ft_Esd_PushButton__Initializer(&context->ESD_Push_Button);
-	context->ESD_Push_Button.Parent = context;
-	context->ESD_Push_Button.X = NoPage_ESD_Push_Button_X__Property;
-	context->ESD_Push_Button.Y = NoPage_ESD_Push_Button_Y__Property;
-	context->ESD_Push_Button.Text = NoPage_ESD_Push_Button_Text__Property;
+	context->Message = NoPage_Message__Default;
+	Ft_Esd_NumericLabel__Initializer(&context->ESD_Numeric_Label);
+	context->ESD_Numeric_Label.Parent = context;
+	context->ESD_Numeric_Label.X = NoPage_ESD_Numeric_Label_X__Property;
+	context->ESD_Numeric_Label.Y = NoPage_ESD_Numeric_Label_Y__Property;
+	context->ESD_Numeric_Label.Value = NoPage_ESD_Numeric_Label_Value__Property;
+	Ft_Esd_Label__Initializer(&context->ESD_Label);
+	context->ESD_Label.Parent = context;
+	context->ESD_Label.Text = NoPage_ESD_Label_Text__Property;
+	context->ESD_Label.X = NoPage_ESD_Label_X__Property;
+	context->ESD_Label.Y = NoPage_ESD_Label_Y__Property;
+	context->ESD_Label.Width = NoPage_ESD_Label_Width__Property;
+	context->ESD_Label.Height = NoPage_ESD_Label_Height__Property;
 }
 
 void NoPage_Start(NoPage *context)
 {
 	void *parent = context->Parent;
-	Ft_Esd_PushButton_Start(&context->ESD_Push_Button);
 }
 
 void NoPage_Update(NoPage *context)
 {
 	void *parent = context->Parent;
-	Ft_Esd_PushButton_Update(&context->ESD_Push_Button);
 }
 
 void NoPage_Render(NoPage *context)
 {
 	void *parent = context->Parent;
-	Ft_Esd_PushButton_Render(&context->ESD_Push_Button);
+	Ft_Esd_NumericLabel_Render(&context->ESD_Numeric_Label);
+	Ft_Esd_Label_Render(&context->ESD_Label);
 }
 
 void NoPage_Idle(NoPage *context)
@@ -50,7 +63,13 @@ void NoPage_Idle(NoPage *context)
 void NoPage_End(NoPage *context)
 {
 	void *parent = context->Parent;
-	Ft_Esd_PushButton_End(&context->ESD_Push_Button);
+}
+
+ft_int32_t NoPage_ESD_Numeric_Label_Value__Property(void *c)
+{
+	NoPage *context = (NoPage *)c;
+	void *parent = context->Parent;
+	return context->Message(parent);
 }
 
 #ifdef ESD_SIMULATION
@@ -59,14 +78,19 @@ void NoPage_End(NoPage *context)
 typedef struct
 {
 	NoPage Instance;
+	int Message;
 } NoPage__ESD;
 
+int NoPage__Get_Message__ESD(void *context) { return ((NoPage__ESD *)context)->Message; }
+void NoPage__Set_Message__ESD(void *context, int value) { ((NoPage__ESD *)context)->Message = value; }
 
 void *NoPage__Create__ESD()
 {
 	NoPage__ESD *context = (NoPage__ESD *)malloc(sizeof(NoPage__ESD));
 	NoPage__Initializer(&context->Instance);
 	context->Instance.Parent = context;
+	context->Message = 0L;
+	context->Instance.Message = NoPage__Get_Message__ESD;
 	return context;
 }
 

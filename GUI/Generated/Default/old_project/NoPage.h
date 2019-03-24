@@ -8,7 +8,8 @@ Header
 #define NoPage__H
 
 #include "Ft_Esd.h"
-#include "Ft_Esd_PushButton.h"
+#include "Ft_Esd_Label.h"
+#include "Ft_Esd_NumericLabel.h"
 #include "Ft_Esd_Theme.h"
 
 #ifndef ESD_LOGIC
@@ -29,7 +30,10 @@ ESD_PAGE(NoPage, Include = "NoPage.h", Callback)
 typedef struct
 {
 	void *Parent;
-	Ft_Esd_PushButton ESD_Push_Button;
+	ESD_INPUT(Message, Type = int)
+	int(* Message)(void *context);
+	Ft_Esd_NumericLabel ESD_Numeric_Label;
+	Ft_Esd_Label ESD_Label;
 } NoPage;
 
 void NoPage__Initializer(NoPage *context);
