@@ -1,7 +1,0 @@
-<!DOCTYPE _PageDocument>
-<_PageDocument _locked="false" displayName="" icon="" defaultSignal="" category="" _uuid="{fddd3aa2-c341-4928-b8d3-6e284ea3a28a}" comment="">
-  <_ActorContainer _name="Actors" _locked="false" _uuid="{e4fe4778-2283-46c3-a725-bc1b4818a101}"/>
-  <_ConnectionContainer _name="Connections" _locked="false" _uuid="{062028b9-fade-4a3a-afd7-435c807d1492}"/>
-  <_NodeContainer _name="Nodes" _locked="false" _uuid="{ed796119-6880-4768-a318-1a3df866c0b2}"/>
-  <_WidgetContainer _name="Widgets" _locked="false" _uuid="{5a08a40a-6fa2-4b64-aa39-192315c5e008}"/>
-</_PageDocument>
