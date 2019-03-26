@@ -1,2 +1,2 @@
 
-__all__ = ['spotstable', 'bookingqueue']
+__all__ = ['spotstable', 'bookingqueue', 'CoordinatesGenerator', 'drawing_utils']
