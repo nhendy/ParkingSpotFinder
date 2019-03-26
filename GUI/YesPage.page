@@ -1,0 +1,22 @@
+<!DOCTYPE _PageDocument>
+<_PageDocument icon="" defaultSignal="" _locked="false" comment="" _uuid="{b561c5dd-cca1-4b2d-8293-72f81eba776d}" displayName="" category="">
+  <_ActorContainer _locked="false" _name="Actors" _uuid="{e4c91cde-8ada-48df-914a-ff12a0b17ac4}"/>
+  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{c0578214-f480-436d-81d7-96c319ce4d97}"/>
+  <_NodeContainer _locked="false" _name="Nodes" _uuid="{45797a2d-adad-4ef5-826f-6d1ffd2ae971}"/>
+  <_WidgetContainer _locked="false" _name="Widgets" _uuid="{3779a037-b4b2-497c-bfc8-ac49cf9f20b0}">
+    <Ft_Esd_Label _z="0" _x="102" _locked="false" _name="ESD Label" _uuid="{57e6e07f-b6ee-42f7-b14c-cbb29b2c9787}" _y="-13">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="String">27</Font>
+        <Text type="String">Welcome to parking spot finder, since you have a parking ID, please procees to parking ID locoation.</Text>
+        <X type="int">24</X>
+        <Y type="double">202.48528137423858</Y>
+        <Width type="double">772</Width>
+        <Height type="double">27</Height>
+        <AlignX type="String">OPT_ALIGN_LEFT</AlignX>
+        <AlignY type="String">OPT_ALIGN_TOP</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+  </_WidgetContainer>
+</_PageDocument>
