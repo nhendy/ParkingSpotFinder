@@ -11,6 +11,10 @@ void MainMenu_NoChanged__Noop(void *context, ft_bool_t value) { }
 void MainMenu_YesChamged__Noop(void *context, ft_bool_t value) { }
 
 Ft_Esd_Theme * Ft_Esd_Theme_GetCurrent();
+static const char * MainMenu_ESD_Label_Text__Property(void *context) { return "Do you have a reservation code?"; }
+static ft_int16_t MainMenu_ESD_Label_X__Property(void *context) { return 286; }
+static ft_int16_t MainMenu_ESD_Label_Y__Property(void *context) { return 190; }
+static ft_int16_t MainMenu_ESD_Label_Width__Property(void *context) { return 257; }
 static ft_int16_t MainMenu_ESD3_Label_Font__Property(void *context) { return 31; }
 static const char * MainMenu_ESD3_Label_Text__Property(void *context) { return "ESD3"; }
 static ft_int16_t MainMenu_ESD3_Label_X__Property(void *context) { return 6; }
@@ -30,9 +34,15 @@ void MainMenu__Initializer(MainMenu *context)
 	context->Yes = Ft_Esd_Noop;
 	context->No = Ft_Esd_Noop;
 	context->No_1 = 0;
-	context->NoChanged = MainMenu_NoChanged__Noop;
 	context->Yes_1 = 0;
+	context->NoChanged = MainMenu_NoChanged__Noop;
 	context->YesChamged = MainMenu_YesChamged__Noop;
+	Ft_Esd_Label__Initializer(&context->ESD_Label);
+	context->ESD_Label.Parent = context;
+	context->ESD_Label.Text = MainMenu_ESD_Label_Text__Property;
+	context->ESD_Label.X = MainMenu_ESD_Label_X__Property;
+	context->ESD_Label.Y = MainMenu_ESD_Label_Y__Property;
+	context->ESD_Label.Width = MainMenu_ESD_Label_Width__Property;
 	Ft_Esd_Label__Initializer(&context->ESD3_Label);
 	context->ESD3_Label.Parent = context;
 	context->ESD3_Label.Font = MainMenu_ESD3_Label_Font__Property;
@@ -69,6 +79,7 @@ void MainMenu_Update(MainMenu *context)
 void MainMenu_Render(MainMenu *context)
 {
 	void *parent = context->Parent;
+	Ft_Esd_Label_Render(&context->ESD_Label);
 	Ft_Esd_Label_Render(&context->ESD3_Label);
 	Ft_Esd_PushButton_Render(&context->ESD_Push_Button);
 	Ft_Esd_PushButton_Render(&context->ESD_Push_Button_2);
@@ -91,12 +102,12 @@ void MainMenu_ESD_Push_Button_Pushed__Signal(void *c)
 	MainMenu *context = (MainMenu *)c;
 	void *parent = context->Parent;
 	context->Yes(parent);
-	ft_bool_t showyes = 1;
-	context->Yes_1 = showyes;
-	context->YesChamged(parent, showyes);
 	ft_bool_t hideno = 0;
 	context->No_1 = hideno;
 	context->NoChanged(parent, hideno);
+	ft_bool_t showyes = 1;
+	context->Yes_1 = showyes;
+	context->YesChamged(parent, showyes);
 }
 
 void MainMenu_ESD_Push_Button_2_Pushed__Signal(void *c)

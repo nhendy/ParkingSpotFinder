@@ -15,21 +15,28 @@ static int App_NoPage_Message__Property(void *context) { return 1234L; }
 
 static void App_MainMenu_Yes__Signal(void *context);
 static void App_MainMenu_No__Signal(void *context);
+static void App_NoPage_Back_1__Signal(void *context);
+static void App_NoSpotsAvailable_Back__Signal(void *context);
+static void App_YesPage3_Back__Signal(void *context);
 
 #define MainMenu__ID 1
-#define YesPage__ID 2
-#define NoPage__ID 3
+#define NoPage__ID 2
+#define NoSpotsAvailable__ID 3
+#define YesPage3__ID 4
 
 void App__Initializer(App *context)
 {
 	context->Parent = 0;
 	context->_ActivePage = 0;
+	context->NumberOfParkingSpotsAvailable = 10L;
 	context->MainMenu = 0;
 	context->MainMenu__Active = 0;
-	context->YesPage = 0;
-	context->YesPage__Active = 0;
 	context->NoPage = 0;
 	context->NoPage__Active = 0;
+	context->NoSpotsAvailable = 0;
+	context->NoSpotsAvailable__Active = 0;
+	context->YesPage3 = 0;
+	context->YesPage3__Active = 0;
 }
 
 static void App__MainMenu__Validate(App *context)
@@ -66,38 +73,6 @@ static void App__MainMenu__Destroy(App *context, int final)
 	}
 }
 
-static void App__YesPage__Validate(App *context)
-{
-	void *parent = context->Parent;
-	if (!context->YesPage)
-	{
-		context->YesPage = (YesPage *)malloc(sizeof(YesPage));
-		YesPage__Initializer(context->YesPage);
-		context->YesPage->Parent = context;
-		YesPage_Start(context->YesPage);
-	}
-}
-
-static void App__YesPage__Create(App *context)
-{
-	App__YesPage__Validate(context);
-	context->YesPage__Active = 1;
-}
-
-static void App__YesPage__Destroy(App *context, int final)
-{
-	if (context->YesPage__Active)
-	{
-		context->YesPage__Active = 0;
-	}
-	if (context->YesPage)
-	{
-		YesPage_End(context->YesPage);
-		free(context->YesPage);
-		context->YesPage = 0;
-	}
-}
-
 static void App__NoPage__Validate(App *context)
 {
 	void *parent = context->Parent;
@@ -107,6 +82,7 @@ static void App__NoPage__Validate(App *context)
 		NoPage__Initializer(context->NoPage);
 		context->NoPage->Parent = context;
 		context->NoPage->Message = App_NoPage_Message__Property;
+		context->NoPage->Back_1 = App_NoPage_Back_1__Signal;
 		NoPage_Start(context->NoPage);
 	}
 }
@@ -131,15 +107,83 @@ static void App__NoPage__Destroy(App *context, int final)
 	}
 }
 
+static void App__NoSpotsAvailable__Validate(App *context)
+{
+	void *parent = context->Parent;
+	if (!context->NoSpotsAvailable)
+	{
+		context->NoSpotsAvailable = (NoSpotsAvailable *)malloc(sizeof(NoSpotsAvailable));
+		NoSpotsAvailable__Initializer(context->NoSpotsAvailable);
+		context->NoSpotsAvailable->Parent = context;
+		context->NoSpotsAvailable->Back = App_NoSpotsAvailable_Back__Signal;
+		NoSpotsAvailable_Start(context->NoSpotsAvailable);
+	}
+}
+
+static void App__NoSpotsAvailable__Create(App *context)
+{
+	App__NoSpotsAvailable__Validate(context);
+	context->NoSpotsAvailable__Active = 1;
+}
+
+static void App__NoSpotsAvailable__Destroy(App *context, int final)
+{
+	if (context->NoSpotsAvailable__Active)
+	{
+		context->NoSpotsAvailable__Active = 0;
+	}
+	if (context->NoSpotsAvailable)
+	{
+		NoSpotsAvailable_End(context->NoSpotsAvailable);
+		free(context->NoSpotsAvailable);
+		context->NoSpotsAvailable = 0;
+	}
+}
+
+static void App__YesPage3__Validate(App *context)
+{
+	void *parent = context->Parent;
+	if (!context->YesPage3)
+	{
+		context->YesPage3 = (YesPage3 *)malloc(sizeof(YesPage3));
+		YesPage3__Initializer(context->YesPage3);
+		context->YesPage3->Parent = context;
+		context->YesPage3->Back = App_YesPage3_Back__Signal;
+		YesPage3_Start(context->YesPage3);
+	}
+}
+
+static void App__YesPage3__Create(App *context)
+{
+	App__YesPage3__Validate(context);
+	context->YesPage3__Active = 1;
+}
+
+static void App__YesPage3__Destroy(App *context, int final)
+{
+	if (context->YesPage3__Active)
+	{
+		context->YesPage3__Active = 0;
+	}
+	if (context->YesPage3)
+	{
+		YesPage3_End(context->YesPage3);
+		free(context->YesPage3);
+		context->YesPage3 = 0;
+	}
+}
+
 void App_Start__Builtin(App *context)
 {
 	void *parent = context->Parent;
 	if ((context->_ActivePage == MainMenu__ID))
 		App__MainMenu__Create(context);
-	if ((context->_ActivePage == YesPage__ID))
-		App__YesPage__Create(context);
 	if ((context->_ActivePage == NoPage__ID))
 		App__NoPage__Create(context);
+	if ((context->_ActivePage == NoSpotsAvailable__ID))
+		App__NoSpotsAvailable__Create(context);
+	if ((context->_ActivePage == YesPage3__ID))
+		App__YesPage3__Create(context);
 }
 
 void App_Update(App *context)
@@ -152,13 +196,6 @@ void App_Update(App *context)
 		else
 			App__MainMenu__Destroy(context, 0);
 	}
-	if ((!!context->YesPage__Active) != ((context->_ActivePage == YesPage__ID)))
-	{
-		if (!context->YesPage__Active)
-			App__YesPage__Create(context);
-		else
-			App__YesPage__Destroy(context, 0);
-	}
 	if ((!!context->NoPage__Active) != ((context->_ActivePage == NoPage__ID)))
 	{
 		if (!context->NoPage__Active)
@@ -166,21 +203,41 @@ void App_Update(App *context)
 		else
 			App__NoPage__Destroy(context, 0);
 	}
+	if ((!!context->NoSpotsAvailable__Active) != ((context->_ActivePage == NoSpotsAvailable__ID)))
+	{
+		if (!context->NoSpotsAvailable__Active)
+			App__NoSpotsAvailable__Create(context);
+		else
+			App__NoSpotsAvailable__Destroy(context, 0);
+	}
+	if ((!!context->YesPage3__Active) != ((context->_ActivePage == YesPage3__ID)))
+	{
+		if (!context->YesPage3__Active)
+			App__YesPage3__Create(context);
+		else
+			App__YesPage3__Destroy(context, 0);
+	}
 	if (context->MainMenu__Active)
 		MainMenu_Update(context->MainMenu);
-	if (context->YesPage__Active)
-		YesPage_Update(context->YesPage);
 	if (context->NoPage__Active)
 		NoPage_Update(context->NoPage);
+	if (context->NoSpotsAvailable__Active)
+		NoSpotsAvailable_Update(context->NoSpotsAvailable);
+	if (context->YesPage3__Active)
+		YesPage3_Update(context->YesPage3);
 	if (!context->MainMenu__Active && (((context->_ActivePage == MainMenu__ID))))
 	{
 		Ft_Esd_Spinner_Popup();
 	}
-	if (!context->YesPage__Active && (((context->_ActivePage == YesPage__ID))))
+	if (!context->NoPage__Active && (((context->_ActivePage == NoPage__ID))))
 	{
 		Ft_Esd_Spinner_Popup();
 	}
-	if (!context->NoPage__Active && (((context->_ActivePage == NoPage__ID))))
+	if (!context->NoSpotsAvailable__Active && (((context->_ActivePage == NoSpotsAvailable__ID))))
+	{
+		Ft_Esd_Spinner_Popup();
+	}
+	if (!context->YesPage3__Active && (((context->_ActivePage == YesPage3__ID))))
 	{
 		Ft_Esd_Spinner_Popup();
 	}
@@ -191,10 +248,12 @@ void App_Render(App *context)
 	void *parent = context->Parent;
 	if (context->MainMenu__Active)
 		MainMenu_Render(context->MainMenu);
-	if (context->YesPage__Active)
-		YesPage_Render(context->YesPage);
 	if (context->NoPage__Active)
 		NoPage_Render(context->NoPage);
+	if (context->NoSpotsAvailable__Active)
+		NoSpotsAvailable_Render(context->NoSpotsAvailable);
+	if (context->YesPage3__Active)
+		YesPage3_Render(context->YesPage3);
 }
 
 void App_Idle(App *context)
@@ -202,10 +261,12 @@ void App_Idle(App *context)
 	void *parent = context->Parent;
 	if (context->MainMenu__Active)
 		MainMenu_Idle(context->MainMenu);
-	if (context->YesPage__Active)
-		YesPage_Idle(context->YesPage);
 	if (context->NoPage__Active)
 		NoPage_Idle(context->NoPage);
+	if (context->NoSpotsAvailable__Active)
+		NoSpotsAvailable_Idle(context->NoSpotsAvailable);
+	if (context->YesPage3__Active)
+		YesPage3_Idle(context->YesPage3);
 }
 
 void App_End(App *context)
@@ -213,24 +274,36 @@ void App_End(App *context)
 	void *parent = context->Parent;
 	if (context->MainMenu__Active)
 		App__MainMenu__Destroy(context, 1);
-	if (context->YesPage__Active)
-		App__YesPage__Destroy(context, 1);
 	if (context->NoPage__Active)
 		App__NoPage__Destroy(context, 1);
+	if (context->NoSpotsAvailable__Active)
+		App__NoSpotsAvailable__Destroy(context, 1);
+	if (context->YesPage3__Active)
+		App__YesPage3__Destroy(context, 1);
 }
 
 void App_Start(App *context)
 {
 	void *parent = context->Parent;
 	App_Start__Builtin(context);
-	context->_ActivePage = MainMenu__ID;
+	int left = context->NumberOfParkingSpotsAvailable;
+	int right = 0L;
+	int if_1 = left != right;
+	if (if_1)
+	{
+		context->_ActivePage = MainMenu__ID;
+	}
+	else
+	{
+		context->_ActivePage = NoSpotsAvailable__ID;
+	}
 }
 
 void App_MainMenu_Yes__Signal(void *c)
 {
 	App *context = (App *)c;
 	void *parent = context->Parent;
-	context->_ActivePage = YesPage__ID;
+	context->_ActivePage = YesPage3__ID;
 }
 
 void App_MainMenu_No__Signal(void *c)
@@ -238,6 +311,27 @@ void App_MainMenu_No__Signal(void *c)
 	App *context = (App *)c;
 	void *parent = context->Parent;
 	context->_ActivePage = NoPage__ID;
+}
+
+void App_NoPage_Back_1__Signal(void *c)
+{
+	App *context = (App *)c;
+	void *parent = context->Parent;
+	context->_ActivePage = MainMenu__ID;
+}
+
+void App_NoSpotsAvailable_Back__Signal(void *c)
+{
+	App *context = (App *)c;
+	void *parent = context->Parent;
+	context->_ActivePage = MainMenu__ID;
+}
+
+void App_YesPage3_Back__Signal(void *c)
+{
+	App *context = (App *)c;
+	void *parent = context->Parent;
+	context->_ActivePage = MainMenu__ID;
 }
 
 static App application;
@@ -290,6 +384,7 @@ void App__Destroy__ESD(void *context)
 	free(context);
 }
 
+void App__Set_NumberOfParkingSpotsAvailable__ESD(void *context, int value) { ((App__ESD *)context)->Instance.NumberOfParkingSpotsAvailable = value; }
 
 #endif /* ESD_SIMULATION */
 

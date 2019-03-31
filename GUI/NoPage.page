@@ -1,14 +1,30 @@
 <!DOCTYPE _PageDocument>
-<_PageDocument icon="" defaultSignal="" _locked="false" comment="" _uuid="{c10758d6-f6c6-4c24-92f1-7bde56a74e5d}" displayName="" category="">
-  <_ActorContainer _locked="false" _name="Actors" _uuid="{81f86a62-e5de-48e1-8b4f-3d3d8f354a87}"/>
-  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{2fb65963-3d85-474e-be11-b92740c8e3b6}">
-    <_Connection connectionType="OutputInput" sourceConnector="value" targetConnector="Value" targetObject="{31cca0c3-6821-4ee8-a7b1-5b625ea760a1}" _locked="false" sourceObject="{7b04b655-243f-4a4d-9448-23baced6797f}" _name="Connection" _uuid="{aba8b890-698d-4c14-b510-1e828b1b3a36}"/>
+<_PageDocument icon="" displayName="" defaultSignal="" _uuid="{c10758d6-f6c6-4c24-92f1-7bde56a74e5d}" comment="" _locked="false" category="">
+  <_ActorContainer _uuid="{81f86a62-e5de-48e1-8b4f-3d3d8f354a87}" _name="Actors" _locked="false"/>
+  <_ConnectionContainer _uuid="{2fb65963-3d85-474e-be11-b92740c8e3b6}" _name="Connections" _locked="false">
+    <_Connection connectionType="SignalSlot" sourceObject="{ec33b068-f576-47ac-b21d-fafea0275d55}" _uuid="{6b2e1774-b7d4-494d-80d9-8c51e7bcdcb3}" targetObject="{d245cd7f-55f6-49c4-bf47-e486506c81b3}" _name="Connection" targetConnector="write" _locked="false" sourceConnector="Pushed"/>
+    <_Connection connectionType="SignalSlot" sourceObject="{ec33b068-f576-47ac-b21d-fafea0275d55}" _uuid="{7621873c-0144-4791-96e4-74f54c82d8dd}" targetObject="{2b07f14f-6a77-4f23-9da7-1f82b6d7c8ac}" _name="Connection" targetConnector="slot" _locked="false" sourceConnector="Pushed"/>
+    <_Connection connectionType="OutputInput" sourceObject="{7b04b655-243f-4a4d-9448-23baced6797f}" _uuid="{aba8b890-698d-4c14-b510-1e828b1b3a36}" targetObject="{31cca0c3-6821-4ee8-a7b1-5b625ea760a1}" _name="Connection" targetConnector="Value" _locked="false" sourceConnector="value"/>
+    <_Connection connectionType="WriterVariable" sourceObject="{d245cd7f-55f6-49c4-bf47-e486506c81b3}" _uuid="{b55adbf4-2b45-4244-9a0f-53bdb4a2b4a1}" targetObject="{08614ca3-303b-4fd4-92e4-25fba42524c6}" _name="Connection" targetConnector="value" _locked="false" sourceConnector="target"/>
+    <_Connection connectionType="WriterVariable" sourceObject="{d245cd7f-55f6-49c4-bf47-e486506c81b3}" _uuid="{eb69516b-cd80-44b3-a09d-81abd2f1b726}" targetObject="{ac6cce6c-7c6a-4b84-bb3e-778fa9cd6d13}" _name="Connection" targetConnector="value" _locked="false" sourceConnector="target"/>
   </_ConnectionContainer>
-  <_NodeContainer _locked="false" _name="Nodes" _uuid="{f5116ebb-3803-4d46-8390-4e59a0a33594}">
-    <_LogicBlockInput _x="-198" _comment="" _displayName="" _type="int" _locked="false" _name="Message" _uuid="{7b04b655-243f-4a4d-9448-23baced6797f}" _y="245"/>
+  <_NodeContainer _uuid="{f5116ebb-3803-4d46-8390-4e59a0a33594}" _name="Nodes" _locked="false">
+    <_LogicBlockInput _type="int" _uuid="{7b04b655-243f-4a4d-9448-23baced6797f}" _name="Message" _comment="" _x="42" _displayName="" _locked="false" _y="107"/>
+    <_LogicVariableWriter _type="ft_bool_t" _uuid="{d245cd7f-55f6-49c4-bf47-e486506c81b3}" _name="ShowBack" _comment="" _x="16" _locked="false" _y="305">
+      <__Properties>
+        <value type="bool">true</value>
+      </__Properties>
+    </_LogicVariableWriter>
+    <_LogicBlockVariable _type="ft_bool_t" _uuid="{08614ca3-303b-4fd4-92e4-25fba42524c6}" _name="Back" _comment="" _x="272" _displayName="" _locked="false" _y="329">
+      <__Properties>
+        <access type="String">Private</access>
+      </__Properties>
+    </_LogicBlockVariable>
+    <_LogicBlockWriter _type="ft_bool_t" _uuid="{ac6cce6c-7c6a-4b84-bb3e-778fa9cd6d13}" _name="BackChanged" _comment="" _x="279" _displayName="" _locked="false" _y="397"/>
+    <_LogicBlockSignal _uuid="{2b07f14f-6a77-4f23-9da7-1f82b6d7c8ac}" _name="Back" _x="18" _displayName="" _locked="false" _y="436"/>
   </_NodeContainer>
-  <_WidgetContainer _locked="false" _name="Widgets" _uuid="{d35e4ee0-40a6-4e6a-8bc8-d02637e0cdd2}">
-    <Ft_Esd_NumericLabel _z="0" _x="110" _locked="false" _name="ESD Numeric Label" _uuid="{31cca0c3-6821-4ee8-a7b1-5b625ea760a1}" _y="25">
+  <_WidgetContainer _uuid="{d35e4ee0-40a6-4e6a-8bc8-d02637e0cdd2}" _name="Widgets" _locked="false">
+    <Ft_Esd_NumericLabel _uuid="{31cca0c3-6821-4ee8-a7b1-5b625ea760a1}" _name="ESD Numeric Label" _x="263" _locked="false" _z="0" _y="16">
       <__Properties>
         <_active type="bool">true</_active>
         <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
@@ -20,7 +36,20 @@
         <Value type="String">0</Value>
       </__Properties>
     </Ft_Esd_NumericLabel>
-    <Ft_Esd_Label _z="1" _x="-199" _locked="false" _name="ESD Label" _uuid="{b42d96b2-4d47-4406-a869-92dd0d8731a2}" _y="5">
+    <Ft_Esd_PushButton _uuid="{ec33b068-f576-47ac-b21d-fafea0275d55}" _name="ESD Push Button" _x="-209" _locked="false" _z="0" _y="314">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="double">28</X>
+        <Y type="double">399</Y>
+        <Width type="String">120</Width>
+        <Height type="String">36</Height>
+        <Font type="String">27</Font>
+        <Text type="String">Back</Text>
+        <Primary type="String">1</Primary>
+      </__Properties>
+    </Ft_Esd_PushButton>
+    <Ft_Esd_Label _uuid="{b42d96b2-4d47-4406-a869-92dd0d8731a2}" _name="ESD Label" _x="-199" _locked="false" _z="1" _y="5">
       <__Properties>
         <_active type="bool">true</_active>
         <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
