@@ -82,6 +82,7 @@ static ft_int16_t YesPage3_ESD_Numeric_Label_X__Property(void *context) { return
 static ft_int16_t YesPage3_ESD_Numeric_Label_Y__Property(void *context) { return 120; }
 static ft_int16_t YesPage3_ESD_Numeric_Label_Width__Property(void *context) { return 177; }
 static ft_int16_t YesPage3_ESD_Numeric_Label_Height__Property(void *context) { return 35; }
+static ft_int32_t YesPage3_ESD_Numeric_Label_Value__Property(void *context);
 
 static void YesPage3_ESD_Push_Button_Pushed__Signal(void *context);
 static void YesPage3_Num1_Pushed__Signal(void *context);
@@ -198,6 +199,7 @@ void YesPage3__Initializer(YesPage3 *context)
 	context->ESD_Numeric_Label.Y = YesPage3_ESD_Numeric_Label_Y__Property;
 	context->ESD_Numeric_Label.Width = YesPage3_ESD_Numeric_Label_Width__Property;
 	context->ESD_Numeric_Label.Height = YesPage3_ESD_Numeric_Label_Height__Property;
+	context->ESD_Numeric_Label.Value = YesPage3_ESD_Numeric_Label_Value__Property;
 }
 
 void YesPage3_Start(YesPage3 *context)
@@ -296,6 +298,13 @@ void YesPage3_Num1_Pushed__Signal(void *c)
 	context->Set1(parent);
 	int set1_1 = 1L;
 	context->Variable = set1_1;
+}
+
+ft_int32_t YesPage3_ESD_Numeric_Label_Value__Property(void *c)
+{
+	YesPage3 *context = (YesPage3 *)c;
+	void *parent = context->Parent;
+	return context->Variable;
 }
 
 #ifdef ESD_SIMULATION

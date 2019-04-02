@@ -20,6 +20,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <stdio.h>
+#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -94,9 +96,9 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(TESTPIN1_GPIO_Port, TESTPIN1_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(TESTPIN3_GPIO_Port, TESTPIN3_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(TESTPIN3_GPIO_Port, TESTPIN3_Pin, GPIO_PIN_RESET);
 
-  char string[2] = "1";
+  char string[2] = "3";
 
   /* USER CODE END 2 */
 
@@ -105,9 +107,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+//	  char v = "x";
     /* USER CODE BEGIN 3 */
-    my_printf("Hello \r\n");
+	  HAL_UART_Transmit(&huart1, (uint8_t*)string, strlen(string), 0xffffff);
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
@@ -180,7 +183,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 115200;
+  huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;

@@ -6,10 +6,11 @@
     <_Connection connectionType="SignalSlot" sourceObject="{23c177c2-21e8-4e26-92b4-4eeb76947df3}" _uuid="{19bfc67c-3ec0-4414-a12f-3ca266555245}" targetObject="{e1f7e20c-033a-40c4-bc8a-98abadf89ed6}" _name="Connection" targetConnector="slot" _locked="false" sourceConnector="Pushed"/>
     <_Connection connectionType="WriterVariable" sourceObject="{385e8ce6-7715-4ef7-b8d9-7a97b17d13a2}" _uuid="{4a5b5377-62ea-4542-a152-374e5ecfa246}" targetObject="{dc41dd80-45f2-40f1-b633-312a2bc8be96}" _name="Connection" targetConnector="value" _locked="false" sourceConnector="target"/>
     <_Connection connectionType="SignalSlot" sourceObject="{bd4698af-dc4a-4c4d-9053-94125beabe13}" _uuid="{4d8dcf61-50c6-4a5d-9b42-8fc5fc777e8c}" targetObject="{385e8ce6-7715-4ef7-b8d9-7a97b17d13a2}" _name="Connection" targetConnector="write" _locked="false" sourceConnector="Pushed"/>
+    <_Connection connectionType="InputInput" sourceObject="{01ecf4cb-b737-4ea1-bae7-06a49307edf3}" _uuid="{5146623a-5830-4cca-8b38-3d63ab72c0f6}" targetObject="{043dbd41-0687-45ea-9d45-8d7d5852029e}" _name="Connection" targetConnector="left" _locked="false" sourceConnector="Value"/>
     <_Connection connectionType="SignalSlot" sourceObject="{bd4698af-dc4a-4c4d-9053-94125beabe13}" _uuid="{60fc8267-5922-4006-bc7c-f63534706490}" targetObject="{5e5f3f5f-b747-4758-9a2c-31d95f9422bc}" _name="Connection" targetConnector="slot" _locked="false" sourceConnector="Pushed"/>
     <_Connection connectionType="WriterVariable" sourceObject="{385e8ce6-7715-4ef7-b8d9-7a97b17d13a2}" _uuid="{8bf5463b-23a6-4194-b7ad-5b4525f0bfe7}" targetObject="{a9cf73e8-b460-43af-939f-71a5eb520be4}" _name="Connection" targetConnector="value" _locked="false" sourceConnector="target"/>
-    <_Connection connectionType="VariableInput" sourceObject="{4260645a-c313-4001-bdcd-319f8c36211e}" _uuid="{8f8dd64b-e9c9-4c3f-94fa-9733bb71d4c4}" targetObject="{dea1e794-6f7b-4148-b791-0bfb7ef8c583}" _name="Connection" targetConnector="left" _locked="false" sourceConnector="value"/>
     <_Connection connectionType="WriterVariable" sourceObject="{2cf0d0fd-6140-4f98-a1cc-251f65387fcc}" _uuid="{9d3b86a0-3a23-4d2b-9d4d-6f808fdc9445}" targetObject="{4260645a-c313-4001-bdcd-319f8c36211e}" _name="Connection" targetConnector="value" _locked="false" sourceConnector="target"/>
+    <_Connection connectionType="VariableInput" sourceObject="{4260645a-c313-4001-bdcd-319f8c36211e}" _uuid="{cdc4dad9-e627-4479-8bf8-6c3db692d45f}" targetObject="{01ecf4cb-b737-4ea1-bae7-06a49307edf3}" _name="Connection" targetConnector="Value" _locked="false" sourceConnector="value"/>
   </_ConnectionContainer>
   <_NodeContainer _uuid="{833942d0-6637-45e2-a0b9-b1cf6e648e44}" _name="Nodes" _locked="false">
     <_LogicBlockSignal _uuid="{5e5f3f5f-b747-4758-9a2c-31d95f9422bc}" _name="Back" _x="70" _displayName="" _locked="false" _y="-520"/>
@@ -26,16 +27,12 @@
         <value type="int">1</value>
       </__Properties>
     </_LogicVariableWriter>
-    <_LogicBlockVariable _type="int" _uuid="{4260645a-c313-4001-bdcd-319f8c36211e}" _name="Variable" _comment="" _x="-159" _displayName="" _locked="false" _y="709">
+    <_LogicBlockVariable _type="int" _uuid="{4260645a-c313-4001-bdcd-319f8c36211e}" _name="Variable" _comment="" _x="-253" _displayName="" _locked="false" _y="708">
       <__Properties>
         <access type="String">Private</access>
       </__Properties>
     </_LogicBlockVariable>
-    <_LogicOperatorBinary _type="const ft_char8_t *" _uuid="{dea1e794-6f7b-4148-b791-0bfb7ef8c583}" _name="Binary Operator" _comment="" _x="-170" _locked="false" _y="885">
-      <__Properties>
-        <operator type="String">*</operator>
-      </__Properties>
-    </_LogicOperatorBinary>
+    <_LogicOperatorBinary _type="int" _uuid="{043dbd41-0687-45ea-9d45-8d7d5852029e}" _name="Binary Operator" _comment="" _x="-207" _locked="false" _y="822"/>
   </_NodeContainer>
   <_WidgetContainer _uuid="{1915a9ec-d2f4-4a63-b993-1d00087e594f}" _name="Widgets" _locked="false">
     <Ft_Esd_Label _uuid="{ef5401df-a559-4b08-bd45-d028aa171fb2}" _name="ESD Label" _x="-182" _locked="false" _z="0" _y="-779">
@@ -221,7 +218,7 @@
         <Primary type="String">1</Primary>
       </__Properties>
     </Ft_Esd_PushButton>
-    <Ft_Esd_NumericLabel _uuid="{01ecf4cb-b737-4ea1-bae7-06a49307edf3}" _name="ESD Numeric Label" _x="-158" _locked="false" _z="2" _y="503">
+    <Ft_Esd_NumericLabel _uuid="{01ecf4cb-b737-4ea1-bae7-06a49307edf3}" _name="ESD Numeric Label" _x="-221" _locked="false" _z="2" _y="416">
       <__Properties>
         <_active type="bool">true</_active>
         <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
