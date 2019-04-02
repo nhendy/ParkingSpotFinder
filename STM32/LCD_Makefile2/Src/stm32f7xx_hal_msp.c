@@ -98,6 +98,104 @@ void HAL_MspInit(void)
 }
 
 /**
+* @brief QSPI MSP Initialization
+* This function configures the hardware resources used in this example
+* @param hqspi: QSPI handle pointer
+* @retval None
+*/
+void HAL_QSPI_MspInit(QSPI_HandleTypeDef* hqspi)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  if(hqspi->Instance==QUADSPI)
+  {
+  /* USER CODE BEGIN QUADSPI_MspInit 0 */
+
+  /* USER CODE END QUADSPI_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_QSPI_CLK_ENABLE();
+  
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOE_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    /**QUADSPI GPIO Configuration    
+    PB2     ------> QUADSPI_CLK
+    PE7     ------> QUADSPI_BK2_IO0
+    PE8     ------> QUADSPI_BK2_IO1
+    PE9     ------> QUADSPI_BK2_IO2
+    PE10     ------> QUADSPI_BK2_IO3
+    PC11     ------> QUADSPI_BK2_NCS 
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_2;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF9_QUADSPI;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF10_QUADSPI;
+    HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_11;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF9_QUADSPI;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+    /* QUADSPI interrupt Init */
+    HAL_NVIC_SetPriority(QUADSPI_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(QUADSPI_IRQn);
+  /* USER CODE BEGIN QUADSPI_MspInit 1 */
+
+  /* USER CODE END QUADSPI_MspInit 1 */
+  }
+
+}
+
+/**
+* @brief QSPI MSP De-Initialization
+* This function freeze the hardware resources used in this example
+* @param hqspi: QSPI handle pointer
+* @retval None
+*/
+void HAL_QSPI_MspDeInit(QSPI_HandleTypeDef* hqspi)
+{
+  if(hqspi->Instance==QUADSPI)
+  {
+  /* USER CODE BEGIN QUADSPI_MspDeInit 0 */
+
+  /* USER CODE END QUADSPI_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_QSPI_CLK_DISABLE();
+  
+    /**QUADSPI GPIO Configuration    
+    PB2     ------> QUADSPI_CLK
+    PE7     ------> QUADSPI_BK2_IO0
+    PE8     ------> QUADSPI_BK2_IO1
+    PE9     ------> QUADSPI_BK2_IO2
+    PE10     ------> QUADSPI_BK2_IO3
+    PC11     ------> QUADSPI_BK2_NCS 
+    */
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_2);
+
+    HAL_GPIO_DeInit(GPIOE, GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10);
+
+    HAL_GPIO_DeInit(GPIOC, GPIO_PIN_11);
+
+    /* QUADSPI interrupt DeInit */
+    HAL_NVIC_DisableIRQ(QUADSPI_IRQn);
+  /* USER CODE BEGIN QUADSPI_MspDeInit 1 */
+
+  /* USER CODE END QUADSPI_MspDeInit 1 */
+  }
+
+}
+
+/**
 * @brief SPI MSP Initialization
 * This function configures the hardware resources used in this example
 * @param hspi: SPI handle pointer
@@ -105,7 +203,6 @@ void HAL_MspInit(void)
 */
 void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(hspi->Instance==SPI1)
   {
@@ -174,10 +271,8 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
 * @param hspi: SPI handle pointer
 * @retval None
 */
-
 void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 {
-
   if(hspi->Instance==SPI1)
   {
   /* USER CODE BEGIN SPI1_MspDeInit 0 */
@@ -229,7 +324,6 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 */
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(huart->Instance==UART4)
   {
@@ -323,10 +417,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 * @param huart: UART handle pointer
 * @retval None
 */
-
 void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 {
-
   if(huart->Instance==UART4)
   {
   /* USER CODE BEGIN UART4_MspDeInit 0 */

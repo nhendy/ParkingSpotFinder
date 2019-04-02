@@ -1,4 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug
