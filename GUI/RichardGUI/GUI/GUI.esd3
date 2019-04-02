@@ -1,0 +1,14 @@
+<!DOCTYPE _ProjectRoot>
+<_ProjectRoot _locked="false" _uuid="{6d24bdef-e62d-4bbe-a47a-4322eb822b21}" _defaultEveModule="ME812A-WH50R(800x480)" _ESDVersion="30000" _name="Project">
+  <_ProjectRootLink _locked="false" _uuid="{0f3d86e2-39cf-4e10-a334-4e5a0862885a}" fileName="%ESD30_LIBRARIES%/FT_Esd_Widgets/FT_Esd_Widgets.esd3" _name="FT_Esd_Widgets.esd3" type="_ProjectRoot">
+    <__Properties>
+      <_target type="String">Default</_target>
+    </__Properties>
+  </_ProjectRootLink>
+  <_ProjectFileLink _locked="false" _uuid="{2a2bba01-5c77-4979-8c38-7301d8a4f652}" fileName="App.main" _name="App.main" type="_ApplicationDocument"/>
+  <_ProjectFileLink _locked="false" _uuid="{dec68210-565e-4bbc-856a-f289205e37c3}" fileName="MainPage.page" _name="MainPage.page" type="_PageDocument"/>
+  <_ProjectFileResource _locked="false" _uuid="{1568feeb-848f-44ca-9d13-6773a5645783}" fileName="YesPage.c" _name="YesPage.c">
+    <_SourceFile _locked="false" _uuid="{9094e361-3a5a-428d-9af4-a6092fc2c13d}" _name="Source File"/>
+  </_ProjectFileResource>
+  <_ProjectFileLink _locked="false" _uuid="{af302cd9-0bde-4dbf-9273-b3c2c6769288}" fileName="YesPage.page" _name="YesPage.page" type="_PageDocument"/>
+</_ProjectRoot>

@@ -109,8 +109,15 @@ int main(void)
     /* USER CODE END WHILE */
 //	  char v = "x";
     /* USER CODE BEGIN 3 */
+<<<<<<< HEAD
 	  HAL_UART_Transmit(&huart1, (uint8_t*)string, strlen(string), 0xffffff);
 	  HAL_Delay(1000);
+=======
+    HAL_GPIO_TogglePin(TESTPIN1_GPIO_Port, TESTPIN1_Pin);
+    HAL_Delay(5000);
+    my_printf("Hello \r\n");
+
+>>>>>>> 5f25d03e3c8c2784337eb61a6abac459911775e5
   }
   /* USER CODE END 3 */
 }

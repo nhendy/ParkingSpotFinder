@@ -1,4 +1,0 @@
-/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/CMakeFiles/UPLOAD.dir
-/Users/noureldinhendy/Developmentspace/ECE477-GarageMonitoringSystem/STM32/LCD_Makefile2/cmake-build-debug/CMakeFiles/LCD_Makefile2.elf.dir

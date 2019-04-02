@@ -10,16 +10,10 @@ TARGET = LCD_Makefile2
 ######################################
 # building variables
 ######################################
-
-# print debug?
-APPDEBUG = 1
-# print debug?
-PDEBUG = 0
 # debug build?
 DEBUG = 1
 # optimization
 OPT = -O0
-
 
 #######################################
 # pathes
@@ -37,19 +31,19 @@ C_SOURCES = \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_spi.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.c \
+  Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_exti.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.c \
+  Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_spi_ex.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c \
-  Timer/App__Generated.c \
-  Timer/MainPage__Generated.c \
   FT_Esd_Widgets/Ft_Esd_Theme.c \
   FT_Esd_Widgets/Ft_Esd_Label__Generated.c \
   FT_Esd_Widgets/Ft_Esd_Toggle__Generated.c \
@@ -85,6 +79,8 @@ C_SOURCES = \
   FT_Esd_Widgets/Ft_Esd_RadioGroup__Generated.c \
   FT_Esd_Widgets/LayoutSplit__Generated.c \
   FT_Esd_Widgets/Ft_Esd_ColorPicker__Generated.c \
+  FT_Esd_Widgets/Simulation/Ft_Esd_Elements__h__Simulation.c \
+  FT_Esd_Widgets/Simulation/Ft_Esd_Theme__h__Simulation.c \
   FT_Eve_Hal/FT_CoPro_Cmds.c \
   FT_Eve_Hal/FT_Gpu_Hal.c \
   FT_Eve_Hal/FT_Emu_main.c \
@@ -103,7 +99,11 @@ C_SOURCES = \
   FT_Esd_Framework/Ft_Esd_Timer__Generated.c \
   FT_Esd_Framework/Ft_Esd_App.c \
   FT_Esd_Framework/FT_Esd_Primitives.c \
-  Src/syscalls.c \
+  FT_Esd_Framework/Simulation/FT_Esd_CoPro_Cmds__h__Simulation.c \
+  FT_Esd_Framework/Simulation/FT_Esd_Primitives__h__Simulation.c \
+  TEST_HELLO/App__Generated.c \
+  TEST_HELLO/MainPage__Generated.c \
+	Sr/syscalls.c \
   Src/stm32f7xx_it.c \
   Src/main.c \
   Src/system_stm32f7xx.c \
@@ -151,7 +151,7 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 AS_DEFS =
 
 # C defines
-C_DEFS = -D__weak=__attribute__\(\(weak\)\) -D__packed=__attribute__\(\(__packed__\)\) -DUSE_HAL_DRIVER -DSTM32F746xx
+C_DEFS = -DUSE_HAL_DRIVER -DSTM32F746xx -D__weak=__attribute__\(\(weak\)\) -D__packed=__attribute__\(\(__packed__\)\)
 
 # AS includes
 AS_INCLUDES =
@@ -162,10 +162,10 @@ C_INCLUDES += -IDrivers/STM32F7xx_HAL_Driver/Inc
 C_INCLUDES += -IDrivers/STM32F7xx_HAL_Driver/Inc/Legacy
 C_INCLUDES += -IDrivers/CMSIS/Include
 C_INCLUDES += -IDrivers/CMSIS/Device/ST/STM32F7xx/Include
-C_INCLUDES += -ITimer
 C_INCLUDES += -IFT_Esd_Widgets
 C_INCLUDES += -IFT_Eve_Hal
 C_INCLUDES += -IFT_Esd_Framework
+C_INCLUDES += -ITEST_HELLO
 
 
 # compile gcc flags
@@ -176,16 +176,6 @@ CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
 endif
-
-ifeq ($(PDEBUG), 1)
-CFLAGS += -DPDEBUG
-endif
-
-ifeq ($(APPDEBUG), 1)
-CFLAGS += -DAPPDEBUG
-endif
-
-
 
 
 # Generate dependency information
@@ -241,14 +231,6 @@ $(BUILD_DIR):
 #######################################
 clean:
 	-rm -fR $(BUILD_DIR)
-
-
-# .PHONY: flash
-# flash:
-# 		make clean
-# 		make all
-# 		st-flash write $(BUILD_DIR)/$(TARGET).bin 0x8000000
-
 flash: all
 		st-flash write $(BUILD_DIR)/$(TARGET).bin 0x8000000
 #######################################
