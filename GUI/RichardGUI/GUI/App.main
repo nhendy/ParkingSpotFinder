@@ -2,6 +2,8 @@
 <_ApplicationDocument _locked="false" defaultSignal="" displayName="" _uuid="{b972565c-f431-4110-8276-e7997bc9a4f6}" category="" icon="" comment="">
   <_ConnectionContainer _locked="false" _uuid="{6224a21a-e4d7-4ee7-b7d5-1c214f6ebd5f}" _name="Connections">
     <_Connection _locked="false" _uuid="{10d4ae0d-362c-489c-a721-f7503097384e}" targetObject="{424b1749-9f6d-4add-a52d-b6de31defea6}" connectionType="SignalSlot" sourceConnector="KeyPadBack" sourceObject="{9de2ea5a-8209-4c9d-a28d-afbb9742fcfa}" _name="Connection" targetConnector="_switch"/>
+    <_Connection _locked="false" _uuid="{28b23f39-5219-4f88-90b2-0fa286d65f1f}" targetObject="{5ed7bff7-2f33-43ce-87eb-200d05deab0c}" connectionType="SignalSlot" sourceConnector="Confirmation" sourceObject="{9de2ea5a-8209-4c9d-a28d-afbb9742fcfa}" _name="Connection" targetConnector="getParkingSpotID"/>
+    <_Connection _locked="false" _uuid="{2ae430de-6ae3-4b4f-9ca6-010b2c8ace47}" targetObject="{5ed7bff7-2f33-43ce-87eb-200d05deab0c}" connectionType="SignalSlot" sourceConnector="Confirmation" sourceObject="{9de2ea5a-8209-4c9d-a28d-afbb9742fcfa}" _name="Connection" targetConnector="_switch"/>
     <_Connection _locked="false" _uuid="{bfc43126-cf46-49b4-8f7f-f3b697faec86}" targetObject="{424b1749-9f6d-4add-a52d-b6de31defea6}" connectionType="SignalSlot" sourceConnector="signal" sourceObject="{90303cd0-741d-46a5-8629-00c6a66e5dae}" _name="Connection" targetConnector="_switch"/>
     <_Connection _locked="false" _uuid="{ed7c038f-273b-483e-b70f-5f68febdb153}" targetObject="{9de2ea5a-8209-4c9d-a28d-afbb9742fcfa}" connectionType="SignalSlot" sourceConnector="keyPad" sourceObject="{424b1749-9f6d-4add-a52d-b6de31defea6}" _name="Connection" targetConnector="_switch"/>
   </_ConnectionContainer>
@@ -9,12 +11,17 @@
     <_LogicBlockSlot _y="5" _locked="false" _uuid="{90303cd0-741d-46a5-8629-00c6a66e5dae}" _x="-715" _displayName="" _name="Start"/>
   </_NodeContainer>
   <_PageContainer _locked="false" _uuid="{06172ec8-ac6d-4559-9e6f-91fb0caa7fc7}" _name="Pages">
-    <MainPage _y="135" _locked="false" _uuid="{424b1749-9f6d-4add-a52d-b6de31defea6}" _x="-413" _z="0" _name="MainPage">
+    <MainPage _y="258" _locked="false" _uuid="{424b1749-9f6d-4add-a52d-b6de31defea6}" _x="-497" _z="0" _name="MainPage">
       <__Properties>
         <_persistence type="bool">false</_persistence>
       </__Properties>
     </MainPage>
-    <YesPage _y="297" _locked="false" _uuid="{9de2ea5a-8209-4c9d-a28d-afbb9742fcfa}" _x="-426" _z="0" _name="YesPage">
+    <Confirmation _y="420" _locked="false" _uuid="{5ed7bff7-2f33-43ce-87eb-200d05deab0c}" _x="-352" _z="0" _name="Confirmation">
+      <__Properties>
+        <_persistence type="bool">false</_persistence>
+      </__Properties>
+    </Confirmation>
+    <YesPage _y="431" _locked="false" _uuid="{9de2ea5a-8209-4c9d-a28d-afbb9742fcfa}" _x="-633" _z="0" _name="YesPage">
       <__Properties>
         <_persistence type="bool">false</_persistence>
       </__Properties>
