@@ -1,0 +1,52 @@
+<!DOCTYPE _PageDocument>
+<_PageDocument _locked="false" defaultSignal="" displayName="" _uuid="{7e42e173-3a5a-4b59-8570-ddde3e1ff574}" category="" icon="" comment="">
+  <_ActorContainer _locked="false" _uuid="{6dba8f08-a029-44d2-bf4e-5b56fd7b8a17}" _name="Actors"/>
+  <_ConnectionContainer _locked="false" _uuid="{60724740-8c44-4bd1-ab36-3ce5090f7819}" _name="Connections">
+    <_Connection _locked="false" _uuid="{0490b000-a2ec-4834-8b29-706e17563673}" targetObject="{df873d22-6f41-4410-a32f-1e24726f84ec}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{5593d766-c990-468f-8133-1544a36f54a4}" _name="Connection" targetConnector="slot"/>
+  </_ConnectionContainer>
+  <_NodeContainer _locked="false" _uuid="{507cd5e2-9a29-4842-ad6f-b6be8bd2a861}" _name="Nodes">
+    <_LogicBlockSignal _y="305" _locked="false" _uuid="{df873d22-6f41-4410-a32f-1e24726f84ec}" _x="-66" _displayName="" _name="keyPad"/>
+  </_NodeContainer>
+  <_WidgetContainer _locked="false" _uuid="{b0e9f760-fa9e-4576-a068-e4bb34e865c9}" _name="Widgets">
+    <Ft_Esd_PushButton _y="296" _locked="false" _uuid="{5593d766-c990-468f-8133-1544a36f54a4}" _x="-317" _z="4" _name="MainPage_Yes">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="int">250</X>
+        <Y type="double">280</Y>
+        <Width type="int">100</Width>
+        <Height type="int">50</Height>
+        <Font type="String">27</Font>
+        <Text type="String">Yes</Text>
+        <Primary type="String">1</Primary>
+      </__Properties>
+    </Ft_Esd_PushButton>
+    <Ft_Esd_Label _y="399" _locked="false" _uuid="{2c33284d-e11f-40c4-9b1a-6a365d568f3b}" _x="98" _z="4.5" _name="ESD Label">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="int">31</Font>
+        <Text type="String">Have you reserved a spot?</Text>
+        <X type="int">250</X>
+        <Y type="int">150</Y>
+        <Width type="int">300</Width>
+        <Height type="int">50</Height>
+        <AlignX type="String">OPT_ALIGN_CENTER</AlignX>
+        <AlignY type="String">OPT_ALIGN_TOP</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+    <Ft_Esd_PushButton _y="672" _locked="false" _uuid="{f89399a9-b0a7-412e-b881-0108b8dba7f7}" _x="-137" _z="5" _name="MainPage_No">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="int">450</X>
+        <Y type="int">280</Y>
+        <Width type="int">100</Width>
+        <Height type="int">50</Height>
+        <Font type="String">27</Font>
+        <Text type="String">No</Text>
+        <Primary type="String">1</Primary>
+      </__Properties>
+    </Ft_Esd_PushButton>
+  </_WidgetContainer>
+</_PageDocument>
