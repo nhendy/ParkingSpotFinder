@@ -1,21 +1,19 @@
 <!DOCTYPE _ProjectRoot>
-<_ProjectRoot _ESDVersion="30000" _defaultEveModule="ME810A-WH70R(800x480)" _locked="false" _name="Project" _uuid="{874974d8-bf2c-4e85-9c02-33f63f2084ac}">
-  <_ProjectRootLink type="_ProjectRoot" fileName="%ESD30_LIBRARIES%/FT_Esd_Widgets/FT_Esd_Widgets.esd3" _locked="false" _name="FT_Esd_Widgets.esd3" _uuid="{3d951903-7fdf-45ac-a36f-5817b369bef0}">
+<_ProjectRoot _locked="false" _uuid="{874974d8-bf2c-4e85-9c02-33f63f2084ac}" _defaultEveModule="ME810A-WH70R(800x480)" _ESDVersion="30000" _name="Project">
+  <_ProjectRootLink _locked="false" _uuid="{3d951903-7fdf-45ac-a36f-5817b369bef0}" fileName="%ESD30_LIBRARIES%/FT_Esd_Widgets/FT_Esd_Widgets.esd3" _name="FT_Esd_Widgets.esd3" type="_ProjectRoot">
     <__Properties>
       <_target type="String">Default</_target>
     </__Properties>
   </_ProjectRootLink>
-  <_ProjectFileResource fileName="App.c" _locked="false" _name="App.c" _uuid="{269eefac-f6c8-46e5-b498-fa33692ca826}">
-    <_SourceFile _locked="false" _name="Source File" _uuid="{5a82338d-8eca-41f4-bf57-cfc5b9969256}"/>
+  <_ProjectFileResource _locked="false" _uuid="{269eefac-f6c8-46e5-b498-fa33692ca826}" fileName="App.c" _name="App.c">
+    <_SourceFile _locked="false" _uuid="{5a82338d-8eca-41f4-bf57-cfc5b9969256}" _name="Source File"/>
   </_ProjectFileResource>
-  <_ProjectFileLink type="_ApplicationDocument" fileName="App.main" _locked="false" _name="App.main" _uuid="{7879d4ba-6817-4213-a456-606f6a25230e}"/>
-  <_ProjectFileLink type="_PageDocument" fileName="MainMenu" _locked="false" _name="MainMenu" _uuid="{3a1e40d0-5da4-499a-9981-8fdb3ded1698}"/>
-  <_ProjectFileResource fileName="MainMenu.c" _locked="false" _name="MainMenu.c" _uuid="{16ea6867-72f5-48a4-8df0-f361b9675f9c}">
-    <_SourceFile _locked="false" _name="Source File" _uuid="{d57243c3-8cdf-4244-8f00-594ff7c80974}"/>
+  <_ProjectFileLink _locked="false" _uuid="{7879d4ba-6817-4213-a456-606f6a25230e}" fileName="App.main" _name="App.main" type="_ApplicationDocument"/>
+  <_ProjectFileLink _locked="false" _uuid="{3a1e40d0-5da4-499a-9981-8fdb3ded1698}" fileName="MainMenu" _name="MainMenu" type="_PageDocument"/>
+  <_ProjectFileResource _locked="false" _uuid="{16ea6867-72f5-48a4-8df0-f361b9675f9c}" fileName="MainMenu.c" _name="MainMenu.c">
+    <_SourceFile _locked="false" _uuid="{d57243c3-8cdf-4244-8f00-594ff7c80974}" _name="Source File"/>
   </_ProjectFileResource>
-  <_ProjectFileLink type="_PageDocument" fileName="NoPage.page" _locked="false" _name="NoPage.page" _uuid="{11785b1f-c11b-42c4-b73d-24dae503640c}"/>
-  <_ProjectFileResource fileName="YesPage.c" _locked="false" _name="YesPage.c" _uuid="{398b3428-8a01-48d5-8437-926d4135d5c9}">
-    <_SourceFile _locked="false" _name="Source File" _uuid="{9d784498-925d-4123-81b7-522714ff1afe}"/>
-  </_ProjectFileResource>
-  <_ProjectFileLink type="_PageDocument" fileName="YesPage.page" _locked="false" _name="YesPage.page" _uuid="{351bfb56-9c6e-4cd1-b9c0-32cb389046a4}"/>
+  <_ProjectFileLink _locked="false" _uuid="{11785b1f-c11b-42c4-b73d-24dae503640c}" fileName="NoPage.page" _name="NoPage.page" type="_PageDocument"/>
+  <_ProjectFileLink _locked="false" _uuid="{9b5d3ceb-58ed-4cdd-8f33-ef76292802a8}" fileName="NoSpotsAvailable.page" _name="NoSpotsAvailable.page" type="_PageDocument"/>
+  <_ProjectFileLink _locked="false" _uuid="{351bfb56-9c6e-4cd1-b9c0-32cb389046a4}" fileName="YesPage.page" _name="YesPage.page" type="_PageDocument"/>
 </_ProjectRoot>

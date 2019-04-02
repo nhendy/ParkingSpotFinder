@@ -9,6 +9,8 @@ Header
 
 #include "Ft_Esd.h"
 #include "Ft_Esd_Label.h"
+#include "Ft_Esd_NumericLabel.h"
+#include "Ft_Esd_PushButton.h"
 #include "Ft_Esd_Theme.h"
 
 #ifndef ESD_LOGIC
@@ -29,7 +31,31 @@ ESD_PAGE(YesPage, Include = "YesPage.h", Callback)
 typedef struct
 {
 	void *Parent;
+	ESD_SIGNAL(Back)
+	void(* Back)(void *context);
+	ESD_VARIABLE(Back_1, Type = ft_bool_t, Private)
+	ft_bool_t Back_1;
+	ESD_WRITER(BackChanged, Type = ft_bool_t)
+	void(* BackChanged)(void *context, ft_bool_t value);
+	ESD_SIGNAL(Set_2_)
+	void(* Set_2_)(void *context);
+	ESD_SIGNAL(__1)
+	void(* __1)(void *context);
+	ESD_VARIABLE(Variable, Type = int, Default = 123, Private)
+	int Variable;
 	Ft_Esd_Label ESD_Label;
+	Ft_Esd_PushButton ESD_Push_Button;
+	Ft_Esd_PushButton Num2;
+	Ft_Esd_PushButton __2;
+	Ft_Esd_PushButton __3;
+	Ft_Esd_PushButton __4;
+	Ft_Esd_PushButton __5;
+	Ft_Esd_PushButton __6;
+	Ft_Esd_PushButton __7;
+	Ft_Esd_PushButton __8;
+	Ft_Esd_PushButton Enter;
+	Ft_Esd_PushButton Num1;
+	Ft_Esd_NumericLabel ESD_Numeric_Label;
 } YesPage;
 
 void YesPage__Initializer(YesPage *context);

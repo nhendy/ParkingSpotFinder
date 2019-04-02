@@ -1,0 +1,12 @@
+<!DOCTYPE _ApplicationDocument>
+<_ApplicationDocument _locked="false" defaultSignal="" displayName="" _uuid="{b0736338-f91e-4cb8-b2bf-0152c1fb6a98}" category="" icon="" comment="">
+  <_ConnectionContainer _locked="false" _uuid="{9bb869e1-22ce-4132-9d0a-fd866c48b008}" _name="Connections"/>
+  <_NodeContainer _locked="false" _uuid="{799eb9ab-8527-478d-a317-ed8552cfbac7}" _name="Nodes"/>
+  <_PageContainer _locked="false" _uuid="{2eea3fa0-85b2-4507-9bd7-72edb6a01179}" _name="Pages">
+    <MainPage _y="146" _locked="false" _uuid="{95023229-3881-4faf-b763-c7d8b7cfa8c9}" _x="-116" _z="0" _name="Main Page">
+      <__Properties>
+        <_persistence type="bool">false</_persistence>
+      </__Properties>
+    </MainPage>
+  </_PageContainer>
+</_ApplicationDocument>

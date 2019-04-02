@@ -10,7 +10,8 @@ Header
 #include "Ft_Esd.h"
 #include "MainMenu.h"
 #include "NoPage.h"
-#include "YesPage.h"
+#include "NoSpotsAvailable.h"
+#include "YesPage3.h"
 
 #ifndef ESD_LOGIC
 #define ESD_LOGIC(name, ...)
@@ -31,12 +32,16 @@ typedef struct
 {
 	void *Parent;
 	int _ActivePage;
+	ESD_VARIABLE(NumberOfParkingSpotsAvailable, Type = int, Default = 10, Public)
+	int NumberOfParkingSpotsAvailable;
 	MainMenu *MainMenu;
 	int MainMenu__Active;
-	YesPage *YesPage;
-	int YesPage__Active;
 	NoPage *NoPage;
 	int NoPage__Active;
+	NoSpotsAvailable *NoSpotsAvailable;
+	int NoSpotsAvailable__Active;
+	YesPage3 *YesPage3;
+	int YesPage3__Active;
 } App;
 
 void App__Initializer(App *context);

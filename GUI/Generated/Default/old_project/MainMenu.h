@@ -36,12 +36,13 @@ typedef struct
 	void(* No)(void *context);
 	ESD_VARIABLE(No_1, Type = ft_bool_t, ReadOnly)
 	ft_bool_t No_1;
-	ESD_WRITER(NoChanged, Type = ft_bool_t)
-	void(* NoChanged)(void *context, ft_bool_t value);
 	ESD_VARIABLE(Yes_1, Type = ft_bool_t, ReadOnly)
 	ft_bool_t Yes_1;
+	ESD_WRITER(NoChanged, Type = ft_bool_t)
+	void(* NoChanged)(void *context, ft_bool_t value);
 	ESD_WRITER(YesChamged, Type = ft_bool_t)
 	void(* YesChamged)(void *context, ft_bool_t value);
+	Ft_Esd_Label ESD_Label;
 	Ft_Esd_Label ESD3_Label;
 	Ft_Esd_PushButton ESD_Push_Button;
 	Ft_Esd_PushButton ESD_Push_Button_2;

@@ -1,0 +1,22 @@
+<!DOCTYPE _PageDocument>
+<_PageDocument _locked="false" defaultSignal="" displayName="" _uuid="{a45d202f-f0be-4db2-ac43-798717971652}" category="" icon="" comment="">
+  <_ActorContainer _locked="false" _uuid="{1d19e286-a301-4f3c-863c-15dcee24d3b2}" _name="Actors"/>
+  <_ConnectionContainer _locked="false" _uuid="{855fa0ae-fc56-44a6-a836-b8c964c37867}" _name="Connections"/>
+  <_NodeContainer _locked="false" _uuid="{f17b0435-a35a-4f01-b31f-40237a6d0c12}" _name="Nodes"/>
+  <_WidgetContainer _locked="false" _uuid="{244f6255-d748-49e0-916f-735678c05de7}" _name="Widgets">
+    <Ft_Esd_Label _y="0" _locked="false" _uuid="{96951d89-f195-40a8-b865-47f75b29e777}" _x="0" _z="0" _name="ESD3 Label">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="int">31</Font>
+        <Text type="String">ESD3</Text>
+        <X type="int">6</X>
+        <Y type="String">0</Y>
+        <Width type="String">120</Width>
+        <Height type="String">36</Height>
+        <AlignX type="String">OPT_ALIGN_LEFT</AlignX>
+        <AlignY type="String">OPT_ALIGN_TOP</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+  </_WidgetContainer>
+</_PageDocument>

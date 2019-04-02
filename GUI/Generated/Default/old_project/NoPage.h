@@ -10,6 +10,7 @@ Header
 #include "Ft_Esd.h"
 #include "Ft_Esd_Label.h"
 #include "Ft_Esd_NumericLabel.h"
+#include "Ft_Esd_PushButton.h"
 #include "Ft_Esd_Theme.h"
 
 #ifndef ESD_LOGIC
@@ -32,7 +33,14 @@ typedef struct
 	void *Parent;
 	ESD_INPUT(Message, Type = int)
 	int(* Message)(void *context);
+	ESD_VARIABLE(Back, Type = ft_bool_t, Private)
+	ft_bool_t Back;
+	ESD_WRITER(BackChanged, Type = ft_bool_t)
+	void(* BackChanged)(void *context, ft_bool_t value);
+	ESD_SIGNAL(Back_1)
+	void(* Back_1)(void *context);
 	Ft_Esd_NumericLabel ESD_Numeric_Label;
+	Ft_Esd_PushButton ESD_Push_Button;
 	Ft_Esd_Label ESD_Label;
 } NoPage;
 
