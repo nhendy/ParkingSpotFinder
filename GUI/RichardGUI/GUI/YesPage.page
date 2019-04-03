@@ -3,6 +3,7 @@
   <_ActorContainer _locked="false" _uuid="{e4c91cde-8ada-48df-914a-ff12a0b17ac4}" _name="Actors"/>
   <_ConnectionContainer _locked="false" _uuid="{c0578214-f480-436d-81d7-96c319ce4d97}" _name="Connections">
     <_Connection _locked="false" _uuid="{017e4034-6f39-4d81-9e92-b9aa2d6ebe00}" targetObject="{50745260-7d47-42cd-b24b-3d5165370606}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{086c8c57-5f88-4105-be8c-1833309dfd47}" _name="Connection" targetConnector="write"/>
+    <_Connection _locked="false" _uuid="{0381fb6d-2ad4-45d4-8bb2-bac7d82d2959}" targetObject="{2a70ed3d-dba9-4626-9894-479685a06543}" connectionType="SlotSlot" sourceConnector="_call" sourceObject="{62d0cf32-5f8d-489d-8a48-5f0e1a6337d5}" _name="Connection" targetConnector="slot"/>
     <_Connection _locked="false" _uuid="{09919451-d98b-4934-bf36-6a239578e864}" targetObject="{f512bfbc-12c8-4eef-ae7d-7a6394446ccd}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{86ead43b-11f0-442f-8921-d4654ba07f1c}" _name="Connection" targetConnector="write"/>
     <_Connection _locked="false" _uuid="{09a18377-ab87-44dd-bfb9-2e9d2701a5e8}" targetObject="{86ed1d67-09e4-4256-b8cc-c46098d0a58d}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{a56c883b-2f01-4757-a5cf-641907ff5554}" _name="Connection" targetConnector="value"/>
     <_Connection _locked="false" _uuid="{0b900436-d4f7-47da-97a6-9cc72d304c60}" targetObject="{c8836e9c-f3de-43e5-8dec-ca70417545b5}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{ecc1eb0a-5b97-43f1-b2d4-093048a307f0}" _name="Connection" targetConnector="write"/>
@@ -17,8 +18,8 @@
     <_Connection _locked="false" _uuid="{4660cf9c-7637-4d90-be66-256d1d823708}" targetObject="{83990d4f-6384-410d-ba43-595bd59ebb60}" connectionType="VariableInput" sourceConnector="value" sourceObject="{460334ef-37d5-45fb-b53f-5d678df22c6f}" _name="Connection" targetConnector="right"/>
     <_Connection _locked="false" _uuid="{4865300e-2ea5-47e2-854e-4281edfa45da}" targetObject="{86ed1d67-09e4-4256-b8cc-c46098d0a58d}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{c8836e9c-f3de-43e5-8dec-ca70417545b5}" _name="Connection" targetConnector="value"/>
     <_Connection _locked="false" _uuid="{4a9d5603-bde8-4d18-8a5b-fdc60b25efb2}" targetObject="{75dd3c05-6ac3-4d29-a4b9-3aec10a44641}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{0219105a-93c5-4abf-a715-cb237f273447}" _name="Connection" targetConnector="write"/>
+    <_Connection _locked="false" _uuid="{5162fe57-2562-47a2-9929-73bd74941a7b}" targetObject="{62d0cf32-5f8d-489d-8a48-5f0e1a6337d5}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{4c5fbf19-41b0-40bf-bbef-75a76b4df815}" _name="Connection" targetConnector="_call"/>
     <_Connection _locked="false" _uuid="{54632f6d-2800-41b6-896b-2e7fb6ba5579}" targetObject="{f512bfbc-12c8-4eef-ae7d-7a6394446ccd}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{12e7053e-6c9a-4567-b6d6-ab73f37ef27a}" _name="Connection" targetConnector="write"/>
-    <_Connection _locked="false" _uuid="{557030a2-8527-4a7f-8925-f33b7d64bb11}" targetObject="{52cefe5e-acbb-4cbd-8585-99d896af9044}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{4c5fbf19-41b0-40bf-bbef-75a76b4df815}" _name="Connection" targetConnector="slot"/>
     <_Connection _locked="false" _uuid="{595bb5b7-0dad-4632-a760-d442bda4bb45}" targetObject="{f512bfbc-12c8-4eef-ae7d-7a6394446ccd}" connectionType="OutputInput" sourceConnector="result" sourceObject="{83990d4f-6384-410d-ba43-595bd59ebb60}" _name="Connection" targetConnector="value"/>
     <_Connection _locked="false" _uuid="{59ff9195-790d-400b-aed0-c485406f1d18}" targetObject="{e697a6e0-41a0-49a0-84ba-33a2bfba50d6}" connectionType="SignalSlot" sourceConnector="Pushed" sourceObject="{4fd8e3e7-9746-4981-852c-c35737699ac9}" _name="Connection" targetConnector="write"/>
     <_Connection _locked="false" _uuid="{5e1ee31a-f594-421a-98fb-e72d033216d1}" targetObject="{dc2e700b-fee6-4e85-ba0c-805bf6d4c9b0}" connectionType="VariableInput" sourceConnector="value" sourceObject="{fc61ed8c-165b-4b68-ad29-b2c70ea57cc2}" _name="Connection" targetConnector="Value"/>
@@ -171,8 +172,10 @@
     <_LogicVariableWriter _y="977" _type="int" _locked="false" _uuid="{a56c883b-2f01-4757-a5cf-641907ff5554}" _x="393" _comment="" _name="Set Variable 2"/>
     <_LogicVariableWriter _y="1177" _type="int" _locked="false" _uuid="{8c95142b-14b4-4a34-a6a2-9273c55ad465}" _x="427" _comment="" _name="DecDigit"/>
     <_LogicBlockSignal _y="1269" _locked="false" _uuid="{59b674d1-0091-4a5d-b32b-aa9edbd1b070}" _x="-664" _displayName="" _name="KeyPadBack"/>
+    <_LogicBlockInput _y="1326" _type="int" _locked="false" _uuid="{a1ff13e8-4198-4600-a491-1528bedaeca0}" _x="670" _displayName="" _comment="" _name="Input"/>
     <YesPage_Cancel_Pushed _y="1384" _locked="false" _uuid="{e5a1bd0d-58e9-42f0-87b4-8ab91a8347d5}" _x="-158" _name="Cancel Pushed"/>
-    <_LogicBlockSignal _y="1390" _locked="false" _uuid="{52cefe5e-acbb-4cbd-8585-99d896af9044}" _x="374" _displayName="" _name="KeyPadOK"/>
+    <_LogicBlockSignal _y="1450" _locked="false" _uuid="{2a70ed3d-dba9-4626-9894-479685a06543}" _x="611" _displayName="" _name="Confirmation"/>
+    <YesPage_OK_Pushed _y="1455" _locked="false" _uuid="{62d0cf32-5f8d-489d-8a48-5f0e1a6337d5}" _x="386" _name="YesPage_OK_Pushed"/>
   </_NodeContainer>
   <_WidgetContainer _locked="false" _uuid="{3779a037-b4b2-497c-bfc8-ac49cf9f20b0}" _name="Widgets">
     <Ft_Esd_Label _y="497" _locked="false" _uuid="{57e6e07f-b6ee-42f7-b14c-cbb29b2c9787}" _x="-759" _z="0" _name="ESD Label">
@@ -180,8 +183,8 @@
         <_active type="bool">true</_active>
         <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
         <Font type="String">27</Font>
-        <Text type="String">Welcome to parking spot finder, since you have a parking ID, please procees to parking ID locoation.</Text>
-        <X type="double">22.656854249492426</X>
+        <Text type="String">Welcome to parking spot finder, since you have a parking ID, please proceed to parking ID locoation.</Text>
+        <X type="int">23</X>
         <Y type="double">99</Y>
         <Width type="double">772</Width>
         <Height type="double">27</Height>
@@ -343,7 +346,7 @@
         <Primary type="String">1</Primary>
       </__Properties>
     </Ft_Esd_PushButton>
-    <Ft_Esd_PushButton _y="1335" _locked="false" _uuid="{4c5fbf19-41b0-40bf-bbef-75a76b4df815}" _x="103" _z="0" _name="OK">
+    <Ft_Esd_PushButton _y="1339" _locked="false" _uuid="{4c5fbf19-41b0-40bf-bbef-75a76b4df815}" _x="141" _z="0" _name="OK">
       <__Properties>
         <_active type="bool">true</_active>
         <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
@@ -378,7 +381,7 @@
         <Width type="double">122</Width>
         <Height type="double">34</Height>
         <Font type="int">29</Font>
-        <Value type="int">0</Value>
+        <Value type="String">0</Value>
       </__Properties>
     </Ft_Esd_NumericLabel>
   </_WidgetContainer>

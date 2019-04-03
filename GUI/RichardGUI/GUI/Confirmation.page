@@ -1,0 +1,81 @@
+<!DOCTYPE _PageDocument>
+<_PageDocument _locked="false" defaultSignal="" displayName="" _uuid="{cb8963d4-5041-449e-800d-7ea224d2869f}" category="" icon="" comment="">
+  <_ActorContainer _locked="false" _uuid="{7e87f7c3-e534-4d4f-9d13-c1b74c1cfe40}" _name="Actors"/>
+  <_ConnectionContainer _locked="false" _uuid="{c89cfec6-a873-40f4-a719-3b362f759dad}" _name="Connections">
+    <_Connection _locked="false" _uuid="{016184e3-fe63-4e97-8ad8-b0152df74716}" targetObject="{5319186e-cff4-43d8-97fb-090e16fe18a4}" connectionType="OutputInput" sourceConnector="result" sourceObject="{2fe9dc6e-17b3-402a-ab55-4996cc969378}" _name="Connection" targetConnector="_active"/>
+    <_Connection _locked="false" _uuid="{139e2f9d-5572-4ce3-8519-866063d87da1}" targetObject="{7188f263-8cbf-439d-ad1d-b672ab96dc94}" connectionType="SignalSlot" sourceConnector="signal" sourceObject="{7f4754e3-dbff-490a-9e99-788665cef521}" _name="Connection" targetConnector="write"/>
+    <_Connection _locked="false" _uuid="{3e80acbc-5e11-48ef-98b9-85f0baf9de0f}" targetObject="{a1419438-37a0-4972-9ce8-7c840cfbcb27}" connectionType="VariableInput" sourceConnector="value" sourceObject="{d8d07675-8b9a-4380-94c7-e304c1a6f042}" _name="Connection" targetConnector="_active"/>
+    <_Connection _locked="false" _uuid="{9653b8c3-0940-4833-b495-f491d0bf17f6}" targetObject="{d8d07675-8b9a-4380-94c7-e304c1a6f042}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{7188f263-8cbf-439d-ad1d-b672ab96dc94}" _name="Connection" targetConnector="value"/>
+    <_Connection _locked="false" _uuid="{96aee16e-d6a5-46ce-922b-1770d61c3cc3}" targetObject="{a1419438-37a0-4972-9ce8-7c840cfbcb27}" connectionType="VariableInput" sourceConnector="value" sourceObject="{07313b8a-9ced-4e32-bee7-c81d13678fd6}" _name="Connection" targetConnector="Value"/>
+    <_Connection _locked="false" _uuid="{9c1ccce6-b6c7-474b-b839-2542e999230c}" targetObject="{f99ca29f-4b8c-44e6-99f2-780ca81d69c4}" connectionType="SignalSlot" sourceConnector="signal" sourceObject="{7f4754e3-dbff-490a-9e99-788665cef521}" _name="Connection" targetConnector="_call"/>
+    <_Connection _locked="false" _uuid="{ca4f6abc-c76b-46dd-a7fd-8acfd5b12070}" targetObject="{2fe9dc6e-17b3-402a-ab55-4996cc969378}" connectionType="VariableInput" sourceConnector="value" sourceObject="{d8d07675-8b9a-4380-94c7-e304c1a6f042}" _name="Connection" targetConnector="value"/>
+    <_Connection _locked="false" _uuid="{d49dde17-482e-46ab-bd74-5f15ba21c8c7}" targetObject="{942d5512-d80b-4fd2-a06a-2dc1ae9e288a}" connectionType="VariableInput" sourceConnector="value" sourceObject="{d8d07675-8b9a-4380-94c7-e304c1a6f042}" _name="Connection" targetConnector="_active"/>
+  </_ConnectionContainer>
+  <_NodeContainer _locked="false" _uuid="{bb7bc532-cad4-48a6-a50c-e2a6623ae36b}" _name="Nodes">
+    <_LogicBlockVariable _y="-580" _type="ft_bool_t" _locked="false" _uuid="{d8d07675-8b9a-4380-94c7-e304c1a6f042}" _x="232" _displayName="" _comment="" _name="SpotAvailability">
+      <__Properties>
+        <access type="String">Private</access>
+      </__Properties>
+    </_LogicBlockVariable>
+    <_LogicBlockSlot _y="-568" _locked="false" _uuid="{7f4754e3-dbff-490a-9e99-788665cef521}" _x="-358" _displayName="" _name="getParkingSpotID"/>
+    <_LogicVariableWriter _y="-567" _type="ft_bool_t" _locked="false" _uuid="{7188f263-8cbf-439d-ad1d-b672ab96dc94}" _x="-43" _comment="" _name="Set Variable 2">
+      <__Properties>
+        <value type="bool">true</value>
+      </__Properties>
+    </_LogicVariableWriter>
+    <Confirmation_getParkingSpotID_Signal _y="-473" _locked="false" _uuid="{f99ca29f-4b8c-44e6-99f2-780ca81d69c4}" _x="-101" _name="getParkingSpotID Signal"/>
+    <_LogicOperatorUnary _y="-391" _type="ft_bool_t" _locked="false" _uuid="{2fe9dc6e-17b3-402a-ab55-4996cc969378}" _x="-75" _comment="" _name="Unary Operator">
+      <__Properties>
+        <operator type="String">!</operator>
+      </__Properties>
+    </_LogicOperatorUnary>
+    <_LogicVariableWriter _y="98" _type="ft_bool_t" _locked="false" _uuid="{b287666b-4443-4150-9399-d335663db0d6}" _x="-198" _comment="" _name="Set Variable"/>
+    <_LogicBlockVariable _y="211" _type="int" _locked="false" _uuid="{07313b8a-9ced-4e32-bee7-c81d13678fd6}" _x="-160" _displayName="" _comment="" _name="ParkingSpotNumber">
+      <__Properties>
+        <access type="String">Private</access>
+      </__Properties>
+    </_LogicBlockVariable>
+  </_NodeContainer>
+  <_WidgetContainer _locked="false" _uuid="{54e15bda-3c5e-49ac-82a9-7d1d020a31df}" _name="Widgets">
+    <Ft_Esd_Label _y="-158" _locked="false" _uuid="{942d5512-d80b-4fd2-a06a-2dc1ae9e288a}" _x="101" _z="1" _name="ParkingSpotFound">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="int">30</Font>
+        <Text type="String">Thank you, the nearest spot is no.</Text>
+        <X type="int">100</X>
+        <Y type="int">150</Y>
+        <Width type="int">400</Width>
+        <Height type="int">40</Height>
+        <AlignX type="String">OPT_ALIGN_CENTER</AlignX>
+        <AlignY type="String">OPT_ALIGN_CENTER</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+    <Ft_Esd_NumericLabel _y="118" _locked="false" _uuid="{a1419438-37a0-4972-9ce8-7c840cfbcb27}" _x="180" _z="2" _name="ESD Numeric Label">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="double">609</X>
+        <Y type="double">150</Y>
+        <Width type="String">120</Width>
+        <Height type="int">40</Height>
+        <Font type="int">31</Font>
+        <Value type="String">0</Value>
+      </__Properties>
+    </Ft_Esd_NumericLabel>
+    <Ft_Esd_Label _y="-161" _locked="false" _uuid="{5319186e-cff4-43d8-97fb-090e16fe18a4}" _x="-135" _z="3" _name="ESD Label">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="int">30</Font>
+        <Text type="String">There are no available spots</Text>
+        <X type="double">181</X>
+        <Y type="double">225</Y>
+        <Width type="int">400</Width>
+        <Height type="int">40</Height>
+        <AlignX type="String">OPT_ALIGN_CENTER</AlignX>
+        <AlignY type="String">OPT_ALIGN_CENTER</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+  </_WidgetContainer>
+</_PageDocument>
