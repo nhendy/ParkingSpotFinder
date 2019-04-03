@@ -172,26 +172,22 @@
     <_LogicVariableWriter _y="977" _type="int" _locked="false" _uuid="{a56c883b-2f01-4757-a5cf-641907ff5554}" _x="393" _comment="" _name="Set Variable 2"/>
     <_LogicVariableWriter _y="1177" _type="int" _locked="false" _uuid="{8c95142b-14b4-4a34-a6a2-9273c55ad465}" _x="427" _comment="" _name="DecDigit"/>
     <_LogicBlockSignal _y="1269" _locked="false" _uuid="{59b674d1-0091-4a5d-b32b-aa9edbd1b070}" _x="-664" _displayName="" _name="KeyPadBack"/>
-    <_LogicBlockInput _y="1326" _type="int" _locked="false" _uuid="{a1ff13e8-4198-4600-a491-1528bedaeca0}" _x="670" _displayName="" _comment="" _name="Input"/>
     <YesPage_Cancel_Pushed _y="1384" _locked="false" _uuid="{e5a1bd0d-58e9-42f0-87b4-8ab91a8347d5}" _x="-158" _name="Cancel Pushed"/>
-    <_LogicBlockSignal _y="1450" _locked="false" _uuid="{2a70ed3d-dba9-4626-9894-479685a06543}" _x="611" _displayName="" _name="Confirmation"/>
-    <YesPage_OK_Pushed _y="1455" _locked="false" _uuid="{62d0cf32-5f8d-489d-8a48-5f0e1a6337d5}" _x="386" _name="YesPage_OK_Pushed"/>
+    <_LogicBlockSignal _y="1454" _locked="false" _uuid="{2a70ed3d-dba9-4626-9894-479685a06543}" _x="622" _displayName="" _name="Confirmation"/>
+    <YesPage_OK_Pushed _y="1455" _locked="false" _uuid="{62d0cf32-5f8d-489d-8a48-5f0e1a6337d5}" _x="387" _name="YesPage_OK_Pushed"/>
   </_NodeContainer>
   <_WidgetContainer _locked="false" _uuid="{3779a037-b4b2-497c-bfc8-ac49cf9f20b0}" _name="Widgets">
-    <Ft_Esd_Label _y="497" _locked="false" _uuid="{57e6e07f-b6ee-42f7-b14c-cbb29b2c9787}" _x="-759" _z="0" _name="ESD Label">
+    <Ft_Esd_Render_RectangleF _y="0" _locked="false" _uuid="{0786cdbb-bad0-4746-9e84-50cc74163f8f}" _x="0" _z="-1" _name="ESD Rectangle (Fixed Point)">
       <__Properties>
         <_active type="bool">true</_active>
-        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
-        <Font type="String">27</Font>
-        <Text type="String">Welcome to parking spot finder, since you have a parking ID, please proceed to parking ID locoation.</Text>
-        <X type="int">23</X>
-        <Y type="double">99</Y>
-        <Width type="double">772</Width>
-        <Height type="double">27</Height>
-        <AlignX type="String">OPT_ALIGN_LEFT</AlignX>
-        <AlignY type="String">OPT_ALIGN_TOP</AlignY>
+        <x type="double">0</x>
+        <y type="double">0</y>
+        <width type="double">800</width>
+        <height type="double">480</height>
+        <radius type="String">4</radius>
+        <color type="Color">#c28e0e</color>
       </__Properties>
-    </Ft_Esd_Label>
+    </Ft_Esd_Render_RectangleF>
     <Ft_Esd_PushButton _y="509" _locked="false" _uuid="{4fd8e3e7-9746-4981-852c-c35737699ac9}" _x="-179" _z="inf" _name="Num2">
       <__Properties>
         <_active type="bool">true</_active>
@@ -215,19 +211,6 @@
         <Height type="int">40</Height>
         <Font type="String">27</Font>
         <Text type="String">1</Text>
-        <Primary type="String">1</Primary>
-      </__Properties>
-    </Ft_Esd_PushButton>
-    <Ft_Esd_PushButton _y="515" _locked="false" _uuid="{86ead43b-11f0-442f-8921-d4654ba07f1c}" _x="67" _z="inf" _name="3">
-      <__Properties>
-        <_active type="bool">true</_active>
-        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
-        <X type="int">430</X>
-        <Y type="int">230</Y>
-        <Width type="int">40</Width>
-        <Height type="int">40</Height>
-        <Font type="String">27</Font>
-        <Text type="String">3</Text>
         <Primary type="String">1</Primary>
       </__Properties>
     </Ft_Esd_PushButton>
@@ -333,32 +316,6 @@
         <Primary type="String">1</Primary>
       </__Properties>
     </Ft_Esd_PushButton>
-    <Ft_Esd_PushButton _y="1334" _locked="false" _uuid="{ab0e1e16-3734-4b16-aad6-dd0de6adff94}" _x="-408" _z="0" _name="Cancel">
-      <__Properties>
-        <_active type="bool">true</_active>
-        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
-        <X type="int">330</X>
-        <Y type="int">380</Y>
-        <Width type="int">40</Width>
-        <Height type="int">40</Height>
-        <Font type="String">27</Font>
-        <Text type="String">C</Text>
-        <Primary type="String">1</Primary>
-      </__Properties>
-    </Ft_Esd_PushButton>
-    <Ft_Esd_PushButton _y="1339" _locked="false" _uuid="{4c5fbf19-41b0-40bf-bbef-75a76b4df815}" _x="141" _z="0" _name="OK">
-      <__Properties>
-        <_active type="bool">true</_active>
-        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
-        <X type="int">430</X>
-        <Y type="int">380</Y>
-        <Width type="int">40</Width>
-        <Height type="int">40</Height>
-        <Font type="String">27</Font>
-        <Text type="String">OK</Text>
-        <Primary type="String">1</Primary>
-      </__Properties>
-    </Ft_Esd_PushButton>
     <Ft_Esd_PushButton _y="1343" _locked="false" _uuid="{0219105a-93c5-4abf-a715-cb237f273447}" _x="-145" _z="inf" _name="0">
       <__Properties>
         <_active type="bool">true</_active>
@@ -384,5 +341,58 @@
         <Value type="String">0</Value>
       </__Properties>
     </Ft_Esd_NumericLabel>
+    <Ft_Esd_Label _y="497" _locked="false" _uuid="{57e6e07f-b6ee-42f7-b14c-cbb29b2c9787}" _x="-759" _z="2147483647" _name="ESD Label">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="int">31</Font>
+        <Text type="String">Enter Confirmation Code</Text>
+        <X type="int">200</X>
+        <Y type="int">100</Y>
+        <Width type="int">400</Width>
+        <Height type="int">40</Height>
+        <AlignX type="String">OPT_ALIGN_CENTER</AlignX>
+        <AlignY type="String">OPT_ALIGN_CENTER</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+    <Ft_Esd_PushButton _y="515" _locked="false" _uuid="{86ead43b-11f0-442f-8921-d4654ba07f1c}" _x="67" _z="2147483647" _name="3">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="int">430</X>
+        <Y type="double">230</Y>
+        <Width type="int">40</Width>
+        <Height type="int">40</Height>
+        <Font type="String">27</Font>
+        <Text type="String">3</Text>
+        <Primary type="String">1</Primary>
+      </__Properties>
+    </Ft_Esd_PushButton>
+    <Ft_Esd_PushButton _y="1334" _locked="false" _uuid="{ab0e1e16-3734-4b16-aad6-dd0de6adff94}" _x="-408" _z="2147483647" _name="Cancel">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="int">330</X>
+        <Y type="int">380</Y>
+        <Width type="int">40</Width>
+        <Height type="int">40</Height>
+        <Font type="String">27</Font>
+        <Text type="String">C</Text>
+        <Primary type="String">1</Primary>
+      </__Properties>
+    </Ft_Esd_PushButton>
+    <Ft_Esd_PushButton _y="1339" _locked="false" _uuid="{4c5fbf19-41b0-40bf-bbef-75a76b4df815}" _x="141" _z="2147483647" _name="OK">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="int">430</X>
+        <Y type="int">380</Y>
+        <Width type="int">40</Width>
+        <Height type="int">40</Height>
+        <Font type="String">27</Font>
+        <Text type="String">OK</Text>
+        <Primary type="String">1</Primary>
+      </__Properties>
+    </Ft_Esd_PushButton>
   </_WidgetContainer>
 </_PageDocument>

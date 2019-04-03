@@ -41,11 +41,8 @@ typedef struct
 	int Digits;
 	ESD_SIGNAL(KeyPadBack)
 	void(* KeyPadBack)(void *context);
-	ESD_INPUT(Input, Type = int)
-	int(* Input)(void *context);
 	ESD_SIGNAL(Confirmation)
 	void(* Confirmation)(void *context);
-	Ft_Esd_Label ESD_Label;
 	Ft_Esd_PushButton Num2;
 	Ft_Esd_PushButton Num1;
 	Ft_Esd_PushButton __1;
@@ -54,12 +51,13 @@ typedef struct
 	Ft_Esd_PushButton __4;
 	Ft_Esd_PushButton __5;
 	Ft_Esd_PushButton __6;
-	Ft_Esd_PushButton __7;
 	Ft_Esd_PushButton Back;
+	Ft_Esd_PushButton __7;
+	Ft_Esd_NumericLabel ESD_Numeric_Label;
+	Ft_Esd_Label ESD_Label;
+	Ft_Esd_PushButton __8;
 	Ft_Esd_PushButton Cancel;
 	Ft_Esd_PushButton OK;
-	Ft_Esd_PushButton __8;
-	Ft_Esd_NumericLabel ESD_Numeric_Label;
 } YesPage;
 
 void YesPage__Initializer(YesPage *context);
