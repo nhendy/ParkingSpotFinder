@@ -9,15 +9,9 @@ C Source
 #include "FT_Esd_Primitives.h"
 
 extern void Ft_Esd_Noop(void *context);
-int YesPage_Input__Default(void *context) { return 0L; }
 
 Ft_Esd_Theme * Ft_Esd_Theme_GetCurrent();
 Ft_Esd_Theme * Ft_Esd_Theme_LightBlue();
-static const char * YesPage_ESD_Label_Text__Property(void *context) { return "Welcome to parking spot finder, since you have a parking ID, please proceed to parking ID locoation."; }
-static ft_int16_t YesPage_ESD_Label_X__Property(void *context) { return 23; }
-static ft_int16_t YesPage_ESD_Label_Y__Property(void *context) { return 99; }
-static ft_int16_t YesPage_ESD_Label_Width__Property(void *context) { return 772; }
-static ft_int16_t YesPage_ESD_Label_Height__Property(void *context) { return 27; }
 static ft_int16_t YesPage_Num2_X__Property(void *context) { return 380; }
 static ft_int16_t YesPage_Num2_Y__Property(void *context) { return 230; }
 static ft_int16_t YesPage_Num2_Width__Property(void *context) { return 40; }
@@ -28,45 +22,65 @@ static ft_int16_t YesPage_Num1_Y__Property(void *context) { return 230; }
 static ft_int16_t YesPage_Num1_Width__Property(void *context) { return 40; }
 static ft_int16_t YesPage_Num1_Height__Property(void *context) { return 40; }
 static const char * YesPage_Num1_Text__Property(void *context) { return "1"; }
-static ft_int16_t YesPage___1_X__Property(void *context) { return 430; }
-static ft_int16_t YesPage___1_Y__Property(void *context) { return 230; }
+static ft_int16_t YesPage___1_X__Property(void *context) { return 330; }
+static ft_int16_t YesPage___1_Y__Property(void *context) { return 280; }
 static ft_int16_t YesPage___1_Width__Property(void *context) { return 40; }
 static ft_int16_t YesPage___1_Height__Property(void *context) { return 40; }
-static const char * YesPage___1_Text__Property(void *context) { return "3"; }
-static ft_int16_t YesPage___2_X__Property(void *context) { return 330; }
+static const char * YesPage___1_Text__Property(void *context) { return "4"; }
+static ft_int16_t YesPage___2_X__Property(void *context) { return 380; }
 static ft_int16_t YesPage___2_Y__Property(void *context) { return 280; }
 static ft_int16_t YesPage___2_Width__Property(void *context) { return 40; }
 static ft_int16_t YesPage___2_Height__Property(void *context) { return 40; }
-static const char * YesPage___2_Text__Property(void *context) { return "4"; }
-static ft_int16_t YesPage___3_X__Property(void *context) { return 380; }
+static const char * YesPage___2_Text__Property(void *context) { return "5"; }
+static ft_int16_t YesPage___3_X__Property(void *context) { return 430; }
 static ft_int16_t YesPage___3_Y__Property(void *context) { return 280; }
 static ft_int16_t YesPage___3_Width__Property(void *context) { return 40; }
 static ft_int16_t YesPage___3_Height__Property(void *context) { return 40; }
-static const char * YesPage___3_Text__Property(void *context) { return "5"; }
-static ft_int16_t YesPage___4_X__Property(void *context) { return 430; }
-static ft_int16_t YesPage___4_Y__Property(void *context) { return 280; }
+static const char * YesPage___3_Text__Property(void *context) { return "6"; }
+static ft_int16_t YesPage___4_X__Property(void *context) { return 330; }
+static ft_int16_t YesPage___4_Y__Property(void *context) { return 330; }
 static ft_int16_t YesPage___4_Width__Property(void *context) { return 40; }
 static ft_int16_t YesPage___4_Height__Property(void *context) { return 40; }
-static const char * YesPage___4_Text__Property(void *context) { return "6"; }
-static ft_int16_t YesPage___5_X__Property(void *context) { return 330; }
+static const char * YesPage___4_Text__Property(void *context) { return "7"; }
+static ft_int16_t YesPage___5_X__Property(void *context) { return 430; }
 static ft_int16_t YesPage___5_Y__Property(void *context) { return 330; }
 static ft_int16_t YesPage___5_Width__Property(void *context) { return 40; }
 static ft_int16_t YesPage___5_Height__Property(void *context) { return 40; }
-static const char * YesPage___5_Text__Property(void *context) { return "7"; }
-static ft_int16_t YesPage___6_X__Property(void *context) { return 430; }
+static const char * YesPage___5_Text__Property(void *context) { return "9"; }
+static ft_int16_t YesPage___6_X__Property(void *context) { return 380; }
 static ft_int16_t YesPage___6_Y__Property(void *context) { return 330; }
 static ft_int16_t YesPage___6_Width__Property(void *context) { return 40; }
 static ft_int16_t YesPage___6_Height__Property(void *context) { return 40; }
-static const char * YesPage___6_Text__Property(void *context) { return "9"; }
-static ft_int16_t YesPage___7_X__Property(void *context) { return 380; }
-static ft_int16_t YesPage___7_Y__Property(void *context) { return 330; }
-static ft_int16_t YesPage___7_Width__Property(void *context) { return 40; }
-static ft_int16_t YesPage___7_Height__Property(void *context) { return 40; }
-static const char * YesPage___7_Text__Property(void *context) { return "8"; }
+static const char * YesPage___6_Text__Property(void *context) { return "8"; }
 static ft_int16_t YesPage_Back_X__Property(void *context) { return 80; }
 static ft_int16_t YesPage_Back_Y__Property(void *context) { return 380; }
 static ft_int16_t YesPage_Back_Height__Property(void *context) { return 40; }
 static const char * YesPage_Back_Text__Property(void *context) { return "Back"; }
+static ft_int16_t YesPage___7_X__Property(void *context) { return 380; }
+static ft_int16_t YesPage___7_Y__Property(void *context) { return 380; }
+static ft_int16_t YesPage___7_Width__Property(void *context) { return 40; }
+static ft_int16_t YesPage___7_Height__Property(void *context) { return 40; }
+static const char * YesPage___7_Text__Property(void *context) { return "0"; }
+static Ft_Esd_Theme * YesPage_ESD_Numeric_Label_Theme__Property(void *context) { return Ft_Esd_Theme_LightBlue(); }
+static ft_int16_t YesPage_ESD_Numeric_Label_X__Property(void *context) { return 333; }
+static ft_int16_t YesPage_ESD_Numeric_Label_Y__Property(void *context) { return 188; }
+static ft_int16_t YesPage_ESD_Numeric_Label_Width__Property(void *context) { return 122; }
+static ft_int16_t YesPage_ESD_Numeric_Label_Height__Property(void *context) { return 34; }
+static ft_int16_t YesPage_ESD_Numeric_Label_Font__Property(void *context) { return 29; }
+static ft_int32_t YesPage_ESD_Numeric_Label_Value__Property(void *context);
+static ft_int16_t YesPage_ESD_Label_Font__Property(void *context) { return 31; }
+static const char * YesPage_ESD_Label_Text__Property(void *context) { return "Enter Confirmation Code"; }
+static ft_int16_t YesPage_ESD_Label_X__Property(void *context) { return 200; }
+static ft_int16_t YesPage_ESD_Label_Y__Property(void *context) { return 100; }
+static ft_int16_t YesPage_ESD_Label_Width__Property(void *context) { return 400; }
+static ft_int16_t YesPage_ESD_Label_Height__Property(void *context) { return 40; }
+static ft_uint16_t YesPage_ESD_Label_AlignX__Property(void *context) { return OPT_ALIGN_CENTER; }
+static ft_uint16_t YesPage_ESD_Label_AlignY__Property(void *context) { return OPT_ALIGN_CENTER; }
+static ft_int16_t YesPage___8_X__Property(void *context) { return 430; }
+static ft_int16_t YesPage___8_Y__Property(void *context) { return 230; }
+static ft_int16_t YesPage___8_Width__Property(void *context) { return 40; }
+static ft_int16_t YesPage___8_Height__Property(void *context) { return 40; }
+static const char * YesPage___8_Text__Property(void *context) { return "3"; }
 static ft_int16_t YesPage_Cancel_X__Property(void *context) { return 330; }
 static ft_int16_t YesPage_Cancel_Y__Property(void *context) { return 380; }
 static ft_int16_t YesPage_Cancel_Width__Property(void *context) { return 40; }
@@ -77,18 +91,6 @@ static ft_int16_t YesPage_OK_Y__Property(void *context) { return 380; }
 static ft_int16_t YesPage_OK_Width__Property(void *context) { return 40; }
 static ft_int16_t YesPage_OK_Height__Property(void *context) { return 40; }
 static const char * YesPage_OK_Text__Property(void *context) { return "OK"; }
-static ft_int16_t YesPage___8_X__Property(void *context) { return 380; }
-static ft_int16_t YesPage___8_Y__Property(void *context) { return 380; }
-static ft_int16_t YesPage___8_Width__Property(void *context) { return 40; }
-static ft_int16_t YesPage___8_Height__Property(void *context) { return 40; }
-static const char * YesPage___8_Text__Property(void *context) { return "0"; }
-static Ft_Esd_Theme * YesPage_ESD_Numeric_Label_Theme__Property(void *context) { return Ft_Esd_Theme_LightBlue(); }
-static ft_int16_t YesPage_ESD_Numeric_Label_X__Property(void *context) { return 333; }
-static ft_int16_t YesPage_ESD_Numeric_Label_Y__Property(void *context) { return 188; }
-static ft_int16_t YesPage_ESD_Numeric_Label_Width__Property(void *context) { return 122; }
-static ft_int16_t YesPage_ESD_Numeric_Label_Height__Property(void *context) { return 34; }
-static ft_int16_t YesPage_ESD_Numeric_Label_Font__Property(void *context) { return 29; }
-static ft_int32_t YesPage_ESD_Numeric_Label_Value__Property(void *context);
 
 static void YesPage_Num2_Pushed__Signal(void *context);
 static void YesPage_Num1_Pushed__Signal(void *context);
@@ -98,11 +100,11 @@ static void YesPage___3_Pushed__Signal(void *context);
 static void YesPage___4_Pushed__Signal(void *context);
 static void YesPage___5_Pushed__Signal(void *context);
 static void YesPage___6_Pushed__Signal(void *context);
-static void YesPage___7_Pushed__Signal(void *context);
 static void YesPage_Back_Pushed__Signal(void *context);
+static void YesPage___7_Pushed__Signal(void *context);
+static void YesPage___8_Pushed__Signal(void *context);
 static void YesPage_Cancel_Pushed__Signal(void *context);
 static void YesPage_OK_Pushed__Signal(void *context);
-static void YesPage___8_Pushed__Signal(void *context);
 
 void YesPage__Initializer(YesPage *context)
 {
@@ -112,15 +114,7 @@ void YesPage__Initializer(YesPage *context)
 	context->OneIncrementer = 1L;
 	context->Digits = -1L;
 	context->KeyPadBack = Ft_Esd_Noop;
-	context->Input = YesPage_Input__Default;
 	context->Confirmation = Ft_Esd_Noop;
-	Ft_Esd_Label__Initializer(&context->ESD_Label);
-	context->ESD_Label.Parent = context;
-	context->ESD_Label.Text = YesPage_ESD_Label_Text__Property;
-	context->ESD_Label.X = YesPage_ESD_Label_X__Property;
-	context->ESD_Label.Y = YesPage_ESD_Label_Y__Property;
-	context->ESD_Label.Width = YesPage_ESD_Label_Width__Property;
-	context->ESD_Label.Height = YesPage_ESD_Label_Height__Property;
 	Ft_Esd_PushButton__Initializer(&context->Num2);
 	context->Num2.Parent = context;
 	context->Num2.X = YesPage_Num2_X__Property;
@@ -185,6 +179,13 @@ void YesPage__Initializer(YesPage *context)
 	context->__6.Height = YesPage___6_Height__Property;
 	context->__6.Text = YesPage___6_Text__Property;
 	context->__6.Pushed = YesPage___6_Pushed__Signal;
+	Ft_Esd_PushButton__Initializer(&context->Back);
+	context->Back.Parent = context;
+	context->Back.X = YesPage_Back_X__Property;
+	context->Back.Y = YesPage_Back_Y__Property;
+	context->Back.Height = YesPage_Back_Height__Property;
+	context->Back.Text = YesPage_Back_Text__Property;
+	context->Back.Pushed = YesPage_Back_Pushed__Signal;
 	Ft_Esd_PushButton__Initializer(&context->__7);
 	context->__7.Parent = context;
 	context->__7.X = YesPage___7_X__Property;
@@ -193,13 +194,33 @@ void YesPage__Initializer(YesPage *context)
 	context->__7.Height = YesPage___7_Height__Property;
 	context->__7.Text = YesPage___7_Text__Property;
 	context->__7.Pushed = YesPage___7_Pushed__Signal;
-	Ft_Esd_PushButton__Initializer(&context->Back);
-	context->Back.Parent = context;
-	context->Back.X = YesPage_Back_X__Property;
-	context->Back.Y = YesPage_Back_Y__Property;
-	context->Back.Height = YesPage_Back_Height__Property;
-	context->Back.Text = YesPage_Back_Text__Property;
-	context->Back.Pushed = YesPage_Back_Pushed__Signal;
+	Ft_Esd_NumericLabel__Initializer(&context->ESD_Numeric_Label);
+	context->ESD_Numeric_Label.Parent = context;
+	context->ESD_Numeric_Label.Theme = YesPage_ESD_Numeric_Label_Theme__Property;
+	context->ESD_Numeric_Label.X = YesPage_ESD_Numeric_Label_X__Property;
+	context->ESD_Numeric_Label.Y = YesPage_ESD_Numeric_Label_Y__Property;
+	context->ESD_Numeric_Label.Width = YesPage_ESD_Numeric_Label_Width__Property;
+	context->ESD_Numeric_Label.Height = YesPage_ESD_Numeric_Label_Height__Property;
+	context->ESD_Numeric_Label.Font = YesPage_ESD_Numeric_Label_Font__Property;
+	context->ESD_Numeric_Label.Value = YesPage_ESD_Numeric_Label_Value__Property;
+	Ft_Esd_Label__Initializer(&context->ESD_Label);
+	context->ESD_Label.Parent = context;
+	context->ESD_Label.Font = YesPage_ESD_Label_Font__Property;
+	context->ESD_Label.Text = YesPage_ESD_Label_Text__Property;
+	context->ESD_Label.X = YesPage_ESD_Label_X__Property;
+	context->ESD_Label.Y = YesPage_ESD_Label_Y__Property;
+	context->ESD_Label.Width = YesPage_ESD_Label_Width__Property;
+	context->ESD_Label.Height = YesPage_ESD_Label_Height__Property;
+	context->ESD_Label.AlignX = YesPage_ESD_Label_AlignX__Property;
+	context->ESD_Label.AlignY = YesPage_ESD_Label_AlignY__Property;
+	Ft_Esd_PushButton__Initializer(&context->__8);
+	context->__8.Parent = context;
+	context->__8.X = YesPage___8_X__Property;
+	context->__8.Y = YesPage___8_Y__Property;
+	context->__8.Width = YesPage___8_Width__Property;
+	context->__8.Height = YesPage___8_Height__Property;
+	context->__8.Text = YesPage___8_Text__Property;
+	context->__8.Pushed = YesPage___8_Pushed__Signal;
 	Ft_Esd_PushButton__Initializer(&context->Cancel);
 	context->Cancel.Parent = context;
 	context->Cancel.X = YesPage_Cancel_X__Property;
@@ -216,27 +237,11 @@ void YesPage__Initializer(YesPage *context)
 	context->OK.Height = YesPage_OK_Height__Property;
 	context->OK.Text = YesPage_OK_Text__Property;
 	context->OK.Pushed = YesPage_OK_Pushed__Signal;
-	Ft_Esd_PushButton__Initializer(&context->__8);
-	context->__8.Parent = context;
-	context->__8.X = YesPage___8_X__Property;
-	context->__8.Y = YesPage___8_Y__Property;
-	context->__8.Width = YesPage___8_Width__Property;
-	context->__8.Height = YesPage___8_Height__Property;
-	context->__8.Text = YesPage___8_Text__Property;
-	context->__8.Pushed = YesPage___8_Pushed__Signal;
-	Ft_Esd_NumericLabel__Initializer(&context->ESD_Numeric_Label);
-	context->ESD_Numeric_Label.Parent = context;
-	context->ESD_Numeric_Label.Theme = YesPage_ESD_Numeric_Label_Theme__Property;
-	context->ESD_Numeric_Label.X = YesPage_ESD_Numeric_Label_X__Property;
-	context->ESD_Numeric_Label.Y = YesPage_ESD_Numeric_Label_Y__Property;
-	context->ESD_Numeric_Label.Width = YesPage_ESD_Numeric_Label_Width__Property;
-	context->ESD_Numeric_Label.Height = YesPage_ESD_Numeric_Label_Height__Property;
-	context->ESD_Numeric_Label.Font = YesPage_ESD_Numeric_Label_Font__Property;
-	context->ESD_Numeric_Label.Value = YesPage_ESD_Numeric_Label_Value__Property;
 }
 
 void YesPage_Cancel_Pushed(YesPage *context);
 void YesPage_OK_Pushed(YesPage *context);
+ft_void_t Ft_Esd_Render_RectangleF(ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_argb32_t);
 
 void YesPage_Start(YesPage *context)
 {
@@ -249,11 +254,11 @@ void YesPage_Start(YesPage *context)
 	Ft_Esd_PushButton_Start(&context->__4);
 	Ft_Esd_PushButton_Start(&context->__5);
 	Ft_Esd_PushButton_Start(&context->__6);
-	Ft_Esd_PushButton_Start(&context->__7);
 	Ft_Esd_PushButton_Start(&context->Back);
+	Ft_Esd_PushButton_Start(&context->__7);
+	Ft_Esd_PushButton_Start(&context->__8);
 	Ft_Esd_PushButton_Start(&context->Cancel);
 	Ft_Esd_PushButton_Start(&context->OK);
-	Ft_Esd_PushButton_Start(&context->__8);
 }
 
 void YesPage_Update(YesPage *context)
@@ -267,38 +272,45 @@ void YesPage_Update(YesPage *context)
 	Ft_Esd_PushButton_Update(&context->__4);
 	Ft_Esd_PushButton_Update(&context->__5);
 	Ft_Esd_PushButton_Update(&context->__6);
-	Ft_Esd_PushButton_Update(&context->__7);
 	Ft_Esd_PushButton_Update(&context->Back);
+	Ft_Esd_PushButton_Update(&context->__7);
+	Ft_Esd_PushButton_Update(&context->__8);
 	Ft_Esd_PushButton_Update(&context->Cancel);
 	Ft_Esd_PushButton_Update(&context->OK);
-	Ft_Esd_PushButton_Update(&context->__8);
 }
 
 void YesPage_Render(YesPage *context)
 {
 	void *parent = context->Parent;
-	Ft_Esd_Label_Render(&context->ESD_Label);
+	ft_int32_f4_t x = 0;
+	ft_int32_f4_t y = 0;
+	ft_int32_f4_t width = (800 * (1 << 4) + 0x0);
+	ft_int32_f4_t height = (480 * (1 << 4) + 0x0);
+	ft_int32_f4_t radius = (4 * (1 << 4) + 0x0);
+	ft_argb32_t color = 0xffc28e0eUL;
+	Ft_Esd_Render_RectangleF(x, y, width, height, radius, color);
 	Ft_Esd_PushButton_Render(&context->Num2);
 	Ft_Esd_PushButton_Render(&context->Num1);
 	Ft_Esd_PushButton_Render(&context->__1);
 	Ft_Esd_PushButton_Render(&context->__2);
 	Ft_Esd_PushButton_Render(&context->__3);
+	ft_int32_t x_1 = 330L;
+	ft_int32_t y_1 = 187L;
+	ft_int32_t width_1 = 139L;
+	ft_int32_t height_1 = 35L;
+	ft_int32_t radius_1 = 4L;
+	ft_argb32_t color_1 = 0xffffffffUL;
+	Ft_Esd_Render_Rectangle(x_1, y_1, width_1, height_1, radius_1, color_1);
 	Ft_Esd_PushButton_Render(&context->__4);
-	ft_int32_t x = 330L;
-	ft_int32_t y = 187L;
-	ft_int32_t width = 139L;
-	ft_int32_t height = 35L;
-	ft_int32_t radius = 4L;
-	ft_argb32_t color = 0xffffffffUL;
-	Ft_Esd_Render_Rectangle(x, y, width, height, radius, color);
 	Ft_Esd_PushButton_Render(&context->__5);
 	Ft_Esd_PushButton_Render(&context->__6);
-	Ft_Esd_PushButton_Render(&context->__7);
 	Ft_Esd_PushButton_Render(&context->Back);
+	Ft_Esd_PushButton_Render(&context->__7);
+	Ft_Esd_NumericLabel_Render(&context->ESD_Numeric_Label);
+	Ft_Esd_Label_Render(&context->ESD_Label);
+	Ft_Esd_PushButton_Render(&context->__8);
 	Ft_Esd_PushButton_Render(&context->Cancel);
 	Ft_Esd_PushButton_Render(&context->OK);
-	Ft_Esd_PushButton_Render(&context->__8);
-	Ft_Esd_NumericLabel_Render(&context->ESD_Numeric_Label);
 }
 
 void YesPage_Idle(YesPage *context)
@@ -317,11 +329,11 @@ void YesPage_End(YesPage *context)
 	Ft_Esd_PushButton_End(&context->__4);
 	Ft_Esd_PushButton_End(&context->__5);
 	Ft_Esd_PushButton_End(&context->__6);
-	Ft_Esd_PushButton_End(&context->__7);
 	Ft_Esd_PushButton_End(&context->Back);
+	Ft_Esd_PushButton_End(&context->__7);
+	Ft_Esd_PushButton_End(&context->__8);
 	Ft_Esd_PushButton_End(&context->Cancel);
 	Ft_Esd_PushButton_End(&context->OK);
-	Ft_Esd_PushButton_End(&context->__8);
 }
 
 void YesPage_Num2_Pushed__Signal(void *c)
@@ -386,8 +398,8 @@ void YesPage___1_Pushed__Signal(void *c)
 {
 	YesPage *context = (YesPage *)c;
 	void *parent = context->Parent;
-	int digit3 = 3L;
-	context->Variable = digit3;
+	int digit4 = 4L;
+	context->Variable = digit4;
 	int left_8 = context->Variable;
 	int left_10 = context->Digits;
 	int right_9 = 0L;
@@ -415,8 +427,8 @@ void YesPage___2_Pushed__Signal(void *c)
 {
 	YesPage *context = (YesPage *)c;
 	void *parent = context->Parent;
-	int digit4 = 4L;
-	context->Variable = digit4;
+	int digit5 = 5L;
+	context->Variable = digit5;
 	int left_12 = context->Variable;
 	int left_14 = context->Digits;
 	int right_13 = 0L;
@@ -444,8 +456,8 @@ void YesPage___3_Pushed__Signal(void *c)
 {
 	YesPage *context = (YesPage *)c;
 	void *parent = context->Parent;
-	int digit5 = 5L;
-	context->Variable = digit5;
+	int digit6 = 6L;
+	context->Variable = digit6;
 	int left_16 = context->Variable;
 	int left_18 = context->Digits;
 	int right_17 = 0L;
@@ -473,8 +485,8 @@ void YesPage___4_Pushed__Signal(void *c)
 {
 	YesPage *context = (YesPage *)c;
 	void *parent = context->Parent;
-	int digit6 = 6L;
-	context->Variable = digit6;
+	int digit7 = 7L;
+	context->Variable = digit7;
 	int left_20 = context->Variable;
 	int left_22 = context->Digits;
 	int right_21 = 0L;
@@ -502,8 +514,8 @@ void YesPage___5_Pushed__Signal(void *c)
 {
 	YesPage *context = (YesPage *)c;
 	void *parent = context->Parent;
-	int digit7 = 7L;
-	context->Variable = digit7;
+	int digit9 = 9L;
+	context->Variable = digit9;
 	int left_24 = context->Variable;
 	int left_26 = context->Digits;
 	int right_25 = 0L;
@@ -531,8 +543,8 @@ void YesPage___6_Pushed__Signal(void *c)
 {
 	YesPage *context = (YesPage *)c;
 	void *parent = context->Parent;
-	int digit9 = 9L;
-	context->Variable = digit9;
+	int digit8 = 8L;
+	context->Variable = digit8;
 	int left_28 = context->Variable;
 	int left_30 = context->Digits;
 	int right_29 = 0L;
@@ -556,12 +568,17 @@ void YesPage___6_Pushed__Signal(void *c)
 	context->Digits = incdigit_7;
 }
 
+void YesPage_Back_Pushed__Signal(void *c)
+{
+	YesPage *context = (YesPage *)c;
+	void *parent = context->Parent;
+	context->KeyPadBack(parent);
+}
+
 void YesPage___7_Pushed__Signal(void *c)
 {
 	YesPage *context = (YesPage *)c;
 	void *parent = context->Parent;
-	int digit8 = 8L;
-	context->Variable = digit8;
 	int left_32 = context->Variable;
 	int left_34 = context->Digits;
 	int right_33 = 0L;
@@ -579,17 +596,48 @@ void YesPage___7_Pushed__Signal(void *c)
 	int right_32 = left_33 * right_34;
 	int settotal_8 = left_32 + right_32;
 	context->Total = settotal_8;
+	int digit0 = 0L;
+	context->Variable = digit0;
 	int left_35 = context->OneIncrementer;
 	int right_35 = context->Digits;
 	int incdigit_8 = left_35 + right_35;
 	context->Digits = incdigit_8;
 }
 
-void YesPage_Back_Pushed__Signal(void *c)
+ft_int32_t YesPage_ESD_Numeric_Label_Value__Property(void *c)
 {
 	YesPage *context = (YesPage *)c;
 	void *parent = context->Parent;
-	context->KeyPadBack(parent);
+	return context->Total;
+}
+
+void YesPage___8_Pushed__Signal(void *c)
+{
+	YesPage *context = (YesPage *)c;
+	void *parent = context->Parent;
+	int digit3 = 3L;
+	context->Variable = digit3;
+	int left_36 = context->Variable;
+	int left_38 = context->Digits;
+	int right_37 = 0L;
+	int if_10 = left_38 >= right_37;
+	int left_37;
+	if (if_10)
+	{
+		left_37 = 10L;
+	}
+	else
+	{
+		left_37 = 1L;
+	}
+	int right_38 = context->Total;
+	int right_36 = left_37 * right_38;
+	int settotal_9 = left_36 + right_36;
+	context->Total = settotal_9;
+	int left_39 = context->OneIncrementer;
+	int right_39 = context->Digits;
+	int incdigit_9 = left_39 + right_39;
+	context->Digits = incdigit_9;
 }
 
 void YesPage_Cancel_Pushed__Signal(void *c)
@@ -612,61 +660,20 @@ void YesPage_OK_Pushed__Signal(void *c)
 	context->Confirmation(parent);
 }
 
-void YesPage___8_Pushed__Signal(void *c)
-{
-	YesPage *context = (YesPage *)c;
-	void *parent = context->Parent;
-	int left_36 = context->Variable;
-	int left_38 = context->Digits;
-	int right_37 = 0L;
-	int if_10 = left_38 >= right_37;
-	int left_37;
-	if (if_10)
-	{
-		left_37 = 10L;
-	}
-	else
-	{
-		left_37 = 1L;
-	}
-	int right_38 = context->Total;
-	int right_36 = left_37 * right_38;
-	int settotal_9 = left_36 + right_36;
-	context->Total = settotal_9;
-	int digit0 = 0L;
-	context->Variable = digit0;
-	int left_39 = context->OneIncrementer;
-	int right_39 = context->Digits;
-	int incdigit_9 = left_39 + right_39;
-	context->Digits = incdigit_9;
-}
-
-ft_int32_t YesPage_ESD_Numeric_Label_Value__Property(void *c)
-{
-	YesPage *context = (YesPage *)c;
-	void *parent = context->Parent;
-	return context->Total;
-}
-
 #ifdef ESD_SIMULATION
 #include <stdlib.h>
 
 typedef struct
 {
 	YesPage Instance;
-	int Input;
 } YesPage__ESD;
 
-int YesPage__Get_Input__ESD(void *context) { return ((YesPage__ESD *)context)->Input; }
-void YesPage__Set_Input__ESD(void *context, int value) { ((YesPage__ESD *)context)->Input = value; }
 
 void *YesPage__Create__ESD()
 {
 	YesPage__ESD *context = (YesPage__ESD *)malloc(sizeof(YesPage__ESD));
 	YesPage__Initializer(&context->Instance);
 	context->Instance.Parent = context;
-	context->Input = 0L;
-	context->Instance.Input = YesPage__Get_Input__ESD;
 	return context;
 }
 

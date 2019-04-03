@@ -32,8 +32,10 @@ typedef struct
 	void *Parent;
 	ESD_SIGNAL(keyPad)
 	void(* keyPad)(void *context);
-	Ft_Esd_Label ESD_Label;
+	ESD_SIGNAL(Confirmation)
+	void(* Confirmation)(void *context);
 	Ft_Esd_PushButton MainPage_Yes;
+	Ft_Esd_Label ESD_Label;
 	Ft_Esd_PushButton MainPage_No;
 } MainPage;
 

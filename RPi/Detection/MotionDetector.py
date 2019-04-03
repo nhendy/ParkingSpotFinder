@@ -1,4 +1,4 @@
-import cv2 as open_cv
+import cv2
 import numpy as np
 import logging
 from Utilities.drawing_utils import draw_contours
@@ -15,8 +15,8 @@ class MotionDetector:
         self.bounds = []                                        # Bounding upright rectangles
         self.mask = []                                          # MASK ?????
 
-        self.statuses = [False] * len(self.coordinates_data)     # State of each ROI
-        self.times = [None] * len(self.coordinates_data)         # Time registered for each ROI
+        self.statuses = [False] * len(self.coordinates_data)    # State of each ROI
+        self.times = [None] * len(self.coordinates_data)        # Time registered for each ROI
 
         self._init_parameters()
 
@@ -30,7 +30,7 @@ class MotionDetector:
             coordinates = self._coordinates(p)
             logging.debug("coordinates: %s", coordinates)
 
-            rect = open_cv.boundingRect(coordinates)
+            rect = cv2.boundingRect(coordinates)
             logging.debug("rect: %s", rect)
 
             new_coordinates = coordinates.copy()
@@ -41,21 +41,21 @@ class MotionDetector:
             self.contours.append(coordinates)
             self.bounds.append(rect)
 
-            mask = open_cv.drawContours(
+            mask = cv2.drawContours(
                 np.zeros((rect[3], rect[2]), dtype=np.uint8),
                 [new_coordinates],
                 contourIdx=-1,
                 color=255,
                 thickness=-1,
-                lineType=open_cv.LINE_8)
+                lineType=cv2.LINE_8)
 
             mask = mask == 255
             self.mask.append(mask)
             logging.debug("mask: %s", self.mask)
 
     def detect_motion(self, frame):
-        blurred = open_cv.GaussianBlur(frame.copy(), (5, 5), 3)
-        grayed = open_cv.cvtColor(blurred, open_cv.COLOR_BGR2GRAY)
+        blurred = cv2.GaussianBlur(frame.copy(), (5, 5), 3)
+        grayed = cv2.cvtColor(blurred, cv2.COLOR_BGR2GRAY)
         new_frame = frame.copy()
         logging.debug("new_frame: %s", new_frame)
 
@@ -78,7 +78,7 @@ class MotionDetector:
         logging.debug("rect: %s", rect)
 
         roi_gray = grayed[rect[1]:(rect[1] + rect[3]), rect[0]:(rect[0] + rect[2])]
-        laplacian = open_cv.Laplacian(roi_gray, open_cv.CV_64F)
+        laplacian = cv2.Laplacian(roi_gray, cv2.CV_64F)
         logging.debug("laplacian: %s", laplacian)
 
         coordinates[:, 0] = coordinates[:, 0] - rect[0]

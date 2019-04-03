@@ -13,12 +13,16 @@ extern void Ft_Esd_Spinner_Popup();
 
 
 static void App_MainPage_keyPad__Signal(void *context);
+static void App_MainPage_Confirmation__Signal(void *context);
 static void App_YesPage_KeyPadBack__Signal(void *context);
 static void App_YesPage_Confirmation__Signal(void *context);
+static void App_Confirmation_CodeIncorrectTimeout__Signal(void *context);
+static void App_Confirmation_NoParkingSpotsFound__Signal(void *context);
+static void App_Confirmation_ParkingSpotFound__Signal(void *context);
 
 #define MainPage__ID 1
-#define Confirmation__ID 2
-#define YesPage__ID 3
+#define YesPage__ID 2
+#define Confirmation__ID 3
 
 void App__Initializer(App *context)
 {
@@ -26,10 +30,10 @@ void App__Initializer(App *context)
 	context->_ActivePage = 0;
 	context->MainPage = 0;
 	context->MainPage__Active = 0;
-	context->Confirmation = 0;
-	context->Confirmation__Active = 0;
 	context->YesPage = 0;
 	context->YesPage__Active = 0;
+	context->Confirmation = 0;
+	context->Confirmation__Active = 0;
 }
 
 static void App__MainPage__Validate(App *context)
@@ -41,6 +45,7 @@ static void App__MainPage__Validate(App *context)
 		MainPage__Initializer(context->MainPage);
 		context->MainPage->Parent = context;
 		context->MainPage->keyPad = App_MainPage_keyPad__Signal;
+		context->MainPage->Confirmation = App_MainPage_Confirmation__Signal;
 		MainPage_Start(context->MainPage);
 	}
 }
@@ -62,38 +67,6 @@ static void App__MainPage__Destroy(App *context, int final)
 		MainPage_End(context->MainPage);
 		free(context->MainPage);
 		context->MainPage = 0;
-	}
-}
-
-static void App__Confirmation__Validate(App *context)
-{
-	void *parent = context->Parent;
-	if (!context->Confirmation)
-	{
-		context->Confirmation = (Confirmation *)malloc(sizeof(Confirmation));
-		Confirmation__Initializer(context->Confirmation);
-		context->Confirmation->Parent = context;
-		Confirmation_Start(context->Confirmation);
-	}
-}
-
-static void App__Confirmation__Create(App *context)
-{
-	App__Confirmation__Validate(context);
-	context->Confirmation__Active = 1;
-}
-
-static void App__Confirmation__Destroy(App *context, int final)
-{
-	if (context->Confirmation__Active)
-	{
-		context->Confirmation__Active = 0;
-	}
-	if (context->Confirmation)
-	{
-		Confirmation_End(context->Confirmation);
-		free(context->Confirmation);
-		context->Confirmation = 0;
 	}
 }
 
@@ -131,15 +104,50 @@ static void App__YesPage__Destroy(App *context, int final)
 	}
 }
 
+static void App__Confirmation__Validate(App *context)
+{
+	void *parent = context->Parent;
+	if (!context->Confirmation)
+	{
+		context->Confirmation = (Confirmation *)malloc(sizeof(Confirmation));
+		Confirmation__Initializer(context->Confirmation);
+		context->Confirmation->Parent = context;
+		context->Confirmation->CodeIncorrectTimeout = App_Confirmation_CodeIncorrectTimeout__Signal;
+		context->Confirmation->NoParkingSpotsFound = App_Confirmation_NoParkingSpotsFound__Signal;
+		context->Confirmation->ParkingSpotFound = App_Confirmation_ParkingSpotFound__Signal;
+		Confirmation_Start(context->Confirmation);
+	}
+}
+
+static void App__Confirmation__Create(App *context)
+{
+	App__Confirmation__Validate(context);
+	context->Confirmation__Active = 1;
+}
+
+static void App__Confirmation__Destroy(App *context, int final)
+{
+	if (context->Confirmation__Active)
+	{
+		context->Confirmation__Active = 0;
+	}
+	if (context->Confirmation)
+	{
+		Confirmation_End(context->Confirmation);
+		free(context->Confirmation);
+		context->Confirmation = 0;
+	}
+}
+
 void App_Start__Builtin(App *context)
 {
 	void *parent = context->Parent;
 	if ((context->_ActivePage == MainPage__ID))
 		App__MainPage__Create(context);
-	if ((context->_ActivePage == Confirmation__ID))
-		App__Confirmation__Create(context);
 	if ((context->_ActivePage == YesPage__ID))
 		App__YesPage__Create(context);
+	if ((context->_ActivePage == Confirmation__ID))
+		App__Confirmation__Create(context);
 }
 
 void App_Update(App *context)
@@ -152,13 +160,6 @@ void App_Update(App *context)
 		else
 			App__MainPage__Destroy(context, 0);
 	}
-	if ((!!context->Confirmation__Active) != ((context->_ActivePage == Confirmation__ID)))
-	{
-		if (!context->Confirmation__Active)
-			App__Confirmation__Create(context);
-		else
-			App__Confirmation__Destroy(context, 0);
-	}
 	if ((!!context->YesPage__Active) != ((context->_ActivePage == YesPage__ID)))
 	{
 		if (!context->YesPage__Active)
@@ -166,21 +167,28 @@ void App_Update(App *context)
 		else
 			App__YesPage__Destroy(context, 0);
 	}
+	if ((!!context->Confirmation__Active) != ((context->_ActivePage == Confirmation__ID)))
+	{
+		if (!context->Confirmation__Active)
+			App__Confirmation__Create(context);
+		else
+			App__Confirmation__Destroy(context, 0);
+	}
 	if (context->MainPage__Active)
 		MainPage_Update(context->MainPage);
-	if (context->Confirmation__Active)
-		Confirmation_Update(context->Confirmation);
 	if (context->YesPage__Active)
 		YesPage_Update(context->YesPage);
+	if (context->Confirmation__Active)
+		Confirmation_Update(context->Confirmation);
 	if (!context->MainPage__Active && (((context->_ActivePage == MainPage__ID))))
 	{
 		Ft_Esd_Spinner_Popup();
 	}
-	if (!context->Confirmation__Active && (((context->_ActivePage == Confirmation__ID))))
+	if (!context->YesPage__Active && (((context->_ActivePage == YesPage__ID))))
 	{
 		Ft_Esd_Spinner_Popup();
 	}
-	if (!context->YesPage__Active && (((context->_ActivePage == YesPage__ID))))
+	if (!context->Confirmation__Active && (((context->_ActivePage == Confirmation__ID))))
 	{
 		Ft_Esd_Spinner_Popup();
 	}
@@ -191,10 +199,10 @@ void App_Render(App *context)
 	void *parent = context->Parent;
 	if (context->MainPage__Active)
 		MainPage_Render(context->MainPage);
-	if (context->Confirmation__Active)
-		Confirmation_Render(context->Confirmation);
 	if (context->YesPage__Active)
 		YesPage_Render(context->YesPage);
+	if (context->Confirmation__Active)
+		Confirmation_Render(context->Confirmation);
 }
 
 void App_Idle(App *context)
@@ -202,10 +210,10 @@ void App_Idle(App *context)
 	void *parent = context->Parent;
 	if (context->MainPage__Active)
 		MainPage_Idle(context->MainPage);
-	if (context->Confirmation__Active)
-		Confirmation_Idle(context->Confirmation);
 	if (context->YesPage__Active)
 		YesPage_Idle(context->YesPage);
+	if (context->Confirmation__Active)
+		Confirmation_Idle(context->Confirmation);
 }
 
 void App_End(App *context)
@@ -213,10 +221,10 @@ void App_End(App *context)
 	void *parent = context->Parent;
 	if (context->MainPage__Active)
 		App__MainPage__Destroy(context, 1);
-	if (context->Confirmation__Active)
-		App__Confirmation__Destroy(context, 1);
 	if (context->YesPage__Active)
 		App__YesPage__Destroy(context, 1);
+	if (context->Confirmation__Active)
+		App__Confirmation__Destroy(context, 1);
 }
 
 void App_Start(App *context)
@@ -233,6 +241,18 @@ void App_MainPage_keyPad__Signal(void *c)
 	context->_ActivePage = YesPage__ID;
 }
 
+void App_MainPage_Confirmation__Signal(void *c)
+{
+	App *context = (App *)c;
+	void *parent = context->Parent;
+	int set_variable = -1L;
+	App__Confirmation__Validate(context);
+	context->Confirmation->parkingSpotIDState = set_variable;
+	context->_ActivePage = Confirmation__ID;
+	App__Confirmation__Validate(context);
+	Confirmation_getParkingSpotID(context->Confirmation);
+}
+
 void App_YesPage_KeyPadBack__Signal(void *c)
 {
 	App *context = (App *)c;
@@ -244,9 +264,30 @@ void App_YesPage_Confirmation__Signal(void *c)
 {
 	App *context = (App *)c;
 	void *parent = context->Parent;
-	context->_ActivePage = Confirmation__ID;
 	App__Confirmation__Validate(context);
 	Confirmation_getParkingSpotID(context->Confirmation);
+	context->_ActivePage = Confirmation__ID;
+}
+
+void App_Confirmation_CodeIncorrectTimeout__Signal(void *c)
+{
+	App *context = (App *)c;
+	void *parent = context->Parent;
+	context->_ActivePage = YesPage__ID;
+}
+
+void App_Confirmation_NoParkingSpotsFound__Signal(void *c)
+{
+	App *context = (App *)c;
+	void *parent = context->Parent;
+	context->_ActivePage = MainPage__ID;
+}
+
+void App_Confirmation_ParkingSpotFound__Signal(void *c)
+{
+	App *context = (App *)c;
+	void *parent = context->Parent;
+	context->_ActivePage = MainPage__ID;
 }
 
 static App application;
