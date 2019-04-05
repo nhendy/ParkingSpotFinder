@@ -62,7 +62,7 @@
 extern int errno;
 extern int __io_putchar(int ch) __attribute__((weak));
 extern int __io_getchar(void) __attribute__((weak));
-extern UART_HandleTypeDef huart1;
+//extern UART_HandleTypeDef huart1;
 
 
 
@@ -73,22 +73,22 @@ char **environ = __env;
 
 //
 //
-void vprint(const char *fmt, va_list argp)
-{
-    char string[200];
-    if(0 < vsprintf(string,fmt,argp)) // build string
-    {
-        HAL_UART_Transmit(&huart1, (uint8_t*)string, strlen(string), 0xffffff); // send message via UART
-    }
-}
-
-void my_printf(const char *fmt, ...) // custom printf() function
-{
-    va_list argp;
-    va_start(argp, fmt);
-    vprint(fmt, argp);
-    va_end(argp);
-}
+//void vprint(const char *fmt, va_list argp)
+//{
+//    char string[200];
+//    if(0 < vsprintf(string,fmt,argp)) // build string
+//    {
+//        HAL_UART_Transmit(&huart1, (uint8_t*)string, strlen(string), 0xffffff); // send message via UART
+//    }
+//}
+//
+//void my_printf(const char *fmt, ...) // custom printf() function
+//{
+//    va_list argp;
+//    va_start(argp, fmt);
+//    vprint(fmt, argp);
+//    va_end(argp);
+//}
 
 
 /* Functions */

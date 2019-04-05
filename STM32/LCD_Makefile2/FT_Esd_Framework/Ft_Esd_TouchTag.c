@@ -60,7 +60,7 @@ void Ft_Esd_TouchTag_Start(Ft_Esd_TouchTag *context)
 	{
 		Ft_Esd_TouchTag_End(context);
 	}
-
+	
 	// Allocate tag
 	for (int i = 1; i < 255; ++i)
 	{

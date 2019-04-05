@@ -30,10 +30,13 @@ ESD_PAGE(MainPage, Include = "MainPage.h", Callback)
 typedef struct
 {
 	void *Parent;
-	Ft_Esd_Label ESD3_Label;
+	ESD_SIGNAL(keyPad)
+	void(* keyPad)(void *context);
+	ESD_SIGNAL(Confirmation)
+	void(* Confirmation)(void *context);
+	Ft_Esd_PushButton MainPage_Yes;
 	Ft_Esd_Label ESD_Label;
-	Ft_Esd_PushButton ESD_Push_Button;
-	Ft_Esd_PushButton ESD_Push_Button_2;
+	Ft_Esd_PushButton MainPage_No;
 } MainPage;
 
 void MainPage__Initializer(MainPage *context);

@@ -7,8 +7,10 @@ Header
 #ifndef App__H
 #define App__H
 
+#include "Confirmation.h"
 #include "Ft_Esd.h"
 #include "MainPage.h"
+#include "YesPage.h"
 
 #ifndef ESD_LOGIC
 #define ESD_LOGIC(name, ...)
@@ -29,14 +31,15 @@ typedef struct
 {
 	void *Parent;
 	int _ActivePage;
-	MainPage *Main_Page;
-	int Main_Page__Active;
+	MainPage *MainPage;
+	int MainPage__Active;
+	YesPage *YesPage;
+	int YesPage__Active;
+	Confirmation *Confirmation;
+	int Confirmation__Active;
 } App;
 
 void App__Initializer(App *context);
-
-ESD_SLOT(Start)
-void App_Start(App *context);
 
 ESD_SLOT(Update)
 void App_Update(App *context);
@@ -49,6 +52,9 @@ void App_Idle(App *context);
 
 ESD_SLOT(End)
 void App_End(App *context);
+
+ESD_SLOT(Start)
+void App_Start(App *context);
 
 #endif /* App__H */
 

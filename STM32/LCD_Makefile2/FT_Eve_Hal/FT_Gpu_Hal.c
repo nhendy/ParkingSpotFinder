@@ -30,9 +30,9 @@
 #define MEM_READ							0x00			// FT812 Host Memory Read
 /* API to initialize the SPI interface */
 extern SPI_HandleTypeDef hspi1;
-extern UART_HandleTypeDef huart6;
+//extern UART_HandleTypeDef huart6;
 extern QUADSPI_TypeDef hqspi;
-extern void my_printf(const char *fmt, ...);
+//extern void my_printf(const char *fmt, ...);
 
 ft_bool_t Ft_Gpu_Hal_Init(Ft_Gpu_HalInit_t *halinit) {
 #ifdef STM32F7
@@ -202,16 +202,16 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 		cTempAddr[1] = (char) (addr >> 8);						// middle byte
 		cTempAddr[0] = (char) (addr);								// low byte
 
-		HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
+		HAL_GPIO_WritePin(CS_GPIO_Port, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
 		for (int i = 2; i >= 0; i--) {
 			if (HAL_QSPI_Transmit(&hqspi, (uint8_t *) &cTempAddr[i],
 			HAL_MAX_DELAY) != HAL_OK) {
-				my_printf("FAILED TO TRANSMIT in StartTransfer\r\n");
+//				my_printf("FAILED TO TRANSMIT in StartTransfer\r\n");
 			} 			// Send Memory Write plus high address byte
 
 			else {
 				#ifdef PDEBUG
-				my_printf("SUCCESSFUL TRANSMISSION\r\n");
+//				my_printf("SUCCESSFUL TRANSMISSION\r\n");
 				#endif
 			}
 
@@ -272,17 +272,17 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 		cTempAddr[1] = (char) (addr >> 8);						// middle byte
 		cTempAddr[0] = (char) (addr);								// low byte
 
-		HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
+		HAL_GPIO_WritePin(CS_GPIO_Port, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
 
 		for (int i = 2; i >= 0; i--) {
 			if (HAL_QSPI_Transmit(&hqspi, (uint8_t *) &cTempAddr[i],
 			HAL_MAX_DELAY) != HAL_OK) {
-				my_printf("FAILED TO TRANSMIT in StartTransfer\r\n");
+//				my_printf("FAILED TO TRANSMIT in StartTransfer\r\n");
 			} 			// Send Memory Write plus high address byte
 
 			else {
 				#ifdef PDEBUG
-				my_printf("SUCCESSFUL TRANSMISSION\r\n");
+//				my_printf("SUCCESSFUL TRANSMISSION\r\n");
 				#endif
 			}
 		}
@@ -350,12 +350,12 @@ ft_uint8_t Ft_Gpu_Hal_Transfer8(Ft_Gpu_Hal_Context_t *host, ft_uint8_t value) {
 	ft_uint8_t ReadByte;
 	if (host->status == FT_GPU_HAL_WRITING) {
 		if(HAL_QSPI_Transmit(&hqspi, &value, HAL_MAX_DELAY) != HAL_OK){
-			my_printf("FAILED TO TRANSMIT IN Ft_Gpu_Hal_Transfer8\r\n");
+//			my_printf("FAILED TO TRANSMIT IN Ft_Gpu_Hal_Transfer8\r\n");
 		}
 	} else {
 		if(HAL_QSPI_Receive(&hqspi, &ReadByte, HAL_MAX_DELAY) != HAL_OK){
 			#ifdef PDEBUG
-			my_printf("FAILED TO RECEIVE IN Ft_Gpu_Hal_Transfer8\r\n");
+//			my_printf("FAILED TO RECEIVE IN Ft_Gpu_Hal_Transfer8\r\n");
 			#endif
 		}
 	}
@@ -440,7 +440,7 @@ ft_uint32_t Ft_Gpu_Hal_Transfer32(Ft_Gpu_Hal_Context_t *host, ft_uint32_t value)
 
 ft_void_t Ft_Gpu_Hal_EndTransfer(Ft_Gpu_Hal_Context_t *host) {
 #ifdef STM32F7
-	HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(CS_GPIO_Port, FT800_CS_N, GPIO_PIN_SET);
 #endif
 #ifdef FT900_PLATFORM
 	spi_close(SPIM, host->hal_config.spi_cs_pin_no);
@@ -516,22 +516,22 @@ ft_void_t Ft_Gpu_HostCommand(Ft_Gpu_Hal_Context_t *host, ft_uint8_t cmd) {
 	cTempAddr[1] = 0;								// middle byte
 	cTempAddr[0] = 0;										// low byte
 
-	HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
+	HAL_GPIO_WritePin(CS_GPIO_Port, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
 
 	for (int i = 2; i >= 0; i--) {
 		if (HAL_QSPI_Transmit(&hqspi, (uint8_t *) &cTempAddr[i],
 		HAL_MAX_DELAY) != HAL_OK) {
-			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\r\n");
+//			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\r\n");
 		} 			// Send Memory Write plus high address byte
 
 		else {
 			#ifdef PDEBUG
-			my_printf("SUCCESSFUL TRANSMISSION\r\n");
+//			my_printf("SUCCESSFUL TRANSMISSION\r\n");
 			#endif
 		}
 	}
 
-	HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_SET);	// Set chip select high
+	HAL_GPIO_WritePin(CS_GPIO_Port, FT800_CS_N, GPIO_PIN_SET);	// Set chip select high
 #endif
 #ifdef FT900_PLATFORM
 	ft_uint8_t hcmd[4] = {0};
@@ -648,22 +648,22 @@ ft_void_t Ft_Gpu_HostCommand_Ext3(Ft_Gpu_Hal_Context_t *host, ft_uint32_t cmd) {
 	cTempAddr[1] = (char) ((cmd >> 8) & 0xff);					// middle byte
 	cTempAddr[0] = (char) ((cmd >> 16) & 0xff);						// low byte
 
-	HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
+	HAL_GPIO_WritePin(CS_GPIO_Port, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
 
 	for (int i = 2; i >= 0; i--) {
 		if (HAL_QSPI_Transmit(&hqspi, (uint8_t *) &cTempAddr[i],
 		HAL_MAX_DELAY) != HAL_OK) {
-			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\r\n");
+//			my_printf("FAILED TO TRANSMIT in Ft_Gpu_HostCommand\r\n");
 		} 			// Send Memory Write plus high address byte
 
 		else {
 			#ifdef PDEBUG
-			my_printf("SUCCESSFUL TRANSMISSION\r\n");
+//			my_printf("SUCCESSFUL TRANSMISSION\r\n");
 			#endif
 		}
 	}
 
-	HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_SET);	// Set chip select high
+	HAL_GPIO_WritePin(CS_GPIO_Port, FT800_CS_N, GPIO_PIN_SET);	// Set chip select high
 #endif
 #ifdef FT900_PLATFORM
 	ft_uint8_t hcmd[4] = {0};
@@ -835,7 +835,7 @@ ft_void_t Ft_Gpu_Hal_WaitCmdfifo_empty(Ft_Gpu_Hal_Context_t *host) {
 	while (Ft_Gpu_Hal_Rd16(host, REG_CMD_READ)
 			!= Ft_Gpu_Hal_Rd16(host, REG_CMD_WRITE)){
 //        my_printf("Waiting for FIFO to empty\r\n");
-        my_printf("FIFO size is %d\r\n", Ft_Gpu_Cmdfifo_Freespace(host));
+//        my_printf("FIFO size is %d\r\n", Ft_Gpu_Cmdfifo_Freespace(host));
 
     }
 

@@ -37,7 +37,7 @@ This file contains is functions for all UI fields.
 #endif
 
 
-#define FT800_PD_N	PD_Pin
+#define FT800_PD_N	PD_PCB_Pin
 #define FT800_CS_N	CS_Pin
 
 //#define USE_RTC_I2C

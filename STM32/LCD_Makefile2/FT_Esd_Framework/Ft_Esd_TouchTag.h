@@ -16,12 +16,16 @@ typedef struct
 	//
 
 	// Called when the touch interaction is started on this tag.
-	ESD_SIGNAL(Down) void(* Down)(void *context);
+	ESD_SIGNAL(Down)
+	void(* Down)(void *context);
+
 	// Up is called when the touch ends, even if the touch ended outside the tag. One Up is guaranteed to be called for every Down.
-	ESD_SIGNAL(Up) void(* Up)(void *context);
+	ESD_SIGNAL(Up)
+	void(* Up)(void *context);
 
 	// Tap is called when both Down and Up events were called while on the tag.
-	ESD_SIGNAL(Tap) void(* Tap)(void *context);
+	ESD_SIGNAL(Tap)
+	void(* Tap)(void *context);
 
 	//
 	// Variables
@@ -36,11 +40,14 @@ void Ft_Esd_TouchTag__Initializer(Ft_Esd_TouchTag *context);
 //
 // Slots
 //
-ESD_SLOT(Start) void Ft_Esd_TouchTag_Start(Ft_Esd_TouchTag *context);
+ESD_SLOT(Start)
+void Ft_Esd_TouchTag_Start(Ft_Esd_TouchTag *context);
 
-ESD_SLOT(Update) void Ft_Esd_TouchTag_Update(Ft_Esd_TouchTag *context);
+ESD_SLOT(Update)
+void Ft_Esd_TouchTag_Update(Ft_Esd_TouchTag *context);
 
-ESD_SLOT(End) void Ft_Esd_TouchTag_End(Ft_Esd_TouchTag *context);
+ESD_SLOT(End)
+void Ft_Esd_TouchTag_End(Ft_Esd_TouchTag *context);
 
 
 //
