@@ -62,7 +62,7 @@
 extern int errno;
 extern int __io_putchar(int ch) __attribute__((weak));
 extern int __io_getchar(void) __attribute__((weak));
-extern UART_HandleTypeDef huart6;
+extern UART_HandleTypeDef huart1;
 
 
 
@@ -71,14 +71,14 @@ register char * stack_ptr asm("sp");
 char *__env[1] = { 0 };
 char **environ = __env;
 
-
-
+//
+//
 void vprint(const char *fmt, va_list argp)
 {
     char string[200];
     if(0 < vsprintf(string,fmt,argp)) // build string
     {
-        HAL_UART_Transmit(&huart6, (uint8_t*)string, strlen(string), 0xffffff); // send message via UART
+        HAL_UART_Transmit(&huart1, (uint8_t*)string, strlen(string), 0xffffff); // send message via UART
     }
 }
 

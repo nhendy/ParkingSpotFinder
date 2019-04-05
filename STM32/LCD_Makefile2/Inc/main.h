@@ -82,6 +82,10 @@ void my_printf(const char *fmt, ...);
 #define TEST_PIN1_GPIO_Port GPIOE
 #define TEST_PIN3_Pin GPIO_PIN_4
 #define TEST_PIN3_GPIO_Port GPIOE
+#define PD_Pin GPIO_PIN_1
+#define PD_GPIO_Port GPIOB
+#define CS_Pin GPIO_PIN_7
+#define CS_GPIO_Port GPIOC
 /* USER CODE BEGIN Private defines */
 void my_printf(const char *fmt, ...);
 /* USER CODE END Private defines */
