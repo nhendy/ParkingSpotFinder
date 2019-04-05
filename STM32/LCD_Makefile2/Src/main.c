@@ -153,7 +153,7 @@ int main(void)
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = QSPI_DATA_1_LINE; // QSPI_DATA_4_LINES
   s_command.DummyCycles       = 0;
-  s_command.NbData            = 0;
+  s_command.NbData            = 1;
   s_command.DdrMode           = QSPI_DDR_MODE_DISABLE;
   s_command.SIOOMode          = QSPI_SIOO_INST_ONLY_FIRST_CMD;
 
