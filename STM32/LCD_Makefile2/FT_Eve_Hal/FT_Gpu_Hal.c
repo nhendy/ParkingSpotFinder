@@ -275,7 +275,7 @@ ft_void_t Ft_Gpu_Hal_StartTransfer(Ft_Gpu_Hal_Context_t *host,
 		HAL_GPIO_WritePin(GPIOB, FT800_CS_N, GPIO_PIN_RESET);// Set chip select low
 
 		for (int i = 2; i >= 0; i--) {
-			if (HAL_QSPI_Transmit(&hqspi, (uint8_t *) &cTempAddr[i], 1,
+			if (HAL_QSPI_Transmit(&hqspi, (uint8_t *) &cTempAddr[i],
 			HAL_MAX_DELAY) != HAL_OK) {
 				my_printf("FAILED TO TRANSMIT in StartTransfer\r\n");
 			} 			// Send Memory Write plus high address byte

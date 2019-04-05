@@ -25,10 +25,12 @@ BUILD_DIR = build
 # source
 ######################################
 C_SOURCES = \
+  ./syscalls.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c \
+  Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_qspi.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_spi.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.c \
   Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_exti.c \
@@ -103,7 +105,7 @@ C_SOURCES = \
   FT_Esd_Framework/Simulation/FT_Esd_Primitives__h__Simulation.c \
   TEST_HELLO/App__Generated.c \
   TEST_HELLO/MainPage__Generated.c \
-	Sr/syscalls.c \
+  Src/syscalls.c \
   Src/stm32f7xx_it.c \
   Src/main.c \
   Src/system_stm32f7xx.c \
@@ -162,6 +164,7 @@ C_INCLUDES += -IDrivers/STM32F7xx_HAL_Driver/Inc
 C_INCLUDES += -IDrivers/STM32F7xx_HAL_Driver/Inc/Legacy
 C_INCLUDES += -IDrivers/CMSIS/Include
 C_INCLUDES += -IDrivers/CMSIS/Device/ST/STM32F7xx/Include
+C_INCLUDES += -ITimer
 C_INCLUDES += -IFT_Esd_Widgets
 C_INCLUDES += -IFT_Eve_Hal
 C_INCLUDES += -IFT_Esd_Framework
