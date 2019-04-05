@@ -6,55 +6,67 @@ C Source
 
 #include "Confirmation.h"
 
+#include "FT_Esd_Primitives.h"
 
 extern void Ft_Esd_Noop(void *context);
 
 Ft_Esd_Theme * Ft_Esd_Theme_GetCurrent();
-static ft_int16_t Confirmation_ParkingSpotFound_Font__Property(void *context) { return 30; }
-static const char * Confirmation_ParkingSpotFound_Text__Property(void *context) { return "Thank you, the nearest spot is no."; }
-static ft_int16_t Confirmation_ParkingSpotFound_X__Property(void *context) { return 100; }
-static ft_int16_t Confirmation_ParkingSpotFound_Y__Property(void *context) { return 150; }
-static ft_int16_t Confirmation_ParkingSpotFound_Width__Property(void *context) { return 400; }
-static ft_int16_t Confirmation_ParkingSpotFound_Height__Property(void *context) { return 40; }
-static ft_uint16_t Confirmation_ParkingSpotFound_AlignX__Property(void *context) { return OPT_ALIGN_CENTER; }
-static ft_uint16_t Confirmation_ParkingSpotFound_AlignY__Property(void *context) { return OPT_ALIGN_CENTER; }
-static ft_int16_t Confirmation_ESD_Numeric_Label_X__Property(void *context) { return 609; }
-static ft_int16_t Confirmation_ESD_Numeric_Label_Y__Property(void *context) { return 150; }
-static ft_int16_t Confirmation_ESD_Numeric_Label_Height__Property(void *context) { return 40; }
-static ft_int16_t Confirmation_ESD_Numeric_Label_Font__Property(void *context) { return 31; }
-static ft_int32_t Confirmation_ESD_Numeric_Label_Value__Property(void *context);
 static ft_int16_t Confirmation_ESD_Label_Font__Property(void *context) { return 30; }
 static const char * Confirmation_ESD_Label_Text__Property(void *context) { return "There are no available spots"; }
-static ft_int16_t Confirmation_ESD_Label_X__Property(void *context) { return 181; }
-static ft_int16_t Confirmation_ESD_Label_Y__Property(void *context) { return 225; }
+static ft_int16_t Confirmation_ESD_Label_X__Property(void *context) { return 200; }
+static ft_int16_t Confirmation_ESD_Label_Y__Property(void *context) { return 200; }
 static ft_int16_t Confirmation_ESD_Label_Width__Property(void *context) { return 400; }
 static ft_int16_t Confirmation_ESD_Label_Height__Property(void *context) { return 40; }
 static ft_uint16_t Confirmation_ESD_Label_AlignX__Property(void *context) { return OPT_ALIGN_CENTER; }
 static ft_uint16_t Confirmation_ESD_Label_AlignY__Property(void *context) { return OPT_ALIGN_CENTER; }
+static ft_int16_t Confirmation_ParkingSpotFound_2_Font__Property(void *context) { return 31; }
+static const char * Confirmation_ParkingSpotFound_2_Text__Property(void *context) { return "The nearest spot is no."; }
+static ft_int16_t Confirmation_ParkingSpotFound_2_X__Property(void *context) { return 140; }
+static ft_int16_t Confirmation_ParkingSpotFound_2_Y__Property(void *context) { return 200; }
+static ft_int16_t Confirmation_ParkingSpotFound_2_Width__Property(void *context) { return 400; }
+static ft_int16_t Confirmation_ParkingSpotFound_2_Height__Property(void *context) { return 40; }
+static ft_uint16_t Confirmation_ParkingSpotFound_2_AlignX__Property(void *context) { return OPT_ALIGN_CENTER; }
+static ft_int16_t Confirmation_Error_Font__Property(void *context) { return 30; }
+static const char * Confirmation_Error_Text__Property(void *context) { return "Code not found, please try again"; }
+static ft_int16_t Confirmation_Error_X__Property(void *context) { return 200; }
+static ft_int16_t Confirmation_Error_Y__Property(void *context) { return 200; }
+static ft_int16_t Confirmation_Error_Width__Property(void *context) { return 400; }
+static ft_int16_t Confirmation_Error_Height__Property(void *context) { return 40; }
+static ft_uint16_t Confirmation_Error_AlignX__Property(void *context) { return OPT_ALIGN_CENTER; }
+static ft_int16_t Confirmation_ESD_Numeric_Label_X__Property(void *context) { return 560; }
+static ft_int16_t Confirmation_ESD_Numeric_Label_Y__Property(void *context) { return 200; }
+static ft_int16_t Confirmation_ESD_Numeric_Label_Height__Property(void *context) { return 40; }
+static ft_int16_t Confirmation_ESD_Numeric_Label_Font__Property(void *context) { return 31; }
+static ft_int32_t Confirmation_ESD_Numeric_Label_Value__Property(void *context);
 
+static void Confirmation_ESD_Timer_Fired__Signal(void *context);
+static void Confirmation_ESD_Timer_2_Fired__Signal(void *context);
+static void Confirmation_ESD_Timer_3_Fired__Signal(void *context);
 
 void Confirmation__Initializer(Confirmation *context)
 {
 	context->Parent = 0;
-	context->SpotAvailability = 0;
-	context->ParkingSpotNumber = 0L;
-	Ft_Esd_Label__Initializer(&context->ParkingSpotFound);
-	context->ParkingSpotFound.Parent = context;
-	context->ParkingSpotFound.Font = Confirmation_ParkingSpotFound_Font__Property;
-	context->ParkingSpotFound.Text = Confirmation_ParkingSpotFound_Text__Property;
-	context->ParkingSpotFound.X = Confirmation_ParkingSpotFound_X__Property;
-	context->ParkingSpotFound.Y = Confirmation_ParkingSpotFound_Y__Property;
-	context->ParkingSpotFound.Width = Confirmation_ParkingSpotFound_Width__Property;
-	context->ParkingSpotFound.Height = Confirmation_ParkingSpotFound_Height__Property;
-	context->ParkingSpotFound.AlignX = Confirmation_ParkingSpotFound_AlignX__Property;
-	context->ParkingSpotFound.AlignY = Confirmation_ParkingSpotFound_AlignY__Property;
-	Ft_Esd_NumericLabel__Initializer(&context->ESD_Numeric_Label);
-	context->ESD_Numeric_Label.Parent = context;
-	context->ESD_Numeric_Label.X = Confirmation_ESD_Numeric_Label_X__Property;
-	context->ESD_Numeric_Label.Y = Confirmation_ESD_Numeric_Label_Y__Property;
-	context->ESD_Numeric_Label.Height = Confirmation_ESD_Numeric_Label_Height__Property;
-	context->ESD_Numeric_Label.Font = Confirmation_ESD_Numeric_Label_Font__Property;
-	context->ESD_Numeric_Label.Value = Confirmation_ESD_Numeric_Label_Value__Property;
+	context->CodeIncorrectTimeout = Ft_Esd_Noop;
+	context->NoParkingSpotsFound = Ft_Esd_Noop;
+	context->ParkingSpotFound = Ft_Esd_Noop;
+	context->parkingSpotIDState = 0L;
+	context->Variable = 1;
+	context->Variable_2 = 1;
+	context->Variable_3 = 1;
+	context->parkingSpotNumber = 0L;
+	Ft_Esd_Timer__Initializer(&context->ESD_Timer);
+	context->ESD_Timer.Parent = context;
+	context->ESD_Timer.TimeoutMs = 5000L;
+	context->ESD_Timer.Repeat = 0;
+	context->ESD_Timer.Fired = Confirmation_ESD_Timer_Fired__Signal;
+	Ft_Esd_Timer__Initializer(&context->ESD_Timer_2);
+	context->ESD_Timer_2.Parent = context;
+	context->ESD_Timer_2.TimeoutMs = 5000L;
+	context->ESD_Timer_2.Fired = Confirmation_ESD_Timer_2_Fired__Signal;
+	Ft_Esd_Timer__Initializer(&context->ESD_Timer_3);
+	context->ESD_Timer_3.Parent = context;
+	context->ESD_Timer_3.TimeoutMs = 10000L;
+	context->ESD_Timer_3.Fired = Confirmation_ESD_Timer_3_Fired__Signal;
 	Ft_Esd_Label__Initializer(&context->ESD_Label);
 	context->ESD_Label.Parent = context;
 	context->ESD_Label.Font = Confirmation_ESD_Label_Font__Property;
@@ -65,13 +77,40 @@ void Confirmation__Initializer(Confirmation *context)
 	context->ESD_Label.Height = Confirmation_ESD_Label_Height__Property;
 	context->ESD_Label.AlignX = Confirmation_ESD_Label_AlignX__Property;
 	context->ESD_Label.AlignY = Confirmation_ESD_Label_AlignY__Property;
+	Ft_Esd_Label__Initializer(&context->ParkingSpotFound_2);
+	context->ParkingSpotFound_2.Parent = context;
+	context->ParkingSpotFound_2.Font = Confirmation_ParkingSpotFound_2_Font__Property;
+	context->ParkingSpotFound_2.Text = Confirmation_ParkingSpotFound_2_Text__Property;
+	context->ParkingSpotFound_2.X = Confirmation_ParkingSpotFound_2_X__Property;
+	context->ParkingSpotFound_2.Y = Confirmation_ParkingSpotFound_2_Y__Property;
+	context->ParkingSpotFound_2.Width = Confirmation_ParkingSpotFound_2_Width__Property;
+	context->ParkingSpotFound_2.Height = Confirmation_ParkingSpotFound_2_Height__Property;
+	context->ParkingSpotFound_2.AlignX = Confirmation_ParkingSpotFound_2_AlignX__Property;
+	Ft_Esd_Label__Initializer(&context->Error);
+	context->Error.Parent = context;
+	context->Error.Font = Confirmation_Error_Font__Property;
+	context->Error.Text = Confirmation_Error_Text__Property;
+	context->Error.X = Confirmation_Error_X__Property;
+	context->Error.Y = Confirmation_Error_Y__Property;
+	context->Error.Width = Confirmation_Error_Width__Property;
+	context->Error.Height = Confirmation_Error_Height__Property;
+	context->Error.AlignX = Confirmation_Error_AlignX__Property;
+	Ft_Esd_NumericLabel__Initializer(&context->ESD_Numeric_Label);
+	context->ESD_Numeric_Label.Parent = context;
+	context->ESD_Numeric_Label.X = Confirmation_ESD_Numeric_Label_X__Property;
+	context->ESD_Numeric_Label.Y = Confirmation_ESD_Numeric_Label_Y__Property;
+	context->ESD_Numeric_Label.Height = Confirmation_ESD_Numeric_Label_Height__Property;
+	context->ESD_Numeric_Label.Font = Confirmation_ESD_Numeric_Label_Font__Property;
+	context->ESD_Numeric_Label.Value = Confirmation_ESD_Numeric_Label_Value__Property;
 }
 
-static int Confirmation_ParkingSpotFound__active(Confirmation *context);
-static int Confirmation_ESD_Numeric_Label__active(Confirmation *context);
 static int Confirmation_ESD_Label__active(Confirmation *context);
+static int Confirmation_ParkingSpotFound_2__active(Confirmation *context);
+static int Confirmation_Error__active(Confirmation *context);
+static int Confirmation_ESD_Numeric_Label__active(Confirmation *context);
 
 void Confirmation_getParkingSpotID_Signal(Confirmation *context);
+ft_void_t Ft_Esd_Render_RectangleF(ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_argb32_t);
 
 void Confirmation_Start(Confirmation *context)
 {
@@ -86,12 +125,21 @@ void Confirmation_Update(Confirmation *context)
 void Confirmation_Render(Confirmation *context)
 {
 	void *parent = context->Parent;
-	if (Confirmation_ParkingSpotFound__active(context))
-		Ft_Esd_Label_Render(&context->ParkingSpotFound);
-	if (Confirmation_ESD_Numeric_Label__active(context))
-		Ft_Esd_NumericLabel_Render(&context->ESD_Numeric_Label);
+	ft_int32_f4_t x = 0;
+	ft_int32_f4_t y = 0;
+	ft_int32_f4_t width = (800 * (1 << 4) + 0x0);
+	ft_int32_f4_t height = (480 * (1 << 4) + 0x0);
+	ft_int32_f4_t radius = (4 * (1 << 4) + 0x0);
+	ft_argb32_t color = 0xffc28e0eUL;
+	Ft_Esd_Render_RectangleF(x, y, width, height, radius, color);
 	if (Confirmation_ESD_Label__active(context))
 		Ft_Esd_Label_Render(&context->ESD_Label);
+	if (Confirmation_ParkingSpotFound_2__active(context))
+		Ft_Esd_Label_Render(&context->ParkingSpotFound_2);
+	if (Confirmation_Error__active(context))
+		Ft_Esd_Label_Render(&context->Error);
+	if (Confirmation_ESD_Numeric_Label__active(context))
+		Ft_Esd_NumericLabel_Render(&context->ESD_Numeric_Label);
 }
 
 void Confirmation_Idle(Confirmation *context)
@@ -102,40 +150,97 @@ void Confirmation_Idle(Confirmation *context)
 void Confirmation_End(Confirmation *context)
 {
 	void *parent = context->Parent;
+	Ft_Esd_Timer_End(&context->ESD_Timer);
+	Ft_Esd_Timer_End(&context->ESD_Timer_2);
+	Ft_Esd_Timer_End(&context->ESD_Timer_3);
 }
 
 void Confirmation_getParkingSpotID(Confirmation *context)
 {
 	void *parent = context->Parent;
-	ft_bool_t set_variable_2 = 1;
-	context->SpotAvailability = set_variable_2;
 	Confirmation_getParkingSpotID_Signal(context);
+	int left = context->parkingSpotIDState;
+	int right = -2L;
+	int if_1 = left == right;
+	if (if_1)
+	{
+		Ft_Esd_Timer_Run(&context->ESD_Timer_2);
+		ft_bool_t set_variable_2 = 0;
+		context->Variable_2 = set_variable_2;
+		context->Variable_3 = set_variable_2;
+	}
+	else
+	{
+		int left_1 = context->parkingSpotIDState;
+		int right_1 = -1L;
+		int if_2 = left_1 == right_1;
+		if (if_2)
+		{
+			Ft_Esd_Timer_Run(&context->ESD_Timer);
+			ft_bool_t set_variable_3 = 0;
+			context->Variable = set_variable_3;
+			context->Variable_3 = set_variable_3;
+		}
+		else
+		{
+			Ft_Esd_Timer_Run(&context->ESD_Timer_3);
+			ft_bool_t parkingspotfound_1 = 0;
+			context->Variable = parkingspotfound_1;
+			context->Variable_2 = parkingspotfound_1;
+		}
+	}
 }
 
-int Confirmation_ParkingSpotFound__active(Confirmation *context)
+void Confirmation_ESD_Timer_Fired__Signal(void *c)
+{
+	Confirmation *context = (Confirmation *)c;
+	void *parent = context->Parent;
+	context->CodeIncorrectTimeout(parent);
+}
+
+void Confirmation_ESD_Timer_2_Fired__Signal(void *c)
+{
+	Confirmation *context = (Confirmation *)c;
+	void *parent = context->Parent;
+	context->NoParkingSpotsFound(parent);
+}
+
+void Confirmation_ESD_Timer_3_Fired__Signal(void *c)
+{
+	Confirmation *context = (Confirmation *)c;
+	void *parent = context->Parent;
+	context->ParkingSpotFound(parent);
+}
+
+int Confirmation_ESD_Label__active(Confirmation *context)
 {
 	void *parent = context->Parent;
-	return context->SpotAvailability;
+	return context->Variable;
+}
+
+int Confirmation_ParkingSpotFound_2__active(Confirmation *context)
+{
+	void *parent = context->Parent;
+	return context->Variable_3;
+}
+
+int Confirmation_Error__active(Confirmation *context)
+{
+	void *parent = context->Parent;
+	return context->Variable_2;
 }
 
 ft_int32_t Confirmation_ESD_Numeric_Label_Value__Property(void *c)
 {
 	Confirmation *context = (Confirmation *)c;
 	void *parent = context->Parent;
-	return context->ParkingSpotNumber;
+	return context->parkingSpotNumber;
 }
 
 int Confirmation_ESD_Numeric_Label__active(Confirmation *context)
 {
 	void *parent = context->Parent;
-	return context->SpotAvailability;
-}
-
-int Confirmation_ESD_Label__active(Confirmation *context)
-{
-	void *parent = context->Parent;
-	ft_bool_t value = context->SpotAvailability;
-	return !value;
+	return context->Variable_3;
 }
 
 #ifdef ESD_SIMULATION
@@ -160,8 +265,11 @@ void Confirmation__Destroy__ESD(void *context)
 	free(context);
 }
 
-void Confirmation__Set_SpotAvailability__ESD(void *context, ft_bool_t value) { ((Confirmation__ESD *)context)->Instance.SpotAvailability = value; }
-void Confirmation__Set_ParkingSpotNumber__ESD(void *context, int value) { ((Confirmation__ESD *)context)->Instance.ParkingSpotNumber = value; }
+void Confirmation__Set_parkingSpotIDState__ESD(void *context, int value) { ((Confirmation__ESD *)context)->Instance.parkingSpotIDState = value; }
+void Confirmation__Set_Variable__ESD(void *context, ft_bool_t value) { ((Confirmation__ESD *)context)->Instance.Variable = value; }
+void Confirmation__Set_Variable_2__ESD(void *context, ft_bool_t value) { ((Confirmation__ESD *)context)->Instance.Variable_2 = value; }
+void Confirmation__Set_Variable_3__ESD(void *context, ft_bool_t value) { ((Confirmation__ESD *)context)->Instance.Variable_3 = value; }
+void Confirmation__Set_parkingSpotNumber__ESD(void *context, int value) { ((Confirmation__ESD *)context)->Instance.parkingSpotNumber = value; }
 
 #endif /* ESD_SIMULATION */
 

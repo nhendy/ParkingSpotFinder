@@ -4,6 +4,9 @@
 ESD_METHOD(Confirmation_getParkingSpotID_Signal, Context = Confirmation)
 void Confirmation_getParkingSpotID_Signal(Confirmation *context)
 {
-	context->ParkingSpotNumber = parkingSpotID;
-	printf("Checking how it works %d", confirmationCode);
+	parkingSpotID = getParkingSpotID(confirmationCode);
+	context->parkingSpotIDState = parkingSpotID;
+	context->parkingSpotNumber = parkingSpotID;
+	//printf("entering getParkingSpotID, %d", context->parkingSpotIDState);
 }
+

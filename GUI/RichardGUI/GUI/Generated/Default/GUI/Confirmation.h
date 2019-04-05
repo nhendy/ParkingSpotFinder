@@ -11,6 +11,7 @@ Header
 #include "Ft_Esd_Label.h"
 #include "Ft_Esd_NumericLabel.h"
 #include "Ft_Esd_Theme.h"
+#include "Ft_Esd_Timer.h"
 
 #ifndef ESD_LOGIC
 #define ESD_LOGIC(name, ...)
@@ -30,13 +31,29 @@ ESD_PAGE(Confirmation, Include = "Confirmation.h", Callback)
 typedef struct
 {
 	void *Parent;
-	ESD_VARIABLE(SpotAvailability, Type = ft_bool_t, Private)
-	ft_bool_t SpotAvailability;
-	ESD_VARIABLE(ParkingSpotNumber, Type = int, Private)
-	int ParkingSpotNumber;
-	Ft_Esd_Label ParkingSpotFound;
-	Ft_Esd_NumericLabel ESD_Numeric_Label;
+	ESD_SIGNAL(CodeIncorrectTimeout)
+	void(* CodeIncorrectTimeout)(void *context);
+	ESD_SIGNAL(NoParkingSpotsFound)
+	void(* NoParkingSpotsFound)(void *context);
+	ESD_SIGNAL(ParkingSpotFound)
+	void(* ParkingSpotFound)(void *context);
+	ESD_VARIABLE(parkingSpotIDState, Type = int, Public)
+	int parkingSpotIDState;
+	ESD_VARIABLE(Variable, Type = ft_bool_t, Default = true, Private)
+	ft_bool_t Variable;
+	ESD_VARIABLE(Variable_2, Type = ft_bool_t, Default = true, Private)
+	ft_bool_t Variable_2;
+	ESD_VARIABLE(Variable_3, Type = ft_bool_t, Default = true, Private)
+	ft_bool_t Variable_3;
+	ESD_VARIABLE(parkingSpotNumber, Type = int, Private)
+	int parkingSpotNumber;
+	Ft_Esd_Timer ESD_Timer;
+	Ft_Esd_Timer ESD_Timer_2;
+	Ft_Esd_Timer ESD_Timer_3;
 	Ft_Esd_Label ESD_Label;
+	Ft_Esd_Label ParkingSpotFound_2;
+	Ft_Esd_Label Error;
+	Ft_Esd_NumericLabel ESD_Numeric_Label;
 } Confirmation;
 
 void Confirmation__Initializer(Confirmation *context);
