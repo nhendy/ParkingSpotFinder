@@ -79,6 +79,9 @@ def check_code(code_generated):
     sql_session = db.load_db("UserCredentialsDB")
     check = sql_session.query(exists().where(app.Users.code == code_generated)).scalar()
     if check:
+        sql_session.query(app.Users).filter(app.Users.code == code_generated). \
+            update({app.Users.reservation_state: "unreserved"}, synchronize_session=False)
+        sql_session.commit()
         return "okay"
     return "not_okay"
 

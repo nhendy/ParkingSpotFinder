@@ -13,6 +13,27 @@ from sqlalchemy import create_engine, select
 import app
 bp = Blueprint('blog', __name__)
 #*******************HELPER FUNCTIONS*****************
+def result_dict(r):
+    return dict(zip(r.keys(), r))
+
+def result_dicts(rs):
+    return list(map(result_dict, rs))
+
+def get_users_data_as_dict():
+    engine = create_engine('sqlite:///userCredentialsDB.db')
+
+    Base = automap_base()
+    Base.prepare(engine, reflect=True)
+    Table = Base.classes.users
+
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    stmt = select('*').select_from(Table)
+    result = session.execute(stmt).fetchall()
+    result = (result_dicts(result))
+    return (result)
+
+######################################
 #****************************************************
 def update_db(name):
     sql_session = db.load_db("UserCredentialsDB")
@@ -36,10 +57,19 @@ def option_to_book():
 def bookSpot():
     if request.method == 'POST':
         error = None
-        print("user: ")
-        print(g.user)
         if error is not None:
             flash(error)
         else:
             return redirect(url_for('blog.index'))
-    return render_template('blog/bookSpot.html')
+    sql_session = db.load_db("UserCredentialsDB")
+    data = get_users_data_as_dict()
+    user_code = "your code is: "
+    code_matched = -1
+    for row in data:
+        if row["username"] == g.user:
+            code_matched = row["code"]
+    if code_matched != -1:
+        user_code = user_code + str(code_matched)
+    else:
+        user_code = user_code + "not found"
+    return render_template('blog/bookSpot.html',code=user_code)
