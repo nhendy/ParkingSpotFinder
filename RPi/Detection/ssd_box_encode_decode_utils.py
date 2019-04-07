@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
 import numpy as np
-
+import tensorflow as tf
+sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 def iou(boxes1, boxes2, coords='centroids'):
     '''
     Compute the intersection-over-union similarity (also known as Jaccard similarity)
