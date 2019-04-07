@@ -40,26 +40,27 @@ def register():
     if request.method == 'POST':
         Username = request.form['username']
         Password = request.form['password']
-
         error = None
-
         if not Username:
             error = 'Username is required.'
         elif not Password:
             error = 'Password is required.'
         try:
             sql_session = db.load_db("UserCredentialsDB")
-            new_person = app.Users(username=Username, password=Password)
-            sql_session.add(new_person)
-            sql_session.commit()
+            check = None
+            check = sql_session.query(exists().where(app.Users.username == Username)).scalar()
+            if check:
+                print(check)
+                error = 'This user already exists'
+            else:
+                new_person = app.Users(username=Username, password=Password, reservation_state="unreserved")
+                sql_session.add(new_person)
+                sql_session.commit()
         except Exception as e:
             error = "could not register because: " + str(e)
-
         if error is None:
             return redirect(url_for('auth.login'))
-
         flash(error)
-
     return render_template('auth/register.html')
 
 @bp.route('/login', methods=('GET', 'POST'))
@@ -67,7 +68,6 @@ def login():
     if request.method == 'POST':
         Username = request.form['username']
         Password = request.form['password']
-
         error = None
         try:
             sql_session = db.load_db("UserCredentialsDB")
@@ -78,25 +78,22 @@ def login():
                 error = None
         except Exception as e:
             error = "could not log you in because: " + str(e)
-
         if error is None:
             session.clear()
             session['user_id'] = Username
             return redirect(url_for('blog.option_to_book'))
-
         flash(error)
     return render_template('auth/login.html')
 
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
-
     if user_id is None:
         g.user = None
     else:
         sql_session = db.load_db("UserCredentialsDB")
         user = sql_session.query(app.Users).filter_by(username=user_id)
-        g.user = user
+        g.user = user_id
 
 @bp.route('/logout')
 def logout():
