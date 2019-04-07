@@ -7,7 +7,7 @@
   ******************************************************************************
   ** This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
+  * USER CODE END. Other portions of this file, whether
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
@@ -78,7 +78,22 @@ void my_printf(const char *fmt, ...);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define TEST_PIN1_Pin GPIO_PIN_2
+#define TEST_PIN1_GPIO_Port GPIOE
+#define TEST_PIN3_Pin GPIO_PIN_4
+#define TEST_PIN3_GPIO_Port GPIOE
+#define PD_Pin GPIO_PIN_0
+#define PD_GPIO_Port GPIOB
+#define PD_PCB_Pin GPIO_PIN_1
+#define PD_PCB_GPIO_Port GPIOB
+//#define CS_Pin GPIO_PIN_10
+//#define CS_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
+void my_printf(const char *fmt, ...);
+
+// HACK!!!!!!!!!!!!!!!!!!!
+#define CS_Pin GPIO_PIN_11
+#define CS_GPIO_Port GPIOC
 
 /* USER CODE END Private defines */
 

@@ -1,0 +1,33 @@
+<!DOCTYPE _ProjectRoot>
+<_ProjectRoot _locked="false" _uuid="{6d24bdef-e62d-4bbe-a47a-4322eb822b21}" _defaultEveModule="ME812A-WH50R(800x480)" _ESDVersion="30000" _name="Project">
+  <_ProjectRootLink _locked="false" _uuid="{0f3d86e2-39cf-4e10-a334-4e5a0862885a}" fileName="%ESD30_LIBRARIES%/FT_Esd_Widgets/FT_Esd_Widgets.esd3" _name="FT_Esd_Widgets.esd3" type="_ProjectRoot">
+    <__Properties>
+      <_target type="String">Default</_target>
+    </__Properties>
+  </_ProjectRootLink>
+  <_ProjectFileResource _locked="false" _uuid="{cb8e4045-1c74-40ac-b8d2-0fa542d97d50}" fileName="App.c" _name="App.c">
+    <_SourceFile _locked="false" _uuid="{bc30ccd4-f7fd-408e-bf0d-43022762a2c9}" _name="Source File"/>
+  </_ProjectFileResource>
+  <_ProjectFileLink _locked="false" _uuid="{2a2bba01-5c77-4979-8c38-7301d8a4f652}" fileName="App.main" _name="App.main" type="_ApplicationDocument"/>
+  <_ProjectFileResource _locked="false" _uuid="{b7c8cd0c-a1aa-4730-aaf2-dc1990a3d79e}" fileName="Confirmation.c" _name="Confirmation.c">
+    <_SourceFile _locked="false" _uuid="{2e2bde48-5ee8-4bb0-825e-f8fb48377c90}" _name="Source File"/>
+  </_ProjectFileResource>
+  <_ProjectFileLink _locked="false" _uuid="{d74df4bf-fbea-46fe-b000-e22816366e35}" fileName="Confirmation.page" _name="Confirmation.page" type="_PageDocument"/>
+  <_ProjectFileResource _locked="false" _uuid="{245a8f17-ca0c-48ce-a50b-5ef33314a777}" fileName="MainPage.c" _name="MainPage.c">
+    <_SourceFile _locked="false" _uuid="{cccdfd95-889a-42b6-9490-b04acc6e663f}" _name="Source File"/>
+  </_ProjectFileResource>
+  <_ProjectFileLink _locked="false" _uuid="{dec68210-565e-4bbc-856a-f289205e37c3}" fileName="MainPage.page" _name="MainPage.page" type="_PageDocument"/>
+  <_ProjectFileResource _locked="false" _uuid="{bc04cf91-341e-4022-be7b-9020d17d504b}" fileName="YesPage.c" _name="YesPage.c">
+    <_SourceFile _locked="false" _uuid="{f33c96b9-0a13-41fe-bda8-b6edadc1fa8d}" _name="Source File"/>
+  </_ProjectFileResource>
+  <_ProjectFileLink _locked="false" _uuid="{af302cd9-0bde-4dbf-9273-b3c2c6769288}" fileName="YesPage.page" _name="YesPage.page" type="_PageDocument"/>
+  <_ProjectFileResource _locked="false" _uuid="{6453edee-94d7-4305-a4d5-68f57d2b4551}" fileName="getRequests.c" _name="getRequests.c">
+    <_SourceFile _locked="false" _uuid="{1286404d-c75c-4ae4-a79e-b9cc745f4ff7}" _name="Source File"/>
+  </_ProjectFileResource>
+  <_ProjectFileResource _locked="false" _uuid="{895e516c-847e-4219-96bd-3fb1a781fde0}" fileName="global.c" _name="global.c">
+    <_SourceFile _locked="false" _uuid="{249b1666-4f5a-4fd3-850f-a7717f789e6c}" _name="Source File"/>
+  </_ProjectFileResource>
+  <_ProjectFileResource _locked="false" _uuid="{91e2635b-c59c-4350-a853-bf1efeecaa96}" fileName="global.h" _name="global.h">
+    <_SourceFile _locked="false" _uuid="{79e0d331-7d07-4a5f-b48b-a25d62e82705}" _name="Source File"/>
+  </_ProjectFileResource>
+</_ProjectRoot>

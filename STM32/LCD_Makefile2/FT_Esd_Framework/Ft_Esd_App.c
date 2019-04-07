@@ -30,8 +30,8 @@
 #endif
 
 // External variables
-extern UART_HandleTypeDef huart6;
-extern void my_printf(const char *fmt, ...);
+//extern UART_HandleTypeDef huart6;
+//extern void //my_printf(const char *fmt, ...);
 
 //---------------------------------------------------------------------------------------
 //
@@ -142,7 +142,7 @@ const ft_uint32_t FT_DLCODE_BOOTUP[] = {
 		END(),
 		DISPLAY()};
 
-#define FT_WELCOME_MESSAGE "Copyright Â© BridgeTek Pte Ltd.\r\n"
+#define FT_WELCOME_MESSAGE "Copyright © BridgeTek Pte Ltd.\r\n"
 
 #ifdef FT900_PLATFORM
 ft_void_t FT900_Config()
@@ -200,7 +200,7 @@ ft_void_t FT900_Config()
 	/* useful for timer */
 	ft_millis_init();
 	interrupt_enable_globally();
-	//my_my_printf("ft900 config done \n");}
+	//my_//my_printf("ft900 config done \n");}
 }
 #endif
 
@@ -232,14 +232,14 @@ ft_void_t FT800_BootupConfig()
 		{
 			chipid = Ft_Gpu_Hal_Rd8(&s_Host, REG_ID);
 #ifdef PDEBUG
-			my_printf("VC1 register ID after wake up %x\n", chipid);
+			//my_printf("VC1 register ID after wake up %x\n", chipid);
 #endif
 			ft_delay(100);
 		}
-		my_printf("VC1 register ID after wake up %x. Expected to be %x\r\n", chipid, 0x7c);
+		//my_printf("VC1 register ID after wake up %x. Expected to be %x\r\n", chipid, 0x7c);
 
 #if defined(MSVC_PLATFORM) || defined(FT900_PLATFORM) || defined(ESD_SIMULATION)
-		my_printf("VC1 register ID after wake up %x\n", chipid);
+		//my_printf("VC1 register ID after wake up %x\n", chipid);
 #endif
 	}
 
@@ -361,7 +361,7 @@ ft_void_t FT800_BootupConfig()
 #ifdef FT900_PLATFORM
 	ILI9488_Bootup();
 
-	my_printf("after ILI9488 bootup \t\n");
+	//my_printf("after ILI9488 bootup \t\n");
 	//spi
 	// Initialize SPIM HW
 	sys_enable(sys_device_spi_master);
@@ -423,7 +423,7 @@ ft_void_t FT800_BootupConfig()
 
 	s_Host.ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(&s_Host, REG_CMD_WRITE);
 	uint16_t horiz_size = (uint16_t) Ft_Gpu_Hal_Rd16(&s_Host, REG_HSIZE);
-	my_printf("horizontal size is %u\r\n", horiz_size);
+	//my_printf("horizontal size is %u\r\n", horiz_size);
 
 }
 
@@ -461,13 +461,13 @@ ft_void_t FT900_InitSDCard()
 
 	SDHOST_STATUS sd_status;
 	while ((sd_status = sdhost_card_detect()) != SDHOST_CARD_INSERTED)
-		my_printf("Waiting for SD Card (status: %i)\n", (int)sd_status);
-	my_printf("SD Card inserted\t\n");
+		//my_printf("Waiting for SD Card (status: %i)\n", (int)sd_status);
+	//my_printf("SD Card inserted\t\n");
 
 	if (f_mount(&s_FatFS, "", 1) != FR_OK)
-		my_printf("FatFS mount failed\n");
+		//my_printf("FatFS mount failed\n");
 	else
-		my_printf("FatFS mounted succesfully\r\n");
+		//my_printf("FatFS mounted succesfully\r\n");
 }
 #endif
 
@@ -494,7 +494,7 @@ ft_void_t App_CoPro_Widget_Calibrate()
 	Ft_Gpu_Hal_RdMem(&s_Host, REG_TOUCH_TRANSFORM_A, (ft_uint8_t *)TransMatrix,
 									 4 * 6); //read all the 6 coefficients
 #ifdef MSVC_PLATFORM
-	my_printf("Touch screen transform values are A 0x%x,B 0x%x,C 0x%x,D 0x%x,E 0x%x, F 0x%x",
+	//my_printf("Touch screen transform values are A 0x%x,B 0x%x,C 0x%x,D 0x%x,E 0x%x, F 0x%x",
 						TransMatrix[0], TransMatrix[1], TransMatrix[2], TransMatrix[3], TransMatrix[4], TransMatrix[5]);
 #endif
 }
@@ -539,7 +539,7 @@ ft_void_t Ft_Esd_Gui_Entry()
 	FT900_Config();
 #endif
 #ifdef APPDEBUG
-	my_printf("Main loop\r\n");
+	//my_printf("Main loop\r\n");
 #endif
 	Ft_Gpu_HalInit_t halinit;
 

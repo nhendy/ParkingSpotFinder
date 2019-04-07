@@ -1,29 +1,60 @@
 <!DOCTYPE _ApplicationDocument>
-<_ApplicationDocument icon="" defaultSignal="" _locked="false" comment="" _uuid="{45b33064-4d69-4a6d-b316-611e69aeb78d}" displayName="" category="">
-  <_ConnectionContainer _locked="false" _name="Connections" _uuid="{592479ce-c137-4f10-bdd6-283aa49e53b8}">
-    <_Connection connectionType="SignalSlot" sourceConnector="signal" targetConnector="_switch" targetObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _locked="false" sourceObject="{849a166f-1ee5-48d8-958c-5dfa70320c12}" _name="Connection" _uuid="{4798a582-30cb-4f7f-9635-d7a05f53881d}"/>
-    <_Connection connectionType="SignalSlot" sourceConnector="Yes" targetConnector="_switch" targetObject="{f44b1af5-2e60-4e9d-8388-19b41a6aafca}" _locked="false" sourceObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="Connection" _uuid="{7c551bca-2f23-4be6-9063-082112ec455d}"/>
-    <_Connection connectionType="SignalSlot" sourceConnector="No" targetConnector="_switch" targetObject="{9df953e1-58c4-4c12-ae7a-6bd76dbc2631}" _locked="false" sourceObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="Connection" _uuid="{87ba2d93-5cdb-47e2-9183-e247f564bb92}"/>
+<_ApplicationDocument icon="" displayName="" defaultSignal="" _uuid="{45b33064-4d69-4a6d-b316-611e69aeb78d}" comment="" _locked="false" category="">
+  <_ConnectionContainer _uuid="{592479ce-c137-4f10-bdd6-283aa49e53b8}" _name="Connections" _locked="false">
+    <_Connection connectionType="SignalSlot" sourceObject="{797c2f0b-817f-4021-a575-9c482d797a6e}" _uuid="{0affa001-a507-4d6c-8ba3-24fd8f4aa6b2}" targetObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="Connection" targetConnector="_switch" _locked="false" sourceConnector="then"/>
+    <_Connection connectionType="OutputInput" sourceObject="{4c741480-4849-4053-9c2c-b214c57208ac}" _uuid="{12e7e557-43f4-45c4-890e-017b874fea1b}" targetObject="{797c2f0b-817f-4021-a575-9c482d797a6e}" _name="Connection" targetConnector="if" _locked="false" sourceConnector="result"/>
+    <_Connection connectionType="SignalSlot" sourceObject="{58ae9f27-f37e-4fcd-9a6f-1608d200d35f}" _uuid="{2d4bb485-fbe0-4219-8a0c-97c3f47cd124}" targetObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="Connection" targetConnector="_switch" _locked="false" sourceConnector="Back"/>
+    <_Connection connectionType="SignalSlot" sourceObject="{849a166f-1ee5-48d8-958c-5dfa70320c12}" _uuid="{358235e5-342a-40f8-b383-24c7af5d2a47}" targetObject="{797c2f0b-817f-4021-a575-9c482d797a6e}" _name="Connection" targetConnector="call" _locked="false" sourceConnector="signal"/>
+    <_Connection connectionType="SignalSlot" sourceObject="{797c2f0b-817f-4021-a575-9c482d797a6e}" _uuid="{45a0a117-41b8-461f-bbc0-11ce811f4afa}" targetObject="{58ae9f27-f37e-4fcd-9a6f-1608d200d35f}" _name="Connection" targetConnector="_switch" _locked="false" sourceConnector="else"/>
+    <_Connection connectionType="SignalSlot" sourceObject="{9df953e1-58c4-4c12-ae7a-6bd76dbc2631}" _uuid="{5f44bde2-df82-4594-9cdf-e60b0f114d77}" targetObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="Connection" targetConnector="_switch" _locked="false" sourceConnector="Back_1"/>
+    <_Connection connectionType="VariableInput" sourceObject="{5da13081-fd9f-4058-8c2f-604a31ac4e5a}" _uuid="{62d4bf20-edc4-4b15-8460-183844e8b425}" targetObject="{4c741480-4849-4053-9c2c-b214c57208ac}" _name="Connection" targetConnector="left" _locked="false" sourceConnector="value"/>
+    <_Connection connectionType="SignalSlot" sourceObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _uuid="{87ba2d93-5cdb-47e2-9183-e247f564bb92}" targetObject="{9df953e1-58c4-4c12-ae7a-6bd76dbc2631}" _name="Connection" targetConnector="_switch" _locked="false" sourceConnector="No"/>
+    <_Connection connectionType="InvalidConnection" sourceObject="{29847d62-0639-489c-8027-e4c16596237a}" _uuid="{98be3fe5-3928-40e6-b175-8ace8cb81b1a}" targetObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="Connection" targetConnector="_switch" _locked="false" sourceConnector="Back"/>
+    <_Connection connectionType="InvalidConnection" sourceObject="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _uuid="{dfcd7ffd-01c8-4ad9-b30d-6d93a9f20241}" targetObject="{29847d62-0639-489c-8027-e4c16596237a}" _name="Connection" targetConnector="_switch" _locked="false" sourceConnector="Yes"/>
   </_ConnectionContainer>
-  <_NodeContainer _locked="false" _name="Nodes" _uuid="{ead66fa9-c867-4a5f-9f38-2f6e8c565bc7}">
-    <_LogicBlockSlot _x="-81" _displayName="Start" _locked="false" _name="Start" _uuid="{849a166f-1ee5-48d8-958c-5dfa70320c12}" _y="-423"/>
+  <_NodeContainer _uuid="{ead66fa9-c867-4a5f-9f38-2f6e8c565bc7}" _name="Nodes" _locked="false">
+    <_LogicCondition _uuid="{797c2f0b-817f-4021-a575-9c482d797a6e}" _name="" _x="-400" _locked="false" _y="-358">
+      <__Properties>
+        <if type="bool">false</if>
+      </__Properties>
+    </_LogicCondition>
+    <_LogicBlockSlot _uuid="{849a166f-1ee5-48d8-958c-5dfa70320c12}" _name="Start" _x="-713" _displayName="Start" _locked="false" _y="-337"/>
+    <_LogicOperatorBinary _type="int" _uuid="{4c741480-4849-4053-9c2c-b214c57208ac}" _name="Binary Operator" _comment="" _x="-336" _locked="false" _y="-11">
+      <__Properties>
+        <operator type="String">!=</operator>
+        <left type="int">0</left>
+      </__Properties>
+    </_LogicOperatorBinary>
+    <_LogicBlockVariable _type="int" _uuid="{5da13081-fd9f-4058-8c2f-604a31ac4e5a}" _name="NumberOfParkingSpotsAvailable" _comment="" _x="-461" _displayName="" _locked="false" _y="108">
+      <__Properties>
+        <value type="int">10</value>
+        <access type="String">Public</access>
+      </__Properties>
+    </_LogicBlockVariable>
   </_NodeContainer>
-  <_PageContainer _locked="false" _name="Pages" _uuid="{bbe6d343-1750-49f6-847d-53d6fb6cfa60}">
-    <MainMenu _z="0" _x="184" _locked="false" _name="MainMenu" _uuid="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _y="-407">
+  <_PageContainer _uuid="{bbe6d343-1750-49f6-847d-53d6fb6cfa60}" _name="Pages" _locked="false">
+    <MainMenu _uuid="{f7968cb9-fb03-4677-9961-f6f1575214b7}" _name="MainMenu" _x="-151" _locked="false" _z="0" _y="-528">
       <__Properties>
         <_persistence type="bool">false</_persistence>
       </__Properties>
     </MainMenu>
-    <YesPage _z="0" _x="130" _locked="false" _name="YesPage" _uuid="{f44b1af5-2e60-4e9d-8388-19b41a6aafca}" _y="-200">
-      <__Properties>
-        <_persistence type="bool">false</_persistence>
-      </__Properties>
-    </YesPage>
-    <NoPage _z="0" _x="414" _locked="false" _name="NoPage" _uuid="{9df953e1-58c4-4c12-ae7a-6bd76dbc2631}" _y="-166">
+    <NoPage _uuid="{9df953e1-58c4-4c12-ae7a-6bd76dbc2631}" _name="NoPage" _x="279" _locked="false" _z="0" _y="-365">
       <__Properties>
         <_persistence type="bool">false</_persistence>
         <Message type="int">1234</Message>
       </__Properties>
     </NoPage>
+    <NoSpotsAvailable _uuid="{58ae9f27-f37e-4fcd-9a6f-1608d200d35f}" _name="NoSpotsAvailable" _x="-216" _locked="false" _z="0" _y="-208">
+      <__Properties>
+        <_persistence type="bool">false</_persistence>
+      </__Properties>
+    </NoSpotsAvailable>
+    <YesPage3>
+      <__Properties>
+        <_uuid type="Uuid">{29847d62-0639-489c-8027-e4c16596237a}</_uuid>
+        <_x type="int">109</_x>
+        <_y type="int">-58</_y>
+      </__Properties>
+    </YesPage3>
   </_PageContainer>
 </_ApplicationDocument>

@@ -28,7 +28,7 @@ This file contains is functions for all UI fields.
 #ifndef _FT_PLATFORM_H_
 #define _FT_PLATFORM_H_
 
-
+#include "main.h"
 #include "FT_EveModule.h"
 //#include "main.c"
 /* FT900 Platform */
@@ -37,8 +37,8 @@ This file contains is functions for all UI fields.
 #endif
 
 
-#define FT800_PD_N	GPIO_PIN_0
-#define FT800_CS_N	GPIO_PIN_1
+#define FT800_PD_N	PD_PCB_Pin
+#define FT800_CS_N	CS_Pin
 
 //#define USE_RTC_I2C
 //#define ENABLE_OV2640_CAMERA

@@ -1,0 +1,189 @@
+<!DOCTYPE _PageDocument>
+<_PageDocument _locked="false" defaultSignal="" displayName="" _uuid="{cb8963d4-5041-449e-800d-7ea224d2869f}" category="" icon="" comment="">
+  <_ActorContainer _locked="false" _uuid="{7e87f7c3-e534-4d4f-9d13-c1b74c1cfe40}" _name="Actors">
+    <Ft_Esd_Timer _y="-707" _locked="false" _uuid="{f8cde017-bdf9-4d66-b152-f2bac4f89d28}" _x="-424" _name="ESD Timer">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <TimeoutMs type="int">5000</TimeoutMs>
+        <Repeat type="bool">false</Repeat>
+      </__Properties>
+    </Ft_Esd_Timer>
+    <Ft_Esd_Timer _y="-707" _locked="false" _uuid="{2bad17f3-d87c-4bf8-a775-b4141e311d44}" _x="-637" _name="ESD Timer 2">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <TimeoutMs type="int">5000</TimeoutMs>
+      </__Properties>
+    </Ft_Esd_Timer>
+    <Ft_Esd_Timer _y="-534" _locked="false" _uuid="{906211c0-dcbf-4940-a899-092a3e15e086}" _x="-170" _name="ESD Timer 3">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <TimeoutMs type="int">10000</TimeoutMs>
+      </__Properties>
+    </Ft_Esd_Timer>
+  </_ActorContainer>
+  <_ConnectionContainer _locked="false" _uuid="{c89cfec6-a873-40f4-a719-3b362f759dad}" _name="Connections">
+    <_Connection _locked="false" _uuid="{0c4d091c-b588-4ee2-aa82-3ae7e78b92a7}" targetObject="{1b83d645-2df7-4515-9774-b1b77a8199d5}" connectionType="VariableInput" sourceConnector="value" sourceObject="{1d04bf42-cd6f-4fef-89a6-1f601f8498eb}" _name="Connection" targetConnector="_active"/>
+    <_Connection _locked="false" _uuid="{16857bd9-fb17-47f9-98c3-10dbccce8e5a}" targetObject="{9977d4e4-0f7e-4428-bc33-c6544b738e4c}" connectionType="SignalSlot" sourceConnector="else" sourceObject="{f7217947-3e3b-4271-8b94-210b6625ae0e}" _name="Connection" targetConnector="write"/>
+    <_Connection _locked="false" _uuid="{17ab82a4-57af-4c9f-a32c-b6c3876a8905}" targetObject="{5319186e-cff4-43d8-97fb-090e16fe18a4}" connectionType="VariableInput" sourceConnector="value" sourceObject="{936751fa-d706-4ddb-aee4-d5a13229afcc}" _name="Connection" targetConnector="_active"/>
+    <_Connection _locked="false" _uuid="{2609485a-0888-4b59-b8af-b4ddffb2b80e}" targetObject="{2bad17f3-d87c-4bf8-a775-b4141e311d44}" connectionType="SignalSlot" sourceConnector="then" sourceObject="{e4af7bd0-901c-4b63-875a-8051785d4b61}" _name="Connection" targetConnector="Run"/>
+    <_Connection _locked="false" _uuid="{3d35b1c3-6ee8-4818-ab41-971531936808}" targetObject="{82dd958c-c533-4f27-817e-c9e8345bc5ae}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{160b7c12-7a21-4f86-9958-25aa13d97b9f}" _name="Connection" targetConnector="value"/>
+    <_Connection _locked="false" _uuid="{3e337fe9-3f39-405c-9f22-5683136e2cdf}" targetObject="{70e51a98-08b5-45d6-ae86-9f8804410a5b}" connectionType="SignalSlot" sourceConnector="then" sourceObject="{e4af7bd0-901c-4b63-875a-8051785d4b61}" _name="Connection" targetConnector="write"/>
+    <_Connection _locked="false" _uuid="{3f1d555e-41a8-49d9-8554-eba1d2b5f2e2}" targetObject="{936751fa-d706-4ddb-aee4-d5a13229afcc}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{160b7c12-7a21-4f86-9958-25aa13d97b9f}" _name="Connection" targetConnector="value"/>
+    <_Connection _locked="false" _uuid="{4b69bcec-b457-439f-b5b0-37455ea91116}" targetObject="{f7217947-3e3b-4271-8b94-210b6625ae0e}" connectionType="SignalSlot" sourceConnector="else" sourceObject="{e4af7bd0-901c-4b63-875a-8051785d4b61}" _name="Connection" targetConnector="call"/>
+    <_Connection _locked="false" _uuid="{54146c04-2664-47ce-8040-587a0e3eb4e7}" targetObject="{e4af7bd0-901c-4b63-875a-8051785d4b61}" connectionType="SlotSlot" sourceConnector="_call" sourceObject="{dc69adc1-a7f5-4fa1-ab98-0ad99df15a45}" _name="Connection" targetConnector="call"/>
+    <_Connection _locked="false" _uuid="{57839023-468b-4a69-a742-201fb34f9fa5}" targetObject="{f8cde017-bdf9-4d66-b152-f2bac4f89d28}" connectionType="SignalSlot" sourceConnector="then" sourceObject="{f7217947-3e3b-4271-8b94-210b6625ae0e}" _name="Connection" targetConnector="Run"/>
+    <_Connection _locked="false" _uuid="{5bdd9a68-fb16-47b2-b96a-c88a8efa34d1}" targetObject="{c90cb67a-6353-43a9-8e43-e3eade94717d}" connectionType="SignalSlot" sourceConnector="Fired" sourceObject="{2bad17f3-d87c-4bf8-a775-b4141e311d44}" _name="Connection" targetConnector="slot"/>
+    <_Connection _locked="false" _uuid="{62d1e4fd-9238-4f81-a184-a3655df7e0ad}" targetObject="{936751fa-d706-4ddb-aee4-d5a13229afcc}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{9977d4e4-0f7e-4428-bc33-c6544b738e4c}" _name="Connection" targetConnector="value"/>
+    <_Connection _locked="false" _uuid="{7128c10b-3c7e-4e8e-b0e4-5dad73c5630b}" targetObject="{82dd958c-c533-4f27-817e-c9e8345bc5ae}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{70e51a98-08b5-45d6-ae86-9f8804410a5b}" _name="Connection" targetConnector="value"/>
+    <_Connection _locked="false" _uuid="{7b5668cb-bc31-4191-8e50-91c74c1e26e0}" targetObject="{f7217947-3e3b-4271-8b94-210b6625ae0e}" connectionType="OutputInput" sourceConnector="result" sourceObject="{6f99c5e0-50b6-429f-b774-40dbe54e9371}" _name="Connection" targetConnector="if"/>
+    <_Connection _locked="false" _uuid="{7fc9dc50-9a27-486e-ae2a-ca37b88dfd35}" targetObject="{dc69adc1-a7f5-4fa1-ab98-0ad99df15a45}" connectionType="SignalSlot" sourceConnector="signal" sourceObject="{7f4754e3-dbff-490a-9e99-788665cef521}" _name="Connection" targetConnector="_call"/>
+    <_Connection _locked="false" _uuid="{88ff3634-fbd4-4656-af85-0d015d65a3ad}" targetObject="{6f99c5e0-50b6-429f-b774-40dbe54e9371}" connectionType="VariableInput" sourceConnector="value" sourceObject="{bef1708f-2460-464c-88bc-c8243c445512}" _name="Connection" targetConnector="left"/>
+    <_Connection _locked="false" _uuid="{908d240d-5cd8-44b5-96c3-c5c5c6e9ae1c}" targetObject="{1d04bf42-cd6f-4fef-89a6-1f601f8498eb}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{9977d4e4-0f7e-4428-bc33-c6544b738e4c}" _name="Connection" targetConnector="value"/>
+    <_Connection _locked="false" _uuid="{96aee16e-d6a5-46ce-922b-1770d61c3cc3}" targetObject="{a1419438-37a0-4972-9ce8-7c840cfbcb27}" connectionType="VariableInput" sourceConnector="value" sourceObject="{07313b8a-9ced-4e32-bee7-c81d13678fd6}" _name="Connection" targetConnector="Value"/>
+    <_Connection _locked="false" _uuid="{97847e50-9c6b-4900-af23-0376047186bc}" targetObject="{a1419438-37a0-4972-9ce8-7c840cfbcb27}" connectionType="VariableInput" sourceConnector="value" sourceObject="{82dd958c-c533-4f27-817e-c9e8345bc5ae}" _name="Connection" targetConnector="_active"/>
+    <_Connection _locked="false" _uuid="{ab826d89-cd83-4937-8244-f1c12e2567f1}" targetObject="{906211c0-dcbf-4940-a899-092a3e15e086}" connectionType="SignalSlot" sourceConnector="else" sourceObject="{f7217947-3e3b-4271-8b94-210b6625ae0e}" _name="Connection" targetConnector="Run"/>
+    <_Connection _locked="false" _uuid="{b03659d4-2ff4-494a-9c63-d3a477718e5e}" targetObject="{1d04bf42-cd6f-4fef-89a6-1f601f8498eb}" connectionType="WriterVariable" sourceConnector="target" sourceObject="{70e51a98-08b5-45d6-ae86-9f8804410a5b}" _name="Connection" targetConnector="value"/>
+    <_Connection _locked="false" _uuid="{c45d3232-0807-4daf-8a82-100d49651081}" targetObject="{160b7c12-7a21-4f86-9958-25aa13d97b9f}" connectionType="SignalSlot" sourceConnector="then" sourceObject="{f7217947-3e3b-4271-8b94-210b6625ae0e}" _name="Connection" targetConnector="write"/>
+    <_Connection _locked="false" _uuid="{c5c4b260-641b-4dcf-8c20-5cfc7ca55400}" targetObject="{c1418f54-7131-4c29-8ee3-1b992d251612}" connectionType="SignalSlot" sourceConnector="Fired" sourceObject="{906211c0-dcbf-4940-a899-092a3e15e086}" _name="Connection" targetConnector="slot"/>
+    <_Connection _locked="false" _uuid="{d4e092eb-1c0b-41d6-b043-800102771035}" targetObject="{e4af7bd0-901c-4b63-875a-8051785d4b61}" connectionType="OutputInput" sourceConnector="result" sourceObject="{245cb391-baca-4966-b8e0-decfe0792dcc}" _name="Connection" targetConnector="if"/>
+    <_Connection _locked="false" _uuid="{d75b7a72-2cc0-450b-9bd4-3cbc2c023b24}" targetObject="{fcba7c4c-a2be-4dbd-9dda-dd2bdf27f16d}" connectionType="SignalSlot" sourceConnector="Fired" sourceObject="{f8cde017-bdf9-4d66-b152-f2bac4f89d28}" _name="Connection" targetConnector="slot"/>
+    <_Connection _locked="false" _uuid="{dc76866d-755f-4da1-9526-40922e8188bc}" targetObject="{245cb391-baca-4966-b8e0-decfe0792dcc}" connectionType="VariableInput" sourceConnector="value" sourceObject="{bef1708f-2460-464c-88bc-c8243c445512}" _name="Connection" targetConnector="left"/>
+    <_Connection _locked="false" _uuid="{ec4a5add-a33f-491c-82b1-bee486e8562c}" targetObject="{942d5512-d80b-4fd2-a06a-2dc1ae9e288a}" connectionType="VariableInput" sourceConnector="value" sourceObject="{82dd958c-c533-4f27-817e-c9e8345bc5ae}" _name="Connection" targetConnector="_active"/>
+  </_ConnectionContainer>
+  <_NodeContainer _locked="false" _uuid="{bb7bc532-cad4-48a6-a50c-e2a6623ae36b}" _name="Nodes">
+    <_LogicBlockSignal _y="-765" _locked="false" _uuid="{fcba7c4c-a2be-4dbd-9dda-dd2bdf27f16d}" _x="-421" _displayName="" _name="CodeIncorrectTimeout"/>
+    <_LogicBlockSignal _y="-764" _locked="false" _uuid="{c90cb67a-6353-43a9-8e43-e3eade94717d}" _x="-627" _displayName="" _name="NoParkingSpotsFound"/>
+    <_LogicBlockSignal _y="-593" _locked="false" _uuid="{c1418f54-7131-4c29-8ee3-1b992d251612}" _x="-170" _displayName="" _name="ParkingSpotFound"/>
+    <_LogicCondition _y="-579" _locked="false" _uuid="{e4af7bd0-901c-4b63-875a-8051785d4b61}" _x="-642" _name="NoParkingSpots">
+      <__Properties>
+        <if type="bool">true</if>
+      </__Properties>
+    </_LogicCondition>
+    <_LogicCondition _y="-578" _locked="false" _uuid="{f7217947-3e3b-4271-8b94-210b6625ae0e}" _x="-431" _name="WrongID"/>
+    <Confirmation_getParkingSpotID_Signal _y="-563" _locked="false" _uuid="{dc69adc1-a7f5-4fa1-ab98-0ad99df15a45}" _x="-921" _name="getParkingSpotID Signal"/>
+    <_LogicBlockSlot _y="-560" _locked="false" _uuid="{7f4754e3-dbff-490a-9e99-788665cef521}" _x="-1144" _displayName="" _name="getParkingSpotID"/>
+    <_LogicOperatorBinary _y="-508" _type="int" _locked="false" _uuid="{245cb391-baca-4966-b8e0-decfe0792dcc}" _x="-646" _comment="" _name="Binary Operator">
+      <__Properties>
+        <operator type="String">==</operator>
+        <left type="int">0</left>
+        <right type="int">-2</right>
+      </__Properties>
+    </_LogicOperatorBinary>
+    <_LogicOperatorBinary _y="-505" _type="int" _locked="false" _uuid="{6f99c5e0-50b6-429f-b774-40dbe54e9371}" _x="-427" _comment="" _name="Binary Operator 2">
+      <__Properties>
+        <operator type="String">==</operator>
+        <right type="int">-1</right>
+      </__Properties>
+    </_LogicOperatorBinary>
+    <_LogicBlockVariable _y="-464" _type="int" _locked="false" _uuid="{bef1708f-2460-464c-88bc-c8243c445512}" _x="-1172" _displayName="" _comment="" _name="parkingSpotIDState">
+      <__Properties>
+        <access type="String">Public</access>
+      </__Properties>
+    </_LogicBlockVariable>
+    <_LogicVariableWriter _y="-421" _type="ft_bool_t" _locked="false" _uuid="{160b7c12-7a21-4f86-9958-25aa13d97b9f}" _x="-411" _comment="" _name="Set Variable 3">
+      <__Properties>
+        <value type="bool">false</value>
+      </__Properties>
+    </_LogicVariableWriter>
+    <_LogicVariableWriter _y="-394" _type="ft_bool_t" _locked="false" _uuid="{9977d4e4-0f7e-4428-bc33-c6544b738e4c}" _x="-167" _comment="" _name="ParkingSpotFound">
+      <__Properties>
+        <value type="bool">false</value>
+      </__Properties>
+    </_LogicVariableWriter>
+    <_LogicVariableWriter _y="-394" _type="ft_bool_t" _locked="false" _uuid="{70e51a98-08b5-45d6-ae86-9f8804410a5b}" _x="-647" _comment="" _name="Set Variable 2">
+      <__Properties>
+        <value type="bool">false</value>
+      </__Properties>
+    </_LogicVariableWriter>
+    <_LogicBlockVariable _y="-274" _type="ft_bool_t" _locked="false" _uuid="{936751fa-d706-4ddb-aee4-d5a13229afcc}" _x="-640" _displayName="" _comment="" _name="Variable">
+      <__Properties>
+        <value type="bool">true</value>
+        <access type="String">Private</access>
+      </__Properties>
+    </_LogicBlockVariable>
+    <_LogicBlockVariable _y="-271" _type="ft_bool_t" _locked="false" _uuid="{1d04bf42-cd6f-4fef-89a6-1f601f8498eb}" _x="-404" _displayName="" _comment="" _name="Variable 2">
+      <__Properties>
+        <value type="bool">true</value>
+        <access type="String">Private</access>
+      </__Properties>
+    </_LogicBlockVariable>
+    <_LogicBlockVariable _y="-271" _type="ft_bool_t" _locked="false" _uuid="{82dd958c-c533-4f27-817e-c9e8345bc5ae}" _x="-178" _displayName="" _comment="" _name="Variable 3">
+      <__Properties>
+        <value type="bool">true</value>
+        <access type="String">Private</access>
+      </__Properties>
+    </_LogicBlockVariable>
+    <_LogicBlockVariable _y="82" _type="int" _locked="false" _uuid="{07313b8a-9ced-4e32-bee7-c81d13678fd6}" _x="-563" _displayName="" _comment="" _name="parkingSpotNumber">
+      <__Properties>
+        <access type="String">Private</access>
+      </__Properties>
+    </_LogicBlockVariable>
+  </_NodeContainer>
+  <_WidgetContainer _locked="false" _uuid="{54e15bda-3c5e-49ac-82a9-7d1d020a31df}" _name="Widgets">
+    <Ft_Esd_Render_RectangleF _y="-158" _locked="false" _uuid="{d3e9ad1b-0b9e-457f-83dc-af49d2c3bc77}" _x="86" _z="1" _name="ESD Rectangle (Fixed Point)">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <x type="double">0</x>
+        <y type="double">0</y>
+        <width type="double">800</width>
+        <height type="double">480</height>
+        <radius type="String">4</radius>
+        <color type="Color">#c28e0e</color>
+      </__Properties>
+    </Ft_Esd_Render_RectangleF>
+    <Ft_Esd_Label _y="-194" _locked="false" _uuid="{5319186e-cff4-43d8-97fb-090e16fe18a4}" _x="-636" _z="4" _name="ESD Label">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="int">30</Font>
+        <Text type="String">There are no available spots</Text>
+        <X type="int">200</X>
+        <Y type="int">200</Y>
+        <Width type="int">400</Width>
+        <Height type="int">40</Height>
+        <AlignX type="String">OPT_ALIGN_CENTER</AlignX>
+        <AlignY type="String">OPT_ALIGN_CENTER</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+    <Ft_Esd_Label _y="-196" _locked="false" _uuid="{942d5512-d80b-4fd2-a06a-2dc1ae9e288a}" _x="-181" _z="2147483647" _name="ParkingSpotFound">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="int">31</Font>
+        <Text type="String">The nearest spot is no.</Text>
+        <X type="int">140</X>
+        <Y type="int">200</Y>
+        <Width type="int">400</Width>
+        <Height type="int">40</Height>
+        <AlignX type="String">OPT_ALIGN_CENTER</AlignX>
+        <AlignY type="String">OPT_ALIGN_TOP</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+    <Ft_Esd_Label _y="-179" _locked="false" _uuid="{1b83d645-2df7-4515-9774-b1b77a8199d5}" _x="-406" _z="2147483647" _name="Error">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <Font type="int">30</Font>
+        <Text type="String">Code not found, please try again</Text>
+        <X type="int">200</X>
+        <Y type="int">200</Y>
+        <Width type="int">400</Width>
+        <Height type="int">40</Height>
+        <AlignX type="String">OPT_ALIGN_CENTER</AlignX>
+        <AlignY type="String">OPT_ALIGN_TOP</AlignY>
+      </__Properties>
+    </Ft_Esd_Label>
+    <Ft_Esd_NumericLabel _y="1" _locked="false" _uuid="{a1419438-37a0-4972-9ce8-7c840cfbcb27}" _x="-178" _z="2147483647" _name="ESD Numeric Label">
+      <__Properties>
+        <_active type="bool">true</_active>
+        <Theme type="String">Ft_Esd_Theme_GetCurrent</Theme>
+        <X type="int">560</X>
+        <Y type="int">200</Y>
+        <Width type="String">120</Width>
+        <Height type="int">40</Height>
+        <Font type="int">31</Font>
+        <Value type="String">0</Value>
+      </__Properties>
+    </Ft_Esd_NumericLabel>
+  </_WidgetContainer>
+</_PageDocument>
