@@ -6,14 +6,11 @@
 {% endblock %}
 
 {% block content %}
-  {% for post in posts %}
-    <article class="post">
-      <header>
-          <a class="action" href="{{ url_for('blog.bookSpot', id=post['id']) }}"></a>
-      </header>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+  <ul>
+    To Book a Spot Just follow the simple instructions: <br>
+    1. Click on the "book spot" link to request a spot. <br>
+    2. Take a note of the code generated. <br>
+    3. Enter code into screen on entering the garage. <br><br>
+    <center><img src="../static/images/happy_driver.gif" style = "max-width: 25%; height: auto;"></img></center
+  </ul>
 {% endblock %}
