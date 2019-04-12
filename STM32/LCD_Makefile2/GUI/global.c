@@ -2,6 +2,6 @@
 
 
 int getParkingSpotID(confirmationCode) {
-	parkingSpotID = -1;
+	parkingSpotID = 10;
 	return parkingSpotID;
 }

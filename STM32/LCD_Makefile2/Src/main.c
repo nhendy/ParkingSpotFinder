@@ -134,8 +134,6 @@ int main(void)
 // FT800_BootupConfig();
 //  my_printf("hello %d\r\n", 1);
 
-  HAL_GPIO_WritePin(TEST_PIN1_GPIO_Port, TEST_PIN1_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(TEST_PIN3_GPIO_Port, TEST_PIN3_Pin, GPIO_PIN_SET);
 
 //  HAL_UART_Receive_IT(&huart1,  rx_data, 1);
 
@@ -153,6 +151,13 @@ int main(void)
         printf("HAL_ERROR\n");
         return HAL_ERROR;
   }
+
+  HAL_GPIO_WritePin(PI_5V_GPIO_Port, PI_5V_Pin, GPIO_PIN_SET);
+  HAL_Delay(200);
+  HAL_GPIO_WritePin(PI_3V3_GPIO_Port, PI_3V3_Pin, GPIO_PIN_SET);
+  HAL_Delay(200);
+  HAL_GPIO_WritePin(PI_1V8_GPIO_Port, PI_1V8_Pin, GPIO_PIN_SET);
+  HAL_Delay(200);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -384,7 +389,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, TEST_PIN1_Pin|TEST_PIN3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, PI_3V3_Pin|PI_1V8_Pin|PI_5V_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, PD_Pin|PD_PCB_Pin, GPIO_PIN_RESET);
@@ -392,8 +397,8 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : TEST_PIN1_Pin TEST_PIN3_Pin */
-  GPIO_InitStruct.Pin = TEST_PIN1_Pin|TEST_PIN3_Pin;
+  /*Configure GPIO pins : PI_3V3_Pin PI_1V8_Pin PI_5V_Pin */
+  GPIO_InitStruct.Pin = PI_3V3_Pin|PI_1V8_Pin|PI_5V_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
