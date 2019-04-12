@@ -25,6 +25,8 @@ from copy import deepcopy
 from PIL import Image
 import csv
 import os
+import tensorflow as tf
+sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 try:
     import json
 except ImportError:

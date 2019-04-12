@@ -5,7 +5,6 @@ from keras.models import load_model
 from math import ceil
 import numpy as np
 from matplotlib import pyplot as plt
-
 from models.keras_ssd7 import build_model
 from keras_loss_function.keras_ssd_loss import SSDLoss
 from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
@@ -30,9 +29,6 @@ variances = [1.0, 1.0, 1.0, 1.0] # The list of variances by which the encoded ta
 coords = 'centroids' # Whether the box coordinates to be used should be in the 'centroids' or 'minmax' format, see documentation
 normalize_coords = False # Whether or not the model is supposed to use relative coordinates that are within [0,1]
 
-
-
-K.clear_session() # Clear previous models from memory.
 
 model = build_model(image_size=(img_height, img_width, img_channels),
                     n_classes=n_classes,
@@ -69,15 +65,15 @@ val_dataset = BatchGenerator(box_output_format=['class_id', 'xmin', 'ymin', 'xma
 
 
 # The directories that contain the images.
-PKLOT_images_dir = '/Users/programming/PycharmProjects/Park/RPi/Detection/Data/'
+PKLOT_images_dir = 'C:/Users/Damini/Documents/ECE477_ObjectDetection_Data_Storage/PKLot/PKLot'
 
 # The directories that contain the annotations.
-PKLOT_annotations_dir      = '/Users/programming/PycharmProjects/Park/RPi/Detection/newXML/'
+PKLOT_annotations_dir      = 'C:/Users/Damini/Documents/ECE477_ObjectDetection_Data_Storage/PKLot2VOC_full_dataset/'
 
 
 # Training dataset
-PKLOT_train_image_set_filename    = '/Users/programming/PycharmProjects/Park/RPi/Detection/ImageSets/Main/train.txt'
-PKLOT_val_image_set_filename      = '/Users/programming/PycharmProjects/Park/RPi/Detection/ImageSets/Main/valid.txt'
+PKLOT_train_image_set_filename    = 'C:/Users/Damini/Documents/ECE477_ObjectDetection_Data_Storage/PKLot2VOC_full_dataset/ImageSets/Main/train.txt'
+PKLOT_val_image_set_filename      = 'C:/Users/Damini/Documents/ECE477_ObjectDetection_Data_Storage/PKLot2VOC_full_dataset/ImageSets/Main/valid.txt'
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['occupied', 'vaccant']
@@ -126,7 +122,7 @@ ssd_box_encoder = SSDBoxEncoder(img_height=img_height,
 
 # 4: Set the batch size.
 
-batch_size = 32 # Change the batch size if you like, or if you run into memory issues with your GPU.
+batch_size = 2 # Change the batch size if you like, or if you run into memory issues with your GPU.
 
 # 5: Set the image processing / data augmentation options and create generator handles.
 

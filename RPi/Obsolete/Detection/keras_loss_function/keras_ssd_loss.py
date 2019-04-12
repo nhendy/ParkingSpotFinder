@@ -18,7 +18,7 @@ limitations under the License.
 
 from __future__ import division
 import tensorflow as tf
-
+sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 class SSDLoss:
     '''
     The SSD loss, see https://arxiv.org/abs/1512.02325.
