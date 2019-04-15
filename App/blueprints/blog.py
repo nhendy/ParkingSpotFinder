@@ -49,8 +49,17 @@ def index():
 
 @bp.route('/option_to_book')
 def option_to_book():
-    update_db(g.user)
+    reserved_spot_count = get_reserved_spot_count()
+    if int(app.vacant_spot_count) - reserved_spot_count > 0:
+        update_db(g.user)
     return render_template('blog/indexParkMe.html')
+
+@bp.route('/book_again')
+def book_again():
+    reserved_spot_count = get_reserved_spot_count()
+    if int(app.vacant_spot_count) - reserved_spot_count > 0:
+        update_db(g.user)
+    return render_template('blog/noVacantSpots.html')
 
 @bp.route('/bookSpot', methods=('GET', 'POST'))
 # @login_required
@@ -65,11 +74,37 @@ def bookSpot():
     data = get_users_data_as_dict()
     user_code = "your code is: "
     code_matched = -1
+    reserved_spot_count = get_reserved_spot_count()
     for row in data:
-        if row["username"] == g.user:
+        if row["username"] == g.user and row["reservation_state"] == "reserved":
             code_matched = row["code"]
     if code_matched != -1:
         user_code = user_code + str(code_matched)
     else:
-        user_code = user_code + "not found"
+        return redirect(url_for('blog.book_again'))
+        # return render_template('blog/noVacantSpots.html')
     return render_template('blog/bookSpot.html',code=user_code)
+
+def get_reserved_spot_count():
+    sql_session = db.load_db("UserCredentialsDB")
+    update_expired_spots(sql_session)
+    ### there has got to be a better way to do this
+    data = get_users_data_as_dict()
+    count = 0
+    for row in data:
+        if row["reservation_state"] == "reserved":
+            count += 1
+    #print(count)
+    return count
+
+def update_expired_spots(sql_session):
+    timenow = datetime.datetime.utcnow()
+    data = get_users_data_as_dict()
+    for row in data:
+        difference = timenow - datetime.datetime.strptime(row["timestamp"],'%Y-%m-%d %H:%M:%S.%f')
+        if difference.total_seconds() > 600:
+            sql_session = db.load_db("UserCredentialsDB")
+            sql_session.query(app.Users).filter(app.Users.username == row["username"]). \
+                update({app.Users.reservation_state: "unreserved"}, synchronize_session=False)
+            sql_session.commit()
+

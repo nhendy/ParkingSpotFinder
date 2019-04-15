@@ -65,6 +65,7 @@ def pi_to_app():
             return jsonify({"error": str(e),
                             "reason": "request should be json format"})
         result_dict = dict()
+        app.vacant_spot_count = content["vacant_spot_count"]
         if content["request_for_reserved_spots"] == "True":
             result_dict["num_spots_reserved"] = get_reserved_spot_count()
             result_dict["code_validation"] = None
