@@ -4,27 +4,53 @@ from Utilities.CoordinatesGenerator import CoordinatesGenerator
 from Utilities.colors import COLOR_RED
 import cv2
 import os
+import threading
+import queue
 
 
 class Controller:
 
     REFERENCE_FILE = 'reference.png'
+    SERIAL_PORT    = '/dev/ttyAMA0'
+
+
+
 
     def __init__(self, **kwargs):
-        self.data_file = kwargs.get('data_file')
-        self.stream_url = kwargs.get('stream_url')
-        self.video_path = kwargs.get('video_path')
+        self.data_file   = kwargs.get('data_file')
+        self.stream_url  = kwargs.get('stream_url')
+        self.video_path  = kwargs.get('video_path')
+        self.baudrate    = kwargs.get('baudrate')
+
         if not os.path.exists(self.data_file) or os.path.getsize(self.data_file) == 0:
             self._init_boxes()
-        self._init_detector()
+
+        self.coordinates   = self._init_coordinates()
+        self.detector      = self._init_detector()
+        self.serial_port   = self._init_port()
+        self.serial_buffer = queue.Queue()
+        self.serial_thread = threading.Thread(target=self.read_serial,
+                            args=serial_buffer, daemon=True)
+
+
+
+
+    def _init_coordinates(self):
+        with open(self.data_file, 'r') as FILE:
+            data = yaml.load(FILE)
+        return data
 
 
     def _init_detector(self):
         """Initializes the motion detector.
         """
-        with open(self.data_file, 'r') as FILE:
-            self.coordinates = yaml.load(FILE)
-        self.detector = MotionDetector(self.coordinates)
+        return MotionDetector(self.coordinates)
+
+    def _init_port(self):
+        """Initializes the serial port.
+        """
+        return serial.Serial(Controller.SERIAL_PORT,
+                             self.baudrate)
 
 
     def _init_boxes(self):
@@ -44,15 +70,34 @@ class Controller:
 
         cap.release()
         # Generate coordinates
-        with open(self.data_file, "w+") as points:
-            generator = CoordinatesGenerator(Controller.REFERENCE_FILE, points, COLOR_RED)
+        with open(self.data_file, "w+") as FILE:
+            generator = CoordinatesGenerator(Controller.REFERENCE_FILE, FILE, COLOR_RED)
             generator.generate()
 
+
+
+    def read_serial(self, queue):
+        logging.info('Reading serial data')
+        while(True):
+            received_line = self.readline()
+            queue.put(received_line.decode())
+            logging.info('Received {}'.format(received_line.decode()))
+
+
     def run(self):
+        # Start the Serial IO thread
+        # Fetch the video capture
+
+        # Get a frame
+        # Detect vacant spots
+        #
+
         if self.video_path:
             cap = cv2.VideoCapture(self.video_path)
         elif self.stream_url:
             cap = cv2.VideoCapture(self.stream_url)
+
+
 
         while(cap.isOpened()):
             _, frame  = cap.read()
