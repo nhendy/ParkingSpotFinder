@@ -8,10 +8,6 @@ import torch.nn as nn
 import torch
 
 class MotionDetector:
-    LAPLACIAN = 3
-    EDGE_DETECTION = 20
-    DETECT_DELAY = 1
-    # MODEL_PATH = 'models/alexnet_car_classifier.pt'
     MODEL_PATH = 'models/working_model.pt'
 
     def __init__(self, coordinates):
@@ -78,8 +74,6 @@ class MotionDetector:
         status =  self._binary_classification(roi, index)
 
         return status
-
-
 
 
     def _binary_classification(self, roi_img, index):
