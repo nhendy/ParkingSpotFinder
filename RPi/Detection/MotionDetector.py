@@ -3,17 +3,23 @@ import numpy as np
 import logging
 from Utilities.drawing_utils import draw_contours
 from Utilities.colors import COLOR_GREEN, COLOR_WHITE, COLOR_BLUE
-
+from torchvision import models, transforms
+import torch.nn as nn
+import torch
 
 class MotionDetector:
     LAPLACIAN = 3
+    EDGE_DETECTION = 20
     DETECT_DELAY = 1
+    # MODEL_PATH = 'models/alexnet_car_classifier.pt'
+    MODEL_PATH = 'models/working_model.pt'
 
     def __init__(self, coordinates):
         self.coordinates_data = coordinates
         self.contours = []                                      # Coordinates
         self.bounds = []                                        # Bounding upright rectangles
         self.mask = []                                          # MASK ?????
+        self.model = None
 
         self.statuses = [False] * len(self.coordinates_data)    # State of each ROI
         self.times = [None] * len(self.coordinates_data)        # Time registered for each ROI
@@ -33,34 +39,25 @@ class MotionDetector:
             rect = cv2.boundingRect(coordinates)
             logging.debug("rect: %s", rect)
 
-            new_coordinates = coordinates.copy()
-            new_coordinates[:, 0] = coordinates[:, 0] - rect[0]
-            new_coordinates[:, 1] = coordinates[:, 1] - rect[1]
-            logging.debug("new_coordinates: %s", new_coordinates)
-
             self.contours.append(coordinates)
             self.bounds.append(rect)
 
-            mask = cv2.drawContours(
-                np.zeros((rect[3], rect[2]), dtype=np.uint8),
-                [new_coordinates],
-                contourIdx=-1,
-                color=255,
-                thickness=-1,
-                lineType=cv2.LINE_8)
+        self.model = models.alexnet(pretrained=False)
+        num_ftrs = self.model.classifier[-1].in_features
+        self.model.classifier[-1] = nn.Linear(num_ftrs, 2)
+        state = torch.load(MotionDetector.MODEL_PATH, map_location='cpu')
+        logging.info('Loading the model ...')
+        self.model.load_state_dict(state)
+        self.model.eval()
 
-            mask = mask == 255
-            self.mask.append(mask)
-            logging.debug("mask: %s", self.mask)
+
 
     def detect_motion(self, frame):
-        blurred = cv2.GaussianBlur(frame.copy(), (5, 5), 3)
-        grayed = cv2.cvtColor(blurred, cv2.COLOR_BGR2GRAY)
         new_frame = frame.copy()
         logging.debug("new_frame: %s", new_frame)
 
         for index, c in enumerate(self.coordinates_data):
-            self.statuses[index] = self.__apply(grayed, index, c)
+            self.statuses[index] = self.__apply(new_frame, index, c)
 
         for index, p in enumerate(self.coordinates_data):
             coordinates = self._coordinates(p)
@@ -70,25 +67,60 @@ class MotionDetector:
 
         return (new_frame, self.statuses)
 
-    def __apply(self, grayed, index, p):
+    def __apply(self, frame, index, p):
         coordinates = self._coordinates(p)
         logging.debug("points: %s", coordinates)
 
         rect = self.bounds[index]
         logging.debug("rect: %s", rect)
 
-        roi_gray = grayed[rect[1]:(rect[1] + rect[3]), rect[0]:(rect[0] + rect[2])]
-        laplacian = cv2.Laplacian(roi_gray, cv2.CV_64F)
-        logging.debug("laplacian: %s", laplacian)
+        roi  = frame[rect[1]:(rect[1] + rect[3]), rect[0]:(rect[0] + rect[2])]
+        status =  self._binary_classification(roi, index)
 
-        coordinates[:, 0] = coordinates[:, 0] - rect[0]
-        coordinates[:, 1] = coordinates[:, 1] - rect[1]
+        return status
 
-        mean = np.mean(np.abs(laplacian * self.mask[index]))
-        logging.info('mean for {} is {:.2f}'.format(index, mean))
-        status =  mean < MotionDetector.LAPLACIAN
-        logging.debug("status: %s", status)
 
+    def _edge_classification(self, roi_img, index):
+        img_gray = cv2.cvtColor(roi_img, cv2.COLOR_BGR2GRAY)
+        edges = cv2.Canny(img_gray,100,200)
+        edges_mean = np.mean(np.abs(edges))
+
+        laplacian = cv2.Laplacian(img_gray, cv2.CV_64F)
+        laplacian_mean = np.mean(np.abs(laplacian))
+
+
+        logging.info('index: {}, edges mean: {:.2f}, laplacian mean:  {:.2f}'.format(index, edges_mean, laplacian_mean))
+        return  edges_mean < MotionDetector.EDGE_DETECTION
+
+
+    def _binary_classification(self, roi_img, index):
+        with torch.no_grad():
+            # cv2.imshow('image', roi_img)
+            # roi_img = Image.fromarray(roi_img)
+            # print(roi_img)
+            data_transforms = transforms.Compose([
+                transforms.ToPILImage(),
+                transforms.Resize(256),
+                transforms.CenterCrop(224),
+                transforms.ToTensor()
+            ])
+
+
+
+
+            roi_img = data_transforms(roi_img).unsqueeze(0).float()
+            outputs = self.model(roi_img)
+            prediction = nn.Softmax()
+            probablities = prediction(outputs)
+            logging.debug("out = {}".format(outputs))
+            logging.debug("class1 = {}, class2 = {}".format(probablities.data[0][0], probablities.data[0][1]))
+
+            # _, predicted = torch.max(outputs, 1)
+            # print(classes[predicted])
+            # print(outputs)
+            status = probablities.data[0][0].item() > probablities.data[0][1].item()
+
+        logging.info('index: {}, Vacant: {:.2f}, Occupied:  {:.2f}'.format(index, probablities.data[0][0], probablities.data[0][1]))
         return status
 
     @staticmethod
