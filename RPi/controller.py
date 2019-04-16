@@ -10,8 +10,14 @@ import queue
 
 class Controller:
 
-    REFERENCE_FILE = 'reference.png'
-    SERIAL_PORT    = '/dev/ttyAMA0'
+    REFERENCE_FILE      = 'reference.png'
+    SERIAL_PORT         = '/dev/ttyAMA0'
+
+    # Messages from the Pi to the MCU
+    CONFIRM_CODE_MSSG   = r"^CONFIRM: (?P<num>\d+)$"
+    CODE_ERROR_MSSG     = -1
+    NOVACANT_ERROR_MSSG = -2
+    SPOT_ID_MSSG        = "{spot_id}"
 
 
 
@@ -84,27 +90,46 @@ class Controller:
             logging.info('Received {}'.format(received_line.decode()))
 
 
+    def process_inputs(self, capture, ):
+        data_dict = {'spots_states': None,
+                     'new_frame'   : None,
+                     'mcu_mssg'    : None}
+        _, frame  = capture.read()
+        data_dict['new_frame'] , data_dict['spots_states'] = self.detector.detect_motion(frame)
+        if self.serial_buffer.qsize() > 0:
+            data_dict['mcu_mssg'] = self.serial_buffer.get()
+
+        return data_dict
+
+
     def run(self):
         # Start the Serial IO thread
         # Fetch the video capture
 
         # Get a frame
         # Detect vacant spots
-        #
+        # update spots states
+        # check reading from the MCU
+
+
+        # getinput
+        # if input: do
+        # if input : do
+        # if input : do
+
 
         if self.video_path:
             cap = cv2.VideoCapture(self.video_path)
         elif self.stream_url:
             cap = cv2.VideoCapture(self.stream_url)
 
-
+        self.serial_thread.start()
 
         while(cap.isOpened()):
-            _, frame  = cap.read()
+            data_dict = self.process_inputs(cap)
 
-            new_frame, statuses = self.detector.detect_motion(frame)
-
-            cv2.imshow('Video', new_frame)
+            if re.match(Controller.CONFIRM_CODE_MSSG, data_dict['mcu_mssg']):
+                
 
             # logging.info('Updating Server...')
             self._update_web_server()
