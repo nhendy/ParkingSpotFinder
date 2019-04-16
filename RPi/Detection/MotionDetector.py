@@ -80,24 +80,10 @@ class MotionDetector:
         return status
 
 
-    def _edge_classification(self, roi_img, index):
-        img_gray = cv2.cvtColor(roi_img, cv2.COLOR_BGR2GRAY)
-        edges = cv2.Canny(img_gray,100,200)
-        edges_mean = np.mean(np.abs(edges))
-
-        laplacian = cv2.Laplacian(img_gray, cv2.CV_64F)
-        laplacian_mean = np.mean(np.abs(laplacian))
-
-
-        logging.info('index: {}, edges mean: {:.2f}, laplacian mean:  {:.2f}'.format(index, edges_mean, laplacian_mean))
-        return  edges_mean < MotionDetector.EDGE_DETECTION
 
 
     def _binary_classification(self, roi_img, index):
         with torch.no_grad():
-            # cv2.imshow('image', roi_img)
-            # roi_img = Image.fromarray(roi_img)
-            # print(roi_img)
             data_transforms = transforms.Compose([
                 transforms.ToPILImage(),
                 transforms.Resize(256),
@@ -105,22 +91,14 @@ class MotionDetector:
                 transforms.ToTensor()
             ])
 
-
-
-
             roi_img = data_transforms(roi_img).unsqueeze(0).float()
             outputs = self.model(roi_img)
             prediction = nn.Softmax()
             probablities = prediction(outputs)
-            logging.debug("out = {}".format(outputs))
-            logging.debug("class1 = {}, class2 = {}".format(probablities.data[0][0], probablities.data[0][1]))
-
-            # _, predicted = torch.max(outputs, 1)
-            # print(classes[predicted])
-            # print(outputs)
             status = probablities.data[0][0].item() > probablities.data[0][1].item()
 
-        logging.info('index: {}, Vacant: {:.2f}, Occupied:  {:.2f}'.format(index, probablities.data[0][0], probablities.data[0][1]))
+        logging.info('index: {}, Vacant: {:.2f}, Occupied:  {:.2f}'.format(index, probablities.data[0][0],
+                                                                                 probablities.data[0][1]))
         return status
 
     @staticmethod
