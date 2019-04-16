@@ -2,14 +2,14 @@
 
 {% block header %}
   <h1>{% block title %}Click to Book a Parking Spot{% endblock %}</h1>
-    <a class="action" href="{{ url_for('book_spot') }}">Book Spot</a>
+    <a class="action" href="{{ url_for('main.book_spot') }}">Book Spot</a>
 {% endblock %}
 
 {% block content %}
   {% for post in posts %}
     <article class="post">
       <header>
-          <a class="action" href="{{ url_for('book_spot') }}"></a>
+          <a class="action" href="{{ url_for('main.book_spot') }}"></a>
       </header>
     </article>
     {% if not loop.last %}
