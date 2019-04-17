@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     reserved       = db.Column(db.Boolean, nullable=False, default=False)
     timestamp      = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+    roles          = db.relationship('Role', secondary='user_roles')
 
     def __init__(self, username):
         self.username = username
@@ -27,7 +28,21 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+# Define the Role data-model
+class Role(db.Model):
+    __tablename__ = 'roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(50), unique=True)
 
+    def __str__(self):
+        return self.name
+
+# Define the UserRoles association table
+class UserRoles(db.Model):
+    __tablename__ = 'user_roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey('Users.id', ondelete='CASCADE'))
+    role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
 
 @login.user_loader
 def load_user(id):
