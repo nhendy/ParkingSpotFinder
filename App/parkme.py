@@ -1,8 +1,6 @@
-from app import create_app, db
+from app import app, db
 import os
 
-
-app = create_app(os.environ['APP_SETTINGS'])
 
 
 @app.shell_context_processor

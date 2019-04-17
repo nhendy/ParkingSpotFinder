@@ -1,10 +1,11 @@
 from flask_admin.contrib import sqla
-import flask_login as login
+from  flask_security import current_user
+from flask import redirect, url_for
 
 
-class AdminModelView(sqla.ModelView):
+class AdminView(sqla.ModelView):
     def is_accessible(self):
-        return login.current_user.is_authenticated
+        return current_user.has_role('admin')
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('auth.login', next=request.url))
+        return redirect(url_for('auth.login'))

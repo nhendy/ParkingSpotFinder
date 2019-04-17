@@ -9,6 +9,7 @@ class Config(object):
     SECRET_KEY = os.environ['SECRET_KEY'] or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
+    SECURITY_PASSWORD_SALT = 'very-secret'
 
 
 class ProductionConfig(Config):
