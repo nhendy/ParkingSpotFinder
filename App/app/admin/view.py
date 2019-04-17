@@ -4,8 +4,10 @@ from flask import redirect, url_for
 
 
 class AdminView(sqla.ModelView):
-    def is_accessible(self):
-        return current_user.has_role('admin')
-
-    def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('auth.login'))
+    pass
+    # def is_accessible(self):
+    #     user = User.query.filter_by(username=current_user.name).first()
+    #     return user.roles == 'Admin'
+    #
+    # def inaccessible_callback(self, name, **kwargs):
+    #     return redirect(url_for('auth.login'))

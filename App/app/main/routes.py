@@ -28,6 +28,7 @@ def book_spot():
         if current_user.is_authenticated:
             user = User.query.filter_by(username=current_user.name).first()
             user.reserved = True
+            print(user.data)
             db.session.commit()
         else:
             return redirect(url_for('main.index'))
