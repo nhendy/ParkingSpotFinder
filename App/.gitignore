@@ -102,3 +102,7 @@ ENV/
 *.db
 
 __pycache__/*
+manage.py
+runme.sh
+
+
