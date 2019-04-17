@@ -10,15 +10,16 @@ class User(UserMixin, db.Model):
     __tablename__ = 'Users'
     id             = db.Column(db.Integer,primary_key=True)
     username       = db.Column(db.String(250), nullable=False, unique=True)
-    # email          = db.Column(db.String(255), unique=True, nullable=True)   #TODO FIXME
+    email          = db.Column(db.String(255), unique=True, nullable=True)   #TODO FIXME
     password_hash  = db.Column(db.String(250), nullable=False)
     reserved       = db.Column(db.Boolean, nullable=False, default=False)
     timestamp      = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
+    code           = db.Column(db.Integer)
     roles          = db.relationship('Role', secondary='user_roles')
 
-    def __init__(self, username):
+    def __init__(self, username, email):
         self.username = username
+        self.email = email
 
     def __repr__(self):
         return '<id {}, username {}>'.format(self.id, self.username)

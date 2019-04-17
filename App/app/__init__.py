@@ -23,8 +23,8 @@ app.register_blueprint(main_bp)
 
 
 from app.models import User, Role
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
+# user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+# security = Security(app, user_datastore)
 
 
 admin = Admin(app, name='parkme', template_mode='bootstrap3')

@@ -25,19 +25,13 @@ def option_to_book():
 @login_required
 def book_spot():
     if request.method == 'POST':
-        error = None
-        if error is not None:
-            flash(error)
+        if current_user.is_authenticated:
+            user = User.query.filter_by(username=current_user.name).first()
+            user.reserved = True
+            db.session.commit()
         else:
-            # user request data
-            sql_session = db.load_db("parkingSpotsDB")
-            new_person = app.RequestsRecord(id=23, name=g.user['id'])
-            sql_session.add(new_person)
-            sql_session.commit()
             return redirect(url_for('main.index'))
-
     return render_template('booking/book_spot.html')
-
 
 @bp.route('/pi_to_app', methods=('GET', 'POST'))
 @roles_required('RPi')
