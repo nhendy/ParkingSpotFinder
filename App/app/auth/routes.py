@@ -33,12 +33,8 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('auth.login'))
-        login_user(user)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('main.index')
-
-        return redirect(next_page)
+        login_user(user, remember=False)
+        return redirect(url_for('main.option_to_book'))
     return render_template('auth/login.html', form=form)
 
 

@@ -10,6 +10,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SECURITY_PASSWORD_SALT = 'very-secret'
+    USER_EMAIL_SENDER_EMAIL = 'test@test.com'
 
 
 class ProductionConfig(Config):
