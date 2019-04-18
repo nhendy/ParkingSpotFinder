@@ -52,7 +52,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -96,6 +97,11 @@ void my_printf(const char *fmt, ...);
 // HACK!!!!!!!!!!!!!!!!!!!
 #define CS_Pin GPIO_PIN_11
 #define CS_GPIO_Port GPIOC
+
+
+
+#define NUM_BYTES_FROM_SENSOR 6    // Num of bytes the sensor sends in one transaction
+#define THRESHOLD_DISTANCE    6    // Minimum distance read from sensor; below which the LCD will turn on
 
 /* USER CODE END Private defines */
 

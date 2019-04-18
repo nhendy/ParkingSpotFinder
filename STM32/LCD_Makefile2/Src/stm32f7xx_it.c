@@ -57,9 +57,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-int rx_idx;
-char rx_buffer[6];
-char rx_data[2];
+extern bool vehicle_approached;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,9 +71,10 @@ char rx_data[2];
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern TIM_HandleTypeDef htim1;
+extern UART_HandleTypeDef huart6;
 /* USER CODE BEGIN EV */
-
+extern UART_HandleTypeDef huart5;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -214,24 +213,41 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32f7xx.s).                    */
 /******************************************************************************/
 
-/* USER CODE BEGIN 1 */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart1) {
-  // rx_buffer[5] = '\0';
-  // my_printf("%s", rx_buffer);
-  int i ;
-  if (rx_idx==0) {for (i=0;i<100;i++) rx_buffer[i]=0;}   //clear Rx_Buffer before receiving new data
+/**
+  * @brief This function handles TIM1 update interrupt and TIM10 global interrupt.
+  */
+void TIM1_UP_TIM10_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 0 */
 
-		if ((rx_data[0]==10) || (rx_data[0] == 13)) //if received data different from ascii 13 (enter)
-		{
-			rx_idx=0;
-		}
-		else            //if received data = 13
-		{
-			rx_buffer[rx_idx++]=rx_data[0];    //add data to Rx_Buffer
-		}
 
-    // my_printf("%s", rx_data);
+  char buffer[NUM_BYTES_FROM_SENSOR]; int curr_distance;
+
+  HAL_UART_Receive(&huart5, (uint8_t *) buffer, sizeof(buffer), HAL_MAX_DELAY);
+  sscanf(buffer, "R%d\r", &curr_distance);
+  vehicle_approached = curr_distance < THRESHOLD_DISTANCE ? true : false;
+  /* USER CODE END TIM1_UP_TIM10_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim1);
+  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 1 */
+
+  /* USER CODE END TIM1_UP_TIM10_IRQn 1 */
 }
+
+/**
+  * @brief This function handles USART6 global interrupt.
+  */
+void USART6_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART6_IRQn 0 */
+
+  /* USER CODE END USART6_IRQn 0 */
+  HAL_UART_IRQHandler(&huart6);
+  /* USER CODE BEGIN USART6_IRQn 1 */
+
+  /* USER CODE END USART6_IRQn 1 */
+}
+
+/* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
