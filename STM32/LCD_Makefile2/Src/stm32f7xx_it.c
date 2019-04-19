@@ -75,6 +75,7 @@ extern void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
 
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim1;
+extern DMA_HandleTypeDef hdma_uart7_rx;
 extern DMA_HandleTypeDef hdma_usart3_rx;
 extern UART_HandleTypeDef huart7;
 extern UART_HandleTypeDef huart3;
@@ -232,13 +233,27 @@ void DMA1_Stream1_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles DMA1 stream3 global interrupt.
+  */
+void DMA1_Stream3_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream3_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream3_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_uart7_rx);
+  /* USER CODE BEGIN DMA1_Stream3_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream3_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM1 update interrupt and TIM10 global interrupt.
   */
 void TIM1_UP_TIM10_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 0 */
 
-	HAL_UART_Receive_DMA(&huart3, (uint8_t *) &rx_byte, 1);
+	HAL_UART_Receive_DMA(&huart7, (uint8_t *) &rx_byte, 1);
 
   /* USER CODE END TIM1_UP_TIM10_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);
@@ -280,14 +295,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 	int curr_distance;
 
-	if (huart->Instance == USART3) {
+	if (huart->Instance == UART7) {
 		if (rx_idx == 0) {
 			memset(rx_buffer, '\0', NUM_BYTES_FROM_SENSOR);
 		}
 
 		if (rx_byte != '\r') {
 			rx_buffer[rx_idx++] = rx_byte;
-			HAL_UART_Receive_DMA(&huart3, (uint8_t *) &rx_byte, 1);
+			HAL_UART_Receive_DMA(&huart7, (uint8_t *) &rx_byte, 1);
 
 		} else {
 			rx_idx = 0;
