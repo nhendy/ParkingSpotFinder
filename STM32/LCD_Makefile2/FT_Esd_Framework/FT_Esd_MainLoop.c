@@ -7,6 +7,8 @@
 #include "FT_Esd_Dl.h"
 #include "Ft_Esd_GpuAlloc.h"
 
+
+
 extern Ft_Gpu_Hal_Context_t *Ft_Esd_Host;
 extern Ft_Esd_GpuAlloc *Ft_Esd_GAlloc;
 extern ft_uint32_t Ft_Esd_Millis;
@@ -65,6 +67,7 @@ ft_void_t Ft_Esd_MainLoop()
 	int idled = 0;
 	while (Ft_Main__Running__ESD())
 	{
+
 		// Idle at least once every frame
 		if (!idled) Ft_Main__Idle__ESD();
 		else idled = 0;

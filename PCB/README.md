@@ -29,7 +29,7 @@
 | PE_9         | 11           | QUAD_SPI_IO2|
 | PE_10         | 12          | QUAD_SPI_IO3|
 
-MCU to FTDI UART1
+## MCU to FTDI UART1
 
 
 
