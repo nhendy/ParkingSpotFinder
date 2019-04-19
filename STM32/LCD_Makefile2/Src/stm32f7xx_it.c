@@ -292,6 +292,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		} else {
 			rx_idx = 0;
 			sscanf(rx_buffer, "R%d", &curr_distance);
+			my_printf("Closest object is at %d mm.\r\n", curr_distance);
 			vehicle_approached =
 					curr_distance < THRESHOLD_DISTANCE ? true : false;
 

@@ -181,8 +181,6 @@ int main(void)
   HAL_Delay(200);
   HAL_TIM_Base_Start_IT(&htim1);
 
-//  char buf[4];
-//  HAL_UART_Receive_IT(&huart7, buf, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -195,7 +193,7 @@ int main(void)
 	 // Ft_Esd_Gui_Entry();
 
 //	  HAL_UART_Receive_DMA(&huart3, (uint8_t *) &rx_byte, 1);
-	  my_printf("%s\r\n", rx_buffer);
+//	  my_printf("%d\r\n", vehicle_approached);
 
   }
   /* USER CODE END 3 */

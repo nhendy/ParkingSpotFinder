@@ -102,7 +102,7 @@ void my_printf(const char *fmt, ...);
 
 
 #define NUM_BYTES_FROM_SENSOR 6    // Num of bytes the sensor sends in one transaction
-#define THRESHOLD_DISTANCE    6    // Minimum distance read from sensor; below which the LCD will turn on
+#define THRESHOLD_DISTANCE    400  // Minimum distance read from sensor; below which the LCD will turn on
 
 /* USER CODE END Private defines */
 
