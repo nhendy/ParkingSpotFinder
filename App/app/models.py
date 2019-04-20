@@ -1,52 +1,24 @@
 from app import db, login
 from sqlalchemy.dialects.postgresql import JSON
-from flask_login import UserMixin
+from flask_login  import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-
-
-class RequestsRecord(db.Model):
-    __tablename__ = 'Requests'
-    id   = db.Column(db.Integer, primary_key=True)
-    # name = db.Column(db.String(250), nullable=False, unique=True)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
-    # result_all = db.Column(JSON)
-
-    def __init__(self, name, time, result_all):
-        self.name = name
-        self.time = time
-        self.result_all = result_all
-
-    def __repr__(self):
-        return '<id {}, name {}, time {}>'.format(self.id, self.name, self.time)
-
-
-class Spot(db.Model):
-    __tablename__ = "Parking Spots"
-    id    = db.Column(db.Integer, primary_key=True)
-    state = db.Column(db.String(250), nullable=False)
-    # result_all = db.Column(JSON)
-
-    def __init__(self, state, result_all):
-        self.state = state
-        self.result_all = result_all
-
-    def __repr__(self):
-        return '<id {}, state {}>'.format(self.id, self.state)
-
+from functools import wraps
 
 class User(UserMixin, db.Model):
     __tablename__ = 'Users'
-    id         = db.Column(db.Integer,primary_key=True)
-    username   = db.Column(db.String(250), nullable=False, unique=True)
-    password_hash   = db.Column(db.String(250), nullable=False)
-    requests   = db.relationship('RequestsRecord', backref='driver', lazy='dynamic')
-    # result_all = db.Column(JSON)
+    id             = db.Column(db.Integer,primary_key=True)
+    username       = db.Column(db.String(250), nullable=False, unique=True)
+    email          = db.Column(db.String(255), unique=True, nullable=True)   #TODO FIXME
+    password_hash  = db.Column(db.String(250), nullable=False)
+    reserved       = db.Column(db.Boolean, nullable=False, default=False)
+    timestamp      = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    code           = db.Column(db.Integer)
+    roles          = db.relationship('Role', secondary='user_roles')
 
-
-    def __init__(self, username):
+    def __init__(self, username, email):
         self.username = username
+        self.email = email
 
     def __repr__(self):
         return '<id {}, username {}>'.format(self.id, self.username)
@@ -57,8 +29,25 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+# Define the Role data-model
+class Role(db.Model):
+    __tablename__ = 'roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(50), unique=True)
 
+    def __str__(self):
+        return self.name
+
+# Define the UserRoles association table
+class UserRoles(db.Model):
+    __tablename__ = 'user_roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey('Users.id', ondelete='CASCADE'))
+    role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
 
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+
+

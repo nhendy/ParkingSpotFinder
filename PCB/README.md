@@ -1,6 +1,6 @@
 # Pinout
 
-## MCU to CM3
+## MCU to CM3 UART5
 
 | STM Pins      | CM3 Pins   | Functionality   |
 | ------------- | ---------- | --------------- |
@@ -15,7 +15,7 @@
 | PB_3          | 6            | SWO   -->  SWO|
 | PB_4          | 10           | JTRST  -->  RST|
 
-## MCU to Sensor
+## MCU to Sensor UART7
 | STM Pins      | Sensor Pins    | Functionality   |
 | ------------- | ----------   | --------------- |
 | PF_6         | Pin 5            | RX  -->  Serial out|
@@ -29,6 +29,7 @@
 | PE_9         | 11           | QUAD_SPI_IO2|
 | PE_10         | 12          | QUAD_SPI_IO3|
 
+## MCU to FTDI UART1
 
 
 

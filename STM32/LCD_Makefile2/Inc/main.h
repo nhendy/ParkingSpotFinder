@@ -52,7 +52,9 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -78,22 +80,29 @@ void my_printf(const char *fmt, ...);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define TEST_PIN1_Pin GPIO_PIN_2
-#define TEST_PIN1_GPIO_Port GPIOE
-#define TEST_PIN3_Pin GPIO_PIN_4
-#define TEST_PIN3_GPIO_Port GPIOE
+#define PI_3V3_Pin GPIO_PIN_2
+#define PI_3V3_GPIO_Port GPIOE
+#define PI_1V8_Pin GPIO_PIN_3
+#define PI_1V8_GPIO_Port GPIOE
+#define PI_5V_Pin GPIO_PIN_4
+#define PI_5V_GPIO_Port GPIOE
 #define PD_Pin GPIO_PIN_0
 #define PD_GPIO_Port GPIOB
 #define PD_PCB_Pin GPIO_PIN_1
 #define PD_PCB_GPIO_Port GPIOB
-//#define CS_Pin GPIO_PIN_10
-//#define CS_GPIO_Port GPIOA
+#define CS_Pin GPIO_PIN_10
+#define CS_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 void my_printf(const char *fmt, ...);
 
 // HACK!!!!!!!!!!!!!!!!!!!
 #define CS_Pin GPIO_PIN_11
 #define CS_GPIO_Port GPIOC
+
+
+
+#define NUM_BYTES_FROM_SENSOR 6    // Num of bytes the sensor sends in one transaction
+#define THRESHOLD_DISTANCE    400  // Minimum distance read from sensor; below which the LCD will turn on
 
 /* USER CODE END Private defines */
 
