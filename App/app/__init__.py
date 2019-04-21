@@ -25,6 +25,7 @@ app.register_blueprint(main_bp)
 
 
 from app.models import User, Role
+# user_manager = UserManager(app, db, User)
 # user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 # security = Security(app, user_datastore)
 
@@ -33,14 +34,18 @@ admin = Admin(app, name='parkme', template_mode='bootstrap3')
 admin.add_view(AdminView(User, db.session))
 admin.add_view(AdminView(Role, db.session))
 
+
+app.vacant_spot_count = 0
+
 # Executes before the first request is processed.
+#TODO check expiration
 @app.before_first_request
 def before_first_request():
     db.create_all()
-    #
     # rpi = User(username='rpi', email='rpi@rpi.edu')
     # rpi.set_password('password')
-    # # rpi.roles.append()
+    # rpi.roles.append(Role(name='RPi'))
+    # rpi.roles.append(Role(name='Admin'))
     # db.session.add(rpi)
     # db.session.commit()
 
