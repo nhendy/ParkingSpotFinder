@@ -23,11 +23,6 @@ def option_to_book():
 @bp.route('/book_spot', methods=('GET', 'POST'))
 @login_required
 def book_spot():
-<<<<<<< HEAD
-=======
-    # TODO FIXME check expiration
-
->>>>>>> e92f9b59a533bafd8eed4fe26849997ec93519f5
     if current_user.is_authenticated:
         user = User.query.filter_by(username=current_user.username).first()
         if user.reserved == True:
@@ -47,45 +42,19 @@ def check_credentials(credentials):
         return True
     return False
 
-
-def check_code(code_generated):
-
-    user = User.query.filter_by(code=code_generated).first()
-
-    if user:
-        user.reserved = False
-        user.code     = -1
-        return "Ok"
-    # sql_session = db.load_db("UserCredentialsDB")
-    # check = sql_session.query(exists().where(app.Users.code == code_generated)).scalar()
-    # if check:
-    #     sql_session.query(app.Users).filter(app.Users.code == code_generated). \
-    #         update({app.Users.reservation_state: "unreserved"}, synchronize_session=False)
-    #     sql_session.commit()
-    #     return "okay"
-    return "not_okay"
-
-def get_reserved_spot_count():
-    booked_users = User.query.filter_by(reserved=True).all()
-    return len(booked_users)
-
-
 def auth_pi(view):
     @functools.wraps(view)
     def decorated(*args, **kwargs):
-<<<<<<< HEAD
         if not current_user.is_authenticated:
            return current_app.login_manager.unauthorized()
         if current_user.roles[0].name != 'RPi':  #TODO FIXME !!!!!!
              return current_app.login_manager.unauthorized()
         return view(*args, **kwargs)
-=======
         if request.method == 'POST':
             auth = request.authorization
             if not auth or not check_credentials(auth):
                 return "your credentials were incorrect"
             return view(*args, **kwargs)
->>>>>>> e92f9b59a533bafd8eed4fe26849997ec93519f5
     return decorated
 
 @bp.route('/pi_to_app', methods=('GET', 'POST'))
@@ -98,11 +67,8 @@ def pi_to_app():
             return jsonify({"error": str(e),
                             "reason": "request should be json format"})
         result_dict = dict()
-<<<<<<< HEAD
         GlobalVariables.num_vacant_spots = content["vacant_spot_count"]
-=======
         current_app.vacant_spot_count = content["vacant_spot_count"]
->>>>>>> e92f9b59a533bafd8eed4fe26849997ec93519f5
         if content["request_for_reserved_spots"] == "True":
             result_dict["num_spots_reserved"] = len(User.query.filter_by(reserved=True).all())
             result_dict["code_validation"] = None
