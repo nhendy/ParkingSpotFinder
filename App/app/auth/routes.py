@@ -5,8 +5,6 @@ from app.auth.forms import RegistrationForm, LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 
-
-
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if current_user.is_authenticated:

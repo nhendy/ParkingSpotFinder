@@ -8,6 +8,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_security import Security, SQLAlchemyUserDatastore, utils
 from app.admin.view import AdminView
 from flask_user import UserManager
+import datetime
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -42,10 +43,27 @@ app.vacant_spot_count = 0
 @app.before_first_request
 def before_first_request():
     db.create_all()
+<<<<<<< HEAD
+    #
+    # admin = User(username='admin', email='admin@admin.edu')
+    # admin.set_password('admin_password')
+    # # admin.roles.append("admin")
+    # db.session.add(admin)
+=======
     # rpi = User(username='rpi', email='rpi@rpi.edu')
     # rpi.set_password('password')
     # rpi.roles.append(Role(name='RPi'))
     # rpi.roles.append(Role(name='Admin'))
     # db.session.add(rpi)
+>>>>>>> e92f9b59a533bafd8eed4fe26849997ec93519f5
     # db.session.commit()
 
+@app.before_request
+def before_request():
+    reserved_users = User.query.filter_by(reserved=True).all()
+    for user in reserved_users:
+        difference = datetime.datetime.utcnow() - datetime.datetime.strptime(str(user.timestamp),'%Y-%m-%d %H:%M:%S.%f')
+        if difference.total_seconds() > 600:
+            user.reserved = False
+            user.code = -1
+            db.session.commit()
