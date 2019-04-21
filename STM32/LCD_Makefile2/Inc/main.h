@@ -54,6 +54,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -75,7 +76,7 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-void my_printf(const char *fmt, ...);
+void my_printf(UART_HandleTypeDef huart, const char *fmt, ...);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -92,7 +93,6 @@ void my_printf(const char *fmt, ...);
 #define CS_Pin GPIO_PIN_10
 #define CS_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
-void my_printf(const char *fmt, ...);
 
 // HACK!!!!!!!!!!!!!!!!!!!
 #define CS_Pin GPIO_PIN_11
@@ -101,7 +101,7 @@ void my_printf(const char *fmt, ...);
 
 
 #define NUM_BYTES_FROM_SENSOR 6    // Num of bytes the sensor sends in one transaction
-#define THRESHOLD_DISTANCE    6    // Minimum distance read from sensor; below which the LCD will turn on
+#define THRESHOLD_DISTANCE    400  // Minimum distance read from sensor; below which the LCD will turn on
 
 /* USER CODE END Private defines */
 

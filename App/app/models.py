@@ -5,14 +5,19 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from functools import wraps
 
+<<<<<<< HEAD
 class GlobalVariables():
     def __init__(self):
         self.num_vacant_spots = 0
 
 class User(UserMixin, db.Model):
+=======
+class User(db.Model, UserMixin):
+>>>>>>> e92f9b59a533bafd8eed4fe26849997ec93519f5
     __tablename__ = 'Users'
     id             = db.Column(db.Integer,primary_key=True)
     username       = db.Column(db.String(250), nullable=False, unique=True)
+    active         = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
     email          = db.Column(db.String(255), unique=True, nullable=True)   #TODO FIXME
     password_hash  = db.Column(db.String(250), nullable=False)
     reserved       = db.Column(db.Boolean, nullable=False, default=False)
@@ -28,7 +33,7 @@ class User(UserMixin, db.Model):
         return '<id {}, username {}>'.format(self.id, self.username)
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        self.password_hash    = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
