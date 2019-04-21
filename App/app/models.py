@@ -5,6 +5,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from functools import wraps
 
+class GlobalVariables():
+    def __init__(self):
+        self.num_vacant_spots = 0
+
 class User(UserMixin, db.Model):
     __tablename__ = 'Users'
     id             = db.Column(db.Integer,primary_key=True)
