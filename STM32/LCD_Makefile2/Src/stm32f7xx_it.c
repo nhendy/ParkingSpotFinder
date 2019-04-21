@@ -79,6 +79,7 @@ extern DMA_HandleTypeDef hdma_uart7_rx;
 extern DMA_HandleTypeDef hdma_usart3_rx;
 extern UART_HandleTypeDef huart7;
 extern UART_HandleTypeDef huart3;
+extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
 /* USER CODE END EV */
 
@@ -307,7 +308,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		} else {
 			rx_idx = 0;
 			sscanf(rx_buffer, "R%d", &curr_distance);
-			my_printf("Closest object is at %d mm.\r\n", curr_distance);
+			my_printf(huart1, "Closest object is at %d mm.\r\n", curr_distance);
 			vehicle_approached =
 					curr_distance < THRESHOLD_DISTANCE ? true : false;
 

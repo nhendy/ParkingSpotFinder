@@ -76,7 +76,7 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-void my_printf(const char *fmt, ...);
+void my_printf(UART_HandleTypeDef huart, const char *fmt, ...);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -93,7 +93,6 @@ void my_printf(const char *fmt, ...);
 #define CS_Pin GPIO_PIN_10
 #define CS_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
-void my_printf(const char *fmt, ...);
 
 // HACK!!!!!!!!!!!!!!!!!!!
 #define CS_Pin GPIO_PIN_11

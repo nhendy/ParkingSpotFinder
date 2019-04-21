@@ -103,8 +103,6 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USART6_UART_Init(void);
 /* USER CODE BEGIN PFP */
-extern ft_void_t FT800_BootupConfig();
-extern ft_void_t Ft_Esd_MainLoop();
 extern ft_void_t Ft_Esd_Gui_Entry();
 /* USER CODE END PFP */
 
@@ -193,8 +191,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  Ft_Esd_Gui_Entry();
 
-//	  HAL_UART_Receive_DMA(&huart3, (uint8_t *) &rx_byte, 1);
-	  my_printf("%s\r\n", rx_buffer);
+	  my_printf(huart5, "Hello\n", rx_buffer);
 
   }
   /* USER CODE END 3 */
