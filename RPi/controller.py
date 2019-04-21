@@ -19,6 +19,9 @@ class Controller:
     NOVACANT_ERROR_MSSG = -2
     SPOT_ID_MSSG        = "{spot_id}"
 
+    # Server endpoint
+    ENDPOINT_URL        = "https://localhost/PI/pi_to_app"
+
 
 
 
@@ -97,7 +100,7 @@ class Controller:
         _, frame  = capture.read()
         data_dict['new_frame'] , data_dict['spots_states'] = self.detector.detect_motion(frame)
         if self.serial_buffer.qsize() > 0:
-            data_dict['mcu_mssg'] = self.serial_buffer.get()
+            data_dict['mcu_mssg'] = re.match(Controller.CONFIRM_CODE_MSSG, self.serial_buffer.get())
 
         return data_dict
 
@@ -128,8 +131,17 @@ class Controller:
         while(cap.isOpened()):
             data_dict = self.process_inputs(cap)
 
-            if re.match(Controller.CONFIRM_CODE_MSSG, data_dict['mcu_mssg']):
-                
+
+            # got a message from MCU
+            if data_dict['mcu_mssg']:
+                # extract  conf code
+                confirmation_code = data_dict['mcu_mssg']['num']
+                # request confirmation from server
+
+                # notify the mcu
+            else:
+                pass
+
 
             # logging.info('Updating Server...')
             self._update_web_server()
@@ -143,8 +155,11 @@ class Controller:
         cv2.destroyAllWindows()
 
 
-    def _update_web_server(self):
-        pass
+    def _update_web_server(self, json):
+        pass 
+
+
+
 
     def _update_mcu(self):
         pass
