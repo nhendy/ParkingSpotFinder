@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Click to Book a Parking Spot{% endblock %}</h1>
-    <a class="action" href="{{ url_for('book_spot') }}">Book Spot</a>
+  <h1>{% block title %}Click to Book a Parking Spot{% endblock %}</h1><br>
+  <center><a class="action" href="{{ url_for('main.book_spot') }}">Book Spot</a></center>
 {% endblock %}
 
 {% block content %}
-  {% for post in posts %}
-    <article class="post">
-      <header>
-          <a class="action" href="{{ url_for('book_spot') }}"></a>
-      </header>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+<h2 style="font-family:verdana;color:#377ba8">
+  To book a spot Just follow the simple instructions: <br>
+</h2>
+  <p style="font-family:verdana;color:#377ba8">
+    1. Click on the "book spot" link to request a spot. <br>
+    2. Take a note of the code generated. <br>
+    3. Enter code into screen when prompted upon entrance to the garage. <br>
+    4. Your reservation will be held for 10 minutes! <br><br>
+    <center><img src="../static/images/happy_driver.png" style = "max-width: 25%; height: auto;"></img></center>
+<center><h3 style="font-family:verdana;color:#377ba8">
+We hope you have a quick and easy parking experience!
+</h3></center>
+  </p>
 {% endblock %}

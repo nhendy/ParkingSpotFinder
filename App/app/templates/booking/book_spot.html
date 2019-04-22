@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block content %}
-  <form action="https://va3rx2p08e.execute-api.us-east-1.amazonaws.com/test/" method="get">
-      <body>
+    <body>
       <ul>
-          This is where something will be displayed. Maybe the spot number? depends on what we do for database.
+          <center><p style="font-family:verdana;color:#377ba8">Booked!</p></center>
+          <center><img src="{{url_for('static', filename='images/thumbsUp.jpg')}}" style =  "max-width: 25%; height: auto;"></img></center>
+          <span><center><p style="font-family:verdana;color:#377ba8"> {{ code }}</p></center></span>
       </ul>
-      </body>
-  </form>
+    </body>
 {% endblock %}
