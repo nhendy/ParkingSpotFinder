@@ -4,12 +4,12 @@
 <nav>
   <h1>Parking Spot Finder</h1>
   <ul>
-    {% if current_user.is_anonymous %}
-    <li><a href="{{ url_for('auth.register') }}">Register</a>
-    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
     {% else %}
-    <li><span>Hi, {{ current_user.username }}!</span></li>
-    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+      <li><a href="{{ url_for('auth.register') }}">Register</a>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
   </ul>
 </nav>
