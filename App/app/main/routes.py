@@ -108,5 +108,6 @@ def check_code(code_generated):
     if user:
         user.reserved = False
         user.code = -1
+        db.session.commit()
         return "okay"
     return "not_okay"
