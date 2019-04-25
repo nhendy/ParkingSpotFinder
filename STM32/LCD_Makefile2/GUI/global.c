@@ -25,6 +25,8 @@ void getParkingSpotID(char *confirm) {
 	parkingSpotID = strtol(buff, NULL, 10);
 	my_printf(huart1, "The parkingSpotID is %d\r\n", parkingSpotID);
 	memset(cCode,'\0', CODE_SIZE);
+//	HAL_Delay(5000);
+//	parkingSpotID = -2;
 
 //	memset(buff, 0, 5);
 //	parkingSpotID = -1;

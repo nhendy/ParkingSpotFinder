@@ -7,6 +7,7 @@ void Confirmation_getParkingSpotID_Signal(Confirmation *context)
 	//parkingSpotID = getParkingSpotID();
 	cCode[0] = '\0';
 	context->parkingSpotIDState = parkingSpotID;
+	volatile int ctx = context->parkingSpotIDState;
 	context->parkingSpotNumber = parkingSpotID;
 }
 

@@ -57,12 +57,12 @@ void Confirmation__Initializer(Confirmation *context)
 	context->parkingSpotNumber = 0L;
 	Ft_Esd_Timer__Initializer(&context->ESD_Timer);
 	context->ESD_Timer.Parent = context;
-	context->ESD_Timer.TimeoutMs = 5000L;
+	context->ESD_Timer.TimeoutMs = 10000L;
 	context->ESD_Timer.Repeat = 0;
 	context->ESD_Timer.Fired = Confirmation_ESD_Timer_Fired__Signal;
 	Ft_Esd_Timer__Initializer(&context->ESD_Timer_2);
 	context->ESD_Timer_2.Parent = context;
-	context->ESD_Timer_2.TimeoutMs = 5000L;
+	context->ESD_Timer_2.TimeoutMs = 10000L;
 	context->ESD_Timer_2.Fired = Confirmation_ESD_Timer_2_Fired__Signal;
 	Ft_Esd_Timer__Initializer(&context->ESD_Timer_3);
 	context->ESD_Timer_3.Parent = context;
