@@ -31,31 +31,23 @@ ESD_PAGE(YesPage, Include = "YesPage.h", Callback)
 typedef struct
 {
 	void *Parent;
-	ESD_VARIABLE(Variable, Type = int, Private)
-	int Variable;
-	ESD_VARIABLE(Total, Type = int, Public)
-	int Total;
-	ESD_VARIABLE(OneIncrementer, Type = int, Default = 1, Private)
-	int OneIncrementer;
-	ESD_VARIABLE(Digits, Type = int, Default = -1, Private)
-	int Digits;
 	ESD_SIGNAL(KeyPadBack)
 	void(* KeyPadBack)(void *context);
 	ESD_SIGNAL(Confirmation)
 	void(* Confirmation)(void *context);
 	Ft_Esd_PushButton Num2;
 	Ft_Esd_PushButton Num1;
-	Ft_Esd_PushButton __1;
-	Ft_Esd_PushButton __2;
-	Ft_Esd_PushButton __3;
-	Ft_Esd_PushButton __4;
-	Ft_Esd_PushButton __5;
-	Ft_Esd_PushButton __6;
+	Ft_Esd_PushButton Num4;
+	Ft_Esd_PushButton Num5;
+	Ft_Esd_PushButton Num6;
+	Ft_Esd_PushButton Num7;
+	Ft_Esd_PushButton Num9;
+	Ft_Esd_PushButton Num8;
 	Ft_Esd_PushButton Back;
-	Ft_Esd_PushButton __7;
+	Ft_Esd_PushButton Num0;
 	Ft_Esd_NumericLabel ESD_Numeric_Label;
+	Ft_Esd_PushButton Num3;
 	Ft_Esd_Label ESD_Label;
-	Ft_Esd_PushButton __8;
 	Ft_Esd_PushButton Cancel;
 	Ft_Esd_PushButton OK;
 } YesPage;

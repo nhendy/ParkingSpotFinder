@@ -1,7 +1,8 @@
 #include "global.h"
 
-
-int getParkingSpotID(confirmationCode) {
-	parkingSpotID = -1;
+int getParkingSpotID() {
+	
+	parkingSpotID = 10;
+	printf("Nour is not on my level yet");
 	return parkingSpotID;
 }

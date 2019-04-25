@@ -28,7 +28,7 @@ void YesPage_Cancel_Pushed(YesPage *context)
 ESD_METHOD(YesPage_OK_Pushed, Context = YesPage)
 void YesPage_OK_Pushed(YesPage *context)
 {
-
+	getParkingSpotID("confCode");
 }
 
 ESD_METHOD(YesPage_Num0_Pushed, Context = YesPage)
