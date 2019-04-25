@@ -11,6 +11,7 @@ C Source
 extern void Ft_Esd_Noop(void *context);
 
 Ft_Esd_Theme * Ft_Esd_Theme_GetCurrent();
+Ft_Esd_Theme * purdue();
 static ft_int16_t MainPage_MainPage_Yes_X__Property(void *context) { return 250; }
 static ft_int16_t MainPage_MainPage_Yes_Y__Property(void *context) { return 280; }
 static ft_int16_t MainPage_MainPage_Yes_Width__Property(void *context) { return 100; }
@@ -67,6 +68,7 @@ void MainPage__Initializer(MainPage *context)
 void MainPage_MainPage_Yes_Pushed(MainPage *context);
 void MainPage_MainPage_No_Pushed(MainPage *context);
 ft_void_t Ft_Esd_Render_RectangleF(ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_argb32_t);
+void Ft_Esd_Theme_SetCurrent(Ft_Esd_Theme *);
 
 void MainPage_Start(MainPage *context)
 {
@@ -90,11 +92,13 @@ void MainPage_Render(MainPage *context)
 	ft_int32_f4_t width = (800 * (1 << 4) + 0x0);
 	ft_int32_f4_t height = (480 * (1 << 4) + 0x0);
 	ft_int32_f4_t radius = (4 * (1 << 4) + 0x0);
-	ft_argb32_t color = 0xffc28e0eUL;
+	ft_argb32_t color = 0xff000000UL;
 	Ft_Esd_Render_RectangleF(x, y, width, height, radius, color);
 	Ft_Esd_PushButton_Render(&context->MainPage_Yes);
 	Ft_Esd_Label_Render(&context->ESD_Label);
 	Ft_Esd_PushButton_Render(&context->MainPage_No);
+	Ft_Esd_Theme * theme = purdue();
+	Ft_Esd_Theme_SetCurrent(theme);
 }
 
 void MainPage_Idle(MainPage *context)

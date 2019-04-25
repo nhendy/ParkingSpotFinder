@@ -18,7 +18,7 @@ extern ft_rgb32_t Ft_Esd_ClearColor;
 
 extern ft_int16_t FT_DispWidth;
 extern ft_int16_t FT_DispHeight;
-
+extern UART_HandleTypeDef huart1;
 // When not in the simulation, use the Ft_Main__Start etc symbols
 // as exported by the single Application logic document included
 #ifndef ESD_SIMULATION
@@ -107,6 +107,8 @@ ft_void_t Ft_Esd_MainLoop()
 		// Replacement for Ft_Gpu_Hal_WaitCmdfifo_empty(phost); with idle function
 		while (Ft_Gpu_Hal_Rd16(phost, REG_CMD_READ) != Ft_Gpu_Hal_Rd16(phost, REG_CMD_WRITE))
 		{
+			volatile ft_uint16_t x = Ft_Gpu_Hal_Rd16(phost, REG_CMD_READ);
+			volatile ft_uint16_t y = Ft_Gpu_Hal_Rd16(phost, REG_CMD_WRITE);
 			// Loop an idle task instead of doing nothing
 			Ft_Main__Idle__ESD();
 			idled = 1;

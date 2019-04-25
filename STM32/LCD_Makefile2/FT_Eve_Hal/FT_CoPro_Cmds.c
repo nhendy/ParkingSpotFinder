@@ -651,7 +651,8 @@ ft_void_t Ft_Gpu_CoCmd_SendStr(Ft_Gpu_Hal_Context_t *phost,const ft_char8_t *s)
 ft_void_t Ft_Gpu_CoCmd_StartFunc(Ft_Gpu_Hal_Context_t *phost,ft_uint16_t count)
 {
 #ifdef STM32F7
-	Ft_Gpu_Hal_CheckCmdBuffer(phost,count);
+	//TESTING RICHARD MESSING THINGS UP
+	//Ft_Gpu_Hal_CheckCmdBuffer(phost,count);
 	Ft_Gpu_Hal_StartCmdTransfer(phost,FT_GPU_WRITE,count);
 #endif
 #ifdef ARDUINO_PLATFORM  

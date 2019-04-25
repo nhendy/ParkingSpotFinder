@@ -10,6 +10,7 @@ C Source
 
 extern void Ft_Esd_Noop(void *context);
 
+Ft_Esd_Theme * purdue();
 Ft_Esd_Theme * Ft_Esd_Theme_GetCurrent();
 static ft_int16_t Confirmation_ESD_Label_Font__Property(void *context) { return 30; }
 static const char * Confirmation_ESD_Label_Text__Property(void *context) { return "There are no available spots"; }
@@ -110,6 +111,7 @@ static int Confirmation_Error__active(Confirmation *context);
 static int Confirmation_ESD_Numeric_Label__active(Confirmation *context);
 
 void Confirmation_getParkingSpotID_Signal(Confirmation *context);
+void Ft_Esd_Theme_SetCurrent(Ft_Esd_Theme *);
 ft_void_t Ft_Esd_Render_RectangleF(ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_int32_f4_t, ft_argb32_t);
 
 void Confirmation_Start(Confirmation *context)
@@ -125,12 +127,14 @@ void Confirmation_Update(Confirmation *context)
 void Confirmation_Render(Confirmation *context)
 {
 	void *parent = context->Parent;
+	Ft_Esd_Theme * theme = purdue();
+	Ft_Esd_Theme_SetCurrent(theme);
 	ft_int32_f4_t x = 0;
 	ft_int32_f4_t y = 0;
 	ft_int32_f4_t width = (800 * (1 << 4) + 0x0);
 	ft_int32_f4_t height = (480 * (1 << 4) + 0x0);
 	ft_int32_f4_t radius = (4 * (1 << 4) + 0x0);
-	ft_argb32_t color = 0xffc28e0eUL;
+	ft_argb32_t color = 0xff000000UL;
 	Ft_Esd_Render_RectangleF(x, y, width, height, radius, color);
 	if (Confirmation_ESD_Label__active(context))
 		Ft_Esd_Label_Render(&context->ESD_Label);

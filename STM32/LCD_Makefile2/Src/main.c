@@ -68,9 +68,6 @@
 
 QSPI_HandleTypeDef hqspi;
 
-SPI_HandleTypeDef hspi1;
-SPI_HandleTypeDef hspi2;
-
 TIM_HandleTypeDef htim1;
 
 UART_HandleTypeDef huart5;
@@ -92,8 +89,6 @@ char rx_byte;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
-static void MX_SPI1_Init(void);
-static void MX_SPI2_Init(void);
 static void MX_QUADSPI_Init(void);
 static void MX_GFXSIMULATOR_Init(void);
 static void MX_UART5_Init(void);
@@ -142,8 +137,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_SPI1_Init();
-  MX_SPI2_Init();
   MX_QUADSPI_Init();
   MX_GFXSIMULATOR_Init();
   MX_UART5_Init();
@@ -172,12 +165,23 @@ int main(void)
         return HAL_ERROR;
   }
 
+
+
+  HAL_Delay(2000);
   HAL_GPIO_WritePin(PI_5V_GPIO_Port, PI_5V_Pin, GPIO_PIN_SET);
-  HAL_Delay(200);
+  HAL_Delay(20);
   HAL_GPIO_WritePin(PI_3V3_GPIO_Port, PI_3V3_Pin, GPIO_PIN_SET);
-  HAL_Delay(200);
+  HAL_Delay(20);
   HAL_GPIO_WritePin(PI_1V8_GPIO_Port, PI_1V8_Pin, GPIO_PIN_SET);
-  HAL_Delay(200);
+  //HAL_GPIO_WritePin(PI_RUN_GPIO_Port, PI_RUN_Pin, GPIO_PIN_SET);
+  //HAL_Delay(200);
+  //HAL_GPIO_WritePin(TEST1_GPIO_Port, TEST1_Pin, GPIO_PIN_SET);
+  //HAL_Delay(200);
+ // HAL_GPIO_ReadPin(PI_RUN_GPIO_Port, PI_RUN_Pin);
+  //HAL_Delay(200);
+//  HAL_GPIO_WritePin(TEST_GPIO_Port, TEST_Pin, GPIO_PIN_SET);
+//  HAL_GPIO_WritePin(TEST1_GPIO_Port, TEST1_Pin, GPIO_PIN_SET);
+//  HAL_GPIO_ReadPin(PI_RUN_GPIO_Port, PI_RUN_Pin);
   HAL_TIM_Base_Start_IT(&htim1);
 
   /* USER CODE END 2 */
@@ -191,7 +195,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  Ft_Esd_Gui_Entry();
 
-	  my_printf(huart5, "Hello\n", rx_buffer);
+	 // my_printf(huart5, "Hello\r\n");
 
   }
   /* USER CODE END 3 */
@@ -291,7 +295,7 @@ static void MX_QUADSPI_Init(void)
   /* USER CODE END QUADSPI_Init 1 */
   /* QUADSPI parameter configuration*/
   hqspi.Instance = QUADSPI;
-  hqspi.Init.ClockPrescaler = 255;
+  hqspi.Init.ClockPrescaler = 2;
   hqspi.Init.FifoThreshold = 1;
   hqspi.Init.SampleShifting = QSPI_SAMPLE_SHIFTING_NONE;
   hqspi.Init.FlashSize = 1;
@@ -306,86 +310,6 @@ static void MX_QUADSPI_Init(void)
   /* USER CODE BEGIN QUADSPI_Init 2 */
 
   /* USER CODE END QUADSPI_Init 2 */
-
-}
-
-/**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_SPI1_Init(void)
-{
-
-  /* USER CODE BEGIN SPI1_Init 0 */
-//
-  /* USER CODE END SPI1_Init 0 */
-
-  /* USER CODE BEGIN SPI1_Init 1 */
-//
-  /* USER CODE END SPI1_Init 1 */
-  /* SPI1 parameter configuration*/
-  hspi1.Instance = SPI1;
-  hspi1.Init.Mode = SPI_MODE_MASTER;
-  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
-  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  hspi1.Init.CRCPolynomial = 7;
-  hspi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  hspi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
-  if (HAL_SPI_Init(&hspi1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN SPI1_Init 2 */
-//
-  /* USER CODE END SPI1_Init 2 */
-
-}
-
-/**
-  * @brief SPI2 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_SPI2_Init(void)
-{
-
-  /* USER CODE BEGIN SPI2_Init 0 */
-//
-  /* USER CODE END SPI2_Init 0 */
-
-  /* USER CODE BEGIN SPI2_Init 1 */
-//
-  /* USER CODE END SPI2_Init 1 */
-  /* SPI2 parameter configuration*/
-  hspi2.Instance = SPI2;
-  hspi2.Init.Mode = SPI_MODE_MASTER;
-  hspi2.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
-  hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  hspi2.Init.CRCPolynomial = 7;
-  hspi2.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  hspi2.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
-  if (HAL_SPI_Init(&hspi2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN SPI2_Init 2 */
-//
-  /* USER CODE END SPI2_Init 2 */
 
 }
 
@@ -459,10 +383,10 @@ static void MX_UART5_Init(void)
 
   /* USER CODE END UART5_Init 1 */
   huart5.Instance = UART5;
-  huart5.Init.BaudRate = 115200;
+  huart5.Init.BaudRate = 9600;
   huart5.Init.WordLength = UART_WORDLENGTH_8B;
   huart5.Init.StopBits = UART_STOPBITS_1;
-  huart5.Init.Parity = UART_PARITY_NONE;
+  huart5.Init.Parity = UART_PARITY_EVEN;
   huart5.Init.Mode = UART_MODE_TX_RX;
   huart5.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart5.Init.OverSampling = UART_OVERSAMPLING_16;
@@ -650,29 +574,29 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, PI_3V3_Pin|PI_1V8_Pin|PI_5V_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, PI_3V3_Pin|PI_1V8_Pin|PI_5V_Pin|TEST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, PD_Pin|PD_PCB_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, PD_Pin|PD_PCB_Pin|TEST1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PI_3V3_Pin PI_1V8_Pin PI_5V_Pin */
-  GPIO_InitStruct.Pin = PI_3V3_Pin|PI_1V8_Pin|PI_5V_Pin;
+  /*Configure GPIO pins : PI_3V3_Pin PI_1V8_Pin PI_5V_Pin TEST_Pin */
+  GPIO_InitStruct.Pin = PI_3V3_Pin|PI_1V8_Pin|PI_5V_Pin|TEST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PD_Pin PD_PCB_Pin */
-  GPIO_InitStruct.Pin = PD_Pin|PD_PCB_Pin;
+  /*Configure GPIO pins : PD_Pin PD_PCB_Pin TEST1_Pin */
+  GPIO_InitStruct.Pin = PD_Pin|PD_PCB_Pin|TEST1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -684,6 +608,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(CS_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PI_RUN_Pin */
+  GPIO_InitStruct.Pin = PI_RUN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(PI_RUN_GPIO_Port, &GPIO_InitStruct);
 
 }
 

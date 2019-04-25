@@ -29,7 +29,7 @@
 #define MEM_WRITE							0x80			// FT812 Host Memory Write
 #define MEM_READ							0x00			// FT812 Host Memory Read
 /* API to initialize the SPI interface */
-extern SPI_HandleTypeDef hspi1;
+//extern SPI_HandleTypeDef hspi1;
 //extern UART_HandleTypeDef huart6;
 extern QUADSPI_TypeDef hqspi;
 //extern void my_printf(const char *fmt, ...);
@@ -825,10 +825,12 @@ ft_void_t Ft_Gpu_Hal_WrCmdBufFromFlash(Ft_Gpu_Hal_Context_t *host,FT_PROGMEM ft_
 
 ft_void_t Ft_Gpu_Hal_CheckCmdBuffer(Ft_Gpu_Hal_Context_t *host,
 		ft_uint32_t count) {
-	ft_uint16_t getfreespace;
+	ft_uint32_t getfreespace;
 	do {
 		// FIXME: This can get stuck, non-even is returned in case of coprocessor issue
-		getfreespace = Ft_Gpu_Cmdfifo_Freespace(host);
+		//FIXED
+		getfreespace = Ft_Gpu_Hal_Rd16(host, REG_CMDB_SPACE) & 4092;
+		//freespace = Ft_Gpu_Cmdfifo_Freespace(host);
 	} while (getfreespace < count);
 }
 ft_void_t Ft_Gpu_Hal_WaitCmdfifo_empty(Ft_Gpu_Hal_Context_t *host) {

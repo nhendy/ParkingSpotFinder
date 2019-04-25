@@ -51,7 +51,8 @@ Ft_Esd_GpuAlloc *Ft_Esd_GAlloc = 0;			 // Pointer to s_GAlloc
 ft_uint32_t Ft_Esd_Millis = 0;					 // Time in milliseconds for current frame
 ft_uint32_t Ft_Esd_DeltaMs = 0;					 // Delta time in milliseconds between frames
 ft_uint32_t Ft_Esd_Frame = 0;						 // Number of times Render has been called
-ft_rgb32_t Ft_Esd_ClearColor = 0x212121; // Screen clear color
+//ft_rgb32_t Ft_Esd_ClearColor = 0x212121; // Screen clear color
+ft_rgb32_t Ft_Esd_ClearColor = 0xc28e0e;
 //---------------------------------------------------------------------------------------
 
 ESD_FUNCTION(Ft_Esd_GetMillis, Type = ft_uint32_t,
@@ -213,9 +214,9 @@ ft_void_t FT800_BootupConfig()
 
 	Ft_Gpu_HostCommand(&s_Host, FT_GPU_ACTIVE_M);
 	Ft_Gpu_Hal_Sleep(300);
-
 	Ft_Gpu_HostCommand(&s_Host, FT_GPU_ACTIVE_M);
 	Ft_Gpu_Hal_Sleep(300);
+	//HAL_Delay(200);
 
 	/* Set the clk to external clock */
 #if (!defined(ME800A_HV35R) && !defined(ME810A_HV35R) && !defined(ME812A_WH50R))
@@ -244,24 +245,6 @@ ft_void_t FT800_BootupConfig()
 	}
 
 	/* Configuration of LCD display */
-#ifdef DISPLAY_RESOLUTION_QVGA
-	/* Values specific to QVGA LCD display */
-	FT_DispWidth = 320;
-	FT_DispHeight = 240;
-	FT_DispHCycle = 408;
-	FT_DispHOffset = 70;
-	FT_DispHSync0 = 0;
-	FT_DispHSync1 = 10;
-	FT_DispVCycle = 263;
-	FT_DispVOffset = 13;
-	FT_DispVSync0 = 0;
-	FT_DispVSync1 = 2;
-	FT_DispPCLK = 8;
-	FT_DispSwizzle = 2;
-	FT_DispPCLKPol = 0;
-	FT_DispCSpread = 1;
-	FT_DispDither = 1;
-#endif
 
 #ifdef DISPLAY_RESOLUTION_WVGA
 	/* Values specific to QVGA LCD display */
@@ -282,32 +265,7 @@ ft_void_t FT800_BootupConfig()
 	FT_DispDither = 1;
 #endif
 
-#ifdef DISPLAY_RESOLUTION_HVGA_PORTRAIT
-	/* Values specific to HVGA LCD display */
-	FT_DispWidth = 320;
-	FT_DispHeight = 480;
-	FT_DispHCycle = 400;
-	FT_DispHOffset = 40;
-	FT_DispHSync0 = 0;
-	FT_DispHSync1 = 10;
-	FT_DispVCycle = 500;
-	FT_DispVOffset = 10;
-	FT_DispVSync0 = 0;
-	FT_DispVSync1 = 5;
-	FT_DispPCLK = 4;
-	FT_DispSwizzle = 2;
-	FT_DispPCLKPol = 1;
-	FT_DispCSpread = 1;
-	FT_DispDither = 1;
-#ifdef ME810A_HV35R
-	FT_DispPCLK = 5;
-#endif
-#endif
 
-#if (defined(ME800A_HV35R) || defined(ME810A_HV35R))
-	/* After recognizing the type of chip, perform the trimming if necessary */
-	Ft_Gpu_ClockTrimming(&s_Host, LOW_FREQ_BOUND);
-#endif
 
 	volatile int hoffset = Ft_Gpu_Hal_Rd16(&s_Host, REG_HOFFSET);
 	Ft_Gpu_Hal_Wr16(&s_Host, REG_HOFFSET, FT_DispHOffset);
@@ -349,32 +307,7 @@ ft_void_t FT800_BootupConfig()
 
 	Ft_Gpu_Hal_Wr8(&s_Host, REG_PCLK, FT_DispPCLK); //after this display is visible on the LCD
 
-#ifdef ENABLE_ILI9488_HVGA_PORTRAIT
-	/* to cross check reset pin */
-	Ft_Gpu_Hal_Wr8(&s_Host, REG_GPIO, 0xff);
-	ft_delay(120);
-	Ft_Gpu_Hal_Wr8(&s_Host, REG_GPIO, 0x7f);
-	ft_delay(120);
-	Ft_Gpu_Hal_Wr8(&s_Host, REG_GPIO, 0xff);
 
-	/* Reconfigure the SPI */
-#ifdef FT900_PLATFORM
-	ILI9488_Bootup();
-
-	//my_printf("after ILI9488 bootup \t\n");
-	//spi
-	// Initialize SPIM HW
-	sys_enable(sys_device_spi_master);
-	gpio_function(27, pad_spim_sck);	/* GPIO27 to SPIM_CLK */
-	gpio_function(28, pad_spim_ss0);	/* GPIO28 as CS */
-	gpio_function(29, pad_spim_mosi); /* GPIO29 to SPIM_MOSI */
-	gpio_function(30, pad_spim_miso); /* GPIO30 to SPIM_MISO */
-
-	gpio_write(28, 1);
-	spi_init(SPIM, spi_dir_master, spi_mode_0, 4);
-#endif
-
-#endif
 
 	/* make the spi to quad mode - addition 2 bytes for silicon */
 #ifdef FT_81X_ENABLE
@@ -389,22 +322,7 @@ ft_void_t FT800_BootupConfig()
 
 #endif
 
-#ifdef FT900_PLATFORM
-	/* Change clock frequency to 25mhz */
-	spi_init(SPIM, spi_dir_master, spi_mode_0, 4);
 
-#if (defined(ENABLE_SPI_QUAD))
-	/* Initialize IO2 and IO3 pad/pin for dual and quad settings */
-	gpio_function(31, pad_spim_io2);
-	gpio_function(32, pad_spim_io3);
-	gpio_write(31, 1);
-	gpio_write(32, 1);
-#endif
-	/* Enable FIFO of QSPI */
-	spi_option(SPIM, spi_option_fifo_size, 64);
-	spi_option(SPIM, spi_option_fifo, 1);
-	spi_option(SPIM, spi_option_fifo_receive_trigger, 1);
-#endif
 
 #ifdef ENABLE_SPI_QUAD
 #ifdef FT900_PLATFORM
@@ -427,49 +345,7 @@ ft_void_t FT800_BootupConfig()
 
 }
 
-#ifdef FT900_PLATFORM
-ft_void_t FT900_InitSDCard()
-{
-	sys_enable(sys_device_sd_card);
-	sdhost_init();
 
-#define GPIO_SD_CLK (19)
-#define GPIO_SD_CMD (20)
-#define GPIO_SD_DAT3 (21)
-#define GPIO_SD_DAT2 (22)
-#define GPIO_SD_DAT1 (23)
-#define GPIO_SD_DAT0 (24)
-#define GPIO_SD_CD (25)
-#define GPIO_SD_WP (26)
-
-	gpio_function(GPIO_SD_CLK, pad_sd_clk);
-	gpio_pull(GPIO_SD_CLK, pad_pull_none); // pad_pull_none
-	gpio_function(GPIO_SD_CMD, pad_sd_cmd);
-	gpio_pull(GPIO_SD_CMD, pad_pull_pullup);
-	gpio_function(GPIO_SD_DAT3, pad_sd_data3);
-	gpio_pull(GPIO_SD_DAT3, pad_pull_pullup);
-	gpio_function(GPIO_SD_DAT2, pad_sd_data2);
-	gpio_pull(GPIO_SD_DAT2, pad_pull_pullup);
-	gpio_function(GPIO_SD_DAT1, pad_sd_data1);
-	gpio_pull(GPIO_SD_DAT1, pad_pull_pullup);
-	gpio_function(GPIO_SD_DAT0, pad_sd_data0);
-	gpio_pull(GPIO_SD_DAT0, pad_pull_pullup);
-	gpio_function(GPIO_SD_CD, pad_sd_cd);
-	gpio_pull(GPIO_SD_CD, pad_pull_pullup);
-	gpio_function(GPIO_SD_WP, pad_sd_wp);
-	gpio_pull(GPIO_SD_WP, pad_pull_pullup);
-
-	SDHOST_STATUS sd_status;
-	while ((sd_status = sdhost_card_detect()) != SDHOST_CARD_INSERTED)
-		//my_printf("Waiting for SD Card (status: %i)\n", (int)sd_status);
-	//my_printf("SD Card inserted\t\n");
-
-	if (f_mount(&s_FatFS, "", 1) != FR_OK)
-		//my_printf("FatFS mount failed\n");
-	else
-		//my_printf("FatFS mounted succesfully\r\n");
-}
-#endif
 
 /* API to demonstrate calibrate widget/functionality */
 ft_void_t App_CoPro_Widget_Calibrate()
@@ -484,19 +360,14 @@ ft_void_t App_CoPro_Widget_Calibrate()
 //		Ft_App_WrCoCmd_Buffer(&s_Host, COLOR_A(30));
 	Ft_Gpu_CoCmd_Text(&s_Host, (FT_DispWidth / 2), (FT_DispHeight / 2), 27,
 										OPT_CENTER, "Please Tap on the dot");
-#if defined(FT_801_ENABLE) || defined(FT_811_ENABLE) || defined(FT_813_ENABLE)
-	Ft_Gpu_Hal_Wr8(&s_Host, REG_CTOUCH_EXTENDED, CTOUCH_MODE_COMPATIBILITY);
-#endif
+
 	Ft_Gpu_CoCmd_Calibrate(&s_Host, 0);
 	/* Wait till coprocessor completes the operation */
 //	Ft_Gpu_Hal_WaitCmdfifo_empty(&s_Host);
 	/* Print the configured values */
 	Ft_Gpu_Hal_RdMem(&s_Host, REG_TOUCH_TRANSFORM_A, (ft_uint8_t *)TransMatrix,
 									 4 * 6); //read all the 6 coefficients
-#ifdef MSVC_PLATFORM
-	//my_printf("Touch screen transform values are A 0x%x,B 0x%x,C 0x%x,D 0x%x,E 0x%x, F 0x%x",
-						TransMatrix[0], TransMatrix[1], TransMatrix[2], TransMatrix[3], TransMatrix[4], TransMatrix[5]);
-#endif
+
 }
 
 // TODO: Update Ft_Esd_FontHeight on CMD_ROMFONT
@@ -519,25 +390,11 @@ ft_void_t setup()
 // Ft_Esd_MainLoop
 ft_void_t Ft_Esd_MainLoop();
 
-#if defined(MSVC_PLATFORM) || defined(FT900_PLATFORM)
-/* Main entry point */
-ft_int32_t main(ft_int32_t argc, ft_char8_t *argv[])
-#endif
-#if defined(ARDUINO_PLATFORM) || defined(MSVC_FT800EMU)
-		ft_void_t loop()
-#endif
+
 #if defined(STM32F7)
 ft_void_t Ft_Esd_Gui_Entry()
 #endif
 {
-#ifdef ESD_SIMULATION
-	printf("\f"); // Shows horizontal line in ESD output window
-	printf(FT_WELCOME_MESSAGE);
-#endif
-
-#ifdef FT900_PLATFORM
-	FT900_Config();
-#endif
 #ifdef APPDEBUG
 	//my_printf("Main loop\r\n");
 #endif
@@ -549,12 +406,6 @@ ft_void_t Ft_Esd_Gui_Entry()
 	s_Host.hal_config.channel_no = FT_GPU_SPI_SINGLE_CHANNEL;
 	s_Host.hal_config.pdn_pin_no = FT800_PD_N;
 	s_Host.hal_config.spi_cs_pin_no = FT800_CS_N;
-#ifdef MSVC_PLATFORM_SPI
-	host.hal_config.spi_clockrate_khz = 12000; //in KHz
-#endif
-#ifdef ARDUINO_PLATFORM_SPI
-	host.hal_config.spi_clockrate_khz = 4000; //in KHz
-#endif
 	Ft_Gpu_Hal_Open(&s_Host);
 
 	//printf("Ft_Gpu_Hal_Open done \n");
@@ -562,16 +413,6 @@ ft_void_t Ft_Esd_Gui_Entry()
 
 	FT800_BootupConfig();
 
-#if (defined FT900_PLATFORM) || defined(MSVC_PLATFORM) || defined(ESD_SIMULATION)
-	printf("reg_touch_rz = 0x%x\n", Ft_Gpu_Hal_Rd16(&s_Host, REG_TOUCH_RZ));
-	printf("reg_touch_rzthresh = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_RZTHRESH));
-	printf("reg_touch_tag_xy = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG_XY));
-	printf("reg_touch_tag = 0x%x\n", Ft_Gpu_Hal_Rd32(&s_Host, REG_TOUCH_TAG));
-#endif
-
-#if FT900_PLATFORM
-	FT900_InitSDCard();
-#endif
 
 #ifndef ESD_SIMULATION
 	App_CoPro_Widget_Calibrate();
@@ -587,9 +428,6 @@ ft_void_t Ft_Esd_Gui_Entry()
 	Ft_Gpu_Hal_Close(&s_Host);
 	Ft_Gpu_Hal_DeInit();
 	Ft_Esd_Host = 0;
-#ifdef MSVC_PLATFORM
-	return 0;
-#endif
 }
 
 ft_uint32_t Ft_Esd_GAlloc_GetTotalUsed(Ft_Esd_GpuAlloc *ga)

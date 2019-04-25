@@ -33,10 +33,10 @@ typedef struct
 	int _ActivePage;
 	MainPage *MainPage;
 	int MainPage__Active;
-	YesPage *YesPage;
-	int YesPage__Active;
 	Confirmation *Confirmation;
 	int Confirmation__Active;
+	YesPage *YesPage;
+	int YesPage__Active;
 } App;
 
 void App__Initializer(App *context);

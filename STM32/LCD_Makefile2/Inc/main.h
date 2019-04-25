@@ -92,6 +92,12 @@ void my_printf(UART_HandleTypeDef huart, const char *fmt, ...);
 #define PD_PCB_GPIO_Port GPIOB
 #define CS_Pin GPIO_PIN_10
 #define CS_GPIO_Port GPIOA
+#define TEST1_Pin GPIO_PIN_9
+#define TEST1_GPIO_Port GPIOB
+#define TEST_Pin GPIO_PIN_0
+#define TEST_GPIO_Port GPIOE
+#define PI_RUN_Pin GPIO_PIN_1
+#define PI_RUN_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
 // HACK!!!!!!!!!!!!!!!!!!!

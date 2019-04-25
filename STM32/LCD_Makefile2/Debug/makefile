@@ -12,7 +12,6 @@ RM := rm -rf
 -include Src/subdir.mk
 -include GUI/subdir.mk
 -include FT_Eve_Hal/subdir.mk
--include FT_Esd_Widgets/Simulation/subdir.mk
 -include FT_Esd_Widgets/subdir.mk
 -include FT_Esd_Framework/Simulation/subdir.mk
 -include FT_Esd_Framework/subdir.mk

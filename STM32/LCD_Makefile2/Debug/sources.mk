@@ -19,7 +19,6 @@ Drivers/STM32F7xx_HAL_Driver/Src \
 FT_Esd_Framework \
 FT_Esd_Framework/Simulation \
 FT_Esd_Widgets \
-FT_Esd_Widgets/Simulation \
 FT_Eve_Hal \
 GUI \
 Src \
