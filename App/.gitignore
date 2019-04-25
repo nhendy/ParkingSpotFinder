@@ -6,6 +6,8 @@ docs/_build/
 docs/_static/
 docs/_templates/
 
+# Django collect static folders
+cam2webui/static/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -98,11 +100,3 @@ ENV/
 .ropeproject
 
 .DS_Store
-
-*.db
-
-__pycache__/*
-manage.py
-runme.sh
-
-

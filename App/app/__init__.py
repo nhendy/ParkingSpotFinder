@@ -8,6 +8,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_security import Security, SQLAlchemyUserDatastore, utils
 from app.admin.view import AdminView
 from flask_user import UserManager
+import datetime
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -25,6 +26,7 @@ app.register_blueprint(main_bp)
 
 
 from app.models import User, Role
+# user_manager = UserManager(app, db, User)
 # user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 # security = Security(app, user_datastore)
 
@@ -33,14 +35,27 @@ admin = Admin(app, name='parkme', template_mode='bootstrap3')
 admin.add_view(AdminView(User, db.session))
 admin.add_view(AdminView(Role, db.session))
 
+
+app.vacant_spot_count = 0
+
 # Executes before the first request is processed.
+#TODO check expiration
 @app.before_first_request
 def before_first_request():
     db.create_all()
-    #
     # rpi = User(username='rpi', email='rpi@rpi.edu')
     # rpi.set_password('password')
-    # # rpi.roles.append()
+    # rpi.roles.append(Role(name='RPi'))
+    # rpi.roles.append(Role(name='Admin'))
     # db.session.add(rpi)
     # db.session.commit()
 
+@app.before_request
+def before_request():
+    reserved_users = User.query.filter_by(reserved=True).all()
+    for user in reserved_users:
+        difference = datetime.datetime.utcnow() - datetime.datetime.strptime(str(user.timestamp),'%Y-%m-%d %H:%M:%S.%f')
+        if difference.total_seconds() > 600:
+            user.reserved = False
+            user.code = -1
+            db.session.commit()
