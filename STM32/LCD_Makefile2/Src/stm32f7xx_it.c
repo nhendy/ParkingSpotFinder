@@ -57,10 +57,11 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern bool vehicle_approached;
+int lcd_timeout = 0;
 extern char rx_buffer[NUM_BYTES_FROM_SENSOR];
 extern int rx_idx;
 extern char rx_byte;
+extern bool vehicle_approached;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -270,9 +271,11 @@ void DMA1_Stream3_IRQHandler(void)
 void TIM1_UP_TIM10_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 0 */
-
-	HAL_UART_Receive_DMA(&huart7, (uint8_t *) &rx_byte, 1);
-//	my_printf(huart5, "HelloTits\r\n");
+	if(lcd_timeout <= LCD_TIMEOUT) {
+		lcd_timeout++;
+	}
+//	HAL_UART_Receive_IT(&huart7, (uint8_t *) &rx_byte, 1);
+//	my_printf(huart1, "|");
   /* USER CODE END TIM1_UP_TIM10_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);
   /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 1 */
@@ -362,19 +365,21 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 		if (rx_byte != '\r') {
 			rx_buffer[rx_idx++] = rx_byte;
-			HAL_UART_Receive_DMA(&huart7, (uint8_t *) &rx_byte, 1);
-
+			HAL_UART_Receive_IT(&huart7, (uint8_t *) &rx_byte, 1);
 		} else {
 			rx_idx = 0;
 			sscanf(rx_buffer, "R%d", &curr_distance);
-//			my_printf(huart1, "Closest object is at %d mm.\r\n", curr_distance);
+			//my_printf(huart1, "Closest object is at %d mm.\r\n", curr_distance);
 			vehicle_approached =
 					curr_distance < THRESHOLD_DISTANCE ? true : false;
+			if (vehicle_approached == true) {
+				lcd_timeout = 0;
+			}
 
 		}
 	}
 	else if(huart -> Instance == USART1){
-		my_printf(huart1, "Entered callback\r\n");
+		//my_printf(huart1, "vehicle_approached = %d", vehicle_approached);
 	}
 
 }

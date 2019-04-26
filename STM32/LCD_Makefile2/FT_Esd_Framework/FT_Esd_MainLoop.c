@@ -6,8 +6,12 @@
 #include "Ft_Esd.h"
 #include "FT_Esd_Dl.h"
 #include "Ft_Esd_GpuAlloc.h"
+#include "main.h"
 
 
+
+extern char rx_byte;
+extern UART_HandleTypeDef huart7;
 
 extern Ft_Gpu_Hal_Context_t *Ft_Esd_Host;
 extern Ft_Esd_GpuAlloc *Ft_Esd_GAlloc;
@@ -28,6 +32,8 @@ extern UART_HandleTypeDef huart1;
 #define Ft_Main__Render__ESD Ft_Main__Render
 #define Ft_Main__Idle__ESD Ft_Main__Idle
 #define Ft_Main__End__ESD Ft_Main__End
+#define BACKLIGHT_OFF 0
+#define BACKLIGHT_ON 128
 #else
 int Ft_Main__Running__ESD();
 int Ft_Sleep__ESD(int ms);
@@ -118,7 +124,15 @@ ft_void_t Ft_Esd_MainLoop()
 		// Restore initial frame values
 		// Ft_Gpu_CoCmd_LoadIdentity(phost); // ?
 		Ft_Esd_ResetGpuState();
+		if(lcd_timeout > LCD_TIMEOUT) {
+			Ft_Gpu_Hal_Wr16(Ft_Esd_Host, REG_PWM_DUTY, BACKLIGHT_OFF);
+		}
+		else if(lcd_timeout < LCD_TIMEOUT) {
+			Ft_Gpu_Hal_Wr16(Ft_Esd_Host, REG_PWM_DUTY, BACKLIGHT_ON);
+		}
 		++Ft_Esd_Frame;
+		HAL_UART_Receive_IT(&huart7, (uint8_t *) &rx_byte, 1);
+
 	}
 
 	// Cleanup application (generally unreachable)

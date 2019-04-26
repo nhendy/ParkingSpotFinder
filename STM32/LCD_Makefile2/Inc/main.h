@@ -107,8 +107,10 @@ void my_printf(UART_HandleTypeDef huart, const char *fmt, ...);
 
 
 #define NUM_BYTES_FROM_SENSOR 6    // Num of bytes the sensor sends in one transaction
-#define THRESHOLD_DISTANCE    400  // Minimum distance read from sensor; below which the LCD will turn on
-
+#define THRESHOLD_DISTANCE    600  // Minimum distance read from sensor; below which the LCD will turn on
+#define LCD_TIMEOUT           50
+bool vehicle_approached;
+extern int lcd_timeout;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

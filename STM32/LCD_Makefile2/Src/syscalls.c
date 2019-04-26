@@ -78,7 +78,7 @@ void vprint(UART_HandleTypeDef huart, const char *fmt, va_list argp)
     if(0 < vsprintf(string,fmt,argp)) // build string
     {
         HAL_UART_Transmit(&huart, (uint8_t*)string, strlen(string), 0xffffff); // send message via UART
-        HAL_Delay(20);
+//        HAL_Delay(20);
     }
 }
 

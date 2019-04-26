@@ -21,9 +21,8 @@ void getParkingSpotID(char *confirm) {
 	}
 	//my_printf(huart5, "The buff before is %s\n", buff);
 	HAL_UART_Receive(&huart5, buff, sizeof(buff), 5000);
-	my_printf(huart5, "The buff after is %s\n", buff);
+	my_printf(huart1, "Recieved from PI: %s\n", buff);
 	parkingSpotID = strtol(buff, NULL, 10);
-	my_printf(huart1, "The parkingSpotID is %d\r\n", parkingSpotID);
 	memset(cCode,'\0', CODE_SIZE);
 //	HAL_Delay(5000);
 //	parkingSpotID = -2;
